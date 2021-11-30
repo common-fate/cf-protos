@@ -19,6 +19,8 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TenantServiceClient interface {
 	GetTenantByPublicKey(ctx context.Context, in *GetTenantByPublicKeyRequest, opts ...grpc.CallOption) (*GetTenantByPublicKeyResponse, error)
+	// UserBelongsToTenant checks whether a user belongs to a particular tenant.
+	UserBelongsToTenant(ctx context.Context, in *UserBelongsToTenantRequest, opts ...grpc.CallOption) (*UserBelongsToTenantResponse, error)
 }
 
 type tenantServiceClient struct {
@@ -38,11 +40,22 @@ func (c *tenantServiceClient) GetTenantByPublicKey(ctx context.Context, in *GetT
 	return out, nil
 }
 
+func (c *tenantServiceClient) UserBelongsToTenant(ctx context.Context, in *UserBelongsToTenantRequest, opts ...grpc.CallOption) (*UserBelongsToTenantResponse, error) {
+	out := new(UserBelongsToTenantResponse)
+	err := c.cc.Invoke(ctx, "/tenant.v1alpha1.TenantService/UserBelongsToTenant", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TenantServiceServer is the server API for TenantService service.
 // All implementations should embed UnimplementedTenantServiceServer
 // for forward compatibility
 type TenantServiceServer interface {
 	GetTenantByPublicKey(context.Context, *GetTenantByPublicKeyRequest) (*GetTenantByPublicKeyResponse, error)
+	// UserBelongsToTenant checks whether a user belongs to a particular tenant.
+	UserBelongsToTenant(context.Context, *UserBelongsToTenantRequest) (*UserBelongsToTenantResponse, error)
 }
 
 // UnimplementedTenantServiceServer should be embedded to have forward compatible implementations.
@@ -51,6 +64,9 @@ type UnimplementedTenantServiceServer struct {
 
 func (UnimplementedTenantServiceServer) GetTenantByPublicKey(context.Context, *GetTenantByPublicKeyRequest) (*GetTenantByPublicKeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTenantByPublicKey not implemented")
+}
+func (UnimplementedTenantServiceServer) UserBelongsToTenant(context.Context, *UserBelongsToTenantRequest) (*UserBelongsToTenantResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserBelongsToTenant not implemented")
 }
 
 // UnsafeTenantServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -82,6 +98,24 @@ func _TenantService_GetTenantByPublicKey_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TenantService_UserBelongsToTenant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserBelongsToTenantRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TenantServiceServer).UserBelongsToTenant(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/tenant.v1alpha1.TenantService/UserBelongsToTenant",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TenantServiceServer).UserBelongsToTenant(ctx, req.(*UserBelongsToTenantRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TenantService_ServiceDesc is the grpc.ServiceDesc for TenantService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -92,6 +126,10 @@ var TenantService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTenantByPublicKey",
 			Handler:    _TenantService_GetTenantByPublicKey_Handler,
+		},
+		{
+			MethodName: "UserBelongsToTenant",
+			Handler:    _TenantService_UserBelongsToTenant_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

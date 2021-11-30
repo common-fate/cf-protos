@@ -45,3 +45,34 @@ func (m *GetTenantByPublicKeyResponse) MarshalLogObject(enc go_uber_org_zap_zapc
 
 	return nil
 }
+
+func (m *UserBelongsToTenantRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "user_email_address" // field user_email_address = 1
+	enc.AddString(keyName, m.UserEmailAddress)
+
+	keyName = "tenant_id" // field tenant_id = 2
+	enc.AddString(keyName, m.TenantId)
+
+	return nil
+}
+
+func (m *UserBelongsToTenantResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "is_member" // field is_member = 1
+	enc.AddBool(keyName, m.IsMember)
+
+	return nil
+}
