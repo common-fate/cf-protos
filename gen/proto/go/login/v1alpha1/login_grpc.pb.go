@@ -24,7 +24,7 @@ type LoginServiceClient interface {
 	// along with the Server Token obtained by the bootstrapping process
 	// for a user's email address. The user is validated by the Login Service
 	// as belong to the tenant this request is being made from.
-	ExchangeCode(ctx context.Context, in *BeginCodeExchangeRequest, opts ...grpc.CallOption) (*BeginCodeExchangeResponse, error)
+	ExchangeCode(ctx context.Context, in *ExchangeCodeRequest, opts ...grpc.CallOption) (*ExchangeCodeResponse, error)
 }
 
 type loginServiceClient struct {
@@ -53,8 +53,8 @@ func (c *loginServiceClient) CompleteBootstrap(ctx context.Context, in *Complete
 	return out, nil
 }
 
-func (c *loginServiceClient) ExchangeCode(ctx context.Context, in *BeginCodeExchangeRequest, opts ...grpc.CallOption) (*BeginCodeExchangeResponse, error) {
-	out := new(BeginCodeExchangeResponse)
+func (c *loginServiceClient) ExchangeCode(ctx context.Context, in *ExchangeCodeRequest, opts ...grpc.CallOption) (*ExchangeCodeResponse, error) {
+	out := new(ExchangeCodeResponse)
 	err := c.cc.Invoke(ctx, "/login.v1alpha1.LoginService/ExchangeCode", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -72,7 +72,7 @@ type LoginServiceServer interface {
 	// along with the Server Token obtained by the bootstrapping process
 	// for a user's email address. The user is validated by the Login Service
 	// as belong to the tenant this request is being made from.
-	ExchangeCode(context.Context, *BeginCodeExchangeRequest) (*BeginCodeExchangeResponse, error)
+	ExchangeCode(context.Context, *ExchangeCodeRequest) (*ExchangeCodeResponse, error)
 }
 
 // UnimplementedLoginServiceServer should be embedded to have forward compatible implementations.
@@ -85,7 +85,7 @@ func (UnimplementedLoginServiceServer) BeginBootstrap(context.Context, *BeginBoo
 func (UnimplementedLoginServiceServer) CompleteBootstrap(context.Context, *CompleteBootstrapRequest) (*CompleteBootstrapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CompleteBootstrap not implemented")
 }
-func (UnimplementedLoginServiceServer) ExchangeCode(context.Context, *BeginCodeExchangeRequest) (*BeginCodeExchangeResponse, error) {
+func (UnimplementedLoginServiceServer) ExchangeCode(context.Context, *ExchangeCodeRequest) (*ExchangeCodeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExchangeCode not implemented")
 }
 
@@ -137,7 +137,7 @@ func _LoginService_CompleteBootstrap_Handler(srv interface{}, ctx context.Contex
 }
 
 func _LoginService_ExchangeCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BeginCodeExchangeRequest)
+	in := new(ExchangeCodeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -149,7 +149,7 @@ func _LoginService_ExchangeCode_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: "/login.v1alpha1.LoginService/ExchangeCode",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LoginServiceServer).ExchangeCode(ctx, req.(*BeginCodeExchangeRequest))
+		return srv.(LoginServiceServer).ExchangeCode(ctx, req.(*ExchangeCodeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

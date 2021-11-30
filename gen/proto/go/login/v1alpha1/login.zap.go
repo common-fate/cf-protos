@@ -91,7 +91,7 @@ func (m *CompleteBootstrapResponse) MarshalLogObject(enc go_uber_org_zap_zapcore
 	return nil
 }
 
-func (m *BeginCodeExchangeRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *ExchangeCodeRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -108,7 +108,7 @@ func (m *BeginCodeExchangeRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.
 	return nil
 }
 
-func (m *BeginCodeExchangeResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *ExchangeCodeResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 

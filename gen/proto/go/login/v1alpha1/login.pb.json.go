@@ -72,7 +72,7 @@ func (msg *CompleteBootstrapResponse) UnmarshalJSON(b []byte) error {
 }
 
 // MarshalJSON implements json.Marshaler
-func (msg *BeginCodeExchangeRequest) MarshalJSON() ([]byte, error) {
+func (msg *ExchangeCodeRequest) MarshalJSON() ([]byte, error) {
 	return protojson.MarshalOptions{
 		UseEnumNumbers:  false,
 		EmitUnpopulated: false,
@@ -81,14 +81,14 @@ func (msg *BeginCodeExchangeRequest) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON implements json.Unmarshaler
-func (msg *BeginCodeExchangeRequest) UnmarshalJSON(b []byte) error {
+func (msg *ExchangeCodeRequest) UnmarshalJSON(b []byte) error {
 	return protojson.UnmarshalOptions{
 		DiscardUnknown: false,
 	}.Unmarshal(b, msg)
 }
 
 // MarshalJSON implements json.Marshaler
-func (msg *BeginCodeExchangeResponse) MarshalJSON() ([]byte, error) {
+func (msg *ExchangeCodeResponse) MarshalJSON() ([]byte, error) {
 	return protojson.MarshalOptions{
 		UseEnumNumbers:  false,
 		EmitUnpopulated: false,
@@ -97,7 +97,7 @@ func (msg *BeginCodeExchangeResponse) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON implements json.Unmarshaler
-func (msg *BeginCodeExchangeResponse) UnmarshalJSON(b []byte) error {
+func (msg *ExchangeCodeResponse) UnmarshalJSON(b []byte) error {
 	return protojson.UnmarshalOptions{
 		DiscardUnknown: false,
 	}.Unmarshal(b, msg)
