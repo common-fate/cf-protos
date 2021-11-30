@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package login.v1alpha1;
+
+import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
+
+// LoginService is the Granted evaluation login server
+service LoginService {
+  rpc BeginBootstrap(BeginBootstrapRequest) returns (BeginBootstrapResponse);
+  rpc CompleteBootstrap(CompleteBootstrapRequest) returns (CompleteBootstrapResponse);
+}
+
+message BeginBootstrapRequest {
+  string admin_email_address = 1 [(validate.rules).string.email = true];
+  bytes pubkey = 2;
+  string version = 3;
+}
+
+message BeginBootstrapResponse {
+  string challenge = 1;
+}
+
+message CompleteBootstrapRequest {
+  string challenge = 1;
+  bytes sig = 2;
+}
+
+message CompleteBootstrapResponse {
+  string server_token = 1;
+  google.protobuf.Timestamp server_token_expires_at = 2;
+  string user_token = 3;
+}
