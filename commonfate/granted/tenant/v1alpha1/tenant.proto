@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package tenant.v1alpha1;
+
+// Tenant is the gRPC service for querying and provisioning tenants
+// used by Common Fate Cloud services
+service TenantService {
+  rpc GetTenantByPublicKey(GetTenantByPublicKeyRequest) returns (GetTenantByPublicKeyResponse);
+}
+
+message GetTenantByPublicKeyRequest {
+  string publickey_hash = 1;
+}
+
+message GetTenantByPublicKeyResponse {
+  string tenant_id = 1;
+  string access_broker_url = 2;
+}
