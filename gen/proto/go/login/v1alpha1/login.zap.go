@@ -90,3 +90,34 @@ func (m *CompleteBootstrapResponse) MarshalLogObject(enc go_uber_org_zap_zapcore
 
 	return nil
 }
+
+func (m *BeginCodeExchangeRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "server_token" // field server_token = 1
+	enc.AddString(keyName, m.ServerToken)
+
+	keyName = "code" // field code = 2
+	enc.AddString(keyName, m.Code)
+
+	return nil
+}
+
+func (m *BeginCodeExchangeResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "user_email_address" // field user_email_address = 1
+	enc.AddString(keyName, m.UserEmailAddress)
+
+	return nil
+}

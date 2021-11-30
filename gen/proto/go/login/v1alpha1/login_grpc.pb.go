@@ -20,6 +20,11 @@ const _ = grpc.SupportPackageIsVersion7
 type LoginServiceClient interface {
 	BeginBootstrap(ctx context.Context, in *BeginBootstrapRequest, opts ...grpc.CallOption) (*BeginBootstrapResponse, error)
 	CompleteBootstrap(ctx context.Context, in *CompleteBootstrapRequest, opts ...grpc.CallOption) (*CompleteBootstrapResponse, error)
+	// ExchangeCode exchanges a code obtained by the user from logging in
+	// along with the Server Token obtained by the bootstrapping process
+	// for a user's email address. The user is validated by the Login Service
+	// as belong to the tenant this request is being made from.
+	ExchangeCode(ctx context.Context, in *BeginCodeExchangeRequest, opts ...grpc.CallOption) (*BeginCodeExchangeResponse, error)
 }
 
 type loginServiceClient struct {
@@ -48,12 +53,26 @@ func (c *loginServiceClient) CompleteBootstrap(ctx context.Context, in *Complete
 	return out, nil
 }
 
+func (c *loginServiceClient) ExchangeCode(ctx context.Context, in *BeginCodeExchangeRequest, opts ...grpc.CallOption) (*BeginCodeExchangeResponse, error) {
+	out := new(BeginCodeExchangeResponse)
+	err := c.cc.Invoke(ctx, "/login.v1alpha1.LoginService/ExchangeCode", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // LoginServiceServer is the server API for LoginService service.
 // All implementations should embed UnimplementedLoginServiceServer
 // for forward compatibility
 type LoginServiceServer interface {
 	BeginBootstrap(context.Context, *BeginBootstrapRequest) (*BeginBootstrapResponse, error)
 	CompleteBootstrap(context.Context, *CompleteBootstrapRequest) (*CompleteBootstrapResponse, error)
+	// ExchangeCode exchanges a code obtained by the user from logging in
+	// along with the Server Token obtained by the bootstrapping process
+	// for a user's email address. The user is validated by the Login Service
+	// as belong to the tenant this request is being made from.
+	ExchangeCode(context.Context, *BeginCodeExchangeRequest) (*BeginCodeExchangeResponse, error)
 }
 
 // UnimplementedLoginServiceServer should be embedded to have forward compatible implementations.
@@ -65,6 +84,9 @@ func (UnimplementedLoginServiceServer) BeginBootstrap(context.Context, *BeginBoo
 }
 func (UnimplementedLoginServiceServer) CompleteBootstrap(context.Context, *CompleteBootstrapRequest) (*CompleteBootstrapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CompleteBootstrap not implemented")
+}
+func (UnimplementedLoginServiceServer) ExchangeCode(context.Context, *BeginCodeExchangeRequest) (*BeginCodeExchangeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExchangeCode not implemented")
 }
 
 // UnsafeLoginServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -114,6 +136,24 @@ func _LoginService_CompleteBootstrap_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LoginService_ExchangeCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BeginCodeExchangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LoginServiceServer).ExchangeCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/login.v1alpha1.LoginService/ExchangeCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LoginServiceServer).ExchangeCode(ctx, req.(*BeginCodeExchangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // LoginService_ServiceDesc is the grpc.ServiceDesc for LoginService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -128,6 +168,10 @@ var LoginService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CompleteBootstrap",
 			Handler:    _LoginService_CompleteBootstrap_Handler,
+		},
+		{
+			MethodName: "ExchangeCode",
+			Handler:    _LoginService_ExchangeCode_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
