@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package admin.v1alpha1;
+
+// AdminService is a service used to manage tenancies in development
+service AdminService {
+  rpc ListTenants(ListTenantsRequest) returns (ListTenantsResponse);
+}
+
+message ListTenantsRequest {}
+
+message ListTenantsResponse {
+  repeated Tenant tenants = 1;
+}
+
+message Tenant {
+  string id = 1;
+  string name = 2;
+  string admin_email = 3;
+  string access_broker_url = 4;
+}
