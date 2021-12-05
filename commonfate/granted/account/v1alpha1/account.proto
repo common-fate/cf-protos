@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package account.v1alpha1;
+
+import "validate/validate.proto";
+
+// AccountService is a public-facing service used to sign up and manage
+// Common Fate Cloud accounts.
+service AccountService {
+  rpc Signup(SignupRequest) returns (SignupResponse);
+}
+
+message SignupRequest {
+  string admin_email_address = 1 [(validate.rules).string.email = true];
+  bytes pubkey = 2;
+  string tenant_name = 3;
+  string access_broker_url = 4;
+}
+
+message SignupResponse {}
