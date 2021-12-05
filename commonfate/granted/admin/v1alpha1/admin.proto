@@ -5,6 +5,7 @@ package admin.v1alpha1;
 // AdminService is a service used to manage tenancies in development
 service AdminService {
   rpc ListTenants(ListTenantsRequest) returns (ListTenantsResponse);
+  rpc DeleteTenant(DeleteTenantRequest) returns (DeleteTenantResponse);
 }
 
 message ListTenantsRequest {}
@@ -19,3 +20,9 @@ message Tenant {
   string admin_email = 3;
   string access_broker_url = 4;
 }
+
+message DeleteTenantRequest {
+  string tenant_id = 1;
+}
+
+message DeleteTenantResponse {}
