@@ -24,6 +24,9 @@ type AccountServiceClient interface {
 	ListMembers(ctx context.Context, in *ListMembersRequest, opts ...grpc.CallOption) (*ListMembersResponse, error)
 	CheckForUpdates(ctx context.Context, in *CheckForUpdatesRequest, opts ...grpc.CallOption) (*CheckForUpdatesResponse, error)
 	GetDeviceId(ctx context.Context, in *GetDeviceIdRequest, opts ...grpc.CallOption) (*GetDeviceIdResponse, error)
+	// Authenticated informs the metadata service that the client has successfully
+	// completed the login flow with their access broker
+	Authenticated(ctx context.Context, in *AuthenticatedRequest, opts ...grpc.CallOption) (*AuthenticatedResponse, error)
 }
 
 type accountServiceClient struct {
@@ -88,6 +91,15 @@ func (c *accountServiceClient) GetDeviceId(ctx context.Context, in *GetDeviceIdR
 	return out, nil
 }
 
+func (c *accountServiceClient) Authenticated(ctx context.Context, in *AuthenticatedRequest, opts ...grpc.CallOption) (*AuthenticatedResponse, error) {
+	out := new(AuthenticatedResponse)
+	err := c.cc.Invoke(ctx, "/account.v1alpha1.AccountService/Authenticated", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AccountServiceServer is the server API for AccountService service.
 // All implementations should embed UnimplementedAccountServiceServer
 // for forward compatibility
@@ -98,6 +110,9 @@ type AccountServiceServer interface {
 	ListMembers(context.Context, *ListMembersRequest) (*ListMembersResponse, error)
 	CheckForUpdates(context.Context, *CheckForUpdatesRequest) (*CheckForUpdatesResponse, error)
 	GetDeviceId(context.Context, *GetDeviceIdRequest) (*GetDeviceIdResponse, error)
+	// Authenticated informs the metadata service that the client has successfully
+	// completed the login flow with their access broker
+	Authenticated(context.Context, *AuthenticatedRequest) (*AuthenticatedResponse, error)
 }
 
 // UnimplementedAccountServiceServer should be embedded to have forward compatible implementations.
@@ -121,6 +136,9 @@ func (UnimplementedAccountServiceServer) CheckForUpdates(context.Context, *Check
 }
 func (UnimplementedAccountServiceServer) GetDeviceId(context.Context, *GetDeviceIdRequest) (*GetDeviceIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDeviceId not implemented")
+}
+func (UnimplementedAccountServiceServer) Authenticated(context.Context, *AuthenticatedRequest) (*AuthenticatedResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Authenticated not implemented")
 }
 
 // UnsafeAccountServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -242,6 +260,24 @@ func _AccountService_GetDeviceId_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AccountService_Authenticated_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AuthenticatedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).Authenticated(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.v1alpha1.AccountService/Authenticated",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).Authenticated(ctx, req.(*AuthenticatedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AccountService_ServiceDesc is the grpc.ServiceDesc for AccountService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -272,6 +308,10 @@ var AccountService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetDeviceId",
 			Handler:    _AccountService_GetDeviceId_Handler,
+		},
+		{
+			MethodName: "Authenticated",
+			Handler:    _AccountService_Authenticated_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

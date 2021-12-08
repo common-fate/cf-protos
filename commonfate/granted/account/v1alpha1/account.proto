@@ -13,6 +13,10 @@ service AccountService {
   rpc ListMembers(ListMembersRequest) returns (ListMembersResponse);
   rpc CheckForUpdates(CheckForUpdatesRequest) returns (CheckForUpdatesResponse);
   rpc GetDeviceId(GetDeviceIdRequest) returns (GetDeviceIdResponse);
+
+  // Authenticated informs the metadata service that the client has successfully
+  // completed the login flow with their access broker
+  rpc Authenticated(AuthenticatedRequest) returns (AuthenticatedResponse);
 }
 
 message SignupRequest {
@@ -49,7 +53,6 @@ message ListMembersResponse {
 
 message CheckForUpdatesRequest {
 	string version = 1;
-	string dev = 2;
 }
 
 message CheckForUpdatesResponse {
@@ -62,3 +65,7 @@ message GetDeviceIdRequest {}
 message GetDeviceIdResponse {
 	string id = 1;
 }
+
+message AuthenticatedRequest {}
+
+message AuthenticatedResponse {}

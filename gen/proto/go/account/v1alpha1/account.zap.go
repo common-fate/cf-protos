@@ -164,9 +164,6 @@ func (m *CheckForUpdatesRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.Ob
 	keyName = "version" // field version = 1
 	enc.AddString(keyName, m.Version)
 
-	keyName = "dev" // field dev = 2
-	enc.AddString(keyName, m.Dev)
-
 	return nil
 }
 
@@ -208,6 +205,28 @@ func (m *GetDeviceIdResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Objec
 
 	keyName = "id" // field id = 1
 	enc.AddString(keyName, m.Id)
+
+	return nil
+}
+
+func (m *AuthenticatedRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+func (m *AuthenticatedResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
 
 	return nil
 }
