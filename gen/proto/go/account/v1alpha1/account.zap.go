@@ -152,3 +152,62 @@ func (m *ListMembersResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Objec
 
 	return nil
 }
+
+func (m *CheckForUpdatesRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "version" // field version = 1
+	enc.AddString(keyName, m.Version)
+
+	keyName = "dev" // field dev = 2
+	enc.AddString(keyName, m.Dev)
+
+	return nil
+}
+
+func (m *CheckForUpdatesResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "update_required" // field update_required = 1
+	enc.AddBool(keyName, m.UpdateRequired)
+
+	keyName = "message" // field message = 2
+	enc.AddString(keyName, m.Message)
+
+	return nil
+}
+
+func (m *GetDeviceIdRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+func (m *GetDeviceIdResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "id" // field id = 1
+	enc.AddString(keyName, m.Id)
+
+	return nil
+}

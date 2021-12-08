@@ -11,6 +11,8 @@ service AccountService {
   rpc InviteMember(InviteMemberRequest) returns (InviteMemberResponse);
   rpc RemoveMember(RemoveMemberRequest) returns (RemoveMemberResponse);
   rpc ListMembers(ListMembersRequest) returns (ListMembersResponse);
+  rpc CheckForUpdates(CheckForUpdatesRequest) returns (CheckForUpdatesResponse);
+  rpc GetDeviceId(GetDeviceIdRequest) returns (GetDeviceIdResponse);
 }
 
 message SignupRequest {
@@ -43,4 +45,20 @@ message Member {
 
 message ListMembersResponse {
 	repeated Member members = 1;
+}
+
+message CheckForUpdatesRequest {
+	string version = 1;
+	string dev = 2;
+}
+
+message CheckForUpdatesResponse {
+	bool update_required = 1;
+	string message = 2;
+}
+
+message GetDeviceIdRequest {}
+
+message GetDeviceIdResponse {
+	string id = 1;
 }
