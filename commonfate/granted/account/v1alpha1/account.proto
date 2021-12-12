@@ -21,9 +21,8 @@ service AccountService {
 
 message SignupRequest {
   string admin_email_address = 1 [(validate.rules).string.email = true];
-  bytes pubkey = 2;
-  string tenant_name = 3;
-  string access_broker_url = 4;
+  string tenant_name = 2 [(validate.rules).string.max_len = 50];
+  string tenant_slug = 3 [(validate.rules).string.max_len = 50];
 }
 
 message SignupResponse {}

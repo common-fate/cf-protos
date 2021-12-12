@@ -27,14 +27,11 @@ func (m *SignupRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncod
 	keyName = "admin_email_address" // field admin_email_address = 1
 	enc.AddString(keyName, m.AdminEmailAddress)
 
-	keyName = "pubkey" // field pubkey = 2
-	enc.AddByteString(keyName, m.Pubkey)
-
-	keyName = "tenant_name" // field tenant_name = 3
+	keyName = "tenant_name" // field tenant_name = 2
 	enc.AddString(keyName, m.TenantName)
 
-	keyName = "access_broker_url" // field access_broker_url = 4
-	enc.AddString(keyName, m.AccessBrokerUrl)
+	keyName = "tenant_slug" // field tenant_slug = 3
+	enc.AddString(keyName, m.TenantSlug)
 
 	return nil
 }
