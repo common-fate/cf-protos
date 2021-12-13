@@ -97,59 +97,6 @@ func (m *RemoveMemberResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 	return nil
 }
 
-func (m *ListMembersRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	return nil
-}
-
-func (m *Member) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	keyName = "email_address" // field email_address = 1
-	enc.AddString(keyName, m.EmailAddress)
-
-	keyName = "is_admin" // field is_admin = 2
-	enc.AddBool(keyName, m.IsAdmin)
-
-	return nil
-}
-
-func (m *ListMembersResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	keyName = "members" // field members = 1
-	enc.AddArray(keyName, go_uber_org_zap_zapcore.ArrayMarshalerFunc(func(aenc go_uber_org_zap_zapcore.ArrayEncoder) error {
-		for _, rv := range m.Members {
-			_ = rv
-			if rv != nil {
-				var vv interface{} = rv
-				if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
-					aenc.AppendObject(marshaler)
-				}
-			}
-		}
-		return nil
-	}))
-
-	return nil
-}
-
 func (m *CheckForUpdatesRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName

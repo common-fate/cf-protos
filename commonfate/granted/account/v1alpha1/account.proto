@@ -10,7 +10,6 @@ service AccountService {
   rpc Signup(SignupRequest) returns (SignupResponse);
   rpc InviteMember(InviteMemberRequest) returns (InviteMemberResponse);
   rpc RemoveMember(RemoveMemberRequest) returns (RemoveMemberResponse);
-  rpc ListMembers(ListMembersRequest) returns (ListMembersResponse);
   rpc CheckForUpdates(CheckForUpdatesRequest) returns (CheckForUpdatesResponse);
   rpc GetDeviceId(GetDeviceIdRequest) returns (GetDeviceIdResponse);
 
@@ -39,16 +38,6 @@ message RemoveMemberRequest {
 
 message RemoveMemberResponse {}
 
-message ListMembersRequest {}
-
-message Member {
-	string email_address = 1;
-	bool is_admin = 2;
-}
-
-message ListMembersResponse {
-	repeated Member members = 1;
-}
 
 message CheckForUpdatesRequest {
 	string version = 1;

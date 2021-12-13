@@ -21,7 +21,6 @@ type AccountServiceClient interface {
 	Signup(ctx context.Context, in *SignupRequest, opts ...grpc.CallOption) (*SignupResponse, error)
 	InviteMember(ctx context.Context, in *InviteMemberRequest, opts ...grpc.CallOption) (*InviteMemberResponse, error)
 	RemoveMember(ctx context.Context, in *RemoveMemberRequest, opts ...grpc.CallOption) (*RemoveMemberResponse, error)
-	ListMembers(ctx context.Context, in *ListMembersRequest, opts ...grpc.CallOption) (*ListMembersResponse, error)
 	CheckForUpdates(ctx context.Context, in *CheckForUpdatesRequest, opts ...grpc.CallOption) (*CheckForUpdatesResponse, error)
 	GetDeviceId(ctx context.Context, in *GetDeviceIdRequest, opts ...grpc.CallOption) (*GetDeviceIdResponse, error)
 	// Authenticated informs the metadata service that the client has successfully
@@ -64,15 +63,6 @@ func (c *accountServiceClient) RemoveMember(ctx context.Context, in *RemoveMembe
 	return out, nil
 }
 
-func (c *accountServiceClient) ListMembers(ctx context.Context, in *ListMembersRequest, opts ...grpc.CallOption) (*ListMembersResponse, error) {
-	out := new(ListMembersResponse)
-	err := c.cc.Invoke(ctx, "/account.v1alpha1.AccountService/ListMembers", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *accountServiceClient) CheckForUpdates(ctx context.Context, in *CheckForUpdatesRequest, opts ...grpc.CallOption) (*CheckForUpdatesResponse, error) {
 	out := new(CheckForUpdatesResponse)
 	err := c.cc.Invoke(ctx, "/account.v1alpha1.AccountService/CheckForUpdates", in, out, opts...)
@@ -107,7 +97,6 @@ type AccountServiceServer interface {
 	Signup(context.Context, *SignupRequest) (*SignupResponse, error)
 	InviteMember(context.Context, *InviteMemberRequest) (*InviteMemberResponse, error)
 	RemoveMember(context.Context, *RemoveMemberRequest) (*RemoveMemberResponse, error)
-	ListMembers(context.Context, *ListMembersRequest) (*ListMembersResponse, error)
 	CheckForUpdates(context.Context, *CheckForUpdatesRequest) (*CheckForUpdatesResponse, error)
 	GetDeviceId(context.Context, *GetDeviceIdRequest) (*GetDeviceIdResponse, error)
 	// Authenticated informs the metadata service that the client has successfully
@@ -127,9 +116,6 @@ func (UnimplementedAccountServiceServer) InviteMember(context.Context, *InviteMe
 }
 func (UnimplementedAccountServiceServer) RemoveMember(context.Context, *RemoveMemberRequest) (*RemoveMemberResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveMember not implemented")
-}
-func (UnimplementedAccountServiceServer) ListMembers(context.Context, *ListMembersRequest) (*ListMembersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListMembers not implemented")
 }
 func (UnimplementedAccountServiceServer) CheckForUpdates(context.Context, *CheckForUpdatesRequest) (*CheckForUpdatesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckForUpdates not implemented")
@@ -206,24 +192,6 @@ func _AccountService_RemoveMember_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_ListMembers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListMembersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountServiceServer).ListMembers(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/account.v1alpha1.AccountService/ListMembers",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).ListMembers(ctx, req.(*ListMembersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _AccountService_CheckForUpdates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CheckForUpdatesRequest)
 	if err := dec(in); err != nil {
@@ -296,10 +264,6 @@ var AccountService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemoveMember",
 			Handler:    _AccountService_RemoveMember_Handler,
-		},
-		{
-			MethodName: "ListMembers",
-			Handler:    _AccountService_ListMembers_Handler,
 		},
 		{
 			MethodName: "CheckForUpdates",

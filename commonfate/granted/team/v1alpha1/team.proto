@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package team.v1alpha1;
+
+// TeamService is used to manage Granted teams.
+service TeamService {
+  rpc ListMembers(ListMembersRequest) returns (ListMembersResponse);
+}
+
+message ListMembersRequest {}
+
+message ListMembersResponse {
+	repeated Member members = 1;
+}
+
+message Member {
+	string email_address = 1;
+	bool is_admin = 2;
+}
