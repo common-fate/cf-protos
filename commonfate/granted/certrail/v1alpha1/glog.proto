@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package glog.v1alpha1;
+package certrail.v1alpha1;
 
 import "google/protobuf/timestamp.proto";
 import "validate/validate.proto";
 
-// GlogService is API to glog, the Granted transparency log.
-service GlogService {
+// CertrailService is API to the Granted transparency log.
+service CertrailService {
   // Store a payload in the transparency log
   rpc Store(StoreRequest) returns (StoreResponse);
   rpc GetEntries(GetEntriesRequest) returns (GetEntriesResponse);
