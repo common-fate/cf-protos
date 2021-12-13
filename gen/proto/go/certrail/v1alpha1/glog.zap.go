@@ -7,8 +7,8 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
-	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
+	_ "google.golang.org/protobuf/types/known/timestamppb"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -161,9 +161,9 @@ func (m *GetEntriesResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Object
 		return nil
 	}
 
-	keyName = "payloads" // field payloads = 1
+	keyName = "envelopes" // field envelopes = 1
 	enc.AddArray(keyName, go_uber_org_zap_zapcore.ArrayMarshalerFunc(func(aenc go_uber_org_zap_zapcore.ArrayEncoder) error {
-		for _, rv := range m.Payloads {
+		for _, rv := range m.Envelopes {
 			_ = rv
 			if rv != nil {
 				var vv interface{} = rv
@@ -178,7 +178,7 @@ func (m *GetEntriesResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Object
 	return nil
 }
 
-func (m *IncludedPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *IncludedEnvelope) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -186,9 +186,9 @@ func (m *IncludedPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEnc
 		return nil
 	}
 
-	keyName = "payload" // field payload = 1
-	if m.Payload != nil {
-		var vv interface{} = m.Payload
+	keyName = "envelope" // field envelope = 1
+	if m.Envelope != nil {
+		var vv interface{} = m.Envelope
 		if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
 			enc.AddObject(keyName, marshaler)
 		}

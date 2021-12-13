@@ -46,9 +46,9 @@ message GetEntriesRequest {
 }
 
 message GetEntriesResponse {
-  repeated IncludedPayload payloads = 1;
+  repeated IncludedEnvelope envelopes = 1;
 }
 
-message IncludedPayload {
-  Payload payload = 1;
+message IncludedEnvelope {
+  Envelope envelope = 1;
 }

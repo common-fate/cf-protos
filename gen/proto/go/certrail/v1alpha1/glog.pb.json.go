@@ -136,7 +136,7 @@ func (msg *GetEntriesResponse) UnmarshalJSON(b []byte) error {
 }
 
 // MarshalJSON implements json.Marshaler
-func (msg *IncludedPayload) MarshalJSON() ([]byte, error) {
+func (msg *IncludedEnvelope) MarshalJSON() ([]byte, error) {
 	return protojson.MarshalOptions{
 		UseEnumNumbers:  false,
 		EmitUnpopulated: false,
@@ -145,7 +145,7 @@ func (msg *IncludedPayload) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON implements json.Unmarshaler
-func (msg *IncludedPayload) UnmarshalJSON(b []byte) error {
+func (msg *IncludedEnvelope) UnmarshalJSON(b []byte) error {
 	return protojson.UnmarshalOptions{
 		DiscardUnknown: false,
 	}.Unmarshal(b, msg)
