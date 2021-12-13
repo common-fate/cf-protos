@@ -9,23 +9,29 @@ import "validate/validate.proto";
 service GlogService {
   // Store a payload in the transparency log
   rpc Store(StoreRequest) returns (StoreResponse);
+  rpc GetEntries(GetEntriesRequest) returns (GetEntriesResponse);
 }
 
 message UpdateConfigPayload {
   bytes config_sha256 = 1 [(validate.rules).bytes.len = 32];
 }
 
+message IssueCertificatePayload {
+  bytes certificate = 1;
+}
+
 message Envelope {
-  TimestampedPayload payload = 1;
+  Payload payload = 1;
   // our ECDSA256 signatures are 64 bytes long
   bytes signature = 2 [(validate.rules).bytes.len = 64];
 }
 
-message TimestampedPayload {
+message Payload {
+  google.protobuf.Timestamp timestamp = 1;
   oneof contents {
-    UpdateConfigPayload update_config = 1;
+    UpdateConfigPayload update_config = 2;
+    IssueCertificatePayload issue_certificate = 3;
   }
-  google.protobuf.Timestamp timestamp = 2;
 }
 
 message StoreRequest {
@@ -33,3 +39,16 @@ message StoreRequest {
 }
 
 message StoreResponse {}
+
+message GetEntriesRequest {
+  int64 start_index = 1;
+  int64 count = 2;
+}
+
+message GetEntriesResponse {
+  repeated IncludedPayload payloads = 1;
+}
+
+message IncludedPayload {
+  Payload payload = 1;
+}

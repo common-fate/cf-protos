@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 type GlogServiceClient interface {
 	// Store a payload in the transparency log
 	Store(ctx context.Context, in *StoreRequest, opts ...grpc.CallOption) (*StoreResponse, error)
+	GetEntries(ctx context.Context, in *GetEntriesRequest, opts ...grpc.CallOption) (*GetEntriesResponse, error)
 }
 
 type glogServiceClient struct {
@@ -39,12 +40,22 @@ func (c *glogServiceClient) Store(ctx context.Context, in *StoreRequest, opts ..
 	return out, nil
 }
 
+func (c *glogServiceClient) GetEntries(ctx context.Context, in *GetEntriesRequest, opts ...grpc.CallOption) (*GetEntriesResponse, error) {
+	out := new(GetEntriesResponse)
+	err := c.cc.Invoke(ctx, "/glog.v1alpha1.GlogService/GetEntries", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GlogServiceServer is the server API for GlogService service.
 // All implementations should embed UnimplementedGlogServiceServer
 // for forward compatibility
 type GlogServiceServer interface {
 	// Store a payload in the transparency log
 	Store(context.Context, *StoreRequest) (*StoreResponse, error)
+	GetEntries(context.Context, *GetEntriesRequest) (*GetEntriesResponse, error)
 }
 
 // UnimplementedGlogServiceServer should be embedded to have forward compatible implementations.
@@ -53,6 +64,9 @@ type UnimplementedGlogServiceServer struct {
 
 func (UnimplementedGlogServiceServer) Store(context.Context, *StoreRequest) (*StoreResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Store not implemented")
+}
+func (UnimplementedGlogServiceServer) GetEntries(context.Context, *GetEntriesRequest) (*GetEntriesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetEntries not implemented")
 }
 
 // UnsafeGlogServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -84,6 +98,24 @@ func _GlogService_Store_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GlogService_GetEntries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEntriesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GlogServiceServer).GetEntries(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/glog.v1alpha1.GlogService/GetEntries",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GlogServiceServer).GetEntries(ctx, req.(*GetEntriesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // GlogService_ServiceDesc is the grpc.ServiceDesc for GlogService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -94,6 +126,10 @@ var GlogService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Store",
 			Handler:    _GlogService_Store_Handler,
+		},
+		{
+			MethodName: "GetEntries",
+			Handler:    _GlogService_GetEntries_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

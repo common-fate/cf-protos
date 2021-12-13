@@ -32,6 +32,20 @@ func (m *UpdateConfigPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.Objec
 	return nil
 }
 
+func (m *IssueCertificatePayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "certificate" // field certificate = 1
+	enc.AddByteString(keyName, m.Certificate)
+
+	return nil
+}
+
 func (m *Envelope) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
@@ -54,7 +68,7 @@ func (m *Envelope) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) e
 	return nil
 }
 
-func (m *TimestampedPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *Payload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -62,8 +76,13 @@ func (m *TimestampedPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.Object
 		return nil
 	}
 
-	keyName = "update_config" // field update_config = 1
-	if ov, ok := m.GetContents().(*TimestampedPayload_UpdateConfig); ok {
+	keyName = "timestamp" // field timestamp = 1
+	if t, err := github_com_golang_protobuf_ptypes.Timestamp(m.Timestamp); err == nil {
+		enc.AddTime(keyName, t)
+	}
+
+	keyName = "update_config" // field update_config = 2
+	if ov, ok := m.GetContents().(*Payload_UpdateConfig); ok {
 		_ = ov
 		if ov.UpdateConfig != nil {
 			var vv interface{} = ov.UpdateConfig
@@ -73,9 +92,15 @@ func (m *TimestampedPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.Object
 		}
 	}
 
-	keyName = "timestamp" // field timestamp = 2
-	if t, err := github_com_golang_protobuf_ptypes.Timestamp(m.Timestamp); err == nil {
-		enc.AddTime(keyName, t)
+	keyName = "issue_certificate" // field issue_certificate = 3
+	if ov, ok := m.GetContents().(*Payload_IssueCertificate); ok {
+		_ = ov
+		if ov.IssueCertificate != nil {
+			var vv interface{} = ov.IssueCertificate
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
 	}
 
 	return nil
@@ -106,6 +131,67 @@ func (m *StoreResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncod
 
 	if m == nil {
 		return nil
+	}
+
+	return nil
+}
+
+func (m *GetEntriesRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "start_index" // field start_index = 1
+	enc.AddInt64(keyName, m.StartIndex)
+
+	keyName = "count" // field count = 2
+	enc.AddInt64(keyName, m.Count)
+
+	return nil
+}
+
+func (m *GetEntriesResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "payloads" // field payloads = 1
+	enc.AddArray(keyName, go_uber_org_zap_zapcore.ArrayMarshalerFunc(func(aenc go_uber_org_zap_zapcore.ArrayEncoder) error {
+		for _, rv := range m.Payloads {
+			_ = rv
+			if rv != nil {
+				var vv interface{} = rv
+				if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+					aenc.AppendObject(marshaler)
+				}
+			}
+		}
+		return nil
+	}))
+
+	return nil
+}
+
+func (m *IncludedPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "payload" // field payload = 1
+	if m.Payload != nil {
+		var vv interface{} = m.Payload
+		if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+			enc.AddObject(keyName, marshaler)
+		}
 	}
 
 	return nil

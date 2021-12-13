@@ -147,6 +147,109 @@ var _ interface {
 	ErrorName() string
 } = UpdateConfigPayloadValidationError{}
 
+// Validate checks the field values on IssueCertificatePayload with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *IssueCertificatePayload) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on IssueCertificatePayload with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// IssueCertificatePayloadMultiError, or nil if none found.
+func (m *IssueCertificatePayload) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *IssueCertificatePayload) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Certificate
+
+	if len(errors) > 0 {
+		return IssueCertificatePayloadMultiError(errors)
+	}
+	return nil
+}
+
+// IssueCertificatePayloadMultiError is an error wrapping multiple validation
+// errors returned by IssueCertificatePayload.ValidateAll() if the designated
+// constraints aren't met.
+type IssueCertificatePayloadMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m IssueCertificatePayloadMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m IssueCertificatePayloadMultiError) AllErrors() []error { return m }
+
+// IssueCertificatePayloadValidationError is the validation error returned by
+// IssueCertificatePayload.Validate if the designated constraints aren't met.
+type IssueCertificatePayloadValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e IssueCertificatePayloadValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e IssueCertificatePayloadValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e IssueCertificatePayloadValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e IssueCertificatePayloadValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e IssueCertificatePayloadValidationError) ErrorName() string {
+	return "IssueCertificatePayloadValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e IssueCertificatePayloadValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sIssueCertificatePayload.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = IssueCertificatePayloadValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = IssueCertificatePayloadValidationError{}
+
 // Validate checks the field values on Envelope with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -285,22 +388,21 @@ var _ interface {
 	ErrorName() string
 } = EnvelopeValidationError{}
 
-// Validate checks the field values on TimestampedPayload with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *TimestampedPayload) Validate() error {
+// Validate checks the field values on Payload with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *Payload) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on TimestampedPayload with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// TimestampedPayloadMultiError, or nil if none found.
-func (m *TimestampedPayload) ValidateAll() error {
+// ValidateAll checks the field values on Payload with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in PayloadMultiError, or nil if none found.
+func (m *Payload) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *TimestampedPayload) validate(all bool) error {
+func (m *Payload) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -311,7 +413,7 @@ func (m *TimestampedPayload) validate(all bool) error {
 		switch v := interface{}(m.GetTimestamp()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, TimestampedPayloadValidationError{
+				errors = append(errors, PayloadValidationError{
 					field:  "Timestamp",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -319,7 +421,7 @@ func (m *TimestampedPayload) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, TimestampedPayloadValidationError{
+				errors = append(errors, PayloadValidationError{
 					field:  "Timestamp",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -328,7 +430,7 @@ func (m *TimestampedPayload) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetTimestamp()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return TimestampedPayloadValidationError{
+			return PayloadValidationError{
 				field:  "Timestamp",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -338,13 +440,13 @@ func (m *TimestampedPayload) validate(all bool) error {
 
 	switch m.Contents.(type) {
 
-	case *TimestampedPayload_UpdateConfig:
+	case *Payload_UpdateConfig:
 
 		if all {
 			switch v := interface{}(m.GetUpdateConfig()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, TimestampedPayloadValidationError{
+					errors = append(errors, PayloadValidationError{
 						field:  "UpdateConfig",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -352,7 +454,7 @@ func (m *TimestampedPayload) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, TimestampedPayloadValidationError{
+					errors = append(errors, PayloadValidationError{
 						field:  "UpdateConfig",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -361,8 +463,39 @@ func (m *TimestampedPayload) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetUpdateConfig()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return TimestampedPayloadValidationError{
+				return PayloadValidationError{
 					field:  "UpdateConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *Payload_IssueCertificate:
+
+		if all {
+			switch v := interface{}(m.GetIssueCertificate()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, PayloadValidationError{
+						field:  "IssueCertificate",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, PayloadValidationError{
+						field:  "IssueCertificate",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetIssueCertificate()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PayloadValidationError{
+					field:  "IssueCertificate",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -372,18 +505,17 @@ func (m *TimestampedPayload) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return TimestampedPayloadMultiError(errors)
+		return PayloadMultiError(errors)
 	}
 	return nil
 }
 
-// TimestampedPayloadMultiError is an error wrapping multiple validation errors
-// returned by TimestampedPayload.ValidateAll() if the designated constraints
-// aren't met.
-type TimestampedPayloadMultiError []error
+// PayloadMultiError is an error wrapping multiple validation errors returned
+// by Payload.ValidateAll() if the designated constraints aren't met.
+type PayloadMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m TimestampedPayloadMultiError) Error() string {
+func (m PayloadMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -392,11 +524,11 @@ func (m TimestampedPayloadMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m TimestampedPayloadMultiError) AllErrors() []error { return m }
+func (m PayloadMultiError) AllErrors() []error { return m }
 
-// TimestampedPayloadValidationError is the validation error returned by
-// TimestampedPayload.Validate if the designated constraints aren't met.
-type TimestampedPayloadValidationError struct {
+// PayloadValidationError is the validation error returned by Payload.Validate
+// if the designated constraints aren't met.
+type PayloadValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -404,24 +536,22 @@ type TimestampedPayloadValidationError struct {
 }
 
 // Field function returns field value.
-func (e TimestampedPayloadValidationError) Field() string { return e.field }
+func (e PayloadValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e TimestampedPayloadValidationError) Reason() string { return e.reason }
+func (e PayloadValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e TimestampedPayloadValidationError) Cause() error { return e.cause }
+func (e PayloadValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e TimestampedPayloadValidationError) Key() bool { return e.key }
+func (e PayloadValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e TimestampedPayloadValidationError) ErrorName() string {
-	return "TimestampedPayloadValidationError"
-}
+func (e PayloadValidationError) ErrorName() string { return "PayloadValidationError" }
 
 // Error satisfies the builtin error interface
-func (e TimestampedPayloadValidationError) Error() string {
+func (e PayloadValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -433,14 +563,14 @@ func (e TimestampedPayloadValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sTimestampedPayload.%s: %s%s",
+		"invalid %sPayload.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = TimestampedPayloadValidationError{}
+var _ error = PayloadValidationError{}
 
 var _ interface {
 	Field() string
@@ -448,7 +578,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = TimestampedPayloadValidationError{}
+} = PayloadValidationError{}
 
 // Validate checks the field values on StoreRequest with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
@@ -675,3 +805,371 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = StoreResponseValidationError{}
+
+// Validate checks the field values on GetEntriesRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GetEntriesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetEntriesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetEntriesRequestMultiError, or nil if none found.
+func (m *GetEntriesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetEntriesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for StartIndex
+
+	// no validation rules for Count
+
+	if len(errors) > 0 {
+		return GetEntriesRequestMultiError(errors)
+	}
+	return nil
+}
+
+// GetEntriesRequestMultiError is an error wrapping multiple validation errors
+// returned by GetEntriesRequest.ValidateAll() if the designated constraints
+// aren't met.
+type GetEntriesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetEntriesRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetEntriesRequestMultiError) AllErrors() []error { return m }
+
+// GetEntriesRequestValidationError is the validation error returned by
+// GetEntriesRequest.Validate if the designated constraints aren't met.
+type GetEntriesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetEntriesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetEntriesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetEntriesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetEntriesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetEntriesRequestValidationError) ErrorName() string {
+	return "GetEntriesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetEntriesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetEntriesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetEntriesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetEntriesRequestValidationError{}
+
+// Validate checks the field values on GetEntriesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetEntriesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetEntriesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetEntriesResponseMultiError, or nil if none found.
+func (m *GetEntriesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetEntriesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetPayloads() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetEntriesResponseValidationError{
+						field:  fmt.Sprintf("Payloads[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetEntriesResponseValidationError{
+						field:  fmt.Sprintf("Payloads[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetEntriesResponseValidationError{
+					field:  fmt.Sprintf("Payloads[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetEntriesResponseMultiError(errors)
+	}
+	return nil
+}
+
+// GetEntriesResponseMultiError is an error wrapping multiple validation errors
+// returned by GetEntriesResponse.ValidateAll() if the designated constraints
+// aren't met.
+type GetEntriesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetEntriesResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetEntriesResponseMultiError) AllErrors() []error { return m }
+
+// GetEntriesResponseValidationError is the validation error returned by
+// GetEntriesResponse.Validate if the designated constraints aren't met.
+type GetEntriesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetEntriesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetEntriesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetEntriesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetEntriesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetEntriesResponseValidationError) ErrorName() string {
+	return "GetEntriesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetEntriesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetEntriesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetEntriesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetEntriesResponseValidationError{}
+
+// Validate checks the field values on IncludedPayload with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *IncludedPayload) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on IncludedPayload with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// IncludedPayloadMultiError, or nil if none found.
+func (m *IncludedPayload) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *IncludedPayload) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetPayload()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, IncludedPayloadValidationError{
+					field:  "Payload",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, IncludedPayloadValidationError{
+					field:  "Payload",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPayload()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return IncludedPayloadValidationError{
+				field:  "Payload",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return IncludedPayloadMultiError(errors)
+	}
+	return nil
+}
+
+// IncludedPayloadMultiError is an error wrapping multiple validation errors
+// returned by IncludedPayload.ValidateAll() if the designated constraints
+// aren't met.
+type IncludedPayloadMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m IncludedPayloadMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m IncludedPayloadMultiError) AllErrors() []error { return m }
+
+// IncludedPayloadValidationError is the validation error returned by
+// IncludedPayload.Validate if the designated constraints aren't met.
+type IncludedPayloadValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e IncludedPayloadValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e IncludedPayloadValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e IncludedPayloadValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e IncludedPayloadValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e IncludedPayloadValidationError) ErrorName() string { return "IncludedPayloadValidationError" }
+
+// Error satisfies the builtin error interface
+func (e IncludedPayloadValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sIncludedPayload.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = IncludedPayloadValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = IncludedPayloadValidationError{}
