@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package glog.v1alpha1;
+
+import "google/protobuf/timestamp.proto";
+
+// GlogService is API to glog, the Granted transparency log.
+service GlogService {
+  // Store a payload in the transparency log
+  rpc Store(StoreRequest) returns (StoreResponse);
+}
+
+message UpdateConfigPayload {
+  bytes config_sha256 = 1;
+  google.protobuf.Timestamp timestamp = 3;
+}
+
+message Envelope {
+  oneof payload {
+    UpdateConfigPayload update_config = 1;
+  }
+  bytes certificate = 2;
+  bytes signature = 3;
+}
+
+message StoreRequest {
+  Envelope envelope = 1;
+}
+
+message StoreResponse {}
