@@ -28,11 +28,6 @@ func (m *UpdateConfigPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.Objec
 	keyName = "config_sha256" // field config_sha256 = 1
 	enc.AddByteString(keyName, m.ConfigSha256)
 
-	keyName = "timestamp" // field timestamp = 3
-	if t, err := github_com_golang_protobuf_ptypes.Timestamp(m.Timestamp); err == nil {
-		enc.AddTime(keyName, t)
-	}
-
 	return nil
 }
 
@@ -44,8 +39,30 @@ func (m *Envelope) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) e
 		return nil
 	}
 
+	keyName = "payload" // field payload = 1
+	if m.Payload != nil {
+		var vv interface{} = m.Payload
+		if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+			enc.AddObject(keyName, marshaler)
+		}
+	}
+
+	keyName = "signature" // field signature = 2
+	enc.AddByteString(keyName, m.Signature)
+
+	return nil
+}
+
+func (m *TimestampedPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
 	keyName = "update_config" // field update_config = 1
-	if ov, ok := m.GetPayload().(*Envelope_UpdateConfig); ok {
+	if ov, ok := m.GetContents().(*TimestampedPayload_UpdateConfig); ok {
 		_ = ov
 		if ov.UpdateConfig != nil {
 			var vv interface{} = ov.UpdateConfig
@@ -55,11 +72,10 @@ func (m *Envelope) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) e
 		}
 	}
 
-	keyName = "certificate" // field certificate = 2
-	enc.AddByteString(keyName, m.Certificate)
-
-	keyName = "signature" // field signature = 3
-	enc.AddByteString(keyName, m.Signature)
+	keyName = "timestamp" // field timestamp = 2
+	if t, err := github_com_golang_protobuf_ptypes.Timestamp(m.Timestamp); err == nil {
+		enc.AddTime(keyName, t)
+	}
 
 	return nil
 }

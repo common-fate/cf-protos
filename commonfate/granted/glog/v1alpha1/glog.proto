@@ -12,15 +12,18 @@ service GlogService {
 
 message UpdateConfigPayload {
   bytes config_sha256 = 1;
-  google.protobuf.Timestamp timestamp = 3;
 }
 
 message Envelope {
-  oneof payload {
+  TimestampedPayload payload = 1;
+  bytes signature = 2;
+}
+
+message TimestampedPayload {
+  oneof contents {
     UpdateConfigPayload update_config = 1;
   }
-  bytes certificate = 2;
-  bytes signature = 3;
+  google.protobuf.Timestamp timestamp = 2;
 }
 
 message StoreRequest {
