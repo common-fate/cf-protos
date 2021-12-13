@@ -20,6 +20,11 @@ plugins:
     out: gen/proto/go
     opt:
       - paths=source_relative
+  - name: validate
+    out: gen/proto/go
+    opt:
+      - lang=go
+      - paths=source_relative
   - name: go-json
     out: gen/proto/go
     opt:

@@ -3,6 +3,7 @@ syntax = "proto3";
 package glog.v1alpha1;
 
 import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
 
 // GlogService is API to glog, the Granted transparency log.
 service GlogService {
@@ -11,12 +12,13 @@ service GlogService {
 }
 
 message UpdateConfigPayload {
-  bytes config_sha256 = 1;
+  bytes config_sha256 = 1 [(validate.rules).bytes.len = 32];
 }
 
 message Envelope {
   TimestampedPayload payload = 1;
-  bytes signature = 2;
+  // our ECDSA256 signatures are 64 bytes long
+  bytes signature = 2 [(validate.rules).bytes.len = 64];
 }
 
 message TimestampedPayload {
