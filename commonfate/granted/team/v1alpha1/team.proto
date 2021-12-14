@@ -8,6 +8,8 @@ import "gconfig/v1alpha1/gconfig.proto";
 service TeamService {
   rpc ListMembers(ListMembersRequest) returns (ListMembersResponse);
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse);
+  // GetConfig returns the latest approved config
+  rpc GetConfig(GetConfigRequest) returns (GetConfigResponse);
 }
 
 message ListMembersRequest {}
@@ -27,4 +29,10 @@ message UpdateConfigRequest {
 
 message UpdateConfigResponse {
   bytes sha256_hash = 1;
+}
+
+message GetConfigRequest {}
+
+message GetConfigResponse {
+  gconfig.v1alpha1.Config config = 1;
 }
