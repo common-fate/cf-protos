@@ -10,7 +10,9 @@ service TeamService {
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse);
   // GetConfig returns the latest approved config
   rpc GetConfig(GetConfigRequest) returns (GetConfigResponse);
+  rpc GetConfigByHash(GetConfigByHashRequest) returns (GetConfigByHashResponse);
   rpc GetInterventions(GetInterventionsRequest) returns (GetInterventionsResponse);
+  // rpc GetProviders(GetProvidersRequest) returns (GetProvidersResponse);
 }
 
 message ListMembersRequest {}
@@ -38,6 +40,15 @@ message GetConfigResponse {
   gconfig.v1alpha1.Config config = 1;
 }
 
+message GetConfigByHashRequest {
+  bytes sha256_hash = 1;
+}
+
+message GetConfigByHashResponse {
+  gconfig.v1alpha1.Config config = 1;
+}
+
+
 message EnrolAWSProviderIntervention {
   string provider_id = 1;
   string aws_account_id = 2;
@@ -56,3 +67,33 @@ message Intervention {
 message GetInterventionsResponse {
   repeated Intervention interventions = 1;
 }
+
+// message GetProvidersRequest {}
+
+// // TODO: this should be shifted into gconfig.v1alpha1.Config
+// message Provider {
+//   string id = 1;
+//   string type = 2;
+//   oneof status {
+//     EnrollmentRequired enrollment_required = 3;
+//     ProviderActive active = 4;
+//   }
+
+//   oneof data {
+//     AWSRoleProvider aws_role = 8;
+//   }
+// }
+
+// message AWSRoleProvider {
+//   string bastion_account_id = 1;
+// }
+
+// message EnrollmentRequired {
+//   string deployment_url = 1;
+// }
+
+// message ProviderActive {}
+
+// message GetProvidersResponse {
+//   repeated Provider providers = 1;
+// }

@@ -834,6 +834,239 @@ var _ interface {
 	ErrorName() string
 } = GetConfigResponseValidationError{}
 
+// Validate checks the field values on GetConfigByHashRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetConfigByHashRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetConfigByHashRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetConfigByHashRequestMultiError, or nil if none found.
+func (m *GetConfigByHashRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetConfigByHashRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Sha256Hash
+
+	if len(errors) > 0 {
+		return GetConfigByHashRequestMultiError(errors)
+	}
+	return nil
+}
+
+// GetConfigByHashRequestMultiError is an error wrapping multiple validation
+// errors returned by GetConfigByHashRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetConfigByHashRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetConfigByHashRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetConfigByHashRequestMultiError) AllErrors() []error { return m }
+
+// GetConfigByHashRequestValidationError is the validation error returned by
+// GetConfigByHashRequest.Validate if the designated constraints aren't met.
+type GetConfigByHashRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetConfigByHashRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetConfigByHashRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetConfigByHashRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetConfigByHashRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetConfigByHashRequestValidationError) ErrorName() string {
+	return "GetConfigByHashRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetConfigByHashRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetConfigByHashRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetConfigByHashRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetConfigByHashRequestValidationError{}
+
+// Validate checks the field values on GetConfigByHashResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetConfigByHashResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetConfigByHashResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetConfigByHashResponseMultiError, or nil if none found.
+func (m *GetConfigByHashResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetConfigByHashResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetConfig()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetConfigByHashResponseValidationError{
+					field:  "Config",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetConfigByHashResponseValidationError{
+					field:  "Config",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetConfigByHashResponseValidationError{
+				field:  "Config",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetConfigByHashResponseMultiError(errors)
+	}
+	return nil
+}
+
+// GetConfigByHashResponseMultiError is an error wrapping multiple validation
+// errors returned by GetConfigByHashResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetConfigByHashResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetConfigByHashResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetConfigByHashResponseMultiError) AllErrors() []error { return m }
+
+// GetConfigByHashResponseValidationError is the validation error returned by
+// GetConfigByHashResponse.Validate if the designated constraints aren't met.
+type GetConfigByHashResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetConfigByHashResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetConfigByHashResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetConfigByHashResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetConfigByHashResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetConfigByHashResponseValidationError) ErrorName() string {
+	return "GetConfigByHashResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetConfigByHashResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetConfigByHashResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetConfigByHashResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetConfigByHashResponseValidationError{}
+
 // Validate checks the field values on EnrolAWSProviderIntervention with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

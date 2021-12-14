@@ -132,6 +132,39 @@ func (m *GetConfigResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectE
 	return nil
 }
 
+func (m *GetConfigByHashRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "sha256_hash" // field sha256_hash = 1
+	enc.AddByteString(keyName, m.Sha256Hash)
+
+	return nil
+}
+
+func (m *GetConfigByHashResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "config" // field config = 1
+	if m.Config != nil {
+		var vv interface{} = m.Config
+		if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+			enc.AddObject(keyName, marshaler)
+		}
+	}
+
+	return nil
+}
+
 func (m *EnrolAWSProviderIntervention) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName

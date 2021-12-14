@@ -22,6 +22,7 @@ type TeamServiceClient interface {
 	UpdateConfig(ctx context.Context, in *UpdateConfigRequest, opts ...grpc.CallOption) (*UpdateConfigResponse, error)
 	// GetConfig returns the latest approved config
 	GetConfig(ctx context.Context, in *GetConfigRequest, opts ...grpc.CallOption) (*GetConfigResponse, error)
+	GetConfigByHash(ctx context.Context, in *GetConfigByHashRequest, opts ...grpc.CallOption) (*GetConfigByHashResponse, error)
 	GetInterventions(ctx context.Context, in *GetInterventionsRequest, opts ...grpc.CallOption) (*GetInterventionsResponse, error)
 }
 
@@ -60,6 +61,15 @@ func (c *teamServiceClient) GetConfig(ctx context.Context, in *GetConfigRequest,
 	return out, nil
 }
 
+func (c *teamServiceClient) GetConfigByHash(ctx context.Context, in *GetConfigByHashRequest, opts ...grpc.CallOption) (*GetConfigByHashResponse, error) {
+	out := new(GetConfigByHashResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/GetConfigByHash", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *teamServiceClient) GetInterventions(ctx context.Context, in *GetInterventionsRequest, opts ...grpc.CallOption) (*GetInterventionsResponse, error) {
 	out := new(GetInterventionsResponse)
 	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/GetInterventions", in, out, opts...)
@@ -77,6 +87,7 @@ type TeamServiceServer interface {
 	UpdateConfig(context.Context, *UpdateConfigRequest) (*UpdateConfigResponse, error)
 	// GetConfig returns the latest approved config
 	GetConfig(context.Context, *GetConfigRequest) (*GetConfigResponse, error)
+	GetConfigByHash(context.Context, *GetConfigByHashRequest) (*GetConfigByHashResponse, error)
 	GetInterventions(context.Context, *GetInterventionsRequest) (*GetInterventionsResponse, error)
 }
 
@@ -92,6 +103,9 @@ func (UnimplementedTeamServiceServer) UpdateConfig(context.Context, *UpdateConfi
 }
 func (UnimplementedTeamServiceServer) GetConfig(context.Context, *GetConfigRequest) (*GetConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetConfig not implemented")
+}
+func (UnimplementedTeamServiceServer) GetConfigByHash(context.Context, *GetConfigByHashRequest) (*GetConfigByHashResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetConfigByHash not implemented")
 }
 func (UnimplementedTeamServiceServer) GetInterventions(context.Context, *GetInterventionsRequest) (*GetInterventionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInterventions not implemented")
@@ -162,6 +176,24 @@ func _TeamService_GetConfig_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TeamService_GetConfigByHash_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConfigByHashRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).GetConfigByHash(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/GetConfigByHash",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).GetConfigByHash(ctx, req.(*GetConfigByHashRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _TeamService_GetInterventions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetInterventionsRequest)
 	if err := dec(in); err != nil {
@@ -198,6 +230,10 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetConfig",
 			Handler:    _TeamService_GetConfig_Handler,
+		},
+		{
+			MethodName: "GetConfigByHash",
+			Handler:    _TeamService_GetConfigByHash_Handler,
 		},
 		{
 			MethodName: "GetInterventions",
