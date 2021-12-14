@@ -12,7 +12,9 @@ require (
 
 require (
 	github.com/alvaroloes/enumer v1.1.2 // indirect
-	github.com/common-fate/gconfig v0.0.0-20211214141810-649c5b2a7e15 // indirect
+	github.com/common-fate/gconfig v0.0.0-20211214143211-b57d6b87cf68 // indirect
+	github.com/hashicorp/errwrap v1.0.0 // indirect
+	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/pascaldekloe/name v0.0.0-20180628100202-0fd16699aae1 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
 	go.uber.org/multierr v1.6.0 // indirect
