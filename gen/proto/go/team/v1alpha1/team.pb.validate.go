@@ -833,3 +833,480 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetConfigResponseValidationError{}
+
+// Validate checks the field values on EnrolAWSProviderIntervention with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *EnrolAWSProviderIntervention) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on EnrolAWSProviderIntervention with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// EnrolAWSProviderInterventionMultiError, or nil if none found.
+func (m *EnrolAWSProviderIntervention) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *EnrolAWSProviderIntervention) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ProviderId
+
+	// no validation rules for AwsAccountId
+
+	// no validation rules for CloudformationUrl
+
+	if len(errors) > 0 {
+		return EnrolAWSProviderInterventionMultiError(errors)
+	}
+	return nil
+}
+
+// EnrolAWSProviderInterventionMultiError is an error wrapping multiple
+// validation errors returned by EnrolAWSProviderIntervention.ValidateAll() if
+// the designated constraints aren't met.
+type EnrolAWSProviderInterventionMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m EnrolAWSProviderInterventionMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m EnrolAWSProviderInterventionMultiError) AllErrors() []error { return m }
+
+// EnrolAWSProviderInterventionValidationError is the validation error returned
+// by EnrolAWSProviderIntervention.Validate if the designated constraints
+// aren't met.
+type EnrolAWSProviderInterventionValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e EnrolAWSProviderInterventionValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e EnrolAWSProviderInterventionValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e EnrolAWSProviderInterventionValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e EnrolAWSProviderInterventionValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e EnrolAWSProviderInterventionValidationError) ErrorName() string {
+	return "EnrolAWSProviderInterventionValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e EnrolAWSProviderInterventionValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sEnrolAWSProviderIntervention.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = EnrolAWSProviderInterventionValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = EnrolAWSProviderInterventionValidationError{}
+
+// Validate checks the field values on GetInterventionsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetInterventionsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetInterventionsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetInterventionsRequestMultiError, or nil if none found.
+func (m *GetInterventionsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetInterventionsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetInterventionsRequestMultiError(errors)
+	}
+	return nil
+}
+
+// GetInterventionsRequestMultiError is an error wrapping multiple validation
+// errors returned by GetInterventionsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetInterventionsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetInterventionsRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetInterventionsRequestMultiError) AllErrors() []error { return m }
+
+// GetInterventionsRequestValidationError is the validation error returned by
+// GetInterventionsRequest.Validate if the designated constraints aren't met.
+type GetInterventionsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetInterventionsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetInterventionsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetInterventionsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetInterventionsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetInterventionsRequestValidationError) ErrorName() string {
+	return "GetInterventionsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetInterventionsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetInterventionsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetInterventionsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetInterventionsRequestValidationError{}
+
+// Validate checks the field values on Intervention with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *Intervention) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Intervention with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in InterventionMultiError, or
+// nil if none found.
+func (m *Intervention) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Intervention) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	switch m.Data.(type) {
+
+	case *Intervention_EnrolAwsProvider:
+
+		if all {
+			switch v := interface{}(m.GetEnrolAwsProvider()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, InterventionValidationError{
+						field:  "EnrolAwsProvider",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, InterventionValidationError{
+						field:  "EnrolAwsProvider",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEnrolAwsProvider()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return InterventionValidationError{
+					field:  "EnrolAwsProvider",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return InterventionMultiError(errors)
+	}
+	return nil
+}
+
+// InterventionMultiError is an error wrapping multiple validation errors
+// returned by Intervention.ValidateAll() if the designated constraints aren't met.
+type InterventionMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InterventionMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InterventionMultiError) AllErrors() []error { return m }
+
+// InterventionValidationError is the validation error returned by
+// Intervention.Validate if the designated constraints aren't met.
+type InterventionValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InterventionValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InterventionValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InterventionValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InterventionValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InterventionValidationError) ErrorName() string { return "InterventionValidationError" }
+
+// Error satisfies the builtin error interface
+func (e InterventionValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sIntervention.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InterventionValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InterventionValidationError{}
+
+// Validate checks the field values on GetInterventionsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetInterventionsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetInterventionsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetInterventionsResponseMultiError, or nil if none found.
+func (m *GetInterventionsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetInterventionsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetInterventions() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetInterventionsResponseValidationError{
+						field:  fmt.Sprintf("Interventions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetInterventionsResponseValidationError{
+						field:  fmt.Sprintf("Interventions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetInterventionsResponseValidationError{
+					field:  fmt.Sprintf("Interventions[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetInterventionsResponseMultiError(errors)
+	}
+	return nil
+}
+
+// GetInterventionsResponseMultiError is an error wrapping multiple validation
+// errors returned by GetInterventionsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetInterventionsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetInterventionsResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetInterventionsResponseMultiError) AllErrors() []error { return m }
+
+// GetInterventionsResponseValidationError is the validation error returned by
+// GetInterventionsResponse.Validate if the designated constraints aren't met.
+type GetInterventionsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetInterventionsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetInterventionsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetInterventionsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetInterventionsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetInterventionsResponseValidationError) ErrorName() string {
+	return "GetInterventionsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetInterventionsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetInterventionsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetInterventionsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetInterventionsResponseValidationError{}

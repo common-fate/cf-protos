@@ -10,6 +10,7 @@ service TeamService {
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse);
   // GetConfig returns the latest approved config
   rpc GetConfig(GetConfigRequest) returns (GetConfigResponse);
+  rpc GetInterventions(GetInterventionsRequest) returns (GetInterventionsResponse);
 }
 
 message ListMembersRequest {}
@@ -35,4 +36,23 @@ message GetConfigRequest {}
 
 message GetConfigResponse {
   gconfig.v1alpha1.Config config = 1;
+}
+
+message EnrolAWSProviderIntervention {
+  string provider_id = 1;
+  string aws_account_id = 2;
+  string cloudformation_url = 3;
+}
+
+message GetInterventionsRequest {}
+
+// Interventions are steps which we require the user to complete manually so that Granted works properly.
+message Intervention {
+  oneof data {
+    EnrolAWSProviderIntervention enrol_aws_provider = 1;
+  }
+}
+
+message GetInterventionsResponse {
+  repeated Intervention interventions = 1;
 }
