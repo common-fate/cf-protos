@@ -406,10 +406,10 @@ func (m *Envelope) validate(all bool) error {
 		}
 	}
 
-	if len(m.GetSignature()) != 64 {
+	if len(m.GetSignature()) > 256 {
 		err := EnvelopeValidationError{
 			field:  "Signature",
-			reason: "value length must be 64 bytes",
+			reason: "value length must be at most 256 bytes",
 		}
 		if !all {
 			return err

@@ -28,8 +28,7 @@ message RevokeCertificatePayload {
 
 message Envelope {
   Payload payload = 1;
-  // our ECDSA256 signatures are 64 bytes long
-  bytes signature = 2 [(validate.rules).bytes.len = 64];
+  bytes signature = 2 [(validate.rules).bytes.max_len = 256];
 }
 
 message Payload {
