@@ -14,6 +14,8 @@ service CertrailService {
 
 message ApproveConfigPayload {
   bytes config_sha256 = 1 [(validate.rules).bytes.len = 32];
+  // the certificate of the approver
+  bytes approved_by = 2;
 }
 
 message IssueCertificatePayload {

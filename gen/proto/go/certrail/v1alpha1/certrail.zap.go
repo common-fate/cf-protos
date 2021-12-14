@@ -29,6 +29,9 @@ func (m *ApproveConfigPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 	keyName = "config_sha256" // field config_sha256 = 1
 	enc.AddByteString(keyName, m.ConfigSha256)
 
+	keyName = "approved_by" // field approved_by = 2
+	enc.AddByteString(keyName, m.ApprovedBy)
+
 	return nil
 }
 
