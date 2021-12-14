@@ -7,8 +7,8 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
-	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
+	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -42,6 +42,23 @@ func (m *IssueCertificatePayload) MarshalLogObject(enc go_uber_org_zap_zapcore.O
 
 	keyName = "certificate" // field certificate = 1
 	enc.AddByteString(keyName, m.Certificate)
+
+	return nil
+}
+
+func (m *RevokeCertificatePayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "certificate" // field certificate = 1
+	enc.AddByteString(keyName, m.Certificate)
+
+	keyName = "revoked_by" // field revoked_by = 2
+	enc.AddByteString(keyName, m.RevokedBy)
 
 	return nil
 }
@@ -97,6 +114,17 @@ func (m *Payload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) er
 		_ = ov
 		if ov.IssueCertificate != nil {
 			var vv interface{} = ov.IssueCertificate
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
+	keyName = "revoke_certificate" // field revoke_certificate = 4
+	if ov, ok := m.GetContents().(*Payload_RevokeCertificate); ok {
+		_ = ov
+		if ov.RevokeCertificate != nil {
+			var vv interface{} = ov.RevokeCertificate
 			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
 				enc.AddObject(keyName, marshaler)
 			}

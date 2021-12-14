@@ -250,6 +250,111 @@ var _ interface {
 	ErrorName() string
 } = IssueCertificatePayloadValidationError{}
 
+// Validate checks the field values on RevokeCertificatePayload with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RevokeCertificatePayload) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RevokeCertificatePayload with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RevokeCertificatePayloadMultiError, or nil if none found.
+func (m *RevokeCertificatePayload) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RevokeCertificatePayload) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Certificate
+
+	// no validation rules for RevokedBy
+
+	if len(errors) > 0 {
+		return RevokeCertificatePayloadMultiError(errors)
+	}
+	return nil
+}
+
+// RevokeCertificatePayloadMultiError is an error wrapping multiple validation
+// errors returned by RevokeCertificatePayload.ValidateAll() if the designated
+// constraints aren't met.
+type RevokeCertificatePayloadMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RevokeCertificatePayloadMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RevokeCertificatePayloadMultiError) AllErrors() []error { return m }
+
+// RevokeCertificatePayloadValidationError is the validation error returned by
+// RevokeCertificatePayload.Validate if the designated constraints aren't met.
+type RevokeCertificatePayloadValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RevokeCertificatePayloadValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RevokeCertificatePayloadValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RevokeCertificatePayloadValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RevokeCertificatePayloadValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RevokeCertificatePayloadValidationError) ErrorName() string {
+	return "RevokeCertificatePayloadValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RevokeCertificatePayloadValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRevokeCertificatePayload.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RevokeCertificatePayloadValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RevokeCertificatePayloadValidationError{}
+
 // Validate checks the field values on Envelope with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -496,6 +601,37 @@ func (m *Payload) validate(all bool) error {
 			if err := v.Validate(); err != nil {
 				return PayloadValidationError{
 					field:  "IssueCertificate",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *Payload_RevokeCertificate:
+
+		if all {
+			switch v := interface{}(m.GetRevokeCertificate()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, PayloadValidationError{
+						field:  "RevokeCertificate",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, PayloadValidationError{
+						field:  "RevokeCertificate",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetRevokeCertificate()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PayloadValidationError{
+					field:  "RevokeCertificate",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}

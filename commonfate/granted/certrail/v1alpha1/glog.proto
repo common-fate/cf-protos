@@ -20,6 +20,12 @@ message IssueCertificatePayload {
   bytes certificate = 1;
 }
 
+message RevokeCertificatePayload {
+  bytes certificate = 1;
+  // the certificate of the actor who is performing the revoking
+  bytes revoked_by = 2;
+}
+
 message Envelope {
   Payload payload = 1;
   // our ECDSA256 signatures are 64 bytes long
@@ -31,6 +37,7 @@ message Payload {
   oneof contents {
     UpdateConfigPayload update_config = 2;
     IssueCertificatePayload issue_certificate = 3;
+    RevokeCertificatePayload revoke_certificate = 4;
   }
 }
 
