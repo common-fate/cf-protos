@@ -25,4 +25,6 @@ message UpdateConfigRequest {
   gconfig.v1alpha1.Config config = 1;
 };
 
-message UpdateConfigResponse {}
+message UpdateConfigResponse {
+  bytes sha256_hash = 1;
+}

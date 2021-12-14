@@ -7,7 +7,7 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
-	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
+	_ "github.com/common-fate/gconfig/gconfig/v1alpha1"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 )
 
@@ -95,6 +95,9 @@ func (m *UpdateConfigResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 	if m == nil {
 		return nil
 	}
+
+	keyName = "sha256_hash" // field sha256_hash = 1
+	enc.AddByteString(keyName, m.Sha256Hash)
 
 	return nil
 }

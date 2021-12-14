@@ -524,6 +524,8 @@ func (m *UpdateConfigResponse) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Sha256Hash
+
 	if len(errors) > 0 {
 		return UpdateConfigResponseMultiError(errors)
 	}
