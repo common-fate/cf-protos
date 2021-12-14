@@ -133,5 +133,5 @@ var CertrailService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "certrail/v1alpha1/glog.proto",
+	Metadata: "certrail/v1alpha1/certrail.proto",
 }
