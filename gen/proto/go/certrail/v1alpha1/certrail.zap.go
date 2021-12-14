@@ -18,7 +18,7 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
-func (m *UpdateConfigPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *ApproveConfigPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -98,11 +98,11 @@ func (m *Payload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) er
 		enc.AddTime(keyName, t)
 	}
 
-	keyName = "update_config" // field update_config = 2
-	if ov, ok := m.GetContents().(*Payload_UpdateConfig); ok {
+	keyName = "approve_config" // field approve_config = 2
+	if ov, ok := m.GetContents().(*Payload_ApproveConfig); ok {
 		_ = ov
-		if ov.UpdateConfig != nil {
-			var vv interface{} = ov.UpdateConfig
+		if ov.ApproveConfig != nil {
+			var vv interface{} = ov.ApproveConfig
 			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
 				enc.AddObject(keyName, marshaler)
 			}

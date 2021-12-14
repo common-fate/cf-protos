@@ -35,22 +35,22 @@ var (
 	_ = sort.Sort
 )
 
-// Validate checks the field values on UpdateConfigPayload with the rules
+// Validate checks the field values on ApproveConfigPayload with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *UpdateConfigPayload) Validate() error {
+func (m *ApproveConfigPayload) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on UpdateConfigPayload with the rules
+// ValidateAll checks the field values on ApproveConfigPayload with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// UpdateConfigPayloadMultiError, or nil if none found.
-func (m *UpdateConfigPayload) ValidateAll() error {
+// ApproveConfigPayloadMultiError, or nil if none found.
+func (m *ApproveConfigPayload) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *UpdateConfigPayload) validate(all bool) error {
+func (m *ApproveConfigPayload) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -58,7 +58,7 @@ func (m *UpdateConfigPayload) validate(all bool) error {
 	var errors []error
 
 	if len(m.GetConfigSha256()) != 32 {
-		err := UpdateConfigPayloadValidationError{
+		err := ApproveConfigPayloadValidationError{
 			field:  "ConfigSha256",
 			reason: "value length must be 32 bytes",
 		}
@@ -69,18 +69,18 @@ func (m *UpdateConfigPayload) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return UpdateConfigPayloadMultiError(errors)
+		return ApproveConfigPayloadMultiError(errors)
 	}
 	return nil
 }
 
-// UpdateConfigPayloadMultiError is an error wrapping multiple validation
-// errors returned by UpdateConfigPayload.ValidateAll() if the designated
+// ApproveConfigPayloadMultiError is an error wrapping multiple validation
+// errors returned by ApproveConfigPayload.ValidateAll() if the designated
 // constraints aren't met.
-type UpdateConfigPayloadMultiError []error
+type ApproveConfigPayloadMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m UpdateConfigPayloadMultiError) Error() string {
+func (m ApproveConfigPayloadMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -89,11 +89,11 @@ func (m UpdateConfigPayloadMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m UpdateConfigPayloadMultiError) AllErrors() []error { return m }
+func (m ApproveConfigPayloadMultiError) AllErrors() []error { return m }
 
-// UpdateConfigPayloadValidationError is the validation error returned by
-// UpdateConfigPayload.Validate if the designated constraints aren't met.
-type UpdateConfigPayloadValidationError struct {
+// ApproveConfigPayloadValidationError is the validation error returned by
+// ApproveConfigPayload.Validate if the designated constraints aren't met.
+type ApproveConfigPayloadValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -101,24 +101,24 @@ type UpdateConfigPayloadValidationError struct {
 }
 
 // Field function returns field value.
-func (e UpdateConfigPayloadValidationError) Field() string { return e.field }
+func (e ApproveConfigPayloadValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e UpdateConfigPayloadValidationError) Reason() string { return e.reason }
+func (e ApproveConfigPayloadValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e UpdateConfigPayloadValidationError) Cause() error { return e.cause }
+func (e ApproveConfigPayloadValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e UpdateConfigPayloadValidationError) Key() bool { return e.key }
+func (e ApproveConfigPayloadValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e UpdateConfigPayloadValidationError) ErrorName() string {
-	return "UpdateConfigPayloadValidationError"
+func (e ApproveConfigPayloadValidationError) ErrorName() string {
+	return "ApproveConfigPayloadValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e UpdateConfigPayloadValidationError) Error() string {
+func (e ApproveConfigPayloadValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -130,14 +130,14 @@ func (e UpdateConfigPayloadValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sUpdateConfigPayload.%s: %s%s",
+		"invalid %sApproveConfigPayload.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = UpdateConfigPayloadValidationError{}
+var _ error = ApproveConfigPayloadValidationError{}
 
 var _ interface {
 	Field() string
@@ -145,7 +145,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = UpdateConfigPayloadValidationError{}
+} = ApproveConfigPayloadValidationError{}
 
 // Validate checks the field values on IssueCertificatePayload with the rules
 // defined in the proto definition for this message. If any rules are
@@ -545,14 +545,14 @@ func (m *Payload) validate(all bool) error {
 
 	switch m.Contents.(type) {
 
-	case *Payload_UpdateConfig:
+	case *Payload_ApproveConfig:
 
 		if all {
-			switch v := interface{}(m.GetUpdateConfig()).(type) {
+			switch v := interface{}(m.GetApproveConfig()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, PayloadValidationError{
-						field:  "UpdateConfig",
+						field:  "ApproveConfig",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -560,16 +560,16 @@ func (m *Payload) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, PayloadValidationError{
-						field:  "UpdateConfig",
+						field:  "ApproveConfig",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			}
-		} else if v, ok := interface{}(m.GetUpdateConfig()).(interface{ Validate() error }); ok {
+		} else if v, ok := interface{}(m.GetApproveConfig()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return PayloadValidationError{
-					field:  "UpdateConfig",
+					field:  "ApproveConfig",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}

@@ -12,7 +12,7 @@ service CertrailService {
   rpc GetEntries(GetEntriesRequest) returns (GetEntriesResponse);
 }
 
-message UpdateConfigPayload {
+message ApproveConfigPayload {
   bytes config_sha256 = 1 [(validate.rules).bytes.len = 32];
 }
 
@@ -34,7 +34,7 @@ message Envelope {
 message Payload {
   google.protobuf.Timestamp timestamp = 1;
   oneof contents {
-    UpdateConfigPayload update_config = 2;
+    ApproveConfigPayload approve_config = 2;
     IssueCertificatePayload issue_certificate = 3;
     RevokeCertificatePayload revoke_certificate = 4;
   }
