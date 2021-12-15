@@ -8,8 +8,6 @@ import "validate/validate.proto";
 // Common Fate Cloud accounts.
 service AccountService {
   rpc Signup(SignupRequest) returns (SignupResponse);
-  rpc InviteMember(InviteMemberRequest) returns (InviteMemberResponse);
-  rpc RemoveMember(RemoveMemberRequest) returns (RemoveMemberResponse);
   rpc CheckForUpdates(CheckForUpdatesRequest) returns (CheckForUpdatesResponse);
   rpc GetDeviceId(GetDeviceIdRequest) returns (GetDeviceIdResponse);
 
@@ -25,18 +23,6 @@ message SignupRequest {
 }
 
 message SignupResponse {}
-
-message InviteMemberRequest {
-	string email_address = 1;
-}
-
-message InviteMemberResponse {}
-
-message RemoveMemberRequest {
-	string email_address = 1;
-}
-
-message RemoveMemberResponse {}
 
 
 message CheckForUpdatesRequest {

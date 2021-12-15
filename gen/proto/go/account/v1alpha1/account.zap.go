@@ -47,56 +47,6 @@ func (m *SignupResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEnco
 	return nil
 }
 
-func (m *InviteMemberRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	keyName = "email_address" // field email_address = 1
-	enc.AddString(keyName, m.EmailAddress)
-
-	return nil
-}
-
-func (m *InviteMemberResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	return nil
-}
-
-func (m *RemoveMemberRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	keyName = "email_address" // field email_address = 1
-	enc.AddString(keyName, m.EmailAddress)
-
-	return nil
-}
-
-func (m *RemoveMemberResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	return nil
-}
-
 func (m *CheckForUpdatesRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName

@@ -19,8 +19,6 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AccountServiceClient interface {
 	Signup(ctx context.Context, in *SignupRequest, opts ...grpc.CallOption) (*SignupResponse, error)
-	InviteMember(ctx context.Context, in *InviteMemberRequest, opts ...grpc.CallOption) (*InviteMemberResponse, error)
-	RemoveMember(ctx context.Context, in *RemoveMemberRequest, opts ...grpc.CallOption) (*RemoveMemberResponse, error)
 	CheckForUpdates(ctx context.Context, in *CheckForUpdatesRequest, opts ...grpc.CallOption) (*CheckForUpdatesResponse, error)
 	GetDeviceId(ctx context.Context, in *GetDeviceIdRequest, opts ...grpc.CallOption) (*GetDeviceIdResponse, error)
 	// Authenticated informs the metadata service that the client has successfully
@@ -39,24 +37,6 @@ func NewAccountServiceClient(cc grpc.ClientConnInterface) AccountServiceClient {
 func (c *accountServiceClient) Signup(ctx context.Context, in *SignupRequest, opts ...grpc.CallOption) (*SignupResponse, error) {
 	out := new(SignupResponse)
 	err := c.cc.Invoke(ctx, "/account.v1alpha1.AccountService/Signup", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *accountServiceClient) InviteMember(ctx context.Context, in *InviteMemberRequest, opts ...grpc.CallOption) (*InviteMemberResponse, error) {
-	out := new(InviteMemberResponse)
-	err := c.cc.Invoke(ctx, "/account.v1alpha1.AccountService/InviteMember", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *accountServiceClient) RemoveMember(ctx context.Context, in *RemoveMemberRequest, opts ...grpc.CallOption) (*RemoveMemberResponse, error) {
-	out := new(RemoveMemberResponse)
-	err := c.cc.Invoke(ctx, "/account.v1alpha1.AccountService/RemoveMember", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -95,8 +75,6 @@ func (c *accountServiceClient) Authenticated(ctx context.Context, in *Authentica
 // for forward compatibility
 type AccountServiceServer interface {
 	Signup(context.Context, *SignupRequest) (*SignupResponse, error)
-	InviteMember(context.Context, *InviteMemberRequest) (*InviteMemberResponse, error)
-	RemoveMember(context.Context, *RemoveMemberRequest) (*RemoveMemberResponse, error)
 	CheckForUpdates(context.Context, *CheckForUpdatesRequest) (*CheckForUpdatesResponse, error)
 	GetDeviceId(context.Context, *GetDeviceIdRequest) (*GetDeviceIdResponse, error)
 	// Authenticated informs the metadata service that the client has successfully
@@ -110,12 +88,6 @@ type UnimplementedAccountServiceServer struct {
 
 func (UnimplementedAccountServiceServer) Signup(context.Context, *SignupRequest) (*SignupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Signup not implemented")
-}
-func (UnimplementedAccountServiceServer) InviteMember(context.Context, *InviteMemberRequest) (*InviteMemberResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method InviteMember not implemented")
-}
-func (UnimplementedAccountServiceServer) RemoveMember(context.Context, *RemoveMemberRequest) (*RemoveMemberResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RemoveMember not implemented")
 }
 func (UnimplementedAccountServiceServer) CheckForUpdates(context.Context, *CheckForUpdatesRequest) (*CheckForUpdatesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckForUpdates not implemented")
@@ -152,42 +124,6 @@ func _AccountService_Signup_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountServiceServer).Signup(ctx, req.(*SignupRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AccountService_InviteMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(InviteMemberRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountServiceServer).InviteMember(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/account.v1alpha1.AccountService/InviteMember",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).InviteMember(ctx, req.(*InviteMemberRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AccountService_RemoveMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RemoveMemberRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountServiceServer).RemoveMember(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/account.v1alpha1.AccountService/RemoveMember",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).RemoveMember(ctx, req.(*RemoveMemberRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -256,14 +192,6 @@ var AccountService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Signup",
 			Handler:    _AccountService_Signup_Handler,
-		},
-		{
-			MethodName: "InviteMember",
-			Handler:    _AccountService_InviteMember_Handler,
-		},
-		{
-			MethodName: "RemoveMember",
-			Handler:    _AccountService_RemoveMember_Handler,
 		},
 		{
 			MethodName: "CheckForUpdates",
