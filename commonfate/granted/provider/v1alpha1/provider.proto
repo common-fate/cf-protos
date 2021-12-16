@@ -11,8 +11,9 @@ service ProviderService {
 
 message EnrolRequest {
   string enrol_token = 1;
+  bytes csr = 2;
   oneof enrollment {
-    AWSEnrollment aws = 2;
+    AWSEnrollment aws = 3;
   }
 }
 

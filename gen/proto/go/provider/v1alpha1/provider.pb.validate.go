@@ -59,6 +59,8 @@ func (m *EnrolRequest) validate(all bool) error {
 
 	// no validation rules for EnrolToken
 
+	// no validation rules for Csr
+
 	switch m.Enrollment.(type) {
 
 	case *EnrolRequest_Aws:
