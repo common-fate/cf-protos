@@ -17,7 +17,9 @@ message EnrolRequest {
   }
 }
 
-message EnrolResponse {}
+message EnrolResponse {
+  bytes certificate = 1;
+}
 
 message AWSEnrollment {
   AWSProof identity = 1;

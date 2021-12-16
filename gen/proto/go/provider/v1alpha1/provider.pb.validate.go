@@ -194,6 +194,8 @@ func (m *EnrolResponse) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Certificate
+
 	if len(errors) > 0 {
 		return EnrolResponseMultiError(errors)
 	}

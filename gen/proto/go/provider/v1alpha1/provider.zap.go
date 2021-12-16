@@ -53,6 +53,9 @@ func (m *EnrolResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncod
 		return nil
 	}
 
+	keyName = "certificate" // field certificate = 1
+	enc.AddByteString(keyName, m.Certificate)
+
 	return nil
 }
 
