@@ -24,6 +24,8 @@ type TeamServiceClient interface {
 	GetConfig(ctx context.Context, in *GetConfigRequest, opts ...grpc.CallOption) (*GetConfigResponse, error)
 	GetConfigByHash(ctx context.Context, in *GetConfigByHashRequest, opts ...grpc.CallOption) (*GetConfigByHashResponse, error)
 	GetInterventions(ctx context.Context, in *GetInterventionsRequest, opts ...grpc.CallOption) (*GetInterventionsResponse, error)
+	// rpc GetProviders(GetProvidersRequest) returns (GetProvidersResponse);
+	EnrolProvider(ctx context.Context, in *EnrolProviderRequest, opts ...grpc.CallOption) (*EnrolProviderResponse, error)
 }
 
 type teamServiceClient struct {
@@ -79,6 +81,15 @@ func (c *teamServiceClient) GetInterventions(ctx context.Context, in *GetInterve
 	return out, nil
 }
 
+func (c *teamServiceClient) EnrolProvider(ctx context.Context, in *EnrolProviderRequest, opts ...grpc.CallOption) (*EnrolProviderResponse, error) {
+	out := new(EnrolProviderResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/EnrolProvider", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TeamServiceServer is the server API for TeamService service.
 // All implementations should embed UnimplementedTeamServiceServer
 // for forward compatibility
@@ -89,6 +100,8 @@ type TeamServiceServer interface {
 	GetConfig(context.Context, *GetConfigRequest) (*GetConfigResponse, error)
 	GetConfigByHash(context.Context, *GetConfigByHashRequest) (*GetConfigByHashResponse, error)
 	GetInterventions(context.Context, *GetInterventionsRequest) (*GetInterventionsResponse, error)
+	// rpc GetProviders(GetProvidersRequest) returns (GetProvidersResponse);
+	EnrolProvider(context.Context, *EnrolProviderRequest) (*EnrolProviderResponse, error)
 }
 
 // UnimplementedTeamServiceServer should be embedded to have forward compatible implementations.
@@ -109,6 +122,9 @@ func (UnimplementedTeamServiceServer) GetConfigByHash(context.Context, *GetConfi
 }
 func (UnimplementedTeamServiceServer) GetInterventions(context.Context, *GetInterventionsRequest) (*GetInterventionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInterventions not implemented")
+}
+func (UnimplementedTeamServiceServer) EnrolProvider(context.Context, *EnrolProviderRequest) (*EnrolProviderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EnrolProvider not implemented")
 }
 
 // UnsafeTeamServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -212,6 +228,24 @@ func _TeamService_GetInterventions_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TeamService_EnrolProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnrolProviderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).EnrolProvider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/EnrolProvider",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).EnrolProvider(ctx, req.(*EnrolProviderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TeamService_ServiceDesc is the grpc.ServiceDesc for TeamService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -238,6 +272,10 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetInterventions",
 			Handler:    _TeamService_GetInterventions_Handler,
+		},
+		{
+			MethodName: "EnrolProvider",
+			Handler:    _TeamService_EnrolProvider_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

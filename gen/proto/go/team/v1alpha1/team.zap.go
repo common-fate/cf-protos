@@ -242,3 +242,62 @@ func (m *GetInterventionsResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.
 
 	return nil
 }
+
+func (m *EnrolProviderRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "aws" // field aws = 1
+	if ov, ok := m.GetProvider().(*EnrolProviderRequest_Aws); ok {
+		_ = ov
+		if ov.Aws != nil {
+			var vv interface{} = ov.Aws
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
+	return nil
+}
+
+func (m *EnrolAWSProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "id" // field id = 1
+	enc.AddString(keyName, m.Id)
+
+	keyName = "account_id" // field account_id = 2
+	enc.AddString(keyName, m.AccountId)
+
+	return nil
+}
+
+func (m *EnrolProviderResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "status" // field status = 1
+	enc.AddString(keyName, m.Status.String())
+
+	keyName = "deployment_url" // field deployment_url = 2
+	enc.AddString(keyName, m.DeploymentUrl)
+
+	keyName = "enrollment_token" // field enrollment_token = 3
+	enc.AddString(keyName, m.EnrollmentToken)
+
+	return nil
+}

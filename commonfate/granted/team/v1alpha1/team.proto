@@ -13,6 +13,7 @@ service TeamService {
   rpc GetConfigByHash(GetConfigByHashRequest) returns (GetConfigByHashResponse);
   rpc GetInterventions(GetInterventionsRequest) returns (GetInterventionsResponse);
   // rpc GetProviders(GetProvidersRequest) returns (GetProvidersResponse);
+  rpc EnrolProvider(EnrolProviderRequest) returns (EnrolProviderResponse);
 }
 
 message ListMembersRequest {}
@@ -66,6 +67,29 @@ message Intervention {
 
 message GetInterventionsResponse {
   repeated Intervention interventions = 1;
+}
+
+message EnrolProviderRequest {
+  oneof provider {
+    EnrolAWSProvider aws = 1;
+  }
+}
+
+message EnrolAWSProvider {
+  string id = 1;
+  string account_id = 2;
+}
+
+enum ProviderStatus {
+  PROVIDER_STATUS_UNSPECIFIED = 0;
+  PROVIDER_STATUS_NEEDS_ENROLLING = 1;
+  PROVIDER_STATUS_ACTIVE = 2;
+}
+
+message EnrolProviderResponse {
+  ProviderStatus status = 1;
+  string deployment_url = 2;
+  string enrollment_token = 3;
 }
 
 // message GetProvidersRequest {}

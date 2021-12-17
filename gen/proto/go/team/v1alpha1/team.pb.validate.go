@@ -1543,3 +1543,349 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetInterventionsResponseValidationError{}
+
+// Validate checks the field values on EnrolProviderRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *EnrolProviderRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on EnrolProviderRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// EnrolProviderRequestMultiError, or nil if none found.
+func (m *EnrolProviderRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *EnrolProviderRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	switch m.Provider.(type) {
+
+	case *EnrolProviderRequest_Aws:
+
+		if all {
+			switch v := interface{}(m.GetAws()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, EnrolProviderRequestValidationError{
+						field:  "Aws",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, EnrolProviderRequestValidationError{
+						field:  "Aws",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetAws()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return EnrolProviderRequestValidationError{
+					field:  "Aws",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return EnrolProviderRequestMultiError(errors)
+	}
+	return nil
+}
+
+// EnrolProviderRequestMultiError is an error wrapping multiple validation
+// errors returned by EnrolProviderRequest.ValidateAll() if the designated
+// constraints aren't met.
+type EnrolProviderRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m EnrolProviderRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m EnrolProviderRequestMultiError) AllErrors() []error { return m }
+
+// EnrolProviderRequestValidationError is the validation error returned by
+// EnrolProviderRequest.Validate if the designated constraints aren't met.
+type EnrolProviderRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e EnrolProviderRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e EnrolProviderRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e EnrolProviderRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e EnrolProviderRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e EnrolProviderRequestValidationError) ErrorName() string {
+	return "EnrolProviderRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e EnrolProviderRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sEnrolProviderRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = EnrolProviderRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = EnrolProviderRequestValidationError{}
+
+// Validate checks the field values on EnrolAWSProvider with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *EnrolAWSProvider) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on EnrolAWSProvider with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// EnrolAWSProviderMultiError, or nil if none found.
+func (m *EnrolAWSProvider) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *EnrolAWSProvider) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for AccountId
+
+	if len(errors) > 0 {
+		return EnrolAWSProviderMultiError(errors)
+	}
+	return nil
+}
+
+// EnrolAWSProviderMultiError is an error wrapping multiple validation errors
+// returned by EnrolAWSProvider.ValidateAll() if the designated constraints
+// aren't met.
+type EnrolAWSProviderMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m EnrolAWSProviderMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m EnrolAWSProviderMultiError) AllErrors() []error { return m }
+
+// EnrolAWSProviderValidationError is the validation error returned by
+// EnrolAWSProvider.Validate if the designated constraints aren't met.
+type EnrolAWSProviderValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e EnrolAWSProviderValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e EnrolAWSProviderValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e EnrolAWSProviderValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e EnrolAWSProviderValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e EnrolAWSProviderValidationError) ErrorName() string { return "EnrolAWSProviderValidationError" }
+
+// Error satisfies the builtin error interface
+func (e EnrolAWSProviderValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sEnrolAWSProvider.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = EnrolAWSProviderValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = EnrolAWSProviderValidationError{}
+
+// Validate checks the field values on EnrolProviderResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *EnrolProviderResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on EnrolProviderResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// EnrolProviderResponseMultiError, or nil if none found.
+func (m *EnrolProviderResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *EnrolProviderResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Status
+
+	// no validation rules for DeploymentUrl
+
+	// no validation rules for EnrollmentToken
+
+	if len(errors) > 0 {
+		return EnrolProviderResponseMultiError(errors)
+	}
+	return nil
+}
+
+// EnrolProviderResponseMultiError is an error wrapping multiple validation
+// errors returned by EnrolProviderResponse.ValidateAll() if the designated
+// constraints aren't met.
+type EnrolProviderResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m EnrolProviderResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m EnrolProviderResponseMultiError) AllErrors() []error { return m }
+
+// EnrolProviderResponseValidationError is the validation error returned by
+// EnrolProviderResponse.Validate if the designated constraints aren't met.
+type EnrolProviderResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e EnrolProviderResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e EnrolProviderResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e EnrolProviderResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e EnrolProviderResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e EnrolProviderResponseValidationError) ErrorName() string {
+	return "EnrolProviderResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e EnrolProviderResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sEnrolProviderResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = EnrolProviderResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = EnrolProviderResponseValidationError{}
