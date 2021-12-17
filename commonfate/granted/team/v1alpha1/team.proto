@@ -3,7 +3,9 @@ syntax = "proto3";
 package team.v1alpha1;
 
 import "gconfig/v1alpha1/gconfig.proto";
+
 import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
 
 // TeamService is used to manage Granted teams.
 service TeamService {
@@ -64,7 +66,7 @@ message EnrolProviderRequest {
 }
 
 message EnrolAWSProvider {
-  string account_id = 1;
+  string account_id = 1 [(validate.rules).string = {len: 12, pattern: "^[0-9]*$"}];
 }
 
 enum ProviderStatus {

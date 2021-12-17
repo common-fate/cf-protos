@@ -1229,7 +1229,28 @@ func (m *EnrolAWSProvider) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for AccountId
+	if utf8.RuneCountInString(m.GetAccountId()) != 12 {
+		err := EnrolAWSProviderValidationError{
+			field:  "AccountId",
+			reason: "value length must be 12 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+
+	}
+
+	if !_EnrolAWSProvider_AccountId_Pattern.MatchString(m.GetAccountId()) {
+		err := EnrolAWSProviderValidationError{
+			field:  "AccountId",
+			reason: "value does not match regex pattern \"^[0-9]*$\"",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if len(errors) > 0 {
 		return EnrolAWSProviderMultiError(errors)
@@ -1307,6 +1328,8 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = EnrolAWSProviderValidationError{}
+
+var _EnrolAWSProvider_AccountId_Pattern = regexp.MustCompile("^[0-9]*$")
 
 // Validate checks the field values on EnrolProviderResponse with the rules
 // defined in the proto definition for this message. If any rules are
