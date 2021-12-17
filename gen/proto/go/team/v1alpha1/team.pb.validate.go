@@ -1566,6 +1566,10 @@ func (m *EnrolProviderRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Id
+
+	// no validation rules for Name
+
 	switch m.Provider.(type) {
 
 	case *EnrolProviderRequest_Aws:
@@ -1701,8 +1705,6 @@ func (m *EnrolAWSProvider) validate(all bool) error {
 	}
 
 	var errors []error
-
-	// no validation rules for Id
 
 	// no validation rules for AccountId
 

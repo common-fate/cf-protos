@@ -70,13 +70,14 @@ message GetInterventionsResponse {
 }
 
 message EnrolProviderRequest {
+  string id = 1;
+  string name = 2;
   oneof provider {
-    EnrolAWSProvider aws = 1;
+    EnrolAWSProvider aws = 3;
   }
 }
 
 message EnrolAWSProvider {
-  string id = 1;
   string account_id = 2;
 }
 

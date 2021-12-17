@@ -251,7 +251,13 @@ func (m *EnrolProviderRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 		return nil
 	}
 
-	keyName = "aws" // field aws = 1
+	keyName = "id" // field id = 1
+	enc.AddString(keyName, m.Id)
+
+	keyName = "name" // field name = 2
+	enc.AddString(keyName, m.Name)
+
+	keyName = "aws" // field aws = 3
 	if ov, ok := m.GetProvider().(*EnrolProviderRequest_Aws); ok {
 		_ = ov
 		if ov.Aws != nil {
@@ -272,9 +278,6 @@ func (m *EnrolAWSProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEn
 	if m == nil {
 		return nil
 	}
-
-	keyName = "id" // field id = 1
-	enc.AddString(keyName, m.Id)
 
 	keyName = "account_id" // field account_id = 2
 	enc.AddString(keyName, m.AccountId)
