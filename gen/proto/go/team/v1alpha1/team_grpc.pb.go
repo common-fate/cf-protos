@@ -30,6 +30,7 @@ type TeamServiceClient interface {
 	// GetStatus returns the overall state of a team's Granted deployments and whether any
 	// actions are required from an administrator.
 	GetStatus(ctx context.Context, in *GetStatusRequest, opts ...grpc.CallOption) (*GetStatusResponse, error)
+	GetProvider(ctx context.Context, in *GetProviderRequest, opts ...grpc.CallOption) (*GetProviderResponse, error)
 }
 
 type teamServiceClient struct {
@@ -112,6 +113,15 @@ func (c *teamServiceClient) GetStatus(ctx context.Context, in *GetStatusRequest,
 	return out, nil
 }
 
+func (c *teamServiceClient) GetProvider(ctx context.Context, in *GetProviderRequest, opts ...grpc.CallOption) (*GetProviderResponse, error) {
+	out := new(GetProviderResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/GetProvider", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TeamServiceServer is the server API for TeamService service.
 // All implementations should embed UnimplementedTeamServiceServer
 // for forward compatibility
@@ -128,6 +138,7 @@ type TeamServiceServer interface {
 	// GetStatus returns the overall state of a team's Granted deployments and whether any
 	// actions are required from an administrator.
 	GetStatus(context.Context, *GetStatusRequest) (*GetStatusResponse, error)
+	GetProvider(context.Context, *GetProviderRequest) (*GetProviderResponse, error)
 }
 
 // UnimplementedTeamServiceServer should be embedded to have forward compatible implementations.
@@ -157,6 +168,9 @@ func (UnimplementedTeamServiceServer) DeleteProvider(context.Context, *DeletePro
 }
 func (UnimplementedTeamServiceServer) GetStatus(context.Context, *GetStatusRequest) (*GetStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetStatus not implemented")
+}
+func (UnimplementedTeamServiceServer) GetProvider(context.Context, *GetProviderRequest) (*GetProviderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProvider not implemented")
 }
 
 // UnsafeTeamServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -314,6 +328,24 @@ func _TeamService_GetStatus_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TeamService_GetProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProviderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).GetProvider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/GetProvider",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).GetProvider(ctx, req.(*GetProviderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TeamService_ServiceDesc is the grpc.ServiceDesc for TeamService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -352,6 +384,10 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetStatus",
 			Handler:    _TeamService_GetStatus_Handler,
+		},
+		{
+			MethodName: "GetProvider",
+			Handler:    _TeamService_GetProvider_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

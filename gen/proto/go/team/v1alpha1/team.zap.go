@@ -414,3 +414,36 @@ func (m *DeleteProviderResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Ob
 
 	return nil
 }
+
+func (m *GetProviderRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "id" // field id = 1
+	enc.AddString(keyName, m.Id)
+
+	return nil
+}
+
+func (m *GetProviderResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "provider" // field provider = 1
+	if m.Provider != nil {
+		var vv interface{} = m.Provider
+		if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+			enc.AddObject(keyName, marshaler)
+		}
+	}
+
+	return nil
+}

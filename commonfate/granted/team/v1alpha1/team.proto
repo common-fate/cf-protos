@@ -19,6 +19,7 @@ service TeamService {
   // GetStatus returns the overall state of a team's Granted deployments and whether any
   // actions are required from an administrator.
   rpc GetStatus(GetStatusRequest) returns (GetStatusResponse);
+  rpc GetProvider(GetProviderRequest) returns (GetProviderResponse);
 }
 
 message ListMembersRequest {}
@@ -120,3 +121,11 @@ message DeleteProviderRequest {
 }
 
 message DeleteProviderResponse {}
+
+message GetProviderRequest {
+  string id = 1;
+}
+
+message GetProviderResponse {
+  Provider provider = 1;
+}
