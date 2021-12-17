@@ -112,7 +112,7 @@ message GetStatusResponse {
 }
 
 message ProviderEnrollment {
-  string provider_id = 1;
+  Provider provider = 1;
   string deployment_url = 2;
   string enrollment_token = 3;
   google.protobuf.Timestamp expires_at = 4;

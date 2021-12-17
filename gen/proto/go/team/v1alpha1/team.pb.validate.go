@@ -2235,7 +2235,34 @@ func (m *ProviderEnrollment) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for ProviderId
+	if all {
+		switch v := interface{}(m.GetProvider()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ProviderEnrollmentValidationError{
+					field:  "Provider",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ProviderEnrollmentValidationError{
+					field:  "Provider",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetProvider()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ProviderEnrollmentValidationError{
+				field:  "Provider",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	// no validation rules for DeploymentUrl
 

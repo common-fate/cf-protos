@@ -374,8 +374,13 @@ func (m *ProviderEnrollment) MarshalLogObject(enc go_uber_org_zap_zapcore.Object
 		return nil
 	}
 
-	keyName = "provider_id" // field provider_id = 1
-	enc.AddString(keyName, m.ProviderId)
+	keyName = "provider" // field provider = 1
+	if m.Provider != nil {
+		var vv interface{} = m.Provider
+		if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+			enc.AddObject(keyName, marshaler)
+		}
+	}
 
 	keyName = "deployment_url" // field deployment_url = 2
 	enc.AddString(keyName, m.DeploymentUrl)
