@@ -3,6 +3,7 @@ syntax = "proto3";
 package team.v1alpha1;
 
 import "gconfig/v1alpha1/gconfig.proto";
+import "google/protobuf/timestamp.proto";
 
 // TeamService is used to manage Granted teams.
 service TeamService {
@@ -11,9 +12,13 @@ service TeamService {
   // GetConfig returns the latest approved config
   rpc GetConfig(GetConfigRequest) returns (GetConfigResponse);
   rpc GetConfigByHash(GetConfigByHashRequest) returns (GetConfigByHashResponse);
-  rpc GetInterventions(GetInterventionsRequest) returns (GetInterventionsResponse);
-  // rpc GetProviders(GetProvidersRequest) returns (GetProvidersResponse);
   rpc EnrolProvider(EnrolProviderRequest) returns (EnrolProviderResponse);
+  rpc ListProviders(ListProvidersRequest) returns (ListProvidersResponse);
+  // DeleteProvider removes a provider from a Granted team.
+  rpc DeleteProvider(DeleteProviderRequest) returns (DeleteProviderResponse);
+  // GetStatus returns the overall state of a team's Granted deployments and whether any
+  // actions are required from an administrator.
+  rpc GetStatus(GetStatusRequest) returns (GetStatusResponse);
 }
 
 message ListMembersRequest {}
@@ -49,26 +54,6 @@ message GetConfigByHashResponse {
   gconfig.v1alpha1.Config config = 1;
 }
 
-
-message EnrolAWSProviderIntervention {
-  string provider_id = 1;
-  string aws_account_id = 2;
-  string cloudformation_url = 3;
-}
-
-message GetInterventionsRequest {}
-
-// Interventions are steps which we require the user to complete manually so that Granted works properly.
-message Intervention {
-  oneof data {
-    EnrolAWSProviderIntervention enrol_aws_provider = 1;
-  }
-}
-
-message GetInterventionsResponse {
-  repeated Intervention interventions = 1;
-}
-
 message EnrolProviderRequest {
   string id = 1;
   string name = 2;
@@ -78,7 +63,7 @@ message EnrolProviderRequest {
 }
 
 message EnrolAWSProvider {
-  string account_id = 2;
+  string account_id = 1;
 }
 
 enum ProviderStatus {
@@ -91,34 +76,46 @@ message EnrolProviderResponse {
   ProviderStatus status = 1;
   string deployment_url = 2;
   string enrollment_token = 3;
+  google.protobuf.Timestamp expires_at = 4;
 }
 
-// message GetProvidersRequest {}
+message ListProvidersRequest {}
 
-// // TODO: this should be shifted into gconfig.v1alpha1.Config
-// message Provider {
-//   string id = 1;
-//   string type = 2;
-//   oneof status {
-//     EnrollmentRequired enrollment_required = 3;
-//     ProviderActive active = 4;
-//   }
+message ListProvidersResponse {
+  repeated Provider providers = 1;
+}
 
-//   oneof data {
-//     AWSRoleProvider aws_role = 8;
-//   }
-// }
+message Provider {
+  string id = 1;
+  string name = 2;
+  ProviderStatus status = 3;
+  oneof details {
+    AWSProviderDetails aws = 4;
+  }
+}
 
-// message AWSRoleProvider {
-//   string bastion_account_id = 1;
-// }
+message AWSProviderDetails {
+  string account_id = 1;
+}
 
-// message EnrollmentRequired {
-//   string deployment_url = 1;
-// }
+message GetStatusRequest {}
 
-// message ProviderActive {}
+message GetStatusResponse {
+  // any enrollments which the user needs to finish deploying
+  repeated ProviderEnrollment enrollments = 1;
+  // any enrollments which have expired (which require the user to delete)
+  repeated ProviderEnrollment expired_enrollments = 2;
+}
 
-// message GetProvidersResponse {
-//   repeated Provider providers = 1;
-// }
+message ProviderEnrollment {
+  string provider_id = 1;
+  string deployment_url = 2;
+  string enrollment_token = 3;
+  google.protobuf.Timestamp expires_at = 4;
+}
+
+message DeleteProviderRequest {
+  string id = 1;
+}
+
+message DeleteProviderResponse {}

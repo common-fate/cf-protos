@@ -8,7 +8,9 @@ import (
 	math "math"
 	proto "github.com/golang/protobuf/proto"
 	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
+	_ "google.golang.org/protobuf/types/known/timestamppb"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
+	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -165,84 +167,6 @@ func (m *GetConfigByHashResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.O
 	return nil
 }
 
-func (m *EnrolAWSProviderIntervention) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	keyName = "provider_id" // field provider_id = 1
-	enc.AddString(keyName, m.ProviderId)
-
-	keyName = "aws_account_id" // field aws_account_id = 2
-	enc.AddString(keyName, m.AwsAccountId)
-
-	keyName = "cloudformation_url" // field cloudformation_url = 3
-	enc.AddString(keyName, m.CloudformationUrl)
-
-	return nil
-}
-
-func (m *GetInterventionsRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	return nil
-}
-
-func (m *Intervention) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	keyName = "enrol_aws_provider" // field enrol_aws_provider = 1
-	if ov, ok := m.GetData().(*Intervention_EnrolAwsProvider); ok {
-		_ = ov
-		if ov.EnrolAwsProvider != nil {
-			var vv interface{} = ov.EnrolAwsProvider
-			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
-				enc.AddObject(keyName, marshaler)
-			}
-		}
-	}
-
-	return nil
-}
-
-func (m *GetInterventionsResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	keyName = "interventions" // field interventions = 1
-	enc.AddArray(keyName, go_uber_org_zap_zapcore.ArrayMarshalerFunc(func(aenc go_uber_org_zap_zapcore.ArrayEncoder) error {
-		for _, rv := range m.Interventions {
-			_ = rv
-			if rv != nil {
-				var vv interface{} = rv
-				if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
-					aenc.AppendObject(marshaler)
-				}
-			}
-		}
-		return nil
-	}))
-
-	return nil
-}
-
 func (m *EnrolProviderRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
@@ -279,7 +203,7 @@ func (m *EnrolAWSProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEn
 		return nil
 	}
 
-	keyName = "account_id" // field account_id = 2
+	keyName = "account_id" // field account_id = 1
 	enc.AddString(keyName, m.AccountId)
 
 	return nil
@@ -301,6 +225,192 @@ func (m *EnrolProviderResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Obj
 
 	keyName = "enrollment_token" // field enrollment_token = 3
 	enc.AddString(keyName, m.EnrollmentToken)
+
+	keyName = "expires_at" // field expires_at = 4
+	if t, err := github_com_golang_protobuf_ptypes.Timestamp(m.ExpiresAt); err == nil {
+		enc.AddTime(keyName, t)
+	}
+
+	return nil
+}
+
+func (m *ListProvidersRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+func (m *ListProvidersResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "providers" // field providers = 1
+	enc.AddArray(keyName, go_uber_org_zap_zapcore.ArrayMarshalerFunc(func(aenc go_uber_org_zap_zapcore.ArrayEncoder) error {
+		for _, rv := range m.Providers {
+			_ = rv
+			if rv != nil {
+				var vv interface{} = rv
+				if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+					aenc.AppendObject(marshaler)
+				}
+			}
+		}
+		return nil
+	}))
+
+	return nil
+}
+
+func (m *Provider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "id" // field id = 1
+	enc.AddString(keyName, m.Id)
+
+	keyName = "name" // field name = 2
+	enc.AddString(keyName, m.Name)
+
+	keyName = "status" // field status = 3
+	enc.AddString(keyName, m.Status.String())
+
+	keyName = "aws" // field aws = 4
+	if ov, ok := m.GetDetails().(*Provider_Aws); ok {
+		_ = ov
+		if ov.Aws != nil {
+			var vv interface{} = ov.Aws
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
+	return nil
+}
+
+func (m *AWSProviderDetails) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "account_id" // field account_id = 1
+	enc.AddString(keyName, m.AccountId)
+
+	return nil
+}
+
+func (m *GetStatusRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+func (m *GetStatusResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "enrollments" // field enrollments = 1
+	enc.AddArray(keyName, go_uber_org_zap_zapcore.ArrayMarshalerFunc(func(aenc go_uber_org_zap_zapcore.ArrayEncoder) error {
+		for _, rv := range m.Enrollments {
+			_ = rv
+			if rv != nil {
+				var vv interface{} = rv
+				if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+					aenc.AppendObject(marshaler)
+				}
+			}
+		}
+		return nil
+	}))
+
+	keyName = "expired_enrollments" // field expired_enrollments = 2
+	enc.AddArray(keyName, go_uber_org_zap_zapcore.ArrayMarshalerFunc(func(aenc go_uber_org_zap_zapcore.ArrayEncoder) error {
+		for _, rv := range m.ExpiredEnrollments {
+			_ = rv
+			if rv != nil {
+				var vv interface{} = rv
+				if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+					aenc.AppendObject(marshaler)
+				}
+			}
+		}
+		return nil
+	}))
+
+	return nil
+}
+
+func (m *ProviderEnrollment) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "provider_id" // field provider_id = 1
+	enc.AddString(keyName, m.ProviderId)
+
+	keyName = "deployment_url" // field deployment_url = 2
+	enc.AddString(keyName, m.DeploymentUrl)
+
+	keyName = "enrollment_token" // field enrollment_token = 3
+	enc.AddString(keyName, m.EnrollmentToken)
+
+	keyName = "expires_at" // field expires_at = 4
+	if t, err := github_com_golang_protobuf_ptypes.Timestamp(m.ExpiresAt); err == nil {
+		enc.AddTime(keyName, t)
+	}
+
+	return nil
+}
+
+func (m *DeleteProviderRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "id" // field id = 1
+	enc.AddString(keyName, m.Id)
+
+	return nil
+}
+
+func (m *DeleteProviderResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
 
 	return nil
 }
