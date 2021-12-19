@@ -7,9 +7,9 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
-	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
+	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -558,18 +558,7 @@ func (m *AccessHandler) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncod
 	return nil
 }
 
-func (m *GetAllProviderDetailsRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	return nil
-}
-
-func (m *GetAllProviderDetailsResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *AllProviderDetails) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -590,6 +579,36 @@ func (m *GetAllProviderDetailsResponse) MarshalLogObject(enc go_uber_org_zap_zap
 		}
 		return nil
 	}))
+
+	return nil
+}
+
+func (m *GetAllProviderDetailsRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+func (m *GetAllProviderDetailsResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "all_provider_details" // field all_provider_details = 1
+	if m.AllProviderDetails != nil {
+		var vv interface{} = m.AllProviderDetails
+		if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+			enc.AddObject(keyName, marshaler)
+		}
+	}
 
 	keyName = "sha256_checksum" // field sha256_checksum = 2
 	enc.AddByteString(keyName, m.Sha256Checksum)

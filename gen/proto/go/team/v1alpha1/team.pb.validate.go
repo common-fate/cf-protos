@@ -3247,6 +3247,141 @@ var _ interface {
 	ErrorName() string
 } = AccessHandlerValidationError{}
 
+// Validate checks the field values on AllProviderDetails with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AllProviderDetails) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AllProviderDetails with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AllProviderDetailsMultiError, or nil if none found.
+func (m *AllProviderDetails) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AllProviderDetails) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetDetails() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, AllProviderDetailsValidationError{
+						field:  fmt.Sprintf("Details[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, AllProviderDetailsValidationError{
+						field:  fmt.Sprintf("Details[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return AllProviderDetailsValidationError{
+					field:  fmt.Sprintf("Details[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return AllProviderDetailsMultiError(errors)
+	}
+	return nil
+}
+
+// AllProviderDetailsMultiError is an error wrapping multiple validation errors
+// returned by AllProviderDetails.ValidateAll() if the designated constraints
+// aren't met.
+type AllProviderDetailsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AllProviderDetailsMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AllProviderDetailsMultiError) AllErrors() []error { return m }
+
+// AllProviderDetailsValidationError is the validation error returned by
+// AllProviderDetails.Validate if the designated constraints aren't met.
+type AllProviderDetailsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AllProviderDetailsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AllProviderDetailsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AllProviderDetailsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AllProviderDetailsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AllProviderDetailsValidationError) ErrorName() string {
+	return "AllProviderDetailsValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AllProviderDetailsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAllProviderDetails.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AllProviderDetailsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AllProviderDetailsValidationError{}
+
 // Validate checks the field values on GetAllProviderDetailsRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -3371,38 +3506,33 @@ func (m *GetAllProviderDetailsResponse) validate(all bool) error {
 
 	var errors []error
 
-	for idx, item := range m.GetDetails() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GetAllProviderDetailsResponseValidationError{
-						field:  fmt.Sprintf("Details[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, GetAllProviderDetailsResponseValidationError{
-						field:  fmt.Sprintf("Details[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return GetAllProviderDetailsResponseValidationError{
-					field:  fmt.Sprintf("Details[%v]", idx),
+	if all {
+		switch v := interface{}(m.GetAllProviderDetails()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetAllProviderDetailsResponseValidationError{
+					field:  "AllProviderDetails",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetAllProviderDetailsResponseValidationError{
+					field:  "AllProviderDetails",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetAllProviderDetails()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetAllProviderDetailsResponseValidationError{
+				field:  "AllProviderDetails",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
 	// no validation rules for Sha256Checksum

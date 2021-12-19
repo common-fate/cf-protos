@@ -160,10 +160,14 @@ message AccessHandler {
   string url = 1;
 }
 
+message AllProviderDetails {
+  repeated ProviderDetails details = 1;
+}
+
 message GetAllProviderDetailsRequest {}
 
 message GetAllProviderDetailsResponse {
-  repeated ProviderDetails details = 1;
+  AllProviderDetails all_provider_details = 1;
   // A checksum of the ProviderDetails.
   // Used so that clients can check efficiently whether
   // they need to update their local cache of provider information.
