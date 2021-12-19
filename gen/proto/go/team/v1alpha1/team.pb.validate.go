@@ -2235,34 +2235,9 @@ func (m *ProviderEnrollment) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetProvider()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ProviderEnrollmentValidationError{
-					field:  "Provider",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ProviderEnrollmentValidationError{
-					field:  "Provider",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetProvider()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ProviderEnrollmentValidationError{
-				field:  "Provider",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for Id
+
+	// no validation rules for Name
 
 	// no validation rules for DeploymentUrl
 
@@ -2295,6 +2270,41 @@ func (m *ProviderEnrollment) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	switch m.Details.(type) {
+
+	case *ProviderEnrollment_Aws:
+
+		if all {
+			switch v := interface{}(m.GetAws()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ProviderEnrollmentValidationError{
+						field:  "Aws",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ProviderEnrollmentValidationError{
+						field:  "Aws",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetAws()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ProviderEnrollmentValidationError{
+					field:  "Aws",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if len(errors) > 0 {
@@ -2375,6 +2385,109 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ProviderEnrollmentValidationError{}
+
+// Validate checks the field values on AWSProviderEnrollment with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AWSProviderEnrollment) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AWSProviderEnrollment with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AWSProviderEnrollmentMultiError, or nil if none found.
+func (m *AWSProviderEnrollment) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AWSProviderEnrollment) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AccountId
+
+	if len(errors) > 0 {
+		return AWSProviderEnrollmentMultiError(errors)
+	}
+	return nil
+}
+
+// AWSProviderEnrollmentMultiError is an error wrapping multiple validation
+// errors returned by AWSProviderEnrollment.ValidateAll() if the designated
+// constraints aren't met.
+type AWSProviderEnrollmentMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AWSProviderEnrollmentMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AWSProviderEnrollmentMultiError) AllErrors() []error { return m }
+
+// AWSProviderEnrollmentValidationError is the validation error returned by
+// AWSProviderEnrollment.Validate if the designated constraints aren't met.
+type AWSProviderEnrollmentValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AWSProviderEnrollmentValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AWSProviderEnrollmentValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AWSProviderEnrollmentValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AWSProviderEnrollmentValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AWSProviderEnrollmentValidationError) ErrorName() string {
+	return "AWSProviderEnrollmentValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AWSProviderEnrollmentValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAWSProviderEnrollment.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AWSProviderEnrollmentValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AWSProviderEnrollmentValidationError{}
 
 // Validate checks the field values on DeleteProviderRequest with the rules
 // defined in the proto definition for this message. If any rules are

@@ -374,24 +374,47 @@ func (m *ProviderEnrollment) MarshalLogObject(enc go_uber_org_zap_zapcore.Object
 		return nil
 	}
 
-	keyName = "provider" // field provider = 1
-	if m.Provider != nil {
-		var vv interface{} = m.Provider
-		if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
-			enc.AddObject(keyName, marshaler)
-		}
-	}
+	keyName = "id" // field id = 1
+	enc.AddString(keyName, m.Id)
 
-	keyName = "deployment_url" // field deployment_url = 2
+	keyName = "name" // field name = 2
+	enc.AddString(keyName, m.Name)
+
+	keyName = "deployment_url" // field deployment_url = 3
 	enc.AddString(keyName, m.DeploymentUrl)
 
-	keyName = "enrollment_token" // field enrollment_token = 3
+	keyName = "enrollment_token" // field enrollment_token = 4
 	enc.AddString(keyName, m.EnrollmentToken)
 
-	keyName = "expires_at" // field expires_at = 4
+	keyName = "expires_at" // field expires_at = 5
 	if t, err := github_com_golang_protobuf_ptypes.Timestamp(m.ExpiresAt); err == nil {
 		enc.AddTime(keyName, t)
 	}
+
+	keyName = "aws" // field aws = 6
+	if ov, ok := m.GetDetails().(*ProviderEnrollment_Aws); ok {
+		_ = ov
+		if ov.Aws != nil {
+			var vv interface{} = ov.Aws
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
+	return nil
+}
+
+func (m *AWSProviderEnrollment) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "account_id" // field account_id = 1
+	enc.AddString(keyName, m.AccountId)
 
 	return nil
 }
