@@ -83,6 +83,9 @@ func (m *AWSEnrollment) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncod
 		}
 	}
 
+	keyName = "access_handler_url" // field access_handler_url = 3
+	enc.AddString(keyName, m.AccessHandlerUrl)
+
 	return nil
 }
 

@@ -353,6 +353,8 @@ func (m *AWSEnrollment) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for AccessHandlerUrl
+
 	if len(errors) > 0 {
 		return AWSEnrollmentMultiError(errors)
 	}
