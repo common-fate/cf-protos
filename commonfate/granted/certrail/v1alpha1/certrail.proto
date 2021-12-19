@@ -10,6 +10,7 @@ service CertrailService {
   // Store a payload in the transparency log
   rpc Store(StoreRequest) returns (StoreResponse);
   rpc GetEntries(GetEntriesRequest) returns (GetEntriesResponse);
+  rpc GetLatestSignedLogRoot(GetLatestSignedLogRootRequest) returns (GetLatestSignedLogRootResponse);
 }
 
 message ApproveConfigPayload {
@@ -59,4 +60,16 @@ message GetEntriesResponse {
 
 message IncludedEnvelope {
   Envelope envelope = 1;
+}
+
+message GetLatestSignedLogRootRequest {}
+
+message GetLatestSignedLogRootResponse {
+
+}
+
+message LogRoot {
+  uint64 tree_size = 1;
+  bytes root_hash = 2;
+  google.protobuf.Timestamp timestamp = 3;
 }

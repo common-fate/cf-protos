@@ -1311,3 +1311,337 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = IncludedEnvelopeValidationError{}
+
+// Validate checks the field values on GetLatestSignedLogRootRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetLatestSignedLogRootRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetLatestSignedLogRootRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetLatestSignedLogRootRequestMultiError, or nil if none found.
+func (m *GetLatestSignedLogRootRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetLatestSignedLogRootRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetLatestSignedLogRootRequestMultiError(errors)
+	}
+	return nil
+}
+
+// GetLatestSignedLogRootRequestMultiError is an error wrapping multiple
+// validation errors returned by GetLatestSignedLogRootRequest.ValidateAll()
+// if the designated constraints aren't met.
+type GetLatestSignedLogRootRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetLatestSignedLogRootRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetLatestSignedLogRootRequestMultiError) AllErrors() []error { return m }
+
+// GetLatestSignedLogRootRequestValidationError is the validation error
+// returned by GetLatestSignedLogRootRequest.Validate if the designated
+// constraints aren't met.
+type GetLatestSignedLogRootRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetLatestSignedLogRootRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetLatestSignedLogRootRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetLatestSignedLogRootRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetLatestSignedLogRootRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetLatestSignedLogRootRequestValidationError) ErrorName() string {
+	return "GetLatestSignedLogRootRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetLatestSignedLogRootRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetLatestSignedLogRootRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetLatestSignedLogRootRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetLatestSignedLogRootRequestValidationError{}
+
+// Validate checks the field values on GetLatestSignedLogRootResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetLatestSignedLogRootResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetLatestSignedLogRootResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetLatestSignedLogRootResponseMultiError, or nil if none found.
+func (m *GetLatestSignedLogRootResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetLatestSignedLogRootResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetLatestSignedLogRootResponseMultiError(errors)
+	}
+	return nil
+}
+
+// GetLatestSignedLogRootResponseMultiError is an error wrapping multiple
+// validation errors returned by GetLatestSignedLogRootResponse.ValidateAll()
+// if the designated constraints aren't met.
+type GetLatestSignedLogRootResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetLatestSignedLogRootResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetLatestSignedLogRootResponseMultiError) AllErrors() []error { return m }
+
+// GetLatestSignedLogRootResponseValidationError is the validation error
+// returned by GetLatestSignedLogRootResponse.Validate if the designated
+// constraints aren't met.
+type GetLatestSignedLogRootResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetLatestSignedLogRootResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetLatestSignedLogRootResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetLatestSignedLogRootResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetLatestSignedLogRootResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetLatestSignedLogRootResponseValidationError) ErrorName() string {
+	return "GetLatestSignedLogRootResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetLatestSignedLogRootResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetLatestSignedLogRootResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetLatestSignedLogRootResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetLatestSignedLogRootResponseValidationError{}
+
+// Validate checks the field values on LogRoot with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *LogRoot) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on LogRoot with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in LogRootMultiError, or nil if none found.
+func (m *LogRoot) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *LogRoot) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TreeSize
+
+	// no validation rules for RootHash
+
+	if all {
+		switch v := interface{}(m.GetTimestamp()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, LogRootValidationError{
+					field:  "Timestamp",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, LogRootValidationError{
+					field:  "Timestamp",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTimestamp()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LogRootValidationError{
+				field:  "Timestamp",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return LogRootMultiError(errors)
+	}
+	return nil
+}
+
+// LogRootMultiError is an error wrapping multiple validation errors returned
+// by LogRoot.ValidateAll() if the designated constraints aren't met.
+type LogRootMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m LogRootMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m LogRootMultiError) AllErrors() []error { return m }
+
+// LogRootValidationError is the validation error returned by LogRoot.Validate
+// if the designated constraints aren't met.
+type LogRootValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LogRootValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LogRootValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LogRootValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LogRootValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LogRootValidationError) ErrorName() string { return "LogRootValidationError" }
+
+// Error satisfies the builtin error interface
+func (e LogRootValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLogRoot.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LogRootValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LogRootValidationError{}

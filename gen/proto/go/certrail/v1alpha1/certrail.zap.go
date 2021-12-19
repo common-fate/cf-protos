@@ -227,3 +227,47 @@ func (m *IncludedEnvelope) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEn
 
 	return nil
 }
+
+func (m *GetLatestSignedLogRootRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+func (m *GetLatestSignedLogRootResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+func (m *LogRoot) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "tree_size" // field tree_size = 1
+	enc.AddUint64(keyName, m.TreeSize)
+
+	keyName = "root_hash" // field root_hash = 2
+	enc.AddByteString(keyName, m.RootHash)
+
+	keyName = "timestamp" // field timestamp = 3
+	if t, err := github_com_golang_protobuf_ptypes.Timestamp(m.Timestamp); err == nil {
+		enc.AddTime(keyName, t)
+	}
+
+	return nil
+}

@@ -21,6 +21,7 @@ type CertrailServiceClient interface {
 	// Store a payload in the transparency log
 	Store(ctx context.Context, in *StoreRequest, opts ...grpc.CallOption) (*StoreResponse, error)
 	GetEntries(ctx context.Context, in *GetEntriesRequest, opts ...grpc.CallOption) (*GetEntriesResponse, error)
+	GetLatestSignedLogRoot(ctx context.Context, in *GetLatestSignedLogRootRequest, opts ...grpc.CallOption) (*GetLatestSignedLogRootResponse, error)
 }
 
 type certrailServiceClient struct {
@@ -49,6 +50,15 @@ func (c *certrailServiceClient) GetEntries(ctx context.Context, in *GetEntriesRe
 	return out, nil
 }
 
+func (c *certrailServiceClient) GetLatestSignedLogRoot(ctx context.Context, in *GetLatestSignedLogRootRequest, opts ...grpc.CallOption) (*GetLatestSignedLogRootResponse, error) {
+	out := new(GetLatestSignedLogRootResponse)
+	err := c.cc.Invoke(ctx, "/certrail.v1alpha1.CertrailService/GetLatestSignedLogRoot", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CertrailServiceServer is the server API for CertrailService service.
 // All implementations should embed UnimplementedCertrailServiceServer
 // for forward compatibility
@@ -56,6 +66,7 @@ type CertrailServiceServer interface {
 	// Store a payload in the transparency log
 	Store(context.Context, *StoreRequest) (*StoreResponse, error)
 	GetEntries(context.Context, *GetEntriesRequest) (*GetEntriesResponse, error)
+	GetLatestSignedLogRoot(context.Context, *GetLatestSignedLogRootRequest) (*GetLatestSignedLogRootResponse, error)
 }
 
 // UnimplementedCertrailServiceServer should be embedded to have forward compatible implementations.
@@ -67,6 +78,9 @@ func (UnimplementedCertrailServiceServer) Store(context.Context, *StoreRequest) 
 }
 func (UnimplementedCertrailServiceServer) GetEntries(context.Context, *GetEntriesRequest) (*GetEntriesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetEntries not implemented")
+}
+func (UnimplementedCertrailServiceServer) GetLatestSignedLogRoot(context.Context, *GetLatestSignedLogRootRequest) (*GetLatestSignedLogRootResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLatestSignedLogRoot not implemented")
 }
 
 // UnsafeCertrailServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -116,6 +130,24 @@ func _CertrailService_GetEntries_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CertrailService_GetLatestSignedLogRoot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLatestSignedLogRootRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CertrailServiceServer).GetLatestSignedLogRoot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/certrail.v1alpha1.CertrailService/GetLatestSignedLogRoot",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CertrailServiceServer).GetLatestSignedLogRoot(ctx, req.(*GetLatestSignedLogRootRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CertrailService_ServiceDesc is the grpc.ServiceDesc for CertrailService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -130,6 +162,10 @@ var CertrailService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetEntries",
 			Handler:    _CertrailService_GetEntries_Handler,
+		},
+		{
+			MethodName: "GetLatestSignedLogRoot",
+			Handler:    _CertrailService_GetLatestSignedLogRoot_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
