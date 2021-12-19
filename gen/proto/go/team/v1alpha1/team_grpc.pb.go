@@ -31,12 +31,12 @@ type TeamServiceClient interface {
 	// actions are required from an administrator.
 	GetStatus(ctx context.Context, in *GetStatusRequest, opts ...grpc.CallOption) (*GetStatusResponse, error)
 	GetProvider(ctx context.Context, in *GetProviderRequest, opts ...grpc.CallOption) (*GetProviderResponse, error)
-	// GetProviderDetails returns details about a given provider including all accounts and
+	// GetAllProviderDetails returns details about a team's providers including all accounts and
 	// access handlers associated with the provider.
-	GetProviderDetails(ctx context.Context, in *GetProviderDetailsRequest, opts ...grpc.CallOption) (*GetProviderDetailsResponse, error)
-	// GetProviderChecksum is used by clients to determine whether their local cache of provider
+	GetAllProviderDetails(ctx context.Context, in *GetAllProviderDetailsRequest, opts ...grpc.CallOption) (*GetAllProviderDetailsResponse, error)
+	// GetAllProviderChecksum is used by clients to determine whether their local cache of provider
 	// details requires an update.
-	GetProviderChecksum(ctx context.Context, in *GetProviderChecksumRequest, opts ...grpc.CallOption) (*GetProviderChecksumResponse, error)
+	GetAllProviderChecksum(ctx context.Context, in *GetAllProviderChecksumRequest, opts ...grpc.CallOption) (*GetAllProviderChecksumResponse, error)
 }
 
 type teamServiceClient struct {
@@ -128,18 +128,18 @@ func (c *teamServiceClient) GetProvider(ctx context.Context, in *GetProviderRequ
 	return out, nil
 }
 
-func (c *teamServiceClient) GetProviderDetails(ctx context.Context, in *GetProviderDetailsRequest, opts ...grpc.CallOption) (*GetProviderDetailsResponse, error) {
-	out := new(GetProviderDetailsResponse)
-	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/GetProviderDetails", in, out, opts...)
+func (c *teamServiceClient) GetAllProviderDetails(ctx context.Context, in *GetAllProviderDetailsRequest, opts ...grpc.CallOption) (*GetAllProviderDetailsResponse, error) {
+	out := new(GetAllProviderDetailsResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/GetAllProviderDetails", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *teamServiceClient) GetProviderChecksum(ctx context.Context, in *GetProviderChecksumRequest, opts ...grpc.CallOption) (*GetProviderChecksumResponse, error) {
-	out := new(GetProviderChecksumResponse)
-	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/GetProviderChecksum", in, out, opts...)
+func (c *teamServiceClient) GetAllProviderChecksum(ctx context.Context, in *GetAllProviderChecksumRequest, opts ...grpc.CallOption) (*GetAllProviderChecksumResponse, error) {
+	out := new(GetAllProviderChecksumResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/GetAllProviderChecksum", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -163,12 +163,12 @@ type TeamServiceServer interface {
 	// actions are required from an administrator.
 	GetStatus(context.Context, *GetStatusRequest) (*GetStatusResponse, error)
 	GetProvider(context.Context, *GetProviderRequest) (*GetProviderResponse, error)
-	// GetProviderDetails returns details about a given provider including all accounts and
+	// GetAllProviderDetails returns details about a team's providers including all accounts and
 	// access handlers associated with the provider.
-	GetProviderDetails(context.Context, *GetProviderDetailsRequest) (*GetProviderDetailsResponse, error)
-	// GetProviderChecksum is used by clients to determine whether their local cache of provider
+	GetAllProviderDetails(context.Context, *GetAllProviderDetailsRequest) (*GetAllProviderDetailsResponse, error)
+	// GetAllProviderChecksum is used by clients to determine whether their local cache of provider
 	// details requires an update.
-	GetProviderChecksum(context.Context, *GetProviderChecksumRequest) (*GetProviderChecksumResponse, error)
+	GetAllProviderChecksum(context.Context, *GetAllProviderChecksumRequest) (*GetAllProviderChecksumResponse, error)
 }
 
 // UnimplementedTeamServiceServer should be embedded to have forward compatible implementations.
@@ -202,11 +202,11 @@ func (UnimplementedTeamServiceServer) GetStatus(context.Context, *GetStatusReque
 func (UnimplementedTeamServiceServer) GetProvider(context.Context, *GetProviderRequest) (*GetProviderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProvider not implemented")
 }
-func (UnimplementedTeamServiceServer) GetProviderDetails(context.Context, *GetProviderDetailsRequest) (*GetProviderDetailsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetProviderDetails not implemented")
+func (UnimplementedTeamServiceServer) GetAllProviderDetails(context.Context, *GetAllProviderDetailsRequest) (*GetAllProviderDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllProviderDetails not implemented")
 }
-func (UnimplementedTeamServiceServer) GetProviderChecksum(context.Context, *GetProviderChecksumRequest) (*GetProviderChecksumResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetProviderChecksum not implemented")
+func (UnimplementedTeamServiceServer) GetAllProviderChecksum(context.Context, *GetAllProviderChecksumRequest) (*GetAllProviderChecksumResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllProviderChecksum not implemented")
 }
 
 // UnsafeTeamServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -382,38 +382,38 @@ func _TeamService_GetProvider_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TeamService_GetProviderDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetProviderDetailsRequest)
+func _TeamService_GetAllProviderDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllProviderDetailsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TeamServiceServer).GetProviderDetails(ctx, in)
+		return srv.(TeamServiceServer).GetAllProviderDetails(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/team.v1alpha1.TeamService/GetProviderDetails",
+		FullMethod: "/team.v1alpha1.TeamService/GetAllProviderDetails",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TeamServiceServer).GetProviderDetails(ctx, req.(*GetProviderDetailsRequest))
+		return srv.(TeamServiceServer).GetAllProviderDetails(ctx, req.(*GetAllProviderDetailsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TeamService_GetProviderChecksum_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetProviderChecksumRequest)
+func _TeamService_GetAllProviderChecksum_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllProviderChecksumRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TeamServiceServer).GetProviderChecksum(ctx, in)
+		return srv.(TeamServiceServer).GetAllProviderChecksum(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/team.v1alpha1.TeamService/GetProviderChecksum",
+		FullMethod: "/team.v1alpha1.TeamService/GetAllProviderChecksum",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TeamServiceServer).GetProviderChecksum(ctx, req.(*GetProviderChecksumRequest))
+		return srv.(TeamServiceServer).GetAllProviderChecksum(ctx, req.(*GetAllProviderChecksumRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -462,12 +462,12 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _TeamService_GetProvider_Handler,
 		},
 		{
-			MethodName: "GetProviderDetails",
-			Handler:    _TeamService_GetProviderDetails_Handler,
+			MethodName: "GetAllProviderDetails",
+			Handler:    _TeamService_GetAllProviderDetails_Handler,
 		},
 		{
-			MethodName: "GetProviderChecksum",
-			Handler:    _TeamService_GetProviderChecksum_Handler,
+			MethodName: "GetAllProviderChecksum",
+			Handler:    _TeamService_GetAllProviderChecksum_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

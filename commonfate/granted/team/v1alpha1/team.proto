@@ -22,12 +22,12 @@ service TeamService {
   // actions are required from an administrator.
   rpc GetStatus(GetStatusRequest) returns (GetStatusResponse);
   rpc GetProvider(GetProviderRequest) returns (GetProviderResponse);
-  // GetProviderDetails returns details about a given provider including all accounts and
+  // GetAllProviderDetails returns details about a team's providers including all accounts and
   // access handlers associated with the provider.
-  rpc GetProviderDetails(GetProviderDetailsRequest) returns (GetProviderDetailsResponse);
-  // GetProviderChecksum is used by clients to determine whether their local cache of provider
+  rpc GetAllProviderDetails(GetAllProviderDetailsRequest) returns (GetAllProviderDetailsResponse);
+  // GetAllProviderChecksum is used by clients to determine whether their local cache of provider
   // details requires an update.
-  rpc GetProviderChecksum(GetProviderChecksumRequest) returns (GetProviderChecksumResponse);
+  rpc GetAllProviderChecksum(GetAllProviderChecksumRequest) returns (GetAllProviderChecksumResponse);
 }
 
 message ListMembersRequest {}
@@ -160,22 +160,18 @@ message AccessHandler {
   string url = 1;
 }
 
-message GetProviderDetailsRequest {
-  string id = 1;
-}
+message GetAllProviderDetailsRequest {}
 
-message GetProviderDetailsResponse {
-  ProviderDetails details = 1;
+message GetAllProviderDetailsResponse {
+  repeated ProviderDetails details = 1;
   // A checksum of the ProviderDetails.
   // Used so that clients can check efficiently whether
   // they need to update their local cache of provider information.
   bytes sha256_checksum = 2;
 }
 
-message GetProviderChecksumRequest {
-  string id = 1;
-}
+message GetAllProviderChecksumRequest {}
 
-message GetProviderChecksumResponse {
+message GetAllProviderChecksumResponse {
   bytes sha256_checksum = 1;
 }

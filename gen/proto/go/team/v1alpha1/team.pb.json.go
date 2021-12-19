@@ -424,7 +424,7 @@ func (msg *AccessHandler) UnmarshalJSON(b []byte) error {
 }
 
 // MarshalJSON implements json.Marshaler
-func (msg *GetProviderDetailsRequest) MarshalJSON() ([]byte, error) {
+func (msg *GetAllProviderDetailsRequest) MarshalJSON() ([]byte, error) {
 	return protojson.MarshalOptions{
 		UseEnumNumbers:  false,
 		EmitUnpopulated: false,
@@ -433,14 +433,14 @@ func (msg *GetProviderDetailsRequest) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON implements json.Unmarshaler
-func (msg *GetProviderDetailsRequest) UnmarshalJSON(b []byte) error {
+func (msg *GetAllProviderDetailsRequest) UnmarshalJSON(b []byte) error {
 	return protojson.UnmarshalOptions{
 		DiscardUnknown: false,
 	}.Unmarshal(b, msg)
 }
 
 // MarshalJSON implements json.Marshaler
-func (msg *GetProviderDetailsResponse) MarshalJSON() ([]byte, error) {
+func (msg *GetAllProviderDetailsResponse) MarshalJSON() ([]byte, error) {
 	return protojson.MarshalOptions{
 		UseEnumNumbers:  false,
 		EmitUnpopulated: false,
@@ -449,14 +449,14 @@ func (msg *GetProviderDetailsResponse) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON implements json.Unmarshaler
-func (msg *GetProviderDetailsResponse) UnmarshalJSON(b []byte) error {
+func (msg *GetAllProviderDetailsResponse) UnmarshalJSON(b []byte) error {
 	return protojson.UnmarshalOptions{
 		DiscardUnknown: false,
 	}.Unmarshal(b, msg)
 }
 
 // MarshalJSON implements json.Marshaler
-func (msg *GetProviderChecksumRequest) MarshalJSON() ([]byte, error) {
+func (msg *GetAllProviderChecksumRequest) MarshalJSON() ([]byte, error) {
 	return protojson.MarshalOptions{
 		UseEnumNumbers:  false,
 		EmitUnpopulated: false,
@@ -465,14 +465,14 @@ func (msg *GetProviderChecksumRequest) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON implements json.Unmarshaler
-func (msg *GetProviderChecksumRequest) UnmarshalJSON(b []byte) error {
+func (msg *GetAllProviderChecksumRequest) UnmarshalJSON(b []byte) error {
 	return protojson.UnmarshalOptions{
 		DiscardUnknown: false,
 	}.Unmarshal(b, msg)
 }
 
 // MarshalJSON implements json.Marshaler
-func (msg *GetProviderChecksumResponse) MarshalJSON() ([]byte, error) {
+func (msg *GetAllProviderChecksumResponse) MarshalJSON() ([]byte, error) {
 	return protojson.MarshalOptions{
 		UseEnumNumbers:  false,
 		EmitUnpopulated: false,
@@ -481,7 +481,7 @@ func (msg *GetProviderChecksumResponse) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON implements json.Unmarshaler
-func (msg *GetProviderChecksumResponse) UnmarshalJSON(b []byte) error {
+func (msg *GetAllProviderChecksumResponse) UnmarshalJSON(b []byte) error {
 	return protojson.UnmarshalOptions{
 		DiscardUnknown: false,
 	}.Unmarshal(b, msg)
