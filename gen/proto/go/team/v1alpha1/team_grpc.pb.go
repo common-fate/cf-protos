@@ -34,6 +34,9 @@ type TeamServiceClient interface {
 	// GetProviderDetails returns details about a given provider including all accounts and
 	// access handlers associated with the provider.
 	GetProviderDetails(ctx context.Context, in *GetProviderDetailsRequest, opts ...grpc.CallOption) (*GetProviderDetailsResponse, error)
+	// GetProviderChecksum is used by clients to determine whether their local cache of provider
+	// details requires an update.
+	GetProviderChecksum(ctx context.Context, in *GetProviderChecksumRequest, opts ...grpc.CallOption) (*GetProviderChecksumResponse, error)
 }
 
 type teamServiceClient struct {
@@ -134,6 +137,15 @@ func (c *teamServiceClient) GetProviderDetails(ctx context.Context, in *GetProvi
 	return out, nil
 }
 
+func (c *teamServiceClient) GetProviderChecksum(ctx context.Context, in *GetProviderChecksumRequest, opts ...grpc.CallOption) (*GetProviderChecksumResponse, error) {
+	out := new(GetProviderChecksumResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/GetProviderChecksum", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TeamServiceServer is the server API for TeamService service.
 // All implementations should embed UnimplementedTeamServiceServer
 // for forward compatibility
@@ -154,6 +166,9 @@ type TeamServiceServer interface {
 	// GetProviderDetails returns details about a given provider including all accounts and
 	// access handlers associated with the provider.
 	GetProviderDetails(context.Context, *GetProviderDetailsRequest) (*GetProviderDetailsResponse, error)
+	// GetProviderChecksum is used by clients to determine whether their local cache of provider
+	// details requires an update.
+	GetProviderChecksum(context.Context, *GetProviderChecksumRequest) (*GetProviderChecksumResponse, error)
 }
 
 // UnimplementedTeamServiceServer should be embedded to have forward compatible implementations.
@@ -189,6 +204,9 @@ func (UnimplementedTeamServiceServer) GetProvider(context.Context, *GetProviderR
 }
 func (UnimplementedTeamServiceServer) GetProviderDetails(context.Context, *GetProviderDetailsRequest) (*GetProviderDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProviderDetails not implemented")
+}
+func (UnimplementedTeamServiceServer) GetProviderChecksum(context.Context, *GetProviderChecksumRequest) (*GetProviderChecksumResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProviderChecksum not implemented")
 }
 
 // UnsafeTeamServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -382,6 +400,24 @@ func _TeamService_GetProviderDetails_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TeamService_GetProviderChecksum_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProviderChecksumRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).GetProviderChecksum(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/GetProviderChecksum",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).GetProviderChecksum(ctx, req.(*GetProviderChecksumRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TeamService_ServiceDesc is the grpc.ServiceDesc for TeamService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -428,6 +464,10 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetProviderDetails",
 			Handler:    _TeamService_GetProviderDetails_Handler,
+		},
+		{
+			MethodName: "GetProviderChecksum",
+			Handler:    _TeamService_GetProviderChecksum_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

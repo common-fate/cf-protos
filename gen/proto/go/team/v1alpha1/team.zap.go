@@ -7,9 +7,9 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
-	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
+	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -587,6 +587,37 @@ func (m *GetProviderDetailsResponse) MarshalLogObject(enc go_uber_org_zap_zapcor
 			enc.AddObject(keyName, marshaler)
 		}
 	}
+
+	keyName = "sha256_checksum" // field sha256_checksum = 2
+	enc.AddByteString(keyName, m.Sha256Checksum)
+
+	return nil
+}
+
+func (m *GetProviderChecksumRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "id" // field id = 1
+	enc.AddString(keyName, m.Id)
+
+	return nil
+}
+
+func (m *GetProviderChecksumResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "sha256_checksum" // field sha256_checksum = 1
+	enc.AddByteString(keyName, m.Sha256Checksum)
 
 	return nil
 }

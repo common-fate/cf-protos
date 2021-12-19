@@ -25,6 +25,9 @@ service TeamService {
   // GetProviderDetails returns details about a given provider including all accounts and
   // access handlers associated with the provider.
   rpc GetProviderDetails(GetProviderDetailsRequest) returns (GetProviderDetailsResponse);
+  // GetProviderChecksum is used by clients to determine whether their local cache of provider
+  // details requires an update.
+  rpc GetProviderChecksum(GetProviderChecksumRequest) returns (GetProviderChecksumResponse);
 }
 
 message ListMembersRequest {}
@@ -163,4 +166,16 @@ message GetProviderDetailsRequest {
 
 message GetProviderDetailsResponse {
   ProviderDetails details = 1;
+  // A checksum of the ProviderDetails.
+  // Used so that clients can check efficiently whether
+  // they need to update their local cache of provider information.
+  bytes sha256_checksum = 2;
+}
+
+message GetProviderChecksumRequest {
+  string id = 1;
+}
+
+message GetProviderChecksumResponse {
+  bytes sha256_checksum = 1;
 }

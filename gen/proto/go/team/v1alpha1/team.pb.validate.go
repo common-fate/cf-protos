@@ -3401,6 +3401,8 @@ func (m *GetProviderDetailsResponse) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for Sha256Checksum
+
 	if len(errors) > 0 {
 		return GetProviderDetailsResponseMultiError(errors)
 	}
@@ -3479,3 +3481,210 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetProviderDetailsResponseValidationError{}
+
+// Validate checks the field values on GetProviderChecksumRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetProviderChecksumRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetProviderChecksumRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetProviderChecksumRequestMultiError, or nil if none found.
+func (m *GetProviderChecksumRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetProviderChecksumRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return GetProviderChecksumRequestMultiError(errors)
+	}
+	return nil
+}
+
+// GetProviderChecksumRequestMultiError is an error wrapping multiple
+// validation errors returned by GetProviderChecksumRequest.ValidateAll() if
+// the designated constraints aren't met.
+type GetProviderChecksumRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetProviderChecksumRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetProviderChecksumRequestMultiError) AllErrors() []error { return m }
+
+// GetProviderChecksumRequestValidationError is the validation error returned
+// by GetProviderChecksumRequest.Validate if the designated constraints aren't met.
+type GetProviderChecksumRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetProviderChecksumRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetProviderChecksumRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetProviderChecksumRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetProviderChecksumRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetProviderChecksumRequestValidationError) ErrorName() string {
+	return "GetProviderChecksumRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetProviderChecksumRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetProviderChecksumRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetProviderChecksumRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetProviderChecksumRequestValidationError{}
+
+// Validate checks the field values on GetProviderChecksumResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetProviderChecksumResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetProviderChecksumResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetProviderChecksumResponseMultiError, or nil if none found.
+func (m *GetProviderChecksumResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetProviderChecksumResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Sha256Checksum
+
+	if len(errors) > 0 {
+		return GetProviderChecksumResponseMultiError(errors)
+	}
+	return nil
+}
+
+// GetProviderChecksumResponseMultiError is an error wrapping multiple
+// validation errors returned by GetProviderChecksumResponse.ValidateAll() if
+// the designated constraints aren't met.
+type GetProviderChecksumResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetProviderChecksumResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetProviderChecksumResponseMultiError) AllErrors() []error { return m }
+
+// GetProviderChecksumResponseValidationError is the validation error returned
+// by GetProviderChecksumResponse.Validate if the designated constraints
+// aren't met.
+type GetProviderChecksumResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetProviderChecksumResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetProviderChecksumResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetProviderChecksumResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetProviderChecksumResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetProviderChecksumResponseValidationError) ErrorName() string {
+	return "GetProviderChecksumResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetProviderChecksumResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetProviderChecksumResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetProviderChecksumResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetProviderChecksumResponseValidationError{}
