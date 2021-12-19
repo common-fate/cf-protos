@@ -1703,248 +1703,6 @@ var _ interface {
 	ErrorName() string
 } = ListProvidersResponseValidationError{}
 
-// Validate checks the field values on Provider with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *Provider) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on Provider with the rules defined in
-// the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in ProviderMultiError, or nil
-// if none found.
-func (m *Provider) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *Provider) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Id
-
-	// no validation rules for Name
-
-	// no validation rules for Status
-
-	switch m.Details.(type) {
-
-	case *Provider_Aws:
-
-		if all {
-			switch v := interface{}(m.GetAws()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ProviderValidationError{
-						field:  "Aws",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ProviderValidationError{
-						field:  "Aws",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetAws()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ProviderValidationError{
-					field:  "Aws",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	if len(errors) > 0 {
-		return ProviderMultiError(errors)
-	}
-	return nil
-}
-
-// ProviderMultiError is an error wrapping multiple validation errors returned
-// by Provider.ValidateAll() if the designated constraints aren't met.
-type ProviderMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m ProviderMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m ProviderMultiError) AllErrors() []error { return m }
-
-// ProviderValidationError is the validation error returned by
-// Provider.Validate if the designated constraints aren't met.
-type ProviderValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e ProviderValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e ProviderValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e ProviderValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e ProviderValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e ProviderValidationError) ErrorName() string { return "ProviderValidationError" }
-
-// Error satisfies the builtin error interface
-func (e ProviderValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sProvider.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = ProviderValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = ProviderValidationError{}
-
-// Validate checks the field values on AWSProviderDetails with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AWSProviderDetails) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on AWSProviderDetails with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// AWSProviderDetailsMultiError, or nil if none found.
-func (m *AWSProviderDetails) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *AWSProviderDetails) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for OrgManagementAccountId
-
-	if len(errors) > 0 {
-		return AWSProviderDetailsMultiError(errors)
-	}
-	return nil
-}
-
-// AWSProviderDetailsMultiError is an error wrapping multiple validation errors
-// returned by AWSProviderDetails.ValidateAll() if the designated constraints
-// aren't met.
-type AWSProviderDetailsMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m AWSProviderDetailsMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m AWSProviderDetailsMultiError) AllErrors() []error { return m }
-
-// AWSProviderDetailsValidationError is the validation error returned by
-// AWSProviderDetails.Validate if the designated constraints aren't met.
-type AWSProviderDetailsValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e AWSProviderDetailsValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e AWSProviderDetailsValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e AWSProviderDetailsValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e AWSProviderDetailsValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e AWSProviderDetailsValidationError) ErrorName() string {
-	return "AWSProviderDetailsValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e AWSProviderDetailsValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sAWSProviderDetails.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = AWSProviderDetailsValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = AWSProviderDetailsValidationError{}
-
 // Validate checks the field values on GetStatusRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
@@ -2926,255 +2684,61 @@ var _ interface {
 	ErrorName() string
 } = GetProviderResponseValidationError{}
 
-// Validate checks the field values on ProviderDetails with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *ProviderDetails) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on ProviderDetails with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// ProviderDetailsMultiError, or nil if none found.
-func (m *ProviderDetails) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *ProviderDetails) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetProvider()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ProviderDetailsValidationError{
-					field:  "Provider",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ProviderDetailsValidationError{
-					field:  "Provider",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetProvider()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ProviderDetailsValidationError{
-				field:  "Provider",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	for idx, item := range m.GetAccounts() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ProviderDetailsValidationError{
-						field:  fmt.Sprintf("Accounts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ProviderDetailsValidationError{
-						field:  fmt.Sprintf("Accounts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ProviderDetailsValidationError{
-					field:  fmt.Sprintf("Accounts[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	for idx, item := range m.GetAccessHandlers() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ProviderDetailsValidationError{
-						field:  fmt.Sprintf("AccessHandlers[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ProviderDetailsValidationError{
-						field:  fmt.Sprintf("AccessHandlers[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ProviderDetailsValidationError{
-					field:  fmt.Sprintf("AccessHandlers[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	if len(errors) > 0 {
-		return ProviderDetailsMultiError(errors)
-	}
-	return nil
-}
-
-// ProviderDetailsMultiError is an error wrapping multiple validation errors
-// returned by ProviderDetails.ValidateAll() if the designated constraints
-// aren't met.
-type ProviderDetailsMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m ProviderDetailsMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m ProviderDetailsMultiError) AllErrors() []error { return m }
-
-// ProviderDetailsValidationError is the validation error returned by
-// ProviderDetails.Validate if the designated constraints aren't met.
-type ProviderDetailsValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e ProviderDetailsValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e ProviderDetailsValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e ProviderDetailsValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e ProviderDetailsValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e ProviderDetailsValidationError) ErrorName() string { return "ProviderDetailsValidationError" }
-
-// Error satisfies the builtin error interface
-func (e ProviderDetailsValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sProviderDetails.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = ProviderDetailsValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = ProviderDetailsValidationError{}
-
-// Validate checks the field values on Account with the rules defined in the
+// Validate checks the field values on Provider with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *Account) Validate() error {
+func (m *Provider) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on Account with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in AccountMultiError, or nil if none found.
-func (m *Account) ValidateAll() error {
+// ValidateAll checks the field values on Provider with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ProviderMultiError, or nil
+// if none found.
+func (m *Provider) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *Account) validate(all bool) error {
+func (m *Provider) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
-
-	// no validation rules for Type
 
 	// no validation rules for Id
 
 	// no validation rules for Name
 
-	for idx, item := range m.GetChildren() {
-		_, _ = idx, item
+	// no validation rules for Status
+
+	switch m.Details.(type) {
+
+	case *Provider_Aws:
 
 		if all {
-			switch v := interface{}(item).(type) {
+			switch v := interface{}(m.GetAws()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, AccountValidationError{
-						field:  fmt.Sprintf("Children[%v]", idx),
+					errors = append(errors, ProviderValidationError{
+						field:  "Aws",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, AccountValidationError{
-						field:  fmt.Sprintf("Children[%v]", idx),
+					errors = append(errors, ProviderValidationError{
+						field:  "Aws",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+		} else if v, ok := interface{}(m.GetAws()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return AccountValidationError{
-					field:  fmt.Sprintf("Children[%v]", idx),
+				return ProviderValidationError{
+					field:  "Aws",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -3184,17 +2748,17 @@ func (m *Account) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return AccountMultiError(errors)
+		return ProviderMultiError(errors)
 	}
 	return nil
 }
 
-// AccountMultiError is an error wrapping multiple validation errors returned
-// by Account.ValidateAll() if the designated constraints aren't met.
-type AccountMultiError []error
+// ProviderMultiError is an error wrapping multiple validation errors returned
+// by Provider.ValidateAll() if the designated constraints aren't met.
+type ProviderMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AccountMultiError) Error() string {
+func (m ProviderMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3203,11 +2767,11 @@ func (m AccountMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AccountMultiError) AllErrors() []error { return m }
+func (m ProviderMultiError) AllErrors() []error { return m }
 
-// AccountValidationError is the validation error returned by Account.Validate
-// if the designated constraints aren't met.
-type AccountValidationError struct {
+// ProviderValidationError is the validation error returned by
+// Provider.Validate if the designated constraints aren't met.
+type ProviderValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3215,22 +2779,22 @@ type AccountValidationError struct {
 }
 
 // Field function returns field value.
-func (e AccountValidationError) Field() string { return e.field }
+func (e ProviderValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AccountValidationError) Reason() string { return e.reason }
+func (e ProviderValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AccountValidationError) Cause() error { return e.cause }
+func (e ProviderValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AccountValidationError) Key() bool { return e.key }
+func (e ProviderValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AccountValidationError) ErrorName() string { return "AccountValidationError" }
+func (e ProviderValidationError) ErrorName() string { return "ProviderValidationError" }
 
 // Error satisfies the builtin error interface
-func (e AccountValidationError) Error() string {
+func (e ProviderValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3242,14 +2806,14 @@ func (e AccountValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAccount.%s: %s%s",
+		"invalid %sProvider.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AccountValidationError{}
+var _ error = ProviderValidationError{}
 
 var _ interface {
 	Field() string
@@ -3257,178 +2821,45 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AccountValidationError{}
+} = ProviderValidationError{}
 
-// Validate checks the field values on AccessHandler with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *AccessHandler) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on AccessHandler with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in AccessHandlerMultiError, or
-// nil if none found.
-func (m *AccessHandler) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *AccessHandler) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Url
-
-	if len(errors) > 0 {
-		return AccessHandlerMultiError(errors)
-	}
-	return nil
-}
-
-// AccessHandlerMultiError is an error wrapping multiple validation errors
-// returned by AccessHandler.ValidateAll() if the designated constraints
-// aren't met.
-type AccessHandlerMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m AccessHandlerMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m AccessHandlerMultiError) AllErrors() []error { return m }
-
-// AccessHandlerValidationError is the validation error returned by
-// AccessHandler.Validate if the designated constraints aren't met.
-type AccessHandlerValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e AccessHandlerValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e AccessHandlerValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e AccessHandlerValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e AccessHandlerValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e AccessHandlerValidationError) ErrorName() string { return "AccessHandlerValidationError" }
-
-// Error satisfies the builtin error interface
-func (e AccessHandlerValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sAccessHandler.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = AccessHandlerValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = AccessHandlerValidationError{}
-
-// Validate checks the field values on AllProviderDetails with the rules
+// Validate checks the field values on AWSProviderDetails with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AllProviderDetails) Validate() error {
+func (m *AWSProviderDetails) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AllProviderDetails with the rules
+// ValidateAll checks the field values on AWSProviderDetails with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// AllProviderDetailsMultiError, or nil if none found.
-func (m *AllProviderDetails) ValidateAll() error {
+// AWSProviderDetailsMultiError, or nil if none found.
+func (m *AWSProviderDetails) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AllProviderDetails) validate(all bool) error {
+func (m *AWSProviderDetails) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	for idx, item := range m.GetDetails() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, AllProviderDetailsValidationError{
-						field:  fmt.Sprintf("Details[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, AllProviderDetailsValidationError{
-						field:  fmt.Sprintf("Details[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return AllProviderDetailsValidationError{
-					field:  fmt.Sprintf("Details[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
+	// no validation rules for OrgManagementAccountId
 
 	if len(errors) > 0 {
-		return AllProviderDetailsMultiError(errors)
+		return AWSProviderDetailsMultiError(errors)
 	}
 	return nil
 }
 
-// AllProviderDetailsMultiError is an error wrapping multiple validation errors
-// returned by AllProviderDetails.ValidateAll() if the designated constraints
+// AWSProviderDetailsMultiError is an error wrapping multiple validation errors
+// returned by AWSProviderDetails.ValidateAll() if the designated constraints
 // aren't met.
-type AllProviderDetailsMultiError []error
+type AWSProviderDetailsMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AllProviderDetailsMultiError) Error() string {
+func (m AWSProviderDetailsMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3437,11 +2868,11 @@ func (m AllProviderDetailsMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AllProviderDetailsMultiError) AllErrors() []error { return m }
+func (m AWSProviderDetailsMultiError) AllErrors() []error { return m }
 
-// AllProviderDetailsValidationError is the validation error returned by
-// AllProviderDetails.Validate if the designated constraints aren't met.
-type AllProviderDetailsValidationError struct {
+// AWSProviderDetailsValidationError is the validation error returned by
+// AWSProviderDetails.Validate if the designated constraints aren't met.
+type AWSProviderDetailsValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3449,24 +2880,24 @@ type AllProviderDetailsValidationError struct {
 }
 
 // Field function returns field value.
-func (e AllProviderDetailsValidationError) Field() string { return e.field }
+func (e AWSProviderDetailsValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AllProviderDetailsValidationError) Reason() string { return e.reason }
+func (e AWSProviderDetailsValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AllProviderDetailsValidationError) Cause() error { return e.cause }
+func (e AWSProviderDetailsValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AllProviderDetailsValidationError) Key() bool { return e.key }
+func (e AWSProviderDetailsValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AllProviderDetailsValidationError) ErrorName() string {
-	return "AllProviderDetailsValidationError"
+func (e AWSProviderDetailsValidationError) ErrorName() string {
+	return "AWSProviderDetailsValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e AllProviderDetailsValidationError) Error() string {
+func (e AWSProviderDetailsValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3478,14 +2909,14 @@ func (e AllProviderDetailsValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAllProviderDetails.%s: %s%s",
+		"invalid %sAWSProviderDetails.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AllProviderDetailsValidationError{}
+var _ error = AWSProviderDetailsValidationError{}
 
 var _ interface {
 	Field() string
@@ -3493,7 +2924,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AllProviderDetailsValidationError{}
+} = AWSProviderDetailsValidationError{}
 
 // Validate checks the field values on GetAllProviderDetailsRequest with the
 // rules defined in the proto definition for this message. If any rules are
@@ -3620,11 +3051,11 @@ func (m *GetAllProviderDetailsResponse) validate(all bool) error {
 	var errors []error
 
 	if all {
-		switch v := interface{}(m.GetAllProviderDetails()).(type) {
+		switch v := interface{}(m.GetProviders()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, GetAllProviderDetailsResponseValidationError{
-					field:  "AllProviderDetails",
+					field:  "Providers",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -3632,16 +3063,16 @@ func (m *GetAllProviderDetailsResponse) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, GetAllProviderDetailsResponseValidationError{
-					field:  "AllProviderDetails",
+					field:  "Providers",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetAllProviderDetails()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetProviders()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return GetAllProviderDetailsResponseValidationError{
-				field:  "AllProviderDetails",
+				field:  "Providers",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}

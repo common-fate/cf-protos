@@ -5,13 +5,13 @@ deps:
     owner: commonfate
     repository: gconfig
     branch: main
-    commit: 94ec84550a4642319bc41613bf2c0f78
-    digest: b1-SNtmvaugFZESszT8GFGpc9rzHaeDgAXiy5k0KHKtHH4=
-    create_time: 2021-12-14T13:55:13.745076Z
+    commit: 5bbcef49f7af4323a17276ce752204f6
+    digest: b1-jet1qwIEc6sljWYWasREVOrcIM0kQrrHRsvYT7I0NA8=
+    create_time: 2021-12-19T16:34:08.51144Z
   - remote: buf.build
     owner: envoyproxy
     repository: protoc-gen-validate
     branch: main
-    commit: ff7f35743eb94d76b2f4ab4a0cca503b
+    commit: dc09a417d27241f7b069feae2cd74a0e
     digest: b1-Ml8P8Frdpw3OwpExAAPdylRY3Drdoz0lwMe104zLBEk=
-    create_time: 2021-12-11T15:02:28.461589Z
+    create_time: 2021-12-17T23:06:23.975454Z

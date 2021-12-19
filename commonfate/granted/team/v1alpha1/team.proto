@@ -95,19 +95,6 @@ message ListProvidersResponse {
   repeated Provider providers = 1;
 }
 
-message Provider {
-  string id = 1;
-  string name = 2;
-  ProviderStatus status = 3;
-  oneof details {
-    AWSProviderDetails aws = 4;
-  }
-}
-
-message AWSProviderDetails {
-  string org_management_account_id = 1;
-}
-
 message GetStatusRequest {}
 
 message GetStatusResponse {
@@ -146,36 +133,24 @@ message GetProviderResponse {
   Provider provider = 1;
 }
 
-message ProviderDetails {
-  Provider provider = 1;
-  repeated Account accounts = 2;
-  repeated AccessHandler access_handlers = 3;
-}
-
-message Account {
-  enum Type {
-    TYPE_UNSPECIFIED = 0;
-    TYPE_AWS_ACCOUNT = 1;
+message Provider {
+  string id = 1;
+  string name = 2;
+  ProviderStatus status = 3;
+  oneof details {
+    AWSProviderDetails aws = 4;
   }
-  Type type = 1;
-  string id = 2;
-  string name = 3;
-  repeated string aliases = 4;
-  repeated Account children = 5;
 }
 
-message AccessHandler {
-  string url = 1;
+message AWSProviderDetails {
+  string org_management_account_id = 1;
 }
 
-message AllProviderDetails {
-  repeated ProviderDetails details = 1;
-}
 
 message GetAllProviderDetailsRequest {}
 
 message GetAllProviderDetailsResponse {
-  AllProviderDetails all_provider_details = 1;
+  gconfig.v1alpha1.Providers providers = 1;
   // A checksum of the ProviderDetails.
   // Used so that clients can check efficiently whether
   // they need to update their local cache of provider information.
