@@ -22,6 +22,9 @@ service TeamService {
   // actions are required from an administrator.
   rpc GetStatus(GetStatusRequest) returns (GetStatusResponse);
   rpc GetProvider(GetProviderRequest) returns (GetProviderResponse);
+  // GetProviderDetails returns details about a given provider including all accounts and
+  // access handlers associated with the provider.
+  rpc GetProviderDetails(GetProviderDetailsRequest) returns (GetProviderDetailsResponse);
 }
 
 message ListMembersRequest {}
@@ -99,7 +102,7 @@ message Provider {
 }
 
 message AWSProviderDetails {
-  string account_id = 1;
+  string org_management_account_id = 1;
 }
 
 message GetStatusRequest {}
@@ -130,4 +133,34 @@ message GetProviderRequest {
 
 message GetProviderResponse {
   Provider provider = 1;
+}
+
+message ProviderDetails {
+  Provider provider = 1;
+  repeated Account accounts = 2;
+  repeated AccessHandler access_handlers = 3;
+}
+
+message Account {
+  enum Type {
+    TYPE_UNSPECIFIED = 0;
+    TYPE_AWS_ACCOUNT = 1;
+  }
+  Type type = 1;
+  string id = 2;
+  string name = 3;
+  repeated string aliases = 4;
+  repeated Account children = 5;
+}
+
+message AccessHandler {
+  string url = 1;
+}
+
+message GetProviderDetailsRequest {
+  string id = 1;
+}
+
+message GetProviderDetailsResponse {
+  ProviderDetails details = 1;
 }

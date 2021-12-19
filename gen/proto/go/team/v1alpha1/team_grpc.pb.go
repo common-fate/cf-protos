@@ -31,6 +31,9 @@ type TeamServiceClient interface {
 	// actions are required from an administrator.
 	GetStatus(ctx context.Context, in *GetStatusRequest, opts ...grpc.CallOption) (*GetStatusResponse, error)
 	GetProvider(ctx context.Context, in *GetProviderRequest, opts ...grpc.CallOption) (*GetProviderResponse, error)
+	// GetProviderDetails returns details about a given provider including all accounts and
+	// access handlers associated with the provider.
+	GetProviderDetails(ctx context.Context, in *GetProviderDetailsRequest, opts ...grpc.CallOption) (*GetProviderDetailsResponse, error)
 }
 
 type teamServiceClient struct {
@@ -122,6 +125,15 @@ func (c *teamServiceClient) GetProvider(ctx context.Context, in *GetProviderRequ
 	return out, nil
 }
 
+func (c *teamServiceClient) GetProviderDetails(ctx context.Context, in *GetProviderDetailsRequest, opts ...grpc.CallOption) (*GetProviderDetailsResponse, error) {
+	out := new(GetProviderDetailsResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/GetProviderDetails", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TeamServiceServer is the server API for TeamService service.
 // All implementations should embed UnimplementedTeamServiceServer
 // for forward compatibility
@@ -139,6 +151,9 @@ type TeamServiceServer interface {
 	// actions are required from an administrator.
 	GetStatus(context.Context, *GetStatusRequest) (*GetStatusResponse, error)
 	GetProvider(context.Context, *GetProviderRequest) (*GetProviderResponse, error)
+	// GetProviderDetails returns details about a given provider including all accounts and
+	// access handlers associated with the provider.
+	GetProviderDetails(context.Context, *GetProviderDetailsRequest) (*GetProviderDetailsResponse, error)
 }
 
 // UnimplementedTeamServiceServer should be embedded to have forward compatible implementations.
@@ -171,6 +186,9 @@ func (UnimplementedTeamServiceServer) GetStatus(context.Context, *GetStatusReque
 }
 func (UnimplementedTeamServiceServer) GetProvider(context.Context, *GetProviderRequest) (*GetProviderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProvider not implemented")
+}
+func (UnimplementedTeamServiceServer) GetProviderDetails(context.Context, *GetProviderDetailsRequest) (*GetProviderDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProviderDetails not implemented")
 }
 
 // UnsafeTeamServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -346,6 +364,24 @@ func _TeamService_GetProvider_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TeamService_GetProviderDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProviderDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).GetProviderDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/GetProviderDetails",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).GetProviderDetails(ctx, req.(*GetProviderDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TeamService_ServiceDesc is the grpc.ServiceDesc for TeamService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -388,6 +424,10 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetProvider",
 			Handler:    _TeamService_GetProvider_Handler,
+		},
+		{
+			MethodName: "GetProviderDetails",
+			Handler:    _TeamService_GetProviderDetails_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
