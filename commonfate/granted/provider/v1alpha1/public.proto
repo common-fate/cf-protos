@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package provider.v1alpha1;
+
+import "google/protobuf/timestamp.proto";
+
+// ProviderPublicService is a public-facing service used to enrol Granted providers
+service ProviderPublicService {
+  rpc Enrol(EnrolRequest) returns (EnrolResponse);
+}
+
+message EnrolRequest {
+  string enrol_token = 1;
+  bytes csr = 2;
+  oneof enrollment {
+    AWSEnrollment aws = 3;
+  }
+}
+
+message EnrolResponse {
+  bytes certificate = 1;
+}
+
+message AWSEnrollment {
+  AWSProof identity = 1;
+  AWSProof organization = 2;
+  // the URL of the initial Access Handler to associate with the provider.
+  string access_handler_url = 3;
+}
+
+message AWSProof {
+  string signature = 1;
+  google.protobuf.Timestamp timestamp = 2;
+  string security_token = 3;
+}

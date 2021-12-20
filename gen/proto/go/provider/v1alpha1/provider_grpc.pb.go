@@ -18,7 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProviderServiceClient interface {
-	Enrol(ctx context.Context, in *EnrolRequest, opts ...grpc.CallOption) (*EnrolResponse, error)
+	GetProviderConfigByDigest(ctx context.Context, in *GetProviderConfigByDigestRequest, opts ...grpc.CallOption) (*GetProviderConfigByDigestResponse, error)
 }
 
 type providerServiceClient struct {
@@ -29,9 +29,9 @@ func NewProviderServiceClient(cc grpc.ClientConnInterface) ProviderServiceClient
 	return &providerServiceClient{cc}
 }
 
-func (c *providerServiceClient) Enrol(ctx context.Context, in *EnrolRequest, opts ...grpc.CallOption) (*EnrolResponse, error) {
-	out := new(EnrolResponse)
-	err := c.cc.Invoke(ctx, "/provider.v1alpha1.ProviderService/Enrol", in, out, opts...)
+func (c *providerServiceClient) GetProviderConfigByDigest(ctx context.Context, in *GetProviderConfigByDigestRequest, opts ...grpc.CallOption) (*GetProviderConfigByDigestResponse, error) {
+	out := new(GetProviderConfigByDigestResponse)
+	err := c.cc.Invoke(ctx, "/provider.v1alpha1.ProviderService/GetProviderConfigByDigest", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -42,15 +42,15 @@ func (c *providerServiceClient) Enrol(ctx context.Context, in *EnrolRequest, opt
 // All implementations should embed UnimplementedProviderServiceServer
 // for forward compatibility
 type ProviderServiceServer interface {
-	Enrol(context.Context, *EnrolRequest) (*EnrolResponse, error)
+	GetProviderConfigByDigest(context.Context, *GetProviderConfigByDigestRequest) (*GetProviderConfigByDigestResponse, error)
 }
 
 // UnimplementedProviderServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedProviderServiceServer struct {
 }
 
-func (UnimplementedProviderServiceServer) Enrol(context.Context, *EnrolRequest) (*EnrolResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Enrol not implemented")
+func (UnimplementedProviderServiceServer) GetProviderConfigByDigest(context.Context, *GetProviderConfigByDigestRequest) (*GetProviderConfigByDigestResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProviderConfigByDigest not implemented")
 }
 
 // UnsafeProviderServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -64,20 +64,20 @@ func RegisterProviderServiceServer(s grpc.ServiceRegistrar, srv ProviderServiceS
 	s.RegisterService(&ProviderService_ServiceDesc, srv)
 }
 
-func _ProviderService_Enrol_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EnrolRequest)
+func _ProviderService_GetProviderConfigByDigest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProviderConfigByDigestRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProviderServiceServer).Enrol(ctx, in)
+		return srv.(ProviderServiceServer).GetProviderConfigByDigest(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/provider.v1alpha1.ProviderService/Enrol",
+		FullMethod: "/provider.v1alpha1.ProviderService/GetProviderConfigByDigest",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProviderServiceServer).Enrol(ctx, req.(*EnrolRequest))
+		return srv.(ProviderServiceServer).GetProviderConfigByDigest(ctx, req.(*GetProviderConfigByDigestRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -90,8 +90,8 @@ var ProviderService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ProviderServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Enrol",
-			Handler:    _ProviderService_Enrol_Handler,
+			MethodName: "GetProviderConfigByDigest",
+			Handler:    _ProviderService_GetProviderConfigByDigest_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
