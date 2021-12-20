@@ -15,10 +15,12 @@ service ProviderPublicService {
 message EnrolRequest {
   // the slug of the team
   string team = 1;
+  // the customer ID of the provider
+  string provider = 2;
   // the URL of the initial Access Handler to associate with the provider.
-  string access_handler_url = 2;
+  string access_handler_url = 3;
   oneof proof {
-    AWSProof aws = 3;
+    AWSProof aws = 4;
   }
 }
 
