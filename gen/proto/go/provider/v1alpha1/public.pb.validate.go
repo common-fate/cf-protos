@@ -61,7 +61,9 @@ func (m *EnrolRequest) validate(all bool) error {
 
 	// no validation rules for Csr
 
-	switch m.Enrollment.(type) {
+	// no validation rules for AccessHandlerUrl
+
+	switch m.Proof.(type) {
 
 	case *EnrolRequest_Aws:
 
@@ -194,8 +196,6 @@ func (m *EnrolResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Certificate
-
 	if len(errors) > 0 {
 		return EnrolResponseMultiError(errors)
 	}
@@ -273,165 +273,6 @@ var _ interface {
 	ErrorName() string
 } = EnrolResponseValidationError{}
 
-// Validate checks the field values on AWSEnrollment with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *AWSEnrollment) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on AWSEnrollment with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in AWSEnrollmentMultiError, or
-// nil if none found.
-func (m *AWSEnrollment) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *AWSEnrollment) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetIdentity()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, AWSEnrollmentValidationError{
-					field:  "Identity",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, AWSEnrollmentValidationError{
-					field:  "Identity",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetIdentity()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return AWSEnrollmentValidationError{
-				field:  "Identity",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if all {
-		switch v := interface{}(m.GetOrganization()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, AWSEnrollmentValidationError{
-					field:  "Organization",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, AWSEnrollmentValidationError{
-					field:  "Organization",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetOrganization()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return AWSEnrollmentValidationError{
-				field:  "Organization",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	// no validation rules for AccessHandlerUrl
-
-	if len(errors) > 0 {
-		return AWSEnrollmentMultiError(errors)
-	}
-	return nil
-}
-
-// AWSEnrollmentMultiError is an error wrapping multiple validation errors
-// returned by AWSEnrollment.ValidateAll() if the designated constraints
-// aren't met.
-type AWSEnrollmentMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m AWSEnrollmentMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m AWSEnrollmentMultiError) AllErrors() []error { return m }
-
-// AWSEnrollmentValidationError is the validation error returned by
-// AWSEnrollment.Validate if the designated constraints aren't met.
-type AWSEnrollmentValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e AWSEnrollmentValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e AWSEnrollmentValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e AWSEnrollmentValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e AWSEnrollmentValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e AWSEnrollmentValidationError) ErrorName() string { return "AWSEnrollmentValidationError" }
-
-// Error satisfies the builtin error interface
-func (e AWSEnrollmentValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sAWSEnrollment.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = AWSEnrollmentValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = AWSEnrollmentValidationError{}
-
 // Validate checks the field values on AWSProof with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -454,14 +295,12 @@ func (m *AWSProof) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Signature
-
 	if all {
-		switch v := interface{}(m.GetTimestamp()).(type) {
+		switch v := interface{}(m.GetIdentity()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, AWSProofValidationError{
-					field:  "Timestamp",
+					field:  "Identity",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -469,23 +308,50 @@ func (m *AWSProof) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, AWSProofValidationError{
-					field:  "Timestamp",
+					field:  "Identity",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetTimestamp()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetIdentity()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return AWSProofValidationError{
-				field:  "Timestamp",
+				field:  "Identity",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
 		}
 	}
 
-	// no validation rules for SecurityToken
+	if all {
+		switch v := interface{}(m.GetOrganization()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AWSProofValidationError{
+					field:  "Organization",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AWSProofValidationError{
+					field:  "Organization",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOrganization()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AWSProofValidationError{
+				field:  "Organization",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return AWSProofMultiError(errors)
@@ -562,3 +428,375 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = AWSProofValidationError{}
+
+// Validate checks the field values on AWSSignature with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *AWSSignature) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AWSSignature with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in AWSSignatureMultiError, or
+// nil if none found.
+func (m *AWSSignature) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AWSSignature) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Signature
+
+	if all {
+		switch v := interface{}(m.GetTimestamp()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AWSSignatureValidationError{
+					field:  "Timestamp",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AWSSignatureValidationError{
+					field:  "Timestamp",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTimestamp()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AWSSignatureValidationError{
+				field:  "Timestamp",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for SecurityToken
+
+	if len(errors) > 0 {
+		return AWSSignatureMultiError(errors)
+	}
+	return nil
+}
+
+// AWSSignatureMultiError is an error wrapping multiple validation errors
+// returned by AWSSignature.ValidateAll() if the designated constraints aren't met.
+type AWSSignatureMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AWSSignatureMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AWSSignatureMultiError) AllErrors() []error { return m }
+
+// AWSSignatureValidationError is the validation error returned by
+// AWSSignature.Validate if the designated constraints aren't met.
+type AWSSignatureValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AWSSignatureValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AWSSignatureValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AWSSignatureValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AWSSignatureValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AWSSignatureValidationError) ErrorName() string { return "AWSSignatureValidationError" }
+
+// Error satisfies the builtin error interface
+func (e AWSSignatureValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAWSSignature.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AWSSignatureValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AWSSignatureValidationError{}
+
+// Validate checks the field values on GetCertificateRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetCertificateRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetCertificateRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetCertificateRequestMultiError, or nil if none found.
+func (m *GetCertificateRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetCertificateRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Csr
+
+	switch m.Proof.(type) {
+
+	case *GetCertificateRequest_Aws:
+
+		if all {
+			switch v := interface{}(m.GetAws()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetCertificateRequestValidationError{
+						field:  "Aws",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetCertificateRequestValidationError{
+						field:  "Aws",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetAws()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetCertificateRequestValidationError{
+					field:  "Aws",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetCertificateRequestMultiError(errors)
+	}
+	return nil
+}
+
+// GetCertificateRequestMultiError is an error wrapping multiple validation
+// errors returned by GetCertificateRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetCertificateRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetCertificateRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetCertificateRequestMultiError) AllErrors() []error { return m }
+
+// GetCertificateRequestValidationError is the validation error returned by
+// GetCertificateRequest.Validate if the designated constraints aren't met.
+type GetCertificateRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetCertificateRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetCertificateRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetCertificateRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetCertificateRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetCertificateRequestValidationError) ErrorName() string {
+	return "GetCertificateRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetCertificateRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetCertificateRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetCertificateRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetCertificateRequestValidationError{}
+
+// Validate checks the field values on GetCertificateResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetCertificateResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetCertificateResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetCertificateResponseMultiError, or nil if none found.
+func (m *GetCertificateResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetCertificateResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Certificate
+
+	if len(errors) > 0 {
+		return GetCertificateResponseMultiError(errors)
+	}
+	return nil
+}
+
+// GetCertificateResponseMultiError is an error wrapping multiple validation
+// errors returned by GetCertificateResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetCertificateResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetCertificateResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetCertificateResponseMultiError) AllErrors() []error { return m }
+
+// GetCertificateResponseValidationError is the validation error returned by
+// GetCertificateResponse.Validate if the designated constraints aren't met.
+type GetCertificateResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetCertificateResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetCertificateResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetCertificateResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetCertificateResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetCertificateResponseValidationError) ErrorName() string {
+	return "GetCertificateResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetCertificateResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetCertificateResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetCertificateResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetCertificateResponseValidationError{}

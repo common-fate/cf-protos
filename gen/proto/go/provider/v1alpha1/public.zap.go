@@ -31,8 +31,11 @@ func (m *EnrolRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncode
 	keyName = "csr" // field csr = 2
 	enc.AddByteString(keyName, m.Csr)
 
-	keyName = "aws" // field aws = 3
-	if ov, ok := m.GetEnrollment().(*EnrolRequest_Aws); ok {
+	keyName = "access_handler_url" // field access_handler_url = 3
+	enc.AddString(keyName, m.AccessHandlerUrl)
+
+	keyName = "aws" // field aws = 4
+	if ov, ok := m.GetProof().(*EnrolRequest_Aws); ok {
 		_ = ov
 		if ov.Aws != nil {
 			var vv interface{} = ov.Aws
@@ -53,13 +56,10 @@ func (m *EnrolResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncod
 		return nil
 	}
 
-	keyName = "certificate" // field certificate = 1
-	enc.AddByteString(keyName, m.Certificate)
-
 	return nil
 }
 
-func (m *AWSEnrollment) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *AWSProof) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -83,13 +83,10 @@ func (m *AWSEnrollment) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncod
 		}
 	}
 
-	keyName = "access_handler_url" // field access_handler_url = 3
-	enc.AddString(keyName, m.AccessHandlerUrl)
-
 	return nil
 }
 
-func (m *AWSProof) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *AWSSignature) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -107,6 +104,45 @@ func (m *AWSProof) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) e
 
 	keyName = "security_token" // field security_token = 3
 	enc.AddString(keyName, m.SecurityToken)
+
+	return nil
+}
+
+func (m *GetCertificateRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "csr" // field csr = 1
+	enc.AddByteString(keyName, m.Csr)
+
+	keyName = "aws" // field aws = 2
+	if ov, ok := m.GetProof().(*GetCertificateRequest_Aws); ok {
+		_ = ov
+		if ov.Aws != nil {
+			var vv interface{} = ov.Aws
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
+	return nil
+}
+
+func (m *GetCertificateResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "certificate" // field certificate = 1
+	enc.AddByteString(keyName, m.Certificate)
 
 	return nil
 }

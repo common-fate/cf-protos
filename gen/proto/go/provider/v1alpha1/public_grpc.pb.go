@@ -19,6 +19,9 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProviderPublicServiceClient interface {
 	Enrol(ctx context.Context, in *EnrolRequest, opts ...grpc.CallOption) (*EnrolResponse, error)
+	// GetCertificate is used by Access Handlers to get a short-lived identity certificate
+	// by proving the provider they are running in
+	GetCertificate(ctx context.Context, in *GetCertificateRequest, opts ...grpc.CallOption) (*GetCertificateResponse, error)
 }
 
 type providerPublicServiceClient struct {
@@ -38,11 +41,23 @@ func (c *providerPublicServiceClient) Enrol(ctx context.Context, in *EnrolReques
 	return out, nil
 }
 
+func (c *providerPublicServiceClient) GetCertificate(ctx context.Context, in *GetCertificateRequest, opts ...grpc.CallOption) (*GetCertificateResponse, error) {
+	out := new(GetCertificateResponse)
+	err := c.cc.Invoke(ctx, "/provider.v1alpha1.ProviderPublicService/GetCertificate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProviderPublicServiceServer is the server API for ProviderPublicService service.
 // All implementations should embed UnimplementedProviderPublicServiceServer
 // for forward compatibility
 type ProviderPublicServiceServer interface {
 	Enrol(context.Context, *EnrolRequest) (*EnrolResponse, error)
+	// GetCertificate is used by Access Handlers to get a short-lived identity certificate
+	// by proving the provider they are running in
+	GetCertificate(context.Context, *GetCertificateRequest) (*GetCertificateResponse, error)
 }
 
 // UnimplementedProviderPublicServiceServer should be embedded to have forward compatible implementations.
@@ -51,6 +66,9 @@ type UnimplementedProviderPublicServiceServer struct {
 
 func (UnimplementedProviderPublicServiceServer) Enrol(context.Context, *EnrolRequest) (*EnrolResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Enrol not implemented")
+}
+func (UnimplementedProviderPublicServiceServer) GetCertificate(context.Context, *GetCertificateRequest) (*GetCertificateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCertificate not implemented")
 }
 
 // UnsafeProviderPublicServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -82,6 +100,24 @@ func _ProviderPublicService_Enrol_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProviderPublicService_GetCertificate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCertificateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProviderPublicServiceServer).GetCertificate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/provider.v1alpha1.ProviderPublicService/GetCertificate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProviderPublicServiceServer).GetCertificate(ctx, req.(*GetCertificateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProviderPublicService_ServiceDesc is the grpc.ServiceDesc for ProviderPublicService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -92,6 +128,10 @@ var ProviderPublicService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Enrol",
 			Handler:    _ProviderPublicService_Enrol_Handler,
+		},
+		{
+			MethodName: "GetCertificate",
+			Handler:    _ProviderPublicService_GetCertificate_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
