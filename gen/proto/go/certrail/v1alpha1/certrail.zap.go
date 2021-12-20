@@ -247,6 +247,14 @@ func (m *GetLatestSignedLogRootResponse) MarshalLogObject(enc go_uber_org_zap_za
 		return nil
 	}
 
+	keyName = "log_root" // field log_root = 1
+	if m.LogRoot != nil {
+		var vv interface{} = m.LogRoot
+		if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+			enc.AddObject(keyName, marshaler)
+		}
+	}
+
 	return nil
 }
 
