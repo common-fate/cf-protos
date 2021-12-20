@@ -76,6 +76,7 @@ message ListProvidersRequest {}
 
 message ListProvidersResponse {
   repeated Provider providers = 1;
+  int32 pending_enrollments_count = 2;
 }
 
 message GetStatusRequest {}

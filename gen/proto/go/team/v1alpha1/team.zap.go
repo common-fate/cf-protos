@@ -7,9 +7,9 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
-	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
+	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -204,6 +204,9 @@ func (m *ListProvidersResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Obj
 		}
 		return nil
 	}))
+
+	keyName = "pending_enrollments_count" // field pending_enrollments_count = 2
+	enc.AddInt32(keyName, m.PendingEnrollmentsCount)
 
 	return nil
 }

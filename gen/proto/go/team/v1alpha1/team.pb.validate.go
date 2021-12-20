@@ -1162,6 +1162,8 @@ func (m *ListProvidersResponse) validate(all bool) error {
 
 	}
 
+	// no validation rules for PendingEnrollmentsCount
+
 	if len(errors) > 0 {
 		return ListProvidersResponseMultiError(errors)
 	}
