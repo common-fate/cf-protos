@@ -20,9 +20,6 @@ const _ = grpc.SupportPackageIsVersion7
 type TeamServiceClient interface {
 	ListMembers(ctx context.Context, in *ListMembersRequest, opts ...grpc.CallOption) (*ListMembersResponse, error)
 	UpdateConfig(ctx context.Context, in *UpdateConfigRequest, opts ...grpc.CallOption) (*UpdateConfigResponse, error)
-	// GetConfig returns the latest approved config
-	GetConfig(ctx context.Context, in *GetConfigRequest, opts ...grpc.CallOption) (*GetConfigResponse, error)
-	GetConfigByHash(ctx context.Context, in *GetConfigByHashRequest, opts ...grpc.CallOption) (*GetConfigByHashResponse, error)
 	EnrolProvider(ctx context.Context, in *EnrolProviderRequest, opts ...grpc.CallOption) (*EnrolProviderResponse, error)
 	ListProviders(ctx context.Context, in *ListProvidersRequest, opts ...grpc.CallOption) (*ListProvidersResponse, error)
 	// DeleteProvider removes a provider from a Granted team.
@@ -59,24 +56,6 @@ func (c *teamServiceClient) ListMembers(ctx context.Context, in *ListMembersRequ
 func (c *teamServiceClient) UpdateConfig(ctx context.Context, in *UpdateConfigRequest, opts ...grpc.CallOption) (*UpdateConfigResponse, error) {
 	out := new(UpdateConfigResponse)
 	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/UpdateConfig", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *teamServiceClient) GetConfig(ctx context.Context, in *GetConfigRequest, opts ...grpc.CallOption) (*GetConfigResponse, error) {
-	out := new(GetConfigResponse)
-	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/GetConfig", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *teamServiceClient) GetConfigByHash(ctx context.Context, in *GetConfigByHashRequest, opts ...grpc.CallOption) (*GetConfigByHashResponse, error) {
-	out := new(GetConfigByHashResponse)
-	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/GetConfigByHash", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -152,9 +131,6 @@ func (c *teamServiceClient) GetAllProviderChecksum(ctx context.Context, in *GetA
 type TeamServiceServer interface {
 	ListMembers(context.Context, *ListMembersRequest) (*ListMembersResponse, error)
 	UpdateConfig(context.Context, *UpdateConfigRequest) (*UpdateConfigResponse, error)
-	// GetConfig returns the latest approved config
-	GetConfig(context.Context, *GetConfigRequest) (*GetConfigResponse, error)
-	GetConfigByHash(context.Context, *GetConfigByHashRequest) (*GetConfigByHashResponse, error)
 	EnrolProvider(context.Context, *EnrolProviderRequest) (*EnrolProviderResponse, error)
 	ListProviders(context.Context, *ListProvidersRequest) (*ListProvidersResponse, error)
 	// DeleteProvider removes a provider from a Granted team.
@@ -180,12 +156,6 @@ func (UnimplementedTeamServiceServer) ListMembers(context.Context, *ListMembersR
 }
 func (UnimplementedTeamServiceServer) UpdateConfig(context.Context, *UpdateConfigRequest) (*UpdateConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateConfig not implemented")
-}
-func (UnimplementedTeamServiceServer) GetConfig(context.Context, *GetConfigRequest) (*GetConfigResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetConfig not implemented")
-}
-func (UnimplementedTeamServiceServer) GetConfigByHash(context.Context, *GetConfigByHashRequest) (*GetConfigByHashResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetConfigByHash not implemented")
 }
 func (UnimplementedTeamServiceServer) EnrolProvider(context.Context, *EnrolProviderRequest) (*EnrolProviderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EnrolProvider not implemented")
@@ -252,42 +222,6 @@ func _TeamService_UpdateConfig_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TeamServiceServer).UpdateConfig(ctx, req.(*UpdateConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _TeamService_GetConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TeamServiceServer).GetConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/team.v1alpha1.TeamService/GetConfig",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TeamServiceServer).GetConfig(ctx, req.(*GetConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _TeamService_GetConfigByHash_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetConfigByHashRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TeamServiceServer).GetConfigByHash(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/team.v1alpha1.TeamService/GetConfigByHash",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TeamServiceServer).GetConfigByHash(ctx, req.(*GetConfigByHashRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -432,14 +366,6 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateConfig",
 			Handler:    _TeamService_UpdateConfig_Handler,
-		},
-		{
-			MethodName: "GetConfig",
-			Handler:    _TeamService_GetConfig_Handler,
-		},
-		{
-			MethodName: "GetConfigByHash",
-			Handler:    _TeamService_GetConfigByHash_Handler,
 		},
 		{
 			MethodName: "EnrolProvider",

@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package config.v1alpha1;
+
+import "gconfig/v1alpha1/gconfig.proto";
+
+// ConfigService is used to read Granted config.
+// It is called by both Granted admins and by Access Handlers.
+// This service doesn't allow config to be updated - those RPCs
+// are part of the TeamService.
+service ConfigService {
+  // GetConfig returns the latest approved config
+  rpc GetConfig(GetConfigRequest) returns (GetConfigResponse);
+  rpc GetConfigByHash(GetConfigByHashRequest) returns (GetConfigByHashResponse);
+}
+
+message GetConfigRequest {}
+
+message GetConfigResponse {
+  gconfig.v1alpha1.Config config = 1;
+}
+
+message GetConfigByHashRequest {
+  bytes sha256_hash = 1;
+}
+
+message GetConfigByHashResponse {
+  gconfig.v1alpha1.Config config = 1;
+}

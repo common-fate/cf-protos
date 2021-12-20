@@ -11,9 +11,6 @@ import "validate/validate.proto";
 service TeamService {
   rpc ListMembers(ListMembersRequest) returns (ListMembersResponse);
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse);
-  // GetConfig returns the latest approved config
-  rpc GetConfig(GetConfigRequest) returns (GetConfigResponse);
-  rpc GetConfigByHash(GetConfigByHashRequest) returns (GetConfigByHashResponse);
   rpc EnrolProvider(EnrolProviderRequest) returns (EnrolProviderResponse);
   rpc ListProviders(ListProvidersRequest) returns (ListProvidersResponse);
   // DeleteProvider removes a provider from a Granted team.
@@ -47,20 +44,6 @@ message UpdateConfigRequest {
 
 message UpdateConfigResponse {
   bytes sha256_hash = 1;
-}
-
-message GetConfigRequest {}
-
-message GetConfigResponse {
-  gconfig.v1alpha1.Config config = 1;
-}
-
-message GetConfigByHashRequest {
-  bytes sha256_hash = 1;
-}
-
-message GetConfigByHashResponse {
-  gconfig.v1alpha1.Config config = 1;
 }
 
 message EnrolProviderRequest {
