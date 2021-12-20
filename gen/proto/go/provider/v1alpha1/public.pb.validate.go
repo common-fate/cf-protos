@@ -584,6 +584,8 @@ func (m *GetCertificateRequest) validate(all bool) error {
 
 	// no validation rules for Csr
 
+	// no validation rules for Tenant
+
 	switch m.Proof.(type) {
 
 	case *GetCertificateRequest_Aws:

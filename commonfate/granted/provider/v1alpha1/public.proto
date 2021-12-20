@@ -37,8 +37,9 @@ message AWSSignature {
 
 message GetCertificateRequest {
   bytes csr = 1;
+  string tenant = 2;
   oneof proof {
-    AWSProof aws = 2;
+    AWSProof aws = 3;
   }
 }
 
