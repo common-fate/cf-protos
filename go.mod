@@ -12,7 +12,7 @@ require (
 
 require (
 	github.com/alvaroloes/enumer v1.1.2 // indirect
-	github.com/common-fate/gconfig v0.0.0-20211214152125-636370f3d009 // indirect
+	github.com/common-fate/gconfig v0.0.0-20211220150125-5410e08ed0ab // indirect
 	github.com/hashicorp/errwrap v1.0.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/pascaldekloe/name v0.0.0-20180628100202-0fd16699aae1 // indirect
