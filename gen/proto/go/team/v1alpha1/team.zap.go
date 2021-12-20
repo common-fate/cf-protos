@@ -7,9 +7,9 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
+	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
-	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -155,14 +155,8 @@ func (m *EnrolProviderResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Obj
 		return nil
 	}
 
-	keyName = "status" // field status = 1
-	enc.AddString(keyName, m.Status.String())
-
 	keyName = "deployment_url" // field deployment_url = 2
 	enc.AddString(keyName, m.DeploymentUrl)
-
-	keyName = "enrollment_token" // field enrollment_token = 3
-	enc.AddString(keyName, m.EnrollmentToken)
 
 	keyName = "expires_at" // field expires_at = 4
 	if t, err := github_com_golang_protobuf_ptypes.Timestamp(m.ExpiresAt); err == nil {
@@ -385,9 +379,6 @@ func (m *Provider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) e
 
 	keyName = "name" // field name = 2
 	enc.AddString(keyName, m.Name)
-
-	keyName = "status" // field status = 3
-	enc.AddString(keyName, m.Status.String())
 
 	keyName = "aws" // field aws = 4
 	if ov, ok := m.GetDetails().(*Provider_Aws); ok {

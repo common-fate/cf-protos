@@ -891,11 +891,7 @@ func (m *EnrolProviderResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Status
-
 	// no validation rules for DeploymentUrl
-
-	// no validation rules for EnrollmentToken
 
 	if all {
 		switch v := interface{}(m.GetExpiresAt()).(type) {
@@ -2249,8 +2245,6 @@ func (m *Provider) validate(all bool) error {
 	// no validation rules for Id
 
 	// no validation rules for Name
-
-	// no validation rules for Status
 
 	switch m.Details.(type) {
 

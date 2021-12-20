@@ -58,17 +58,8 @@ message EnrolAWSProvider {
   string account_id = 1 [(validate.rules).string = {len: 12, pattern: "^[0-9]*$"}];
 }
 
-enum ProviderStatus {
-  PROVIDER_STATUS_UNSPECIFIED = 0;
-  PROVIDER_STATUS_NEEDS_ENROLLING = 1;
-  PROVIDER_STATUS_ACTIVE = 2;
-  PROVIDER_STATUS_ENROLLMENT_EXPIRED = 3;
-}
-
 message EnrolProviderResponse {
-  ProviderStatus status = 1;
   string deployment_url = 2;
-  string enrollment_token = 3;
   google.protobuf.Timestamp expires_at = 4;
 }
 
@@ -120,7 +111,6 @@ message GetProviderResponse {
 message Provider {
   string id = 1;
   string name = 2;
-  ProviderStatus status = 3;
   oneof details {
     AWSProviderDetails aws = 4;
   }
