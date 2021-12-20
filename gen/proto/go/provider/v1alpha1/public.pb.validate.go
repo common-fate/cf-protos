@@ -57,9 +57,7 @@ func (m *EnrolRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for EnrolToken
-
-	// no validation rules for Csr
+	// no validation rules for Team
 
 	// no validation rules for AccessHandlerUrl
 
@@ -584,7 +582,7 @@ func (m *GetCertificateRequest) validate(all bool) error {
 
 	// no validation rules for Csr
 
-	// no validation rules for Tenant
+	// no validation rules for Team
 
 	// no validation rules for Provider
 

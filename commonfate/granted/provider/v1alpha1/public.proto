@@ -13,12 +13,12 @@ service ProviderPublicService {
 }
 
 message EnrolRequest {
-  string enrol_token = 1;
-  bytes csr = 2;
+  // the slug of the team
+  string team = 1;
   // the URL of the initial Access Handler to associate with the provider.
-  string access_handler_url = 3;
+  string access_handler_url = 2;
   oneof proof {
-    AWSProof aws = 4;
+    AWSProof aws = 3;
   }
 }
 
@@ -38,7 +38,7 @@ message AWSSignature {
 message GetCertificateRequest {
   bytes csr = 1;
   // the slug of the team
-  string tenant = 2;
+  string team = 2;
   // the customer ID of the provider
   string provider = 3;
   oneof proof {
