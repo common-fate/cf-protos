@@ -37,9 +37,12 @@ message AWSSignature {
 
 message GetCertificateRequest {
   bytes csr = 1;
+  // the slug of the team
   string tenant = 2;
+  // the customer ID of the provider
+  string provider = 3;
   oneof proof {
-    AWSProof aws = 3;
+    AWSProof aws = 4;
   }
 }
 
