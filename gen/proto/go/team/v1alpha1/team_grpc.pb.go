@@ -34,6 +34,12 @@ type TeamServiceClient interface {
 	// GetAllProviderChecksum is used by clients to determine whether their local cache of provider
 	// details requires an update.
 	GetAllProviderChecksum(ctx context.Context, in *GetAllProviderChecksumRequest, opts ...grpc.CallOption) (*GetAllProviderChecksumResponse, error)
+	// GetAccessHandlersForProvider lists the Access Handlers associated with a provider
+	GetAccessHandlersForProvider(ctx context.Context, in *GetAccessHandlersForProviderRequest, opts ...grpc.CallOption) (*GetAccessHandlersForProviderResponse, error)
+	// AddAccessHandler registers a new Access Handler for a provider
+	AddAccessHandler(ctx context.Context, in *AddAccessHandlerRequest, opts ...grpc.CallOption) (*AddAccessHandlerResponse, error)
+	// DeleteAccessHandler deletes an Access Handler from a provider
+	DeleteAccessHandler(ctx context.Context, in *DeleteAccessHandlerRequest, opts ...grpc.CallOption) (*DeleteAccessHandlerResponse, error)
 }
 
 type teamServiceClient struct {
@@ -125,6 +131,33 @@ func (c *teamServiceClient) GetAllProviderChecksum(ctx context.Context, in *GetA
 	return out, nil
 }
 
+func (c *teamServiceClient) GetAccessHandlersForProvider(ctx context.Context, in *GetAccessHandlersForProviderRequest, opts ...grpc.CallOption) (*GetAccessHandlersForProviderResponse, error) {
+	out := new(GetAccessHandlersForProviderResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/GetAccessHandlersForProvider", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *teamServiceClient) AddAccessHandler(ctx context.Context, in *AddAccessHandlerRequest, opts ...grpc.CallOption) (*AddAccessHandlerResponse, error) {
+	out := new(AddAccessHandlerResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/AddAccessHandler", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *teamServiceClient) DeleteAccessHandler(ctx context.Context, in *DeleteAccessHandlerRequest, opts ...grpc.CallOption) (*DeleteAccessHandlerResponse, error) {
+	out := new(DeleteAccessHandlerResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/DeleteAccessHandler", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TeamServiceServer is the server API for TeamService service.
 // All implementations should embed UnimplementedTeamServiceServer
 // for forward compatibility
@@ -145,6 +178,12 @@ type TeamServiceServer interface {
 	// GetAllProviderChecksum is used by clients to determine whether their local cache of provider
 	// details requires an update.
 	GetAllProviderChecksum(context.Context, *GetAllProviderChecksumRequest) (*GetAllProviderChecksumResponse, error)
+	// GetAccessHandlersForProvider lists the Access Handlers associated with a provider
+	GetAccessHandlersForProvider(context.Context, *GetAccessHandlersForProviderRequest) (*GetAccessHandlersForProviderResponse, error)
+	// AddAccessHandler registers a new Access Handler for a provider
+	AddAccessHandler(context.Context, *AddAccessHandlerRequest) (*AddAccessHandlerResponse, error)
+	// DeleteAccessHandler deletes an Access Handler from a provider
+	DeleteAccessHandler(context.Context, *DeleteAccessHandlerRequest) (*DeleteAccessHandlerResponse, error)
 }
 
 // UnimplementedTeamServiceServer should be embedded to have forward compatible implementations.
@@ -177,6 +216,15 @@ func (UnimplementedTeamServiceServer) GetAllProviderDetails(context.Context, *Ge
 }
 func (UnimplementedTeamServiceServer) GetAllProviderChecksum(context.Context, *GetAllProviderChecksumRequest) (*GetAllProviderChecksumResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllProviderChecksum not implemented")
+}
+func (UnimplementedTeamServiceServer) GetAccessHandlersForProvider(context.Context, *GetAccessHandlersForProviderRequest) (*GetAccessHandlersForProviderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccessHandlersForProvider not implemented")
+}
+func (UnimplementedTeamServiceServer) AddAccessHandler(context.Context, *AddAccessHandlerRequest) (*AddAccessHandlerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddAccessHandler not implemented")
+}
+func (UnimplementedTeamServiceServer) DeleteAccessHandler(context.Context, *DeleteAccessHandlerRequest) (*DeleteAccessHandlerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccessHandler not implemented")
 }
 
 // UnsafeTeamServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -352,6 +400,60 @@ func _TeamService_GetAllProviderChecksum_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TeamService_GetAccessHandlersForProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccessHandlersForProviderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).GetAccessHandlersForProvider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/GetAccessHandlersForProvider",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).GetAccessHandlersForProvider(ctx, req.(*GetAccessHandlersForProviderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TeamService_AddAccessHandler_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddAccessHandlerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).AddAccessHandler(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/AddAccessHandler",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).AddAccessHandler(ctx, req.(*AddAccessHandlerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TeamService_DeleteAccessHandler_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAccessHandlerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).DeleteAccessHandler(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/DeleteAccessHandler",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).DeleteAccessHandler(ctx, req.(*DeleteAccessHandlerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TeamService_ServiceDesc is the grpc.ServiceDesc for TeamService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -394,6 +496,18 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAllProviderChecksum",
 			Handler:    _TeamService_GetAllProviderChecksum_Handler,
+		},
+		{
+			MethodName: "GetAccessHandlersForProvider",
+			Handler:    _TeamService_GetAccessHandlersForProvider_Handler,
+		},
+		{
+			MethodName: "AddAccessHandler",
+			Handler:    _TeamService_AddAccessHandler_Handler,
+		},
+		{
+			MethodName: "DeleteAccessHandler",
+			Handler:    _TeamService_DeleteAccessHandler_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

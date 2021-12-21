@@ -2900,3 +2900,660 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetAllProviderChecksumResponseValidationError{}
+
+// Validate checks the field values on GetAccessHandlersForProviderRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetAccessHandlersForProviderRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetAccessHandlersForProviderRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetAccessHandlersForProviderRequestMultiError, or nil if none found.
+func (m *GetAccessHandlersForProviderRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAccessHandlersForProviderRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ProviderId
+
+	if len(errors) > 0 {
+		return GetAccessHandlersForProviderRequestMultiError(errors)
+	}
+	return nil
+}
+
+// GetAccessHandlersForProviderRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetAccessHandlersForProviderRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetAccessHandlersForProviderRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAccessHandlersForProviderRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAccessHandlersForProviderRequestMultiError) AllErrors() []error { return m }
+
+// GetAccessHandlersForProviderRequestValidationError is the validation error
+// returned by GetAccessHandlersForProviderRequest.Validate if the designated
+// constraints aren't met.
+type GetAccessHandlersForProviderRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAccessHandlersForProviderRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAccessHandlersForProviderRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAccessHandlersForProviderRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAccessHandlersForProviderRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAccessHandlersForProviderRequestValidationError) ErrorName() string {
+	return "GetAccessHandlersForProviderRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAccessHandlersForProviderRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAccessHandlersForProviderRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAccessHandlersForProviderRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAccessHandlersForProviderRequestValidationError{}
+
+// Validate checks the field values on GetAccessHandlersForProviderResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetAccessHandlersForProviderResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetAccessHandlersForProviderResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetAccessHandlersForProviderResponseMultiError, or nil if none found.
+func (m *GetAccessHandlersForProviderResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAccessHandlersForProviderResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetAccessHandlers() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetAccessHandlersForProviderResponseValidationError{
+						field:  fmt.Sprintf("AccessHandlers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetAccessHandlersForProviderResponseValidationError{
+						field:  fmt.Sprintf("AccessHandlers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetAccessHandlersForProviderResponseValidationError{
+					field:  fmt.Sprintf("AccessHandlers[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetAccessHandlersForProviderResponseMultiError(errors)
+	}
+	return nil
+}
+
+// GetAccessHandlersForProviderResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetAccessHandlersForProviderResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetAccessHandlersForProviderResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAccessHandlersForProviderResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAccessHandlersForProviderResponseMultiError) AllErrors() []error { return m }
+
+// GetAccessHandlersForProviderResponseValidationError is the validation error
+// returned by GetAccessHandlersForProviderResponse.Validate if the designated
+// constraints aren't met.
+type GetAccessHandlersForProviderResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAccessHandlersForProviderResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAccessHandlersForProviderResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAccessHandlersForProviderResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAccessHandlersForProviderResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAccessHandlersForProviderResponseValidationError) ErrorName() string {
+	return "GetAccessHandlersForProviderResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAccessHandlersForProviderResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAccessHandlersForProviderResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAccessHandlersForProviderResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAccessHandlersForProviderResponseValidationError{}
+
+// Validate checks the field values on AddAccessHandlerRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddAccessHandlerRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddAccessHandlerRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AddAccessHandlerRequestMultiError, or nil if none found.
+func (m *AddAccessHandlerRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddAccessHandlerRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ProviderId
+
+	// no validation rules for AccessHandlerUrl
+
+	if len(errors) > 0 {
+		return AddAccessHandlerRequestMultiError(errors)
+	}
+	return nil
+}
+
+// AddAccessHandlerRequestMultiError is an error wrapping multiple validation
+// errors returned by AddAccessHandlerRequest.ValidateAll() if the designated
+// constraints aren't met.
+type AddAccessHandlerRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddAccessHandlerRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddAccessHandlerRequestMultiError) AllErrors() []error { return m }
+
+// AddAccessHandlerRequestValidationError is the validation error returned by
+// AddAccessHandlerRequest.Validate if the designated constraints aren't met.
+type AddAccessHandlerRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddAccessHandlerRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddAccessHandlerRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddAccessHandlerRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddAccessHandlerRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddAccessHandlerRequestValidationError) ErrorName() string {
+	return "AddAccessHandlerRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddAccessHandlerRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddAccessHandlerRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddAccessHandlerRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddAccessHandlerRequestValidationError{}
+
+// Validate checks the field values on AddAccessHandlerResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddAccessHandlerResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddAccessHandlerResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AddAccessHandlerResponseMultiError, or nil if none found.
+func (m *AddAccessHandlerResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddAccessHandlerResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return AddAccessHandlerResponseMultiError(errors)
+	}
+	return nil
+}
+
+// AddAccessHandlerResponseMultiError is an error wrapping multiple validation
+// errors returned by AddAccessHandlerResponse.ValidateAll() if the designated
+// constraints aren't met.
+type AddAccessHandlerResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddAccessHandlerResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddAccessHandlerResponseMultiError) AllErrors() []error { return m }
+
+// AddAccessHandlerResponseValidationError is the validation error returned by
+// AddAccessHandlerResponse.Validate if the designated constraints aren't met.
+type AddAccessHandlerResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddAccessHandlerResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddAccessHandlerResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddAccessHandlerResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddAccessHandlerResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddAccessHandlerResponseValidationError) ErrorName() string {
+	return "AddAccessHandlerResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddAccessHandlerResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddAccessHandlerResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddAccessHandlerResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddAccessHandlerResponseValidationError{}
+
+// Validate checks the field values on DeleteAccessHandlerRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteAccessHandlerRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteAccessHandlerRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteAccessHandlerRequestMultiError, or nil if none found.
+func (m *DeleteAccessHandlerRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteAccessHandlerRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ProviderId
+
+	// no validation rules for AccessHandlerUrl
+
+	if len(errors) > 0 {
+		return DeleteAccessHandlerRequestMultiError(errors)
+	}
+	return nil
+}
+
+// DeleteAccessHandlerRequestMultiError is an error wrapping multiple
+// validation errors returned by DeleteAccessHandlerRequest.ValidateAll() if
+// the designated constraints aren't met.
+type DeleteAccessHandlerRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteAccessHandlerRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteAccessHandlerRequestMultiError) AllErrors() []error { return m }
+
+// DeleteAccessHandlerRequestValidationError is the validation error returned
+// by DeleteAccessHandlerRequest.Validate if the designated constraints aren't met.
+type DeleteAccessHandlerRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteAccessHandlerRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteAccessHandlerRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteAccessHandlerRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteAccessHandlerRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteAccessHandlerRequestValidationError) ErrorName() string {
+	return "DeleteAccessHandlerRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteAccessHandlerRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteAccessHandlerRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteAccessHandlerRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteAccessHandlerRequestValidationError{}
+
+// Validate checks the field values on DeleteAccessHandlerResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteAccessHandlerResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteAccessHandlerResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteAccessHandlerResponseMultiError, or nil if none found.
+func (m *DeleteAccessHandlerResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteAccessHandlerResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteAccessHandlerResponseMultiError(errors)
+	}
+	return nil
+}
+
+// DeleteAccessHandlerResponseMultiError is an error wrapping multiple
+// validation errors returned by DeleteAccessHandlerResponse.ValidateAll() if
+// the designated constraints aren't met.
+type DeleteAccessHandlerResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteAccessHandlerResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteAccessHandlerResponseMultiError) AllErrors() []error { return m }
+
+// DeleteAccessHandlerResponseValidationError is the validation error returned
+// by DeleteAccessHandlerResponse.Validate if the designated constraints
+// aren't met.
+type DeleteAccessHandlerResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteAccessHandlerResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteAccessHandlerResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteAccessHandlerResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteAccessHandlerResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteAccessHandlerResponseValidationError) ErrorName() string {
+	return "DeleteAccessHandlerResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteAccessHandlerResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteAccessHandlerResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteAccessHandlerResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteAccessHandlerResponseValidationError{}

@@ -25,6 +25,15 @@ service TeamService {
   // GetAllProviderChecksum is used by clients to determine whether their local cache of provider
   // details requires an update.
   rpc GetAllProviderChecksum(GetAllProviderChecksumRequest) returns (GetAllProviderChecksumResponse);
+
+  // GetAccessHandlersForProvider lists the Access Handlers associated with a provider
+  rpc GetAccessHandlersForProvider(GetAccessHandlersForProviderRequest) returns (GetAccessHandlersForProviderResponse);
+
+  // AddAccessHandler registers a new Access Handler for a provider
+  rpc AddAccessHandler(AddAccessHandlerRequest) returns (AddAccessHandlerResponse);
+
+  // DeleteAccessHandler deletes an Access Handler from a provider
+  rpc DeleteAccessHandler(DeleteAccessHandlerRequest) returns (DeleteAccessHandlerResponse);
 }
 
 message ListMembersRequest {}
@@ -136,3 +145,25 @@ message GetAllProviderChecksumRequest {}
 message GetAllProviderChecksumResponse {
   bytes sha256_checksum = 1;
 }
+
+message GetAccessHandlersForProviderRequest {
+  string provider_id = 1;
+}
+
+message GetAccessHandlersForProviderResponse {
+  repeated gconfig.v1alpha1.AccessHandler access_handlers = 1;
+}
+
+message AddAccessHandlerRequest {
+  string provider_id = 1;
+  string access_handler_url = 2;
+}
+
+message AddAccessHandlerResponse {}
+
+message DeleteAccessHandlerRequest {
+  string provider_id = 1;
+  string access_handler_url = 2;
+}
+
+message DeleteAccessHandlerResponse {}
