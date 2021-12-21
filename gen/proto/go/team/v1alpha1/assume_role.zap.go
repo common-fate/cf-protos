@@ -17,7 +17,7 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
-func (m *AssumeRole) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *AssumeRoleSignatureRoleAccount) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -31,13 +31,41 @@ func (m *AssumeRole) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder)
 	keyName = "account" // field account = 2
 	enc.AddString(keyName, m.Account)
 
-	keyName = "certificate_fingerprint" // field certificate_fingerprint = 3
-	enc.AddByteString(keyName, m.CertificateFingerprint)
+	return nil
+}
 
-	keyName = "timestamp" // field timestamp = 4
+func (m *AssumeRoleSignatureTimestamp) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "inner_digest" // field inner_digest = 1
+	enc.AddByteString(keyName, m.InnerDigest)
+
+	keyName = "timestamp" // field timestamp = 2
 	if t, err := github_com_golang_protobuf_ptypes.Timestamp(m.Timestamp); err == nil {
 		enc.AddTime(keyName, t)
 	}
+
+	return nil
+}
+
+func (m *AssumeRoleSignature) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "inner_digest" // field inner_digest = 1
+	enc.AddByteString(keyName, m.InnerDigest)
+
+	keyName = "certificate_fingerprint" // field certificate_fingerprint = 2
+	enc.AddByteString(keyName, m.CertificateFingerprint)
 
 	return nil
 }

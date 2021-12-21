@@ -4,13 +4,25 @@ package team.v1alpha1;
 
 import "google/protobuf/timestamp.proto";
 
-// AssumeRole is the payload which is signed by users to
+// AssumeRoleSignatureRoleAccount is the payload which is signed by users to
 // prove they have access to the private key associated
 // with their Identity Certificate, to assume roles
 // with Granted.
-message AssumeRole {
+message AssumeRoleSignatureRoleAccount {
 	string role = 1;
 	string account = 2;
-	bytes certificate_fingerprint = 3;
-	google.protobuf.Timestamp timestamp = 4;
 }
+
+// The inner_digest is the SHA256 hash of AssumeRoleSignatureRoleAccount.
+message AssumeRoleSignatureTimestamp {
+	bytes inner_digest = 1;
+	google.protobuf.Timestamp timestamp = 2;
+}
+
+// This is the final AssumeRoleSignature payload to be signed.
+// The inner_digest is the SHA256 hash of AssumeRoleSignatureTimestamp.
+message AssumeRoleSignature {
+	bytes inner_digest = 1;
+	bytes certificate_fingerprint = 2;
+}
+

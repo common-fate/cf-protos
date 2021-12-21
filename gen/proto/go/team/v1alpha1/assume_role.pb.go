@@ -21,23 +21,21 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// AssumeRole is the payload which is signed by users to
+// AssumeRoleSignatureRoleAccount is the payload which is signed by users to
 // prove they have access to the private key associated
 // with their Identity Certificate, to assume roles
 // with Granted.
-type AssumeRole struct {
+type AssumeRoleSignatureRoleAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Role                   string                 `protobuf:"bytes,1,opt,name=role,proto3" json:"role,omitempty"`
-	Account                string                 `protobuf:"bytes,2,opt,name=account,proto3" json:"account,omitempty"`
-	CertificateFingerprint []byte                 `protobuf:"bytes,3,opt,name=certificate_fingerprint,json=certificateFingerprint,proto3" json:"certificate_fingerprint,omitempty"`
-	Timestamp              *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Role    string `protobuf:"bytes,1,opt,name=role,proto3" json:"role,omitempty"`
+	Account string `protobuf:"bytes,2,opt,name=account,proto3" json:"account,omitempty"`
 }
 
-func (x *AssumeRole) Reset() {
-	*x = AssumeRole{}
+func (x *AssumeRoleSignatureRoleAccount) Reset() {
+	*x = AssumeRoleSignatureRoleAccount{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_team_v1alpha1_assume_role_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -45,13 +43,13 @@ func (x *AssumeRole) Reset() {
 	}
 }
 
-func (x *AssumeRole) String() string {
+func (x *AssumeRoleSignatureRoleAccount) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AssumeRole) ProtoMessage() {}
+func (*AssumeRoleSignatureRoleAccount) ProtoMessage() {}
 
-func (x *AssumeRole) ProtoReflect() protoreflect.Message {
+func (x *AssumeRoleSignatureRoleAccount) ProtoReflect() protoreflect.Message {
 	mi := &file_team_v1alpha1_assume_role_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -63,35 +61,134 @@ func (x *AssumeRole) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AssumeRole.ProtoReflect.Descriptor instead.
-func (*AssumeRole) Descriptor() ([]byte, []int) {
+// Deprecated: Use AssumeRoleSignatureRoleAccount.ProtoReflect.Descriptor instead.
+func (*AssumeRoleSignatureRoleAccount) Descriptor() ([]byte, []int) {
 	return file_team_v1alpha1_assume_role_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *AssumeRole) GetRole() string {
+func (x *AssumeRoleSignatureRoleAccount) GetRole() string {
 	if x != nil {
 		return x.Role
 	}
 	return ""
 }
 
-func (x *AssumeRole) GetAccount() string {
+func (x *AssumeRoleSignatureRoleAccount) GetAccount() string {
 	if x != nil {
 		return x.Account
 	}
 	return ""
 }
 
-func (x *AssumeRole) GetCertificateFingerprint() []byte {
+// The inner_digest is the SHA256 hash of AssumeRoleSignatureRoleAccount.
+type AssumeRoleSignatureTimestamp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	InnerDigest []byte                 `protobuf:"bytes,1,opt,name=inner_digest,json=innerDigest,proto3" json:"inner_digest,omitempty"`
+	Timestamp   *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+}
+
+func (x *AssumeRoleSignatureTimestamp) Reset() {
+	*x = AssumeRoleSignatureTimestamp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_team_v1alpha1_assume_role_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AssumeRoleSignatureTimestamp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AssumeRoleSignatureTimestamp) ProtoMessage() {}
+
+func (x *AssumeRoleSignatureTimestamp) ProtoReflect() protoreflect.Message {
+	mi := &file_team_v1alpha1_assume_role_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AssumeRoleSignatureTimestamp.ProtoReflect.Descriptor instead.
+func (*AssumeRoleSignatureTimestamp) Descriptor() ([]byte, []int) {
+	return file_team_v1alpha1_assume_role_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *AssumeRoleSignatureTimestamp) GetInnerDigest() []byte {
 	if x != nil {
-		return x.CertificateFingerprint
+		return x.InnerDigest
 	}
 	return nil
 }
 
-func (x *AssumeRole) GetTimestamp() *timestamppb.Timestamp {
+func (x *AssumeRoleSignatureTimestamp) GetTimestamp() *timestamppb.Timestamp {
 	if x != nil {
 		return x.Timestamp
+	}
+	return nil
+}
+
+// This is the final AssumeRoleSignature payload to be signed.
+// The inner_digest is the SHA256 hash of AssumeRoleSignatureTimestamp.
+type AssumeRoleSignature struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	InnerDigest            []byte `protobuf:"bytes,1,opt,name=inner_digest,json=innerDigest,proto3" json:"inner_digest,omitempty"`
+	CertificateFingerprint []byte `protobuf:"bytes,2,opt,name=certificate_fingerprint,json=certificateFingerprint,proto3" json:"certificate_fingerprint,omitempty"`
+}
+
+func (x *AssumeRoleSignature) Reset() {
+	*x = AssumeRoleSignature{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_team_v1alpha1_assume_role_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AssumeRoleSignature) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AssumeRoleSignature) ProtoMessage() {}
+
+func (x *AssumeRoleSignature) ProtoReflect() protoreflect.Message {
+	mi := &file_team_v1alpha1_assume_role_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AssumeRoleSignature.ProtoReflect.Descriptor instead.
+func (*AssumeRoleSignature) Descriptor() ([]byte, []int) {
+	return file_team_v1alpha1_assume_role_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *AssumeRoleSignature) GetInnerDigest() []byte {
+	if x != nil {
+		return x.InnerDigest
+	}
+	return nil
+}
+
+func (x *AssumeRoleSignature) GetCertificateFingerprint() []byte {
+	if x != nil {
+		return x.CertificateFingerprint
 	}
 	return nil
 }
@@ -104,18 +201,27 @@ var file_team_v1alpha1_assume_role_proto_rawDesc = []byte{
 	0x6f, 0x12, 0x0d, 0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31,
 	0x1a, 0x1f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75,
 	0x66, 0x2f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x22, 0xad, 0x01, 0x0a, 0x0a, 0x41, 0x73, 0x73, 0x75, 0x6d, 0x65, 0x52, 0x6f, 0x6c, 0x65,
-	0x12, 0x12, 0x0a, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
-	0x72, 0x6f, 0x6c, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x37,
-	0x0a, 0x17, 0x63, 0x65, 0x72, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x65, 0x5f, 0x66, 0x69,
-	0x6e, 0x67, 0x65, 0x72, 0x70, 0x72, 0x69, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0c, 0x52,
-	0x16, 0x63, 0x65, 0x72, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x65, 0x46, 0x69, 0x6e, 0x67,
-	0x65, 0x72, 0x70, 0x72, 0x69, 0x6e, 0x74, 0x12, 0x38, 0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73,
-	0x74, 0x61, 0x6d, 0x70, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f,
-	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d,
-	0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d,
-	0x70, 0x42, 0xc3, 0x01, 0x0a, 0x11, 0x63, 0x6f, 0x6d, 0x2e, 0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76,
+	0x6f, 0x22, 0x4e, 0x0a, 0x1e, 0x41, 0x73, 0x73, 0x75, 0x6d, 0x65, 0x52, 0x6f, 0x6c, 0x65, 0x53,
+	0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x52, 0x6f, 0x6c, 0x65, 0x41, 0x63, 0x63, 0x6f,
+	0x75, 0x6e, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75,
+	0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e,
+	0x74, 0x22, 0x7b, 0x0a, 0x1c, 0x41, 0x73, 0x73, 0x75, 0x6d, 0x65, 0x52, 0x6f, 0x6c, 0x65, 0x53,
+	0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d,
+	0x70, 0x12, 0x21, 0x0a, 0x0c, 0x69, 0x6e, 0x6e, 0x65, 0x72, 0x5f, 0x64, 0x69, 0x67, 0x65, 0x73,
+	0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x0b, 0x69, 0x6e, 0x6e, 0x65, 0x72, 0x44, 0x69,
+	0x67, 0x65, 0x73, 0x74, 0x12, 0x38, 0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d,
+	0x70, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74,
+	0x61, 0x6d, 0x70, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x22, 0x71,
+	0x0a, 0x13, 0x41, 0x73, 0x73, 0x75, 0x6d, 0x65, 0x52, 0x6f, 0x6c, 0x65, 0x53, 0x69, 0x67, 0x6e,
+	0x61, 0x74, 0x75, 0x72, 0x65, 0x12, 0x21, 0x0a, 0x0c, 0x69, 0x6e, 0x6e, 0x65, 0x72, 0x5f, 0x64,
+	0x69, 0x67, 0x65, 0x73, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x0b, 0x69, 0x6e, 0x6e,
+	0x65, 0x72, 0x44, 0x69, 0x67, 0x65, 0x73, 0x74, 0x12, 0x37, 0x0a, 0x17, 0x63, 0x65, 0x72, 0x74,
+	0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x65, 0x5f, 0x66, 0x69, 0x6e, 0x67, 0x65, 0x72, 0x70, 0x72,
+	0x69, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x16, 0x63, 0x65, 0x72, 0x74, 0x69,
+	0x66, 0x69, 0x63, 0x61, 0x74, 0x65, 0x46, 0x69, 0x6e, 0x67, 0x65, 0x72, 0x70, 0x72, 0x69, 0x6e,
+	0x74, 0x42, 0xc3, 0x01, 0x0a, 0x11, 0x63, 0x6f, 0x6d, 0x2e, 0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76,
 	0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x42, 0x0f, 0x41, 0x73, 0x73, 0x75, 0x6d, 0x65, 0x52,
 	0x6f, 0x6c, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x48, 0x67, 0x69, 0x74, 0x68,
 	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2d, 0x66, 0x61,
@@ -142,13 +248,15 @@ func file_team_v1alpha1_assume_role_proto_rawDescGZIP() []byte {
 	return file_team_v1alpha1_assume_role_proto_rawDescData
 }
 
-var file_team_v1alpha1_assume_role_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_team_v1alpha1_assume_role_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_team_v1alpha1_assume_role_proto_goTypes = []interface{}{
-	(*AssumeRole)(nil),            // 0: team.v1alpha1.AssumeRole
-	(*timestamppb.Timestamp)(nil), // 1: google.protobuf.Timestamp
+	(*AssumeRoleSignatureRoleAccount)(nil), // 0: team.v1alpha1.AssumeRoleSignatureRoleAccount
+	(*AssumeRoleSignatureTimestamp)(nil),   // 1: team.v1alpha1.AssumeRoleSignatureTimestamp
+	(*AssumeRoleSignature)(nil),            // 2: team.v1alpha1.AssumeRoleSignature
+	(*timestamppb.Timestamp)(nil),          // 3: google.protobuf.Timestamp
 }
 var file_team_v1alpha1_assume_role_proto_depIdxs = []int32{
-	1, // 0: team.v1alpha1.AssumeRole.timestamp:type_name -> google.protobuf.Timestamp
+	3, // 0: team.v1alpha1.AssumeRoleSignatureTimestamp.timestamp:type_name -> google.protobuf.Timestamp
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -163,7 +271,31 @@ func file_team_v1alpha1_assume_role_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_team_v1alpha1_assume_role_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AssumeRole); i {
+			switch v := v.(*AssumeRoleSignatureRoleAccount); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_team_v1alpha1_assume_role_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AssumeRoleSignatureTimestamp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_team_v1alpha1_assume_role_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AssumeRoleSignature); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -181,7 +313,7 @@ func file_team_v1alpha1_assume_role_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_team_v1alpha1_assume_role_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
