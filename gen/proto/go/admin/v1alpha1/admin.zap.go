@@ -98,3 +98,28 @@ func (m *DeleteTenantResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 
 	return nil
 }
+
+func (m *RotateTenantCertificateRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "tenant_id" // field tenant_id = 1
+	enc.AddString(keyName, m.TenantId)
+
+	return nil
+}
+
+func (m *RotateTenantCertificateResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}

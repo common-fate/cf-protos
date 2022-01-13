@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 type AdminServiceClient interface {
 	ListTenants(ctx context.Context, in *ListTenantsRequest, opts ...grpc.CallOption) (*ListTenantsResponse, error)
 	DeleteTenant(ctx context.Context, in *DeleteTenantRequest, opts ...grpc.CallOption) (*DeleteTenantResponse, error)
+	RotateTenantCertificate(ctx context.Context, in *RotateTenantCertificateRequest, opts ...grpc.CallOption) (*RotateTenantCertificateResponse, error)
 }
 
 type adminServiceClient struct {
@@ -48,12 +49,22 @@ func (c *adminServiceClient) DeleteTenant(ctx context.Context, in *DeleteTenantR
 	return out, nil
 }
 
+func (c *adminServiceClient) RotateTenantCertificate(ctx context.Context, in *RotateTenantCertificateRequest, opts ...grpc.CallOption) (*RotateTenantCertificateResponse, error) {
+	out := new(RotateTenantCertificateResponse)
+	err := c.cc.Invoke(ctx, "/admin.v1alpha1.AdminService/RotateTenantCertificate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AdminServiceServer is the server API for AdminService service.
 // All implementations should embed UnimplementedAdminServiceServer
 // for forward compatibility
 type AdminServiceServer interface {
 	ListTenants(context.Context, *ListTenantsRequest) (*ListTenantsResponse, error)
 	DeleteTenant(context.Context, *DeleteTenantRequest) (*DeleteTenantResponse, error)
+	RotateTenantCertificate(context.Context, *RotateTenantCertificateRequest) (*RotateTenantCertificateResponse, error)
 }
 
 // UnimplementedAdminServiceServer should be embedded to have forward compatible implementations.
@@ -65,6 +76,9 @@ func (UnimplementedAdminServiceServer) ListTenants(context.Context, *ListTenants
 }
 func (UnimplementedAdminServiceServer) DeleteTenant(context.Context, *DeleteTenantRequest) (*DeleteTenantResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteTenant not implemented")
+}
+func (UnimplementedAdminServiceServer) RotateTenantCertificate(context.Context, *RotateTenantCertificateRequest) (*RotateTenantCertificateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RotateTenantCertificate not implemented")
 }
 
 // UnsafeAdminServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -114,6 +128,24 @@ func _AdminService_DeleteTenant_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AdminService_RotateTenantCertificate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RotateTenantCertificateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServiceServer).RotateTenantCertificate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/admin.v1alpha1.AdminService/RotateTenantCertificate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServiceServer).RotateTenantCertificate(ctx, req.(*RotateTenantCertificateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AdminService_ServiceDesc is the grpc.ServiceDesc for AdminService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -128,6 +160,10 @@ var AdminService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteTenant",
 			Handler:    _AdminService_DeleteTenant_Handler,
+		},
+		{
+			MethodName: "RotateTenantCertificate",
+			Handler:    _AdminService_RotateTenantCertificate_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

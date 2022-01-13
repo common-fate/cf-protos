@@ -6,6 +6,7 @@ package admin.v1alpha1;
 service AdminService {
   rpc ListTenants(ListTenantsRequest) returns (ListTenantsResponse);
   rpc DeleteTenant(DeleteTenantRequest) returns (DeleteTenantResponse);
+  rpc RotateTenantCertificate(RotateTenantCertificateRequest) returns (RotateTenantCertificateResponse);
 }
 
 message ListTenantsRequest {}
@@ -26,3 +27,9 @@ message DeleteTenantRequest {
 }
 
 message DeleteTenantResponse {}
+
+message RotateTenantCertificateRequest {
+  string tenant_id = 1;
+}
+
+message RotateTenantCertificateResponse {}
