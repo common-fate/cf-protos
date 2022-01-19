@@ -381,6 +381,8 @@ func (m *IssueSessionCredentialsPayload) validate(all bool) error {
 
 	// no validation rules for Id
 
+	// no validation rules for UserCertificate
+
 	if len(errors) > 0 {
 		return IssueSessionCredentialsPayloadMultiError(errors)
 	}

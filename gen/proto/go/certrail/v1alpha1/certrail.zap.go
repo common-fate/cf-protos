@@ -7,8 +7,8 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
-	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
+	_ "google.golang.org/protobuf/types/known/timestamppb"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -76,6 +76,9 @@ func (m *IssueSessionCredentialsPayload) MarshalLogObject(enc go_uber_org_zap_za
 
 	keyName = "id" // field id = 1
 	enc.AddString(keyName, m.Id)
+
+	keyName = "user_certificate" // field user_certificate = 2
+	enc.AddByteString(keyName, m.UserCertificate)
 
 	return nil
 }
