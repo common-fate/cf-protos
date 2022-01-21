@@ -64,6 +64,7 @@ func (m *AssumeRoleSignatureRoleAccount) validate(all bool) error {
 	if len(errors) > 0 {
 		return AssumeRoleSignatureRoleAccountMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -197,6 +198,7 @@ func (m *AssumeRoleSignatureTimestamp) validate(all bool) error {
 	if len(errors) > 0 {
 		return AssumeRoleSignatureTimestampMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -303,6 +305,7 @@ func (m *AssumeRoleSignature) validate(all bool) error {
 	if len(errors) > 0 {
 		return AssumeRoleSignatureMultiError(errors)
 	}
+
 	return nil
 }
 
