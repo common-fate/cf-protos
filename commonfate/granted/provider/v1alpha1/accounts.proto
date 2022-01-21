@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package provider.v1alpha1;
+
+import "gconfig/v1alpha1/gconfig.proto";
+
+// ProviderService is a service used by Granted Access Handlers
+// to request information they need about their account structure
+service ProviderAccountsService {
+  rpc StoreAccounts(StoreAccountsRequest) returns (StoreAccountsResponse);
+}
+
+message StoreAccountsRequest {
+    repeated gconfig.v1alpha1.Account accounts = 1;
+}
+
+message StoreAccountsResponse {}
