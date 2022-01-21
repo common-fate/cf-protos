@@ -7,9 +7,9 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
-	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
+	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -55,6 +55,42 @@ func (m *ListMembersResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Objec
 	return nil
 }
 
+func (m *ListRolesRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+func (m *ListRolesResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "roles" // field roles = 1
+	enc.AddArray(keyName, go_uber_org_zap_zapcore.ArrayMarshalerFunc(func(aenc go_uber_org_zap_zapcore.ArrayEncoder) error {
+		for _, rv := range m.Roles {
+			_ = rv
+			if rv != nil {
+				var vv interface{} = rv
+				if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+					aenc.AppendObject(marshaler)
+				}
+			}
+		}
+		return nil
+	}))
+
+	return nil
+}
+
 func (m *Member) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
@@ -68,6 +104,23 @@ func (m *Member) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) err
 
 	keyName = "is_admin" // field is_admin = 2
 	enc.AddBool(keyName, m.IsAdmin)
+
+	return nil
+}
+
+func (m *Role) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "accounts_string" // field accounts_string = 1
+	enc.AddString(keyName, m.AccountsString)
+
+	keyName = "id" // field id = 2
+	enc.AddString(keyName, m.Id)
 
 	return nil
 }
