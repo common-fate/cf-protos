@@ -632,9 +632,9 @@ func (m *Role) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for EmailAddress
+	// no validation rules for AccountsString
 
-	// no validation rules for IsAdmin
+	// no validation rules for Id
 
 	if len(errors) > 0 {
 		return RoleMultiError(errors)

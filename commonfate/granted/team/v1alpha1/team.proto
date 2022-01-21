@@ -53,10 +53,12 @@ message Member {
 	bool is_admin = 2;
 }
 
-// @TODO: alter config ot match role output
 message Role {
-	string email_address = 1;
-	bool is_admin = 2;
+  // demarcates the aws accounts in use
+  // for n > 1 accounts, seperate with a '|' char i.e. 
+  // "account1|account2|account3"
+	string accounts_string = 1;
+	string id = 2;
 }
 
 message UpdateConfigRequest {
