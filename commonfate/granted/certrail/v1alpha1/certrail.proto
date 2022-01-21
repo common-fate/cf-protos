@@ -29,6 +29,16 @@ message RevokeCertificatePayload {
   bytes revoked_by = 2;
 }
 
+// When an access handler issues credentials to a user it is stored
+// in our immutable audit trail. This allows administrators to compare
+// our audit trail against their cloud providers' audit trails to verify
+// that we are correctly issuing credentials and detect any discrepancies.
+message IssueSessionCredentialsPayload {
+  // id is the access key ID in AWS
+  string id = 1;
+  bytes user_certificate = 2;
+}
+
 message Envelope {
   Payload payload = 1;
   bytes signature = 2 [(validate.rules).bytes.max_len = 256];
@@ -40,6 +50,7 @@ message Payload {
     ApproveConfigPayload approve_config = 2;
     IssueCertificatePayload issue_certificate = 3;
     RevokeCertificatePayload revoke_certificate = 4;
+    IssueSessionCredentialsPayload issue_session_credentials = 5;
   }
 }
 

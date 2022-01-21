@@ -3,11 +3,11 @@ module github.com/common-fate/cf-protos
 go 1.17
 
 require (
-	github.com/common-fate/gconfig v0.0.0-20211220150125-5410e08ed0ab
-	github.com/envoyproxy/protoc-gen-validate v0.6.2
+	github.com/common-fate/gconfig v0.0.0-20220120083656-e70209c35e3a
+	github.com/envoyproxy/protoc-gen-validate v0.6.3
 	github.com/golang/protobuf v1.5.2
-	go.uber.org/zap v1.19.1
-	google.golang.org/grpc v1.42.0
+	go.uber.org/zap v1.20.0
+	google.golang.org/grpc v1.43.0
 	google.golang.org/protobuf v1.27.1
 )
 

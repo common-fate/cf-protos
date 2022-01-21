@@ -66,6 +66,23 @@ func (m *RevokeCertificatePayload) MarshalLogObject(enc go_uber_org_zap_zapcore.
 	return nil
 }
 
+func (m *IssueSessionCredentialsPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "id" // field id = 1
+	enc.AddString(keyName, m.Id)
+
+	keyName = "user_certificate" // field user_certificate = 2
+	enc.AddByteString(keyName, m.UserCertificate)
+
+	return nil
+}
+
 func (m *Envelope) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
@@ -128,6 +145,17 @@ func (m *Payload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) er
 		_ = ov
 		if ov.RevokeCertificate != nil {
 			var vv interface{} = ov.RevokeCertificate
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
+	keyName = "issue_session_credentials" // field issue_session_credentials = 5
+	if ov, ok := m.GetContents().(*Payload_IssueSessionCredentials); ok {
+		_ = ov
+		if ov.IssueSessionCredentials != nil {
+			var vv interface{} = ov.IssueSessionCredentials
 			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
 				enc.AddObject(keyName, marshaler)
 			}

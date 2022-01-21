@@ -10,6 +10,7 @@ import "validate/validate.proto";
 // TeamService is used to manage Granted teams.
 service TeamService {
   rpc ListMembers(ListMembersRequest) returns (ListMembersResponse);
+  rpc ListRoles(ListRolesRequest) returns (ListRolesResponse);
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse);
   rpc EnrolProvider(EnrolProviderRequest) returns (EnrolProviderResponse);
   rpc ListProviders(ListProvidersRequest) returns (ListProvidersResponse);
@@ -41,10 +42,23 @@ message ListMembersRequest {}
 message ListMembersResponse {
 	repeated Member members = 1;
 }
+message ListRolesRequest {}
+
+message ListRolesResponse {
+	repeated Role roles = 1;
+}
 
 message Member {
 	string email_address = 1;
 	bool is_admin = 2;
+}
+
+message Role {
+  // demarcates the aws accounts in use
+  // for n > 1 accounts, seperate with a '|' char i.e. 
+  // "account1|account2|account3"
+	string accounts_string = 1;
+	string id = 2;
 }
 
 message UpdateConfigRequest {
