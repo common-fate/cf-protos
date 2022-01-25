@@ -764,6 +764,8 @@ func (m *Role) validate(all bool) error {
 
 	}
 
+	// no validation rules for Audited
+
 	if len(errors) > 0 {
 		return RoleMultiError(errors)
 	}

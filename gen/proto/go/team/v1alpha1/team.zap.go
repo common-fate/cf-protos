@@ -150,6 +150,9 @@ func (m *Role) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error
 		return nil
 	}))
 
+	keyName = "audited" // field audited = 3
+	enc.AddBool(keyName, m.Audited)
+
 	return nil
 }
 

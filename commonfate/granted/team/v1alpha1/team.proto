@@ -62,6 +62,7 @@ message Account {
 message Role {
 	string id = 1;
   repeated Account account = 2;
+  bool audited = 3;
 }
 
 message UpdateConfigRequest {
