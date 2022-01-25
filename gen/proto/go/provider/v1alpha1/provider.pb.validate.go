@@ -61,6 +61,8 @@ func (m *StoreAssumeRoleReasonRequest) validate(all bool) error {
 
 	// no validation rules for Role
 
+	// no validation rules for Account
+
 	// no validation rules for Reason
 
 	if len(errors) > 0 {

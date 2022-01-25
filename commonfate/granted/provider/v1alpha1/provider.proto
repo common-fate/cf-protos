@@ -13,7 +13,8 @@ service ProviderService {
 message StoreAssumeRoleReasonRequest {
   string email = 1;
   string role = 2;
-  string reason = 3;
+  string account = 3;
+  string reason = 4;
 }
 
 message StoreAssumeRoleReasonResponse {}

@@ -30,7 +30,10 @@ func (m *StoreAssumeRoleReasonRequest) MarshalLogObject(enc go_uber_org_zap_zapc
 	keyName = "role" // field role = 2
 	enc.AddString(keyName, m.Role)
 
-	keyName = "reason" // field reason = 3
+	keyName = "account" // field account = 3
+	enc.AddString(keyName, m.Account)
+
+	keyName = "reason" // field reason = 4
 	enc.AddString(keyName, m.Reason)
 
 	return nil
