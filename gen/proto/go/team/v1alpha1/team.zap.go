@@ -7,9 +7,9 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
+	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
-	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -108,6 +108,23 @@ func (m *Member) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) err
 	return nil
 }
 
+func (m *Account) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "provider" // field provider = 1
+	enc.AddString(keyName, m.Provider)
+
+	keyName = "account_id" // field account_id = 2
+	enc.AddString(keyName, m.AccountId)
+
+	return nil
+}
+
 func (m *Role) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
@@ -116,11 +133,22 @@ func (m *Role) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error
 		return nil
 	}
 
-	keyName = "accounts_string" // field accounts_string = 1
-	enc.AddString(keyName, m.AccountsString)
-
-	keyName = "id" // field id = 2
+	keyName = "id" // field id = 1
 	enc.AddString(keyName, m.Id)
+
+	keyName = "account" // field account = 2
+	enc.AddArray(keyName, go_uber_org_zap_zapcore.ArrayMarshalerFunc(func(aenc go_uber_org_zap_zapcore.ArrayEncoder) error {
+		for _, rv := range m.Account {
+			_ = rv
+			if rv != nil {
+				var vv interface{} = rv
+				if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+					aenc.AppendObject(marshaler)
+				}
+			}
+		}
+		return nil
+	}))
 
 	return nil
 }

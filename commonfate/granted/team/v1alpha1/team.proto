@@ -53,12 +53,15 @@ message Member {
 	bool is_admin = 2;
 }
 
+
+message Account {
+  string provider = 1; // e.g. "aws"
+  string account_id = 2; // e.g. "123456789012"
+}
+
 message Role {
-  // demarcates the aws accounts in use
-  // for n > 1 accounts, seperate with a '|' char i.e. 
-  // "account1|account2|account3"
-	string accounts_string = 1;
-	string id = 2;
+	string id = 1;
+  repeated Account account = 2;
 }
 
 message UpdateConfigRequest {
