@@ -35,6 +35,216 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on StoreAssumeRoleReasonRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *StoreAssumeRoleReasonRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on StoreAssumeRoleReasonRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// StoreAssumeRoleReasonRequestMultiError, or nil if none found.
+func (m *StoreAssumeRoleReasonRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *StoreAssumeRoleReasonRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Email
+
+	// no validation rules for Role
+
+	// no validation rules for Reason
+
+	if len(errors) > 0 {
+		return StoreAssumeRoleReasonRequestMultiError(errors)
+	}
+	return nil
+}
+
+// StoreAssumeRoleReasonRequestMultiError is an error wrapping multiple
+// validation errors returned by StoreAssumeRoleReasonRequest.ValidateAll() if
+// the designated constraints aren't met.
+type StoreAssumeRoleReasonRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m StoreAssumeRoleReasonRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m StoreAssumeRoleReasonRequestMultiError) AllErrors() []error { return m }
+
+// StoreAssumeRoleReasonRequestValidationError is the validation error returned
+// by StoreAssumeRoleReasonRequest.Validate if the designated constraints
+// aren't met.
+type StoreAssumeRoleReasonRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e StoreAssumeRoleReasonRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e StoreAssumeRoleReasonRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e StoreAssumeRoleReasonRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e StoreAssumeRoleReasonRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e StoreAssumeRoleReasonRequestValidationError) ErrorName() string {
+	return "StoreAssumeRoleReasonRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e StoreAssumeRoleReasonRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sStoreAssumeRoleReasonRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = StoreAssumeRoleReasonRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = StoreAssumeRoleReasonRequestValidationError{}
+
+// Validate checks the field values on StoreAssumeRoleReasonResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *StoreAssumeRoleReasonResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on StoreAssumeRoleReasonResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// StoreAssumeRoleReasonResponseMultiError, or nil if none found.
+func (m *StoreAssumeRoleReasonResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *StoreAssumeRoleReasonResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return StoreAssumeRoleReasonResponseMultiError(errors)
+	}
+	return nil
+}
+
+// StoreAssumeRoleReasonResponseMultiError is an error wrapping multiple
+// validation errors returned by StoreAssumeRoleReasonResponse.ValidateAll()
+// if the designated constraints aren't met.
+type StoreAssumeRoleReasonResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m StoreAssumeRoleReasonResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m StoreAssumeRoleReasonResponseMultiError) AllErrors() []error { return m }
+
+// StoreAssumeRoleReasonResponseValidationError is the validation error
+// returned by StoreAssumeRoleReasonResponse.Validate if the designated
+// constraints aren't met.
+type StoreAssumeRoleReasonResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e StoreAssumeRoleReasonResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e StoreAssumeRoleReasonResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e StoreAssumeRoleReasonResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e StoreAssumeRoleReasonResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e StoreAssumeRoleReasonResponseValidationError) ErrorName() string {
+	return "StoreAssumeRoleReasonResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e StoreAssumeRoleReasonResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sStoreAssumeRoleReasonResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = StoreAssumeRoleReasonResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = StoreAssumeRoleReasonResponseValidationError{}
+
 // Validate checks the field values on GetProviderConfigByDigestRequest with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
