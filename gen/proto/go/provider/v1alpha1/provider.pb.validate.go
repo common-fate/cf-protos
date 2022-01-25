@@ -57,9 +57,13 @@ func (m *StoreAssumeRoleReasonRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Email
+	// no validation rules for RequestorEmail
 
-	// no validation rules for Role
+	// no validation rules for CustomerRoleId
+
+	// no validation rules for CustomerAccountId
+
+	// no validation rules for RoleArn
 
 	// no validation rules for Reason
 
@@ -273,7 +277,6 @@ func (m *GetProviderConfigByDigestRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetProviderConfigByDigestRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -407,7 +410,6 @@ func (m *GetProviderConfigByDigestResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetProviderConfigByDigestResponseMultiError(errors)
 	}
-
 	return nil
 }
 
