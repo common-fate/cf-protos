@@ -16,6 +16,37 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+func (m *StoreAssumeRoleReasonRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "email" // field email = 1
+	enc.AddString(keyName, m.Email)
+
+	keyName = "role" // field role = 2
+	enc.AddString(keyName, m.Role)
+
+	keyName = "reason" // field reason = 3
+	enc.AddString(keyName, m.Reason)
+
+	return nil
+}
+
+func (m *StoreAssumeRoleReasonResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
 func (m *GetProviderConfigByDigestRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
