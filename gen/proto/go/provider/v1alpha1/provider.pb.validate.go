@@ -57,7 +57,7 @@ func (m *StoreAssumeRoleReasonRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for RequestorMail
+	// no validation rules for RequestorEmail
 
 	// no validation rules for CustomerRoleId
 

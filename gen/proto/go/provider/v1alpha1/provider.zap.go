@@ -24,8 +24,8 @@ func (m *StoreAssumeRoleReasonRequest) MarshalLogObject(enc go_uber_org_zap_zapc
 		return nil
 	}
 
-	keyName = "requestor_mail" // field requestor_mail = 1
-	enc.AddString(keyName, m.RequestorMail)
+	keyName = "requestor_email" // field requestor_email = 1
+	enc.AddString(keyName, m.RequestorEmail)
 
 	keyName = "customer_role_id" // field customer_role_id = 2
 	enc.AddString(keyName, m.CustomerRoleId)

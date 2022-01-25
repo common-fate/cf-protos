@@ -11,7 +11,7 @@ service ProviderService {
   rpc StoreAssumeRoleReason(StoreAssumeRoleReasonRequest) returns (StoreAssumeRoleReasonResponse);
 }
 message StoreAssumeRoleReasonRequest {
-  string requestor_mail = 1;
+  string requestor_email = 1;
   string customer_role_id = 2;
   string customer_account_id = 3;
   string role_arn = 4;
