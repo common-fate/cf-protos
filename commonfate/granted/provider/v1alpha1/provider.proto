@@ -8,17 +8,7 @@ import "gconfig/v1alpha1/gconfig.proto";
 // to request information they need about their account structure
 service ProviderService {
   rpc GetProviderConfigByDigest(GetProviderConfigByDigestRequest) returns (GetProviderConfigByDigestResponse);
-  rpc StoreAssumeRoleReason(StoreAssumeRoleReasonRequest) returns (StoreAssumeRoleReasonResponse);
 }
-message StoreAssumeRoleReasonRequest {
-  string requestor_email = 1;
-  string customer_role_id = 2;
-  string customer_account_id = 3;
-  string role_arn = 4;
-  string reason = 5;
-}
-
-message StoreAssumeRoleReasonResponse {}
 
 message GetProviderConfigByDigestRequest {
   bytes sha256_digest = 1;
