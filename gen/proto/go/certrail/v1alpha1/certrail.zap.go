@@ -80,6 +80,12 @@ func (m *IssueSessionCredentialsPayload) MarshalLogObject(enc go_uber_org_zap_za
 	keyName = "user_certificate" // field user_certificate = 2
 	enc.AddByteString(keyName, m.UserCertificate)
 
+	keyName = "user_supplied_reason" // field user_supplied_reason = 3
+	if ov, ok := m.GetXUserSuppliedReason().(*IssueSessionCredentialsPayload_UserSuppliedReason); ok {
+		_ = ov
+		enc.AddString(keyName, ov.UserSuppliedReason)
+	}
+
 	return nil
 }
 
