@@ -37,7 +37,7 @@ message IssueSessionCredentialsPayload {
   // id is the access key ID in AWS
   string id = 1;
   bytes user_certificate = 2;
-  optional string user_supplied_reason = 3;
+  string user_supplied_reason = 3;
 }
 
 message Envelope {

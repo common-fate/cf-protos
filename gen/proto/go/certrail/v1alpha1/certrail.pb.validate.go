@@ -383,12 +383,7 @@ func (m *IssueSessionCredentialsPayload) validate(all bool) error {
 
 	// no validation rules for UserCertificate
 
-	switch m.XUserSuppliedReason.(type) {
-
-	case *IssueSessionCredentialsPayload_UserSuppliedReason:
-		// no validation rules for UserSuppliedReason
-
-	}
+	// no validation rules for UserSuppliedReason
 
 	if len(errors) > 0 {
 		return IssueSessionCredentialsPayloadMultiError(errors)
