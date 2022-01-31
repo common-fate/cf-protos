@@ -5,6 +5,7 @@ package team.v1alpha1;
 import "gconfig/v1alpha1/gconfig.proto";
 
 import "google/protobuf/timestamp.proto";
+
 import "validate/validate.proto";
 
 // TeamService is used to manage Granted teams.
@@ -62,8 +63,10 @@ message Account {
 message Role {
 	string id = 1;
   repeated Account account = 2;
-  bool audited = 3;
+  repeated gconfig.v1alpha1.Rule rule =3;
 }
+
+
 
 message UpdateConfigRequest {
   gconfig.v1alpha1.Config config = 1;

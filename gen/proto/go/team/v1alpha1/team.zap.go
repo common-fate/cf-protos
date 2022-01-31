@@ -150,8 +150,19 @@ func (m *Role) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error
 		return nil
 	}))
 
-	keyName = "audited" // field audited = 3
-	enc.AddBool(keyName, m.Audited)
+	keyName = "rule" // field rule = 3
+	enc.AddArray(keyName, go_uber_org_zap_zapcore.ArrayMarshalerFunc(func(aenc go_uber_org_zap_zapcore.ArrayEncoder) error {
+		for _, rv := range m.Rule {
+			_ = rv
+			if rv != nil {
+				var vv interface{} = rv
+				if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+					aenc.AppendObject(marshaler)
+				}
+			}
+		}
+		return nil
+	}))
 
 	return nil
 }
