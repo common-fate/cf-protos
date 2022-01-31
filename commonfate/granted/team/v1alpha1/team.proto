@@ -5,6 +5,7 @@ package team.v1alpha1;
 import "gconfig/v1alpha1/gconfig.proto";
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
 
 import "validate/validate.proto";
 
@@ -64,6 +65,7 @@ message Role {
 	string id = 1;
   repeated Account account = 2;
   repeated gconfig.v1alpha1.Rule rule =3;
+  google.protobuf.Duration session_duration = 4;
 }
 
 
