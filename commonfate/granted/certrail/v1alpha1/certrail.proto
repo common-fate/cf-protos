@@ -21,7 +21,7 @@ message ApproveConfigPayload {
 
 // a request contains the current expected params of the request
 // before approving, the admin can review whether the user still has access to the role under the same conditions it was requested
-message RoleAccessRequest {
+message RoleAccessRequestPayload {
   string role = 1;
   string provider = 2;
   // must be an aws account id
@@ -32,7 +32,19 @@ message RoleAccessRequest {
   // id is a generated id to help lookups
   string id = 7;
 }
+message ApprovedRoleAccessRequestPayload {
+  string role_access_request = 1;
+  bytes approved_by = 2;
+}
 
+message DeclinedRoleAccessRequestPayload {
+  string role_access_request = 1;
+  bytes declined_by = 2;
+}
+message CancelledRoleAccessRequestPayload {
+  string role_access_request = 1;
+  bytes cancelled_by = 2;
+}
 message IssueCertificatePayload {
   bytes certificate = 1;
 }
@@ -66,7 +78,10 @@ message Payload {
     IssueCertificatePayload issue_certificate = 3;
     RevokeCertificatePayload revoke_certificate = 4;
     IssueSessionCredentialsPayload issue_session_credentials = 5;
-    RoleAccessRequest role_access_request = 6;
+    RoleAccessRequestPayload role_access_request = 6;
+    ApprovedRoleAccessRequestPayload approved_role_access_request_payload = 7;
+    DeclinedRoleAccessRequestPayload declined_role_access_request_payload = 8;
+    CancelledRoleAccessRequestPayload cancelled_role_access_request_payload = 9;
   }
 }
 

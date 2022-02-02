@@ -7,9 +7,9 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
+	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	_ "google.golang.org/protobuf/types/known/durationpb"
-	_ "google.golang.org/protobuf/types/known/timestamppb"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -36,7 +36,7 @@ func (m *ApproveConfigPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 	return nil
 }
 
-func (m *RoleAccessRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *RoleAccessRequestPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -66,6 +66,57 @@ func (m *RoleAccessRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectE
 
 	keyName = "id" // field id = 7
 	enc.AddString(keyName, m.Id)
+
+	return nil
+}
+
+func (m *ApprovedRoleAccessRequestPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "role_access_request" // field role_access_request = 1
+	enc.AddString(keyName, m.RoleAccessRequest)
+
+	keyName = "approved_by" // field approved_by = 2
+	enc.AddByteString(keyName, m.ApprovedBy)
+
+	return nil
+}
+
+func (m *DeclinedRoleAccessRequestPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "role_access_request" // field role_access_request = 1
+	enc.AddString(keyName, m.RoleAccessRequest)
+
+	keyName = "declined_by" // field declined_by = 2
+	enc.AddByteString(keyName, m.DeclinedBy)
+
+	return nil
+}
+
+func (m *CancelledRoleAccessRequestPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "role_access_request" // field role_access_request = 1
+	enc.AddString(keyName, m.RoleAccessRequest)
+
+	keyName = "cancelled_by" // field cancelled_by = 2
+	enc.AddByteString(keyName, m.CancelledBy)
 
 	return nil
 }
@@ -205,6 +256,39 @@ func (m *Payload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) er
 		_ = ov
 		if ov.RoleAccessRequest != nil {
 			var vv interface{} = ov.RoleAccessRequest
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
+	keyName = "approved_role_access_request_payload" // field approved_role_access_request_payload = 7
+	if ov, ok := m.GetContents().(*Payload_ApprovedRoleAccessRequestPayload); ok {
+		_ = ov
+		if ov.ApprovedRoleAccessRequestPayload != nil {
+			var vv interface{} = ov.ApprovedRoleAccessRequestPayload
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
+	keyName = "declined_role_access_request_payload" // field declined_role_access_request_payload = 8
+	if ov, ok := m.GetContents().(*Payload_DeclinedRoleAccessRequestPayload); ok {
+		_ = ov
+		if ov.DeclinedRoleAccessRequestPayload != nil {
+			var vv interface{} = ov.DeclinedRoleAccessRequestPayload
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
+	keyName = "cancelled_role_access_request_payload" // field cancelled_role_access_request_payload = 9
+	if ov, ok := m.GetContents().(*Payload_CancelledRoleAccessRequestPayload); ok {
+		_ = ov
+		if ov.CancelledRoleAccessRequestPayload != nil {
+			var vv interface{} = ov.CancelledRoleAccessRequestPayload
 			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
 				enc.AddObject(keyName, marshaler)
 			}

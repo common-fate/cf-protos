@@ -150,22 +150,22 @@ var _ interface {
 	ErrorName() string
 } = ApproveConfigPayloadValidationError{}
 
-// Validate checks the field values on RoleAccessRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *RoleAccessRequest) Validate() error {
+// Validate checks the field values on RoleAccessRequestPayload with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RoleAccessRequestPayload) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on RoleAccessRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on RoleAccessRequestPayload with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// RoleAccessRequestMultiError, or nil if none found.
-func (m *RoleAccessRequest) ValidateAll() error {
+// RoleAccessRequestPayloadMultiError, or nil if none found.
+func (m *RoleAccessRequestPayload) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *RoleAccessRequest) validate(all bool) error {
+func (m *RoleAccessRequestPayload) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -177,7 +177,7 @@ func (m *RoleAccessRequest) validate(all bool) error {
 	// no validation rules for Provider
 
 	if utf8.RuneCountInString(m.GetAccount()) != 12 {
-		err := RoleAccessRequestValidationError{
+		err := RoleAccessRequestPayloadValidationError{
 			field:  "Account",
 			reason: "value length must be 12 runes",
 		}
@@ -192,7 +192,7 @@ func (m *RoleAccessRequest) validate(all bool) error {
 		switch v := interface{}(m.GetSessionDuration()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, RoleAccessRequestValidationError{
+				errors = append(errors, RoleAccessRequestPayloadValidationError{
 					field:  "SessionDuration",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -200,7 +200,7 @@ func (m *RoleAccessRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, RoleAccessRequestValidationError{
+				errors = append(errors, RoleAccessRequestPayloadValidationError{
 					field:  "SessionDuration",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -209,7 +209,7 @@ func (m *RoleAccessRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetSessionDuration()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return RoleAccessRequestValidationError{
+			return RoleAccessRequestPayloadValidationError{
 				field:  "SessionDuration",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -224,19 +224,19 @@ func (m *RoleAccessRequest) validate(all bool) error {
 	// no validation rules for Id
 
 	if len(errors) > 0 {
-		return RoleAccessRequestMultiError(errors)
+		return RoleAccessRequestPayloadMultiError(errors)
 	}
 
 	return nil
 }
 
-// RoleAccessRequestMultiError is an error wrapping multiple validation errors
-// returned by RoleAccessRequest.ValidateAll() if the designated constraints
-// aren't met.
-type RoleAccessRequestMultiError []error
+// RoleAccessRequestPayloadMultiError is an error wrapping multiple validation
+// errors returned by RoleAccessRequestPayload.ValidateAll() if the designated
+// constraints aren't met.
+type RoleAccessRequestPayloadMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m RoleAccessRequestMultiError) Error() string {
+func (m RoleAccessRequestPayloadMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -245,11 +245,11 @@ func (m RoleAccessRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m RoleAccessRequestMultiError) AllErrors() []error { return m }
+func (m RoleAccessRequestPayloadMultiError) AllErrors() []error { return m }
 
-// RoleAccessRequestValidationError is the validation error returned by
-// RoleAccessRequest.Validate if the designated constraints aren't met.
-type RoleAccessRequestValidationError struct {
+// RoleAccessRequestPayloadValidationError is the validation error returned by
+// RoleAccessRequestPayload.Validate if the designated constraints aren't met.
+type RoleAccessRequestPayloadValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -257,24 +257,24 @@ type RoleAccessRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e RoleAccessRequestValidationError) Field() string { return e.field }
+func (e RoleAccessRequestPayloadValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e RoleAccessRequestValidationError) Reason() string { return e.reason }
+func (e RoleAccessRequestPayloadValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e RoleAccessRequestValidationError) Cause() error { return e.cause }
+func (e RoleAccessRequestPayloadValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e RoleAccessRequestValidationError) Key() bool { return e.key }
+func (e RoleAccessRequestPayloadValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e RoleAccessRequestValidationError) ErrorName() string {
-	return "RoleAccessRequestValidationError"
+func (e RoleAccessRequestPayloadValidationError) ErrorName() string {
+	return "RoleAccessRequestPayloadValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e RoleAccessRequestValidationError) Error() string {
+func (e RoleAccessRequestPayloadValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -286,14 +286,14 @@ func (e RoleAccessRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sRoleAccessRequest.%s: %s%s",
+		"invalid %sRoleAccessRequestPayload.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = RoleAccessRequestValidationError{}
+var _ error = RoleAccessRequestPayloadValidationError{}
 
 var _ interface {
 	Field() string
@@ -301,7 +301,334 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = RoleAccessRequestValidationError{}
+} = RoleAccessRequestPayloadValidationError{}
+
+// Validate checks the field values on ApprovedRoleAccessRequestPayload with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ApprovedRoleAccessRequestPayload) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ApprovedRoleAccessRequestPayload with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ApprovedRoleAccessRequestPayloadMultiError, or nil if none found.
+func (m *ApprovedRoleAccessRequestPayload) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ApprovedRoleAccessRequestPayload) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RoleAccessRequest
+
+	// no validation rules for ApprovedBy
+
+	if len(errors) > 0 {
+		return ApprovedRoleAccessRequestPayloadMultiError(errors)
+	}
+
+	return nil
+}
+
+// ApprovedRoleAccessRequestPayloadMultiError is an error wrapping multiple
+// validation errors returned by
+// ApprovedRoleAccessRequestPayload.ValidateAll() if the designated
+// constraints aren't met.
+type ApprovedRoleAccessRequestPayloadMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ApprovedRoleAccessRequestPayloadMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ApprovedRoleAccessRequestPayloadMultiError) AllErrors() []error { return m }
+
+// ApprovedRoleAccessRequestPayloadValidationError is the validation error
+// returned by ApprovedRoleAccessRequestPayload.Validate if the designated
+// constraints aren't met.
+type ApprovedRoleAccessRequestPayloadValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ApprovedRoleAccessRequestPayloadValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ApprovedRoleAccessRequestPayloadValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ApprovedRoleAccessRequestPayloadValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ApprovedRoleAccessRequestPayloadValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ApprovedRoleAccessRequestPayloadValidationError) ErrorName() string {
+	return "ApprovedRoleAccessRequestPayloadValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ApprovedRoleAccessRequestPayloadValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sApprovedRoleAccessRequestPayload.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ApprovedRoleAccessRequestPayloadValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ApprovedRoleAccessRequestPayloadValidationError{}
+
+// Validate checks the field values on DeclinedRoleAccessRequestPayload with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *DeclinedRoleAccessRequestPayload) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeclinedRoleAccessRequestPayload with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// DeclinedRoleAccessRequestPayloadMultiError, or nil if none found.
+func (m *DeclinedRoleAccessRequestPayload) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeclinedRoleAccessRequestPayload) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RoleAccessRequest
+
+	// no validation rules for DeclinedBy
+
+	if len(errors) > 0 {
+		return DeclinedRoleAccessRequestPayloadMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeclinedRoleAccessRequestPayloadMultiError is an error wrapping multiple
+// validation errors returned by
+// DeclinedRoleAccessRequestPayload.ValidateAll() if the designated
+// constraints aren't met.
+type DeclinedRoleAccessRequestPayloadMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeclinedRoleAccessRequestPayloadMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeclinedRoleAccessRequestPayloadMultiError) AllErrors() []error { return m }
+
+// DeclinedRoleAccessRequestPayloadValidationError is the validation error
+// returned by DeclinedRoleAccessRequestPayload.Validate if the designated
+// constraints aren't met.
+type DeclinedRoleAccessRequestPayloadValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeclinedRoleAccessRequestPayloadValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeclinedRoleAccessRequestPayloadValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeclinedRoleAccessRequestPayloadValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeclinedRoleAccessRequestPayloadValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeclinedRoleAccessRequestPayloadValidationError) ErrorName() string {
+	return "DeclinedRoleAccessRequestPayloadValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeclinedRoleAccessRequestPayloadValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeclinedRoleAccessRequestPayload.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeclinedRoleAccessRequestPayloadValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeclinedRoleAccessRequestPayloadValidationError{}
+
+// Validate checks the field values on CancelledRoleAccessRequestPayload with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *CancelledRoleAccessRequestPayload) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CancelledRoleAccessRequestPayload
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// CancelledRoleAccessRequestPayloadMultiError, or nil if none found.
+func (m *CancelledRoleAccessRequestPayload) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CancelledRoleAccessRequestPayload) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RoleAccessRequest
+
+	// no validation rules for CancelledBy
+
+	if len(errors) > 0 {
+		return CancelledRoleAccessRequestPayloadMultiError(errors)
+	}
+
+	return nil
+}
+
+// CancelledRoleAccessRequestPayloadMultiError is an error wrapping multiple
+// validation errors returned by
+// CancelledRoleAccessRequestPayload.ValidateAll() if the designated
+// constraints aren't met.
+type CancelledRoleAccessRequestPayloadMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CancelledRoleAccessRequestPayloadMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CancelledRoleAccessRequestPayloadMultiError) AllErrors() []error { return m }
+
+// CancelledRoleAccessRequestPayloadValidationError is the validation error
+// returned by CancelledRoleAccessRequestPayload.Validate if the designated
+// constraints aren't met.
+type CancelledRoleAccessRequestPayloadValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CancelledRoleAccessRequestPayloadValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CancelledRoleAccessRequestPayloadValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CancelledRoleAccessRequestPayloadValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CancelledRoleAccessRequestPayloadValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CancelledRoleAccessRequestPayloadValidationError) ErrorName() string {
+	return "CancelledRoleAccessRequestPayloadValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CancelledRoleAccessRequestPayloadValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCancelledRoleAccessRequestPayload.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CancelledRoleAccessRequestPayloadValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CancelledRoleAccessRequestPayloadValidationError{}
 
 // Validate checks the field values on IssueCertificatePayload with the rules
 // defined in the proto definition for this message. If any rules are
@@ -962,6 +1289,99 @@ func (m *Payload) validate(all bool) error {
 			if err := v.Validate(); err != nil {
 				return PayloadValidationError{
 					field:  "RoleAccessRequest",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *Payload_ApprovedRoleAccessRequestPayload:
+
+		if all {
+			switch v := interface{}(m.GetApprovedRoleAccessRequestPayload()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, PayloadValidationError{
+						field:  "ApprovedRoleAccessRequestPayload",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, PayloadValidationError{
+						field:  "ApprovedRoleAccessRequestPayload",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetApprovedRoleAccessRequestPayload()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PayloadValidationError{
+					field:  "ApprovedRoleAccessRequestPayload",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *Payload_DeclinedRoleAccessRequestPayload:
+
+		if all {
+			switch v := interface{}(m.GetDeclinedRoleAccessRequestPayload()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, PayloadValidationError{
+						field:  "DeclinedRoleAccessRequestPayload",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, PayloadValidationError{
+						field:  "DeclinedRoleAccessRequestPayload",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetDeclinedRoleAccessRequestPayload()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PayloadValidationError{
+					field:  "DeclinedRoleAccessRequestPayload",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *Payload_CancelledRoleAccessRequestPayload:
+
+		if all {
+			switch v := interface{}(m.GetCancelledRoleAccessRequestPayload()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, PayloadValidationError{
+						field:  "CancelledRoleAccessRequestPayload",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, PayloadValidationError{
+						field:  "CancelledRoleAccessRequestPayload",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetCancelledRoleAccessRequestPayload()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PayloadValidationError{
+					field:  "CancelledRoleAccessRequestPayload",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
