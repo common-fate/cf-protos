@@ -9,6 +9,7 @@ import (
 	proto "github.com/golang/protobuf/proto"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
+	_ "google.golang.org/protobuf/types/known/durationpb"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -31,6 +32,37 @@ func (m *ApproveConfigPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 
 	keyName = "approved_by" // field approved_by = 2
 	enc.AddByteString(keyName, m.ApprovedBy)
+
+	return nil
+}
+
+func (m *RoleAccessRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "role" // field role = 1
+	enc.AddString(keyName, m.Role)
+
+	keyName = "provider" // field provider = 2
+	enc.AddString(keyName, m.Provider)
+
+	keyName = "account" // field account = 3
+	enc.AddString(keyName, m.Account)
+
+	keyName = "session_duration" // field session_duration = 4
+	if d, err := github_com_golang_protobuf_ptypes.Duration(m.SessionDuration); err == nil {
+		enc.AddDuration(keyName, d)
+	}
+
+	keyName = "reason" // field reason = 5
+	enc.AddString(keyName, m.Reason)
+
+	keyName = "requested_by" // field requested_by = 6
+	enc.AddByteString(keyName, m.RequestedBy)
 
 	return nil
 }
@@ -159,6 +191,17 @@ func (m *Payload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) er
 		_ = ov
 		if ov.IssueSessionCredentials != nil {
 			var vv interface{} = ov.IssueSessionCredentials
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
+	keyName = "role_access_request" // field role_access_request = 6
+	if ov, ok := m.GetContents().(*Payload_RoleAccessRequest); ok {
+		_ = ov
+		if ov.RoleAccessRequest != nil {
+			var vv interface{} = ov.RoleAccessRequest
 			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
 				enc.AddObject(keyName, marshaler)
 			}
