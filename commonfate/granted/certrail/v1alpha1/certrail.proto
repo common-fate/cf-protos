@@ -4,7 +4,7 @@ package certrail.v1alpha1;
 
 import "google/protobuf/timestamp.proto";
 import "validate/validate.proto";
-
+import "google/protobuf/duration.proto";
 // CertrailService is API to the Granted transparency log.
 service CertrailService {
   // Store a payload in the transparency log
@@ -17,6 +17,16 @@ message ApproveConfigPayload {
   bytes config_sha256 = 1 [(validate.rules).bytes.len = 32];
   // the certificate of the approver
   bytes approved_by = 2;
+}
+
+// a request contains the current expected params of the request
+// before approving, the admin can review whether the user still has access to the role under the same conditions it was requested
+message RoleAccessRequest {
+  string role = 1;
+  string provider = 2;
+  google.protobuf.Duration session_duration = 3;
+  string reason = 4;
+  bytes requested_by = 5;
 }
 
 message IssueCertificatePayload {
@@ -52,6 +62,7 @@ message Payload {
     IssueCertificatePayload issue_certificate = 3;
     RevokeCertificatePayload revoke_certificate = 4;
     IssueSessionCredentialsPayload issue_session_credentials = 5;
+    RoleAccessRequest role_access_request = 6;
   }
 }
 
