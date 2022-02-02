@@ -24,9 +24,11 @@ message ApproveConfigPayload {
 message RoleAccessRequest {
   string role = 1;
   string provider = 2;
-  google.protobuf.Duration session_duration = 3;
-  string reason = 4;
-  bytes requested_by = 5;
+  // must be an aws account id
+  string account =3 [(validate.rules).string.len = 12];
+  google.protobuf.Duration session_duration = 4;
+  string reason = 5;
+  bytes requested_by = 6;
 }
 
 message IssueCertificatePayload {

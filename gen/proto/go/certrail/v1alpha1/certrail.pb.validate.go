@@ -176,6 +176,18 @@ func (m *RoleAccessRequest) validate(all bool) error {
 
 	// no validation rules for Provider
 
+	if utf8.RuneCountInString(m.GetAccount()) != 12 {
+		err := RoleAccessRequestValidationError{
+			field:  "Account",
+			reason: "value length must be 12 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+
+	}
+
 	if all {
 		switch v := interface{}(m.GetSessionDuration()).(type) {
 		case interface{ ValidateAll() error }:
