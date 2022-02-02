@@ -79,9 +79,9 @@ message Payload {
     RevokeCertificatePayload revoke_certificate = 4;
     IssueSessionCredentialsPayload issue_session_credentials = 5;
     RoleAccessRequestPayload role_access_request = 6;
-    ApprovedRoleAccessRequestPayload approved_role_access_request_payload = 7;
-    DeclinedRoleAccessRequestPayload declined_role_access_request_payload = 8;
-    CancelledRoleAccessRequestPayload cancelled_role_access_request_payload = 9;
+    ApprovedRoleAccessRequestPayload approved_role_access_request = 7;
+    DeclinedRoleAccessRequestPayload declined_role_access_request = 8;
+    CancelledRoleAccessRequestPayload cancelled_role_access_request = 9;
   }
 }
 

@@ -1295,14 +1295,14 @@ func (m *Payload) validate(all bool) error {
 			}
 		}
 
-	case *Payload_ApprovedRoleAccessRequestPayload:
+	case *Payload_ApprovedRoleAccessRequest:
 
 		if all {
-			switch v := interface{}(m.GetApprovedRoleAccessRequestPayload()).(type) {
+			switch v := interface{}(m.GetApprovedRoleAccessRequest()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, PayloadValidationError{
-						field:  "ApprovedRoleAccessRequestPayload",
+						field:  "ApprovedRoleAccessRequest",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1310,30 +1310,30 @@ func (m *Payload) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, PayloadValidationError{
-						field:  "ApprovedRoleAccessRequestPayload",
+						field:  "ApprovedRoleAccessRequest",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			}
-		} else if v, ok := interface{}(m.GetApprovedRoleAccessRequestPayload()).(interface{ Validate() error }); ok {
+		} else if v, ok := interface{}(m.GetApprovedRoleAccessRequest()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return PayloadValidationError{
-					field:  "ApprovedRoleAccessRequestPayload",
+					field:  "ApprovedRoleAccessRequest",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
 			}
 		}
 
-	case *Payload_DeclinedRoleAccessRequestPayload:
+	case *Payload_DeclinedRoleAccessRequest:
 
 		if all {
-			switch v := interface{}(m.GetDeclinedRoleAccessRequestPayload()).(type) {
+			switch v := interface{}(m.GetDeclinedRoleAccessRequest()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, PayloadValidationError{
-						field:  "DeclinedRoleAccessRequestPayload",
+						field:  "DeclinedRoleAccessRequest",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1341,30 +1341,30 @@ func (m *Payload) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, PayloadValidationError{
-						field:  "DeclinedRoleAccessRequestPayload",
+						field:  "DeclinedRoleAccessRequest",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			}
-		} else if v, ok := interface{}(m.GetDeclinedRoleAccessRequestPayload()).(interface{ Validate() error }); ok {
+		} else if v, ok := interface{}(m.GetDeclinedRoleAccessRequest()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return PayloadValidationError{
-					field:  "DeclinedRoleAccessRequestPayload",
+					field:  "DeclinedRoleAccessRequest",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
 			}
 		}
 
-	case *Payload_CancelledRoleAccessRequestPayload:
+	case *Payload_CancelledRoleAccessRequest:
 
 		if all {
-			switch v := interface{}(m.GetCancelledRoleAccessRequestPayload()).(type) {
+			switch v := interface{}(m.GetCancelledRoleAccessRequest()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, PayloadValidationError{
-						field:  "CancelledRoleAccessRequestPayload",
+						field:  "CancelledRoleAccessRequest",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1372,16 +1372,16 @@ func (m *Payload) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, PayloadValidationError{
-						field:  "CancelledRoleAccessRequestPayload",
+						field:  "CancelledRoleAccessRequest",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			}
-		} else if v, ok := interface{}(m.GetCancelledRoleAccessRequestPayload()).(interface{ Validate() error }); ok {
+		} else if v, ok := interface{}(m.GetCancelledRoleAccessRequest()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return PayloadValidationError{
-					field:  "CancelledRoleAccessRequestPayload",
+					field:  "CancelledRoleAccessRequest",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}

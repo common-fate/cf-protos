@@ -7,9 +7,9 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
+	_ "google.golang.org/protobuf/types/known/durationpb"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
-	_ "google.golang.org/protobuf/types/known/durationpb"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -262,33 +262,33 @@ func (m *Payload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) er
 		}
 	}
 
-	keyName = "approved_role_access_request_payload" // field approved_role_access_request_payload = 7
-	if ov, ok := m.GetContents().(*Payload_ApprovedRoleAccessRequestPayload); ok {
+	keyName = "approved_role_access_request" // field approved_role_access_request = 7
+	if ov, ok := m.GetContents().(*Payload_ApprovedRoleAccessRequest); ok {
 		_ = ov
-		if ov.ApprovedRoleAccessRequestPayload != nil {
-			var vv interface{} = ov.ApprovedRoleAccessRequestPayload
+		if ov.ApprovedRoleAccessRequest != nil {
+			var vv interface{} = ov.ApprovedRoleAccessRequest
 			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
 				enc.AddObject(keyName, marshaler)
 			}
 		}
 	}
 
-	keyName = "declined_role_access_request_payload" // field declined_role_access_request_payload = 8
-	if ov, ok := m.GetContents().(*Payload_DeclinedRoleAccessRequestPayload); ok {
+	keyName = "declined_role_access_request" // field declined_role_access_request = 8
+	if ov, ok := m.GetContents().(*Payload_DeclinedRoleAccessRequest); ok {
 		_ = ov
-		if ov.DeclinedRoleAccessRequestPayload != nil {
-			var vv interface{} = ov.DeclinedRoleAccessRequestPayload
+		if ov.DeclinedRoleAccessRequest != nil {
+			var vv interface{} = ov.DeclinedRoleAccessRequest
 			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
 				enc.AddObject(keyName, marshaler)
 			}
 		}
 	}
 
-	keyName = "cancelled_role_access_request_payload" // field cancelled_role_access_request_payload = 9
-	if ov, ok := m.GetContents().(*Payload_CancelledRoleAccessRequestPayload); ok {
+	keyName = "cancelled_role_access_request" // field cancelled_role_access_request = 9
+	if ov, ok := m.GetContents().(*Payload_CancelledRoleAccessRequest); ok {
 		_ = ov
-		if ov.CancelledRoleAccessRequestPayload != nil {
-			var vv interface{} = ov.CancelledRoleAccessRequestPayload
+		if ov.CancelledRoleAccessRequest != nil {
+			var vv interface{} = ov.CancelledRoleAccessRequest
 			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
 				enc.AddObject(keyName, marshaler)
 			}
