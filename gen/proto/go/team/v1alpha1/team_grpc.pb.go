@@ -18,6 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TeamServiceClient interface {
+	ListRoleAccessRequests(ctx context.Context, in *ListRoleAccessRequestsRequest, opts ...grpc.CallOption) (*ListRoleAccessRequestsResponse, error)
 	ListMembers(ctx context.Context, in *ListMembersRequest, opts ...grpc.CallOption) (*ListMembersResponse, error)
 	ListRoles(ctx context.Context, in *ListRolesRequest, opts ...grpc.CallOption) (*ListRolesResponse, error)
 	UpdateConfig(ctx context.Context, in *UpdateConfigRequest, opts ...grpc.CallOption) (*UpdateConfigResponse, error)
@@ -49,6 +50,15 @@ type teamServiceClient struct {
 
 func NewTeamServiceClient(cc grpc.ClientConnInterface) TeamServiceClient {
 	return &teamServiceClient{cc}
+}
+
+func (c *teamServiceClient) ListRoleAccessRequests(ctx context.Context, in *ListRoleAccessRequestsRequest, opts ...grpc.CallOption) (*ListRoleAccessRequestsResponse, error) {
+	out := new(ListRoleAccessRequestsResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/ListRoleAccessRequests", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *teamServiceClient) ListMembers(ctx context.Context, in *ListMembersRequest, opts ...grpc.CallOption) (*ListMembersResponse, error) {
@@ -172,6 +182,7 @@ func (c *teamServiceClient) DeleteAccessHandler(ctx context.Context, in *DeleteA
 // All implementations should embed UnimplementedTeamServiceServer
 // for forward compatibility
 type TeamServiceServer interface {
+	ListRoleAccessRequests(context.Context, *ListRoleAccessRequestsRequest) (*ListRoleAccessRequestsResponse, error)
 	ListMembers(context.Context, *ListMembersRequest) (*ListMembersResponse, error)
 	ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error)
 	UpdateConfig(context.Context, *UpdateConfigRequest) (*UpdateConfigResponse, error)
@@ -201,6 +212,9 @@ type TeamServiceServer interface {
 type UnimplementedTeamServiceServer struct {
 }
 
+func (UnimplementedTeamServiceServer) ListRoleAccessRequests(context.Context, *ListRoleAccessRequestsRequest) (*ListRoleAccessRequestsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListRoleAccessRequests not implemented")
+}
 func (UnimplementedTeamServiceServer) ListMembers(context.Context, *ListMembersRequest) (*ListMembersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListMembers not implemented")
 }
@@ -250,6 +264,24 @@ type UnsafeTeamServiceServer interface {
 
 func RegisterTeamServiceServer(s grpc.ServiceRegistrar, srv TeamServiceServer) {
 	s.RegisterService(&TeamService_ServiceDesc, srv)
+}
+
+func _TeamService_ListRoleAccessRequests_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRoleAccessRequestsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).ListRoleAccessRequests(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/ListRoleAccessRequests",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).ListRoleAccessRequests(ctx, req.(*ListRoleAccessRequestsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _TeamService_ListMembers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -493,6 +525,10 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "team.v1alpha1.TeamService",
 	HandlerType: (*TeamServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListRoleAccessRequests",
+			Handler:    _TeamService_ListRoleAccessRequests_Handler,
+		},
 		{
 			MethodName: "ListMembers",
 			Handler:    _TeamService_ListMembers_Handler,

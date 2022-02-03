@@ -3,7 +3,7 @@ syntax = "proto3";
 package team.v1alpha1;
 
 import "gconfig/v1alpha1/gconfig.proto";
-
+import "certrail/v1alpha1/certrail.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
 
@@ -11,6 +11,7 @@ import "validate/validate.proto";
 
 // TeamService is used to manage Granted teams.
 service TeamService {
+  rpc ListRoleAccessRequests(ListRoleAccessRequestsRequest) returns (ListRoleAccessRequestsResponse);
   rpc ListMembers(ListMembersRequest) returns (ListMembersResponse);
   rpc ListRoles(ListRolesRequest) returns (ListRolesResponse);
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse);
@@ -38,6 +39,20 @@ service TeamService {
   // DeleteAccessHandler deletes an Access Handler from a provider
   rpc DeleteAccessHandler(DeleteAccessHandlerRequest) returns (DeleteAccessHandlerResponse);
 }
+message ListRoleAccessRequestsRequest {
+  optional bool include_expired = 1;
+}
+message ListRoleAccessRequestsResponse {
+  repeated RoleAccessRequest requests = 1;
+}
+
+// this will contain all of the related decisions if they exist
+message RoleAccessRequest {
+   certrail.v1alpha1.RoleAccessRequestPayload request = 1;
+   string status = 2;
+   google.protobuf.Timestamp timestamp = 3;
+}
+
 
 message ListMembersRequest {}
 
