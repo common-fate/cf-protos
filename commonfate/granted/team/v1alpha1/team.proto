@@ -45,12 +45,17 @@ message ListRoleAccessRequestsRequest {
 message ListRoleAccessRequestsResponse {
   repeated RoleAccessRequest requests = 1;
 }
-
+enum RoleAccessRequestStatus {
+  PENDING = 0;
+  APPROVED = 2;
+  CANCELLED = 3;
+  DECLINED = 4;
+}
 // this will contain all of the related decisions if they exist
 message RoleAccessRequest {
-   certrail.v1alpha1.RoleAccessRequestPayload request = 1;
-   string status = 2;
-   google.protobuf.Timestamp timestamp = 3;
+  certrail.v1alpha1.RoleAccessRequestPayload request = 1;
+  RoleAccessRequestStatus status = 2;
+  google.protobuf.Timestamp timestamp = 3;
 }
 
 
