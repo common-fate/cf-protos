@@ -150,22 +150,23 @@ var _ interface {
 	ErrorName() string
 } = ApproveConfigPayloadValidationError{}
 
-// Validate checks the field values on GetEntryByMerkleHashRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetEntryByMerkleHashRequest) Validate() error {
+// Validate checks the field values on GetEntryIndexByMerkleHashRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetEntryIndexByMerkleHashRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetEntryByMerkleHashRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// GetEntryByMerkleHashRequestMultiError, or nil if none found.
-func (m *GetEntryByMerkleHashRequest) ValidateAll() error {
+// ValidateAll checks the field values on GetEntryIndexByMerkleHashRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetEntryIndexByMerkleHashRequestMultiError, or nil if none found.
+func (m *GetEntryIndexByMerkleHashRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetEntryByMerkleHashRequest) validate(all bool) error {
+func (m *GetEntryIndexByMerkleHashRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -175,19 +176,20 @@ func (m *GetEntryByMerkleHashRequest) validate(all bool) error {
 	// no validation rules for MerkleHash
 
 	if len(errors) > 0 {
-		return GetEntryByMerkleHashRequestMultiError(errors)
+		return GetEntryIndexByMerkleHashRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetEntryByMerkleHashRequestMultiError is an error wrapping multiple
-// validation errors returned by GetEntryByMerkleHashRequest.ValidateAll() if
-// the designated constraints aren't met.
-type GetEntryByMerkleHashRequestMultiError []error
+// GetEntryIndexByMerkleHashRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetEntryIndexByMerkleHashRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetEntryIndexByMerkleHashRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetEntryByMerkleHashRequestMultiError) Error() string {
+func (m GetEntryIndexByMerkleHashRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -196,12 +198,12 @@ func (m GetEntryByMerkleHashRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetEntryByMerkleHashRequestMultiError) AllErrors() []error { return m }
+func (m GetEntryIndexByMerkleHashRequestMultiError) AllErrors() []error { return m }
 
-// GetEntryByMerkleHashRequestValidationError is the validation error returned
-// by GetEntryByMerkleHashRequest.Validate if the designated constraints
-// aren't met.
-type GetEntryByMerkleHashRequestValidationError struct {
+// GetEntryIndexByMerkleHashRequestValidationError is the validation error
+// returned by GetEntryIndexByMerkleHashRequest.Validate if the designated
+// constraints aren't met.
+type GetEntryIndexByMerkleHashRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -209,24 +211,24 @@ type GetEntryByMerkleHashRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetEntryByMerkleHashRequestValidationError) Field() string { return e.field }
+func (e GetEntryIndexByMerkleHashRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetEntryByMerkleHashRequestValidationError) Reason() string { return e.reason }
+func (e GetEntryIndexByMerkleHashRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetEntryByMerkleHashRequestValidationError) Cause() error { return e.cause }
+func (e GetEntryIndexByMerkleHashRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetEntryByMerkleHashRequestValidationError) Key() bool { return e.key }
+func (e GetEntryIndexByMerkleHashRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetEntryByMerkleHashRequestValidationError) ErrorName() string {
-	return "GetEntryByMerkleHashRequestValidationError"
+func (e GetEntryIndexByMerkleHashRequestValidationError) ErrorName() string {
+	return "GetEntryIndexByMerkleHashRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetEntryByMerkleHashRequestValidationError) Error() string {
+func (e GetEntryIndexByMerkleHashRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -238,14 +240,14 @@ func (e GetEntryByMerkleHashRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetEntryByMerkleHashRequest.%s: %s%s",
+		"invalid %sGetEntryIndexByMerkleHashRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetEntryByMerkleHashRequestValidationError{}
+var _ error = GetEntryIndexByMerkleHashRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -253,73 +255,48 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetEntryByMerkleHashRequestValidationError{}
+} = GetEntryIndexByMerkleHashRequestValidationError{}
 
-// Validate checks the field values on GetEntryByMerkleHashResponse with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetEntryByMerkleHashResponse) Validate() error {
+// Validate checks the field values on GetEntryIndexByMerkleHashResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetEntryIndexByMerkleHashResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetEntryByMerkleHashResponse with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// GetEntryByMerkleHashResponseMultiError, or nil if none found.
-func (m *GetEntryByMerkleHashResponse) ValidateAll() error {
+// ValidateAll checks the field values on GetEntryIndexByMerkleHashResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetEntryIndexByMerkleHashResponseMultiError, or nil if none found.
+func (m *GetEntryIndexByMerkleHashResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetEntryByMerkleHashResponse) validate(all bool) error {
+func (m *GetEntryIndexByMerkleHashResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetEnvelope()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetEntryByMerkleHashResponseValidationError{
-					field:  "Envelope",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, GetEntryByMerkleHashResponseValidationError{
-					field:  "Envelope",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetEnvelope()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GetEntryByMerkleHashResponseValidationError{
-				field:  "Envelope",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for Index
 
 	if len(errors) > 0 {
-		return GetEntryByMerkleHashResponseMultiError(errors)
+		return GetEntryIndexByMerkleHashResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetEntryByMerkleHashResponseMultiError is an error wrapping multiple
-// validation errors returned by GetEntryByMerkleHashResponse.ValidateAll() if
-// the designated constraints aren't met.
-type GetEntryByMerkleHashResponseMultiError []error
+// GetEntryIndexByMerkleHashResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetEntryIndexByMerkleHashResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetEntryIndexByMerkleHashResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetEntryByMerkleHashResponseMultiError) Error() string {
+func (m GetEntryIndexByMerkleHashResponseMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -328,12 +305,12 @@ func (m GetEntryByMerkleHashResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetEntryByMerkleHashResponseMultiError) AllErrors() []error { return m }
+func (m GetEntryIndexByMerkleHashResponseMultiError) AllErrors() []error { return m }
 
-// GetEntryByMerkleHashResponseValidationError is the validation error returned
-// by GetEntryByMerkleHashResponse.Validate if the designated constraints
-// aren't met.
-type GetEntryByMerkleHashResponseValidationError struct {
+// GetEntryIndexByMerkleHashResponseValidationError is the validation error
+// returned by GetEntryIndexByMerkleHashResponse.Validate if the designated
+// constraints aren't met.
+type GetEntryIndexByMerkleHashResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -341,24 +318,24 @@ type GetEntryByMerkleHashResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetEntryByMerkleHashResponseValidationError) Field() string { return e.field }
+func (e GetEntryIndexByMerkleHashResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetEntryByMerkleHashResponseValidationError) Reason() string { return e.reason }
+func (e GetEntryIndexByMerkleHashResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetEntryByMerkleHashResponseValidationError) Cause() error { return e.cause }
+func (e GetEntryIndexByMerkleHashResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetEntryByMerkleHashResponseValidationError) Key() bool { return e.key }
+func (e GetEntryIndexByMerkleHashResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetEntryByMerkleHashResponseValidationError) ErrorName() string {
-	return "GetEntryByMerkleHashResponseValidationError"
+func (e GetEntryIndexByMerkleHashResponseValidationError) ErrorName() string {
+	return "GetEntryIndexByMerkleHashResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetEntryByMerkleHashResponseValidationError) Error() string {
+func (e GetEntryIndexByMerkleHashResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -370,14 +347,14 @@ func (e GetEntryByMerkleHashResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetEntryByMerkleHashResponse.%s: %s%s",
+		"invalid %sGetEntryIndexByMerkleHashResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetEntryByMerkleHashResponseValidationError{}
+var _ error = GetEntryIndexByMerkleHashResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -385,7 +362,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetEntryByMerkleHashResponseValidationError{}
+} = GetEntryIndexByMerkleHashResponseValidationError{}
 
 // Validate checks the field values on RoleAccessRequestPayload with the rules
 // defined in the proto definition for this message. If any rules are

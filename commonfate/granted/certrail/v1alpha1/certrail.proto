@@ -10,7 +10,8 @@ service CertrailService {
   // Store a payload in the transparency log
   rpc Store(StoreRequest) returns (StoreResponse);
   rpc GetEntries(GetEntriesRequest) returns (GetEntriesResponse);
-  rpc GetEntryByMerkleHash(GetEntryByMerkleHashRequest) returns (GetEntryByMerkleHashResponse);
+  // used by the access handler
+  rpc GetEntryIndexByMerkleHash(GetEntryIndexByMerkleHashRequest) returns (GetEntryIndexByMerkleHashResponse);
   rpc GetLatestSignedLogRoot(GetLatestSignedLogRootRequest) returns (GetLatestSignedLogRootResponse);
 }
 
@@ -20,12 +21,12 @@ message ApproveConfigPayload {
   bytes approved_by = 2;
 }
 
-message GetEntryByMerkleHashRequest{
+message GetEntryIndexByMerkleHashRequest{
   bytes merkle_hash = 1;
 }
 
-message GetEntryByMerkleHashResponse{
-  IncludedEnvelope envelope = 1;
+message GetEntryIndexByMerkleHashResponse{
+  int64 index =1;
 }
 
 // a request contains the current expected params of the request

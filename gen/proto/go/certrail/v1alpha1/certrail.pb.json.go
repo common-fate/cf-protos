@@ -24,7 +24,7 @@ func (msg *ApproveConfigPayload) UnmarshalJSON(b []byte) error {
 }
 
 // MarshalJSON implements json.Marshaler
-func (msg *GetEntryByMerkleHashRequest) MarshalJSON() ([]byte, error) {
+func (msg *GetEntryIndexByMerkleHashRequest) MarshalJSON() ([]byte, error) {
 	return protojson.MarshalOptions{
 		UseEnumNumbers:  false,
 		EmitUnpopulated: false,
@@ -33,14 +33,14 @@ func (msg *GetEntryByMerkleHashRequest) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON implements json.Unmarshaler
-func (msg *GetEntryByMerkleHashRequest) UnmarshalJSON(b []byte) error {
+func (msg *GetEntryIndexByMerkleHashRequest) UnmarshalJSON(b []byte) error {
 	return protojson.UnmarshalOptions{
 		DiscardUnknown: false,
 	}.Unmarshal(b, msg)
 }
 
 // MarshalJSON implements json.Marshaler
-func (msg *GetEntryByMerkleHashResponse) MarshalJSON() ([]byte, error) {
+func (msg *GetEntryIndexByMerkleHashResponse) MarshalJSON() ([]byte, error) {
 	return protojson.MarshalOptions{
 		UseEnumNumbers:  false,
 		EmitUnpopulated: false,
@@ -49,7 +49,7 @@ func (msg *GetEntryByMerkleHashResponse) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON implements json.Unmarshaler
-func (msg *GetEntryByMerkleHashResponse) UnmarshalJSON(b []byte) error {
+func (msg *GetEntryIndexByMerkleHashResponse) UnmarshalJSON(b []byte) error {
 	return protojson.UnmarshalOptions{
 		DiscardUnknown: false,
 	}.Unmarshal(b, msg)

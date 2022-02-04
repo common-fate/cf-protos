@@ -7,9 +7,9 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
+	_ "google.golang.org/protobuf/types/known/durationpb"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
-	_ "google.golang.org/protobuf/types/known/durationpb"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -36,7 +36,7 @@ func (m *ApproveConfigPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 	return nil
 }
 
-func (m *GetEntryByMerkleHashRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *GetEntryIndexByMerkleHashRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -50,7 +50,7 @@ func (m *GetEntryByMerkleHashRequest) MarshalLogObject(enc go_uber_org_zap_zapco
 	return nil
 }
 
-func (m *GetEntryByMerkleHashResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *GetEntryIndexByMerkleHashResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -58,13 +58,8 @@ func (m *GetEntryByMerkleHashResponse) MarshalLogObject(enc go_uber_org_zap_zapc
 		return nil
 	}
 
-	keyName = "envelope" // field envelope = 1
-	if m.Envelope != nil {
-		var vv interface{} = m.Envelope
-		if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
-			enc.AddObject(keyName, marshaler)
-		}
-	}
+	keyName = "index" // field index = 1
+	enc.AddInt64(keyName, m.Index)
 
 	return nil
 }
