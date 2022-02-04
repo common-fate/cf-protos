@@ -31,16 +31,16 @@ message RoleAccessRequestPayload {
   bytes requested_by = 6;
 }
 message ApprovedRoleAccessRequestPayload {
-  string role_access_request = 1;
+  int64 role_access_request_certrail_index = 1;
   bytes approved_by = 2;
 }
 
 message DeclinedRoleAccessRequestPayload {
-  string role_access_request = 1;
+  int64 role_access_request_certrail_index = 1;
   bytes declined_by = 2;
 }
 message CancelledRoleAccessRequestPayload {
-  string role_access_request = 1;
+  int64 role_access_request_certrail_index = 1;
   bytes cancelled_by = 2;
 }
 message IssueCertificatePayload {
