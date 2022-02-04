@@ -57,9 +57,7 @@ func (m *ListRoleAccessRequestsRequest) validate(all bool) error {
 
 	var errors []error
 
-	if m.IncludeExpired != nil {
-		// no validation rules for IncludeExpired
-	}
+	// no validation rules for IncludeExpired
 
 	if len(errors) > 0 {
 		return ListRoleAccessRequestsRequestMultiError(errors)

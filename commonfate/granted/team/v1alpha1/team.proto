@@ -40,7 +40,7 @@ service TeamService {
   rpc DeleteAccessHandler(DeleteAccessHandlerRequest) returns (DeleteAccessHandlerResponse);
 }
 message ListRoleAccessRequestsRequest {
-  optional bool include_expired = 1;
+  bool include_expired = 1;
 }
 message ListRoleAccessRequestsResponse {
   repeated RoleAccessRequest requests = 1;
