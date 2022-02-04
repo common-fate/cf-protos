@@ -7,9 +7,9 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
-	_ "google.golang.org/protobuf/types/known/durationpb"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
+	_ "google.golang.org/protobuf/types/known/durationpb"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -63,9 +63,6 @@ func (m *RoleAccessRequestPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.
 
 	keyName = "requested_by" // field requested_by = 6
 	enc.AddByteString(keyName, m.RequestedBy)
-
-	keyName = "id" // field id = 7
-	enc.AddString(keyName, m.Id)
 
 	return nil
 }

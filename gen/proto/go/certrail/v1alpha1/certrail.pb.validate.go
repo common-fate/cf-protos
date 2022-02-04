@@ -221,8 +221,6 @@ func (m *RoleAccessRequestPayload) validate(all bool) error {
 
 	// no validation rules for RequestedBy
 
-	// no validation rules for Id
-
 	if len(errors) > 0 {
 		return RoleAccessRequestPayloadMultiError(errors)
 	}

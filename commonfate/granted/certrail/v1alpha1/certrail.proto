@@ -29,8 +29,6 @@ message RoleAccessRequestPayload {
   google.protobuf.Duration session_duration = 4;
   string reason = 5;
   bytes requested_by = 6;
-  // id is a generated id to help lookups
-  string id = 7;
 }
 message ApprovedRoleAccessRequestPayload {
   string role_access_request = 1;
