@@ -46,10 +46,11 @@ message ListRoleAccessRequestsResponse {
   repeated RoleAccessRequest requests = 1;
 }
 enum RoleAccessRequestStatus {
-  PENDING = 0;
-  APPROVED = 2;
-  CANCELLED = 3;
-  DECLINED = 4;
+  ROLE_ACCESS_REQUEST_STATUS_UNSPECIFIED = 0;
+  ROLE_ACCESS_REQUEST_STATUS_PENDING = 1;
+  ROLE_ACCESS_REQUEST_STATUS_APPROVED = 2;
+  ROLE_ACCESS_REQUEST_STATUS_CANCELLED = 3;
+  ROLE_ACCESS_REQUEST_STATUS_DECLINED = 4;
 }
 // this will contain all of the related decisions if they exist
 message RoleAccessRequest {
