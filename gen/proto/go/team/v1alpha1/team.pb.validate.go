@@ -361,8 +361,6 @@ func (m *RoleAccessRequest) validate(all bool) error {
 
 	// no validation rules for Id
 
-	// no validation rules for CertrailIndex
-
 	if len(errors) > 0 {
 		return RoleAccessRequestMultiError(errors)
 	}
