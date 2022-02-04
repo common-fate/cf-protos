@@ -1617,6 +1617,13 @@ func (m *StoreResponse) validate(all bool) error {
 
 	var errors []error
 
+	switch m.Contents.(type) {
+
+	case *StoreResponse_RoleAccessRequestId:
+		// no validation rules for RoleAccessRequestId
+
+	}
+
 	if len(errors) > 0 {
 		return StoreResponseMultiError(errors)
 	}

@@ -325,6 +325,12 @@ func (m *StoreResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncod
 		return nil
 	}
 
+	keyName = "role_access_request_id" // field role_access_request_id = 1
+	if ov, ok := m.GetContents().(*StoreResponse_RoleAccessRequestId); ok {
+		_ = ov
+		enc.AddString(keyName, ov.RoleAccessRequestId)
+	}
+
 	return nil
 }
 

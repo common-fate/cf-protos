@@ -89,7 +89,11 @@ message StoreRequest {
   Envelope envelope = 1;
 }
 
-message StoreResponse {}
+message StoreResponse {
+  oneof contents {
+    string role_access_request_id = 1;
+    } 
+}
 
 message GetEntriesRequest {
   int64 start_index = 1;
