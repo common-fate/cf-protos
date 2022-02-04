@@ -57,6 +57,7 @@ message RoleAccessRequest {
   certrail.v1alpha1.RoleAccessRequestPayload request = 1;
   RoleAccessRequestStatus status = 2;
   google.protobuf.Timestamp timestamp = 3;
+  string id = 4;
 }
 
 
