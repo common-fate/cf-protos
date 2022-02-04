@@ -10,6 +10,7 @@ service CertrailService {
   // Store a payload in the transparency log
   rpc Store(StoreRequest) returns (StoreResponse);
   rpc GetEntries(GetEntriesRequest) returns (GetEntriesResponse);
+  rpc GetEntryByMerkleHash(GetEntryByMerkleHashRequest) returns (GetEntryByMerkleHashResponse);
   rpc GetLatestSignedLogRoot(GetLatestSignedLogRootRequest) returns (GetLatestSignedLogRootResponse);
 }
 
@@ -17,6 +18,14 @@ message ApproveConfigPayload {
   bytes config_sha256 = 1 [(validate.rules).bytes.len = 32];
   // the certificate of the approver
   bytes approved_by = 2;
+}
+
+message GetEntryByMerkleHashRequest{
+  bytes merkle_hash = 1;
+}
+
+message GetEntryByMerkleHashResponse{
+  IncludedEnvelope envelope = 1;
 }
 
 // a request contains the current expected params of the request

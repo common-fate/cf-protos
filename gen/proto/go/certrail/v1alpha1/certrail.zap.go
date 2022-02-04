@@ -36,6 +36,39 @@ func (m *ApproveConfigPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 	return nil
 }
 
+func (m *GetEntryByMerkleHashRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "merkle_hash" // field merkle_hash = 1
+	enc.AddByteString(keyName, m.MerkleHash)
+
+	return nil
+}
+
+func (m *GetEntryByMerkleHashResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "envelope" // field envelope = 1
+	if m.Envelope != nil {
+		var vv interface{} = m.Envelope
+		if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+			enc.AddObject(keyName, marshaler)
+		}
+	}
+
+	return nil
+}
+
 func (m *RoleAccessRequestPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
