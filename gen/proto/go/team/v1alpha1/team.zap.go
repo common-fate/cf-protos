@@ -87,8 +87,8 @@ func (m *RoleAccessRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectE
 	keyName = "id" // field id = 4
 	enc.AddString(keyName, m.Id)
 
-	keyName = "certrail_index" // field certrail_index = 5
-	enc.AddInt64(keyName, m.CertrailIndex)
+	keyName = "trillian_merkle_hash" // field trillian_merkle_hash = 5
+	enc.AddByteString(keyName, m.TrillianMerkleHash)
 
 	return nil
 }

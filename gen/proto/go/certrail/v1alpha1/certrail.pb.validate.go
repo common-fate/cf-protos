@@ -324,7 +324,7 @@ func (m *ApprovedRoleAccessRequestPayload) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for RoleAccessRequestCertrailIndex
+	// no validation rules for RoleAccessRequestTrillianMerkleHash
 
 	// no validation rules for ApprovedBy
 
@@ -433,7 +433,7 @@ func (m *DeclinedRoleAccessRequestPayload) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for RoleAccessRequestCertrailIndex
+	// no validation rules for RoleAccessRequestTrillianMerkleHash
 
 	// no validation rules for DeclinedBy
 
@@ -542,7 +542,7 @@ func (m *CancelledRoleAccessRequestPayload) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for RoleAccessRequestCertrailIndex
+	// no validation rules for RoleAccessRequestTrillianMerkleHash
 
 	// no validation rules for CancelledBy
 

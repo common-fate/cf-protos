@@ -58,7 +58,7 @@ message RoleAccessRequest {
   RoleAccessRequestStatus status = 2;
   google.protobuf.Timestamp timestamp = 3;
   string id = 4;
-  int64 certrail_index = 5;
+  bytes trillian_merkle_hash = 5;
 }
 
 

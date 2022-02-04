@@ -31,16 +31,16 @@ message RoleAccessRequestPayload {
   bytes requested_by = 6;
 }
 message ApprovedRoleAccessRequestPayload {
-  int64 role_access_request_certrail_index = 1;
+  bytes role_access_request_trillian_merkle_hash = 1;
   bytes approved_by = 2;
 }
 
 message DeclinedRoleAccessRequestPayload {
-  int64 role_access_request_certrail_index = 1;
+  bytes role_access_request_trillian_merkle_hash = 1;
   bytes declined_by = 2;
 }
 message CancelledRoleAccessRequestPayload {
-  int64 role_access_request_certrail_index = 1;
+  bytes role_access_request_trillian_merkle_hash = 1;
   bytes cancelled_by = 2;
 }
 message IssueCertificatePayload {
