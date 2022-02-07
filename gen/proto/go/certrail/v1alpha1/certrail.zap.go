@@ -36,6 +36,34 @@ func (m *ApproveConfigPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 	return nil
 }
 
+func (m *GetEntryIndexByMerkleHashRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "merkle_hash" // field merkle_hash = 1
+	enc.AddByteString(keyName, m.MerkleHash)
+
+	return nil
+}
+
+func (m *GetEntryIndexByMerkleHashResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "index" // field index = 1
+	enc.AddInt64(keyName, m.Index)
+
+	return nil
+}
+
 func (m *RoleAccessRequestPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
@@ -64,9 +92,6 @@ func (m *RoleAccessRequestPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.
 	keyName = "requested_by" // field requested_by = 6
 	enc.AddByteString(keyName, m.RequestedBy)
 
-	keyName = "id" // field id = 7
-	enc.AddString(keyName, m.Id)
-
 	return nil
 }
 
@@ -78,8 +103,8 @@ func (m *ApprovedRoleAccessRequestPayload) MarshalLogObject(enc go_uber_org_zap_
 		return nil
 	}
 
-	keyName = "role_access_request" // field role_access_request = 1
-	enc.AddString(keyName, m.RoleAccessRequest)
+	keyName = "role_access_request_trillian_merkle_hash" // field role_access_request_trillian_merkle_hash = 1
+	enc.AddByteString(keyName, m.RoleAccessRequestTrillianMerkleHash)
 
 	keyName = "approved_by" // field approved_by = 2
 	enc.AddByteString(keyName, m.ApprovedBy)
@@ -95,8 +120,8 @@ func (m *DeclinedRoleAccessRequestPayload) MarshalLogObject(enc go_uber_org_zap_
 		return nil
 	}
 
-	keyName = "role_access_request" // field role_access_request = 1
-	enc.AddString(keyName, m.RoleAccessRequest)
+	keyName = "role_access_request_trillian_merkle_hash" // field role_access_request_trillian_merkle_hash = 1
+	enc.AddByteString(keyName, m.RoleAccessRequestTrillianMerkleHash)
 
 	keyName = "declined_by" // field declined_by = 2
 	enc.AddByteString(keyName, m.DeclinedBy)
@@ -112,8 +137,8 @@ func (m *CancelledRoleAccessRequestPayload) MarshalLogObject(enc go_uber_org_zap
 		return nil
 	}
 
-	keyName = "role_access_request" // field role_access_request = 1
-	enc.AddString(keyName, m.RoleAccessRequest)
+	keyName = "role_access_request_trillian_merkle_hash" // field role_access_request_trillian_merkle_hash = 1
+	enc.AddByteString(keyName, m.RoleAccessRequestTrillianMerkleHash)
 
 	keyName = "cancelled_by" // field cancelled_by = 2
 	enc.AddByteString(keyName, m.CancelledBy)
@@ -323,6 +348,12 @@ func (m *StoreResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncod
 
 	if m == nil {
 		return nil
+	}
+
+	keyName = "role_access_request_id" // field role_access_request_id = 1
+	if ov, ok := m.GetContents().(*StoreResponse_RoleAccessRequestId); ok {
+		_ = ov
+		enc.AddString(keyName, ov.RoleAccessRequestId)
 	}
 
 	return nil

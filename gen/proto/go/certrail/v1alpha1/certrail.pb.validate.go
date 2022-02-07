@@ -150,6 +150,220 @@ var _ interface {
 	ErrorName() string
 } = ApproveConfigPayloadValidationError{}
 
+// Validate checks the field values on GetEntryIndexByMerkleHashRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetEntryIndexByMerkleHashRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetEntryIndexByMerkleHashRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetEntryIndexByMerkleHashRequestMultiError, or nil if none found.
+func (m *GetEntryIndexByMerkleHashRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetEntryIndexByMerkleHashRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for MerkleHash
+
+	if len(errors) > 0 {
+		return GetEntryIndexByMerkleHashRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetEntryIndexByMerkleHashRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetEntryIndexByMerkleHashRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetEntryIndexByMerkleHashRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetEntryIndexByMerkleHashRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetEntryIndexByMerkleHashRequestMultiError) AllErrors() []error { return m }
+
+// GetEntryIndexByMerkleHashRequestValidationError is the validation error
+// returned by GetEntryIndexByMerkleHashRequest.Validate if the designated
+// constraints aren't met.
+type GetEntryIndexByMerkleHashRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetEntryIndexByMerkleHashRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetEntryIndexByMerkleHashRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetEntryIndexByMerkleHashRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetEntryIndexByMerkleHashRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetEntryIndexByMerkleHashRequestValidationError) ErrorName() string {
+	return "GetEntryIndexByMerkleHashRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetEntryIndexByMerkleHashRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetEntryIndexByMerkleHashRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetEntryIndexByMerkleHashRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetEntryIndexByMerkleHashRequestValidationError{}
+
+// Validate checks the field values on GetEntryIndexByMerkleHashResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetEntryIndexByMerkleHashResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetEntryIndexByMerkleHashResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetEntryIndexByMerkleHashResponseMultiError, or nil if none found.
+func (m *GetEntryIndexByMerkleHashResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetEntryIndexByMerkleHashResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Index
+
+	if len(errors) > 0 {
+		return GetEntryIndexByMerkleHashResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetEntryIndexByMerkleHashResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetEntryIndexByMerkleHashResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetEntryIndexByMerkleHashResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetEntryIndexByMerkleHashResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetEntryIndexByMerkleHashResponseMultiError) AllErrors() []error { return m }
+
+// GetEntryIndexByMerkleHashResponseValidationError is the validation error
+// returned by GetEntryIndexByMerkleHashResponse.Validate if the designated
+// constraints aren't met.
+type GetEntryIndexByMerkleHashResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetEntryIndexByMerkleHashResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetEntryIndexByMerkleHashResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetEntryIndexByMerkleHashResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetEntryIndexByMerkleHashResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetEntryIndexByMerkleHashResponseValidationError) ErrorName() string {
+	return "GetEntryIndexByMerkleHashResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetEntryIndexByMerkleHashResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetEntryIndexByMerkleHashResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetEntryIndexByMerkleHashResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetEntryIndexByMerkleHashResponseValidationError{}
+
 // Validate checks the field values on RoleAccessRequestPayload with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -220,8 +434,6 @@ func (m *RoleAccessRequestPayload) validate(all bool) error {
 	// no validation rules for Reason
 
 	// no validation rules for RequestedBy
-
-	// no validation rules for Id
 
 	if len(errors) > 0 {
 		return RoleAccessRequestPayloadMultiError(errors)
@@ -326,7 +538,7 @@ func (m *ApprovedRoleAccessRequestPayload) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for RoleAccessRequest
+	// no validation rules for RoleAccessRequestTrillianMerkleHash
 
 	// no validation rules for ApprovedBy
 
@@ -435,7 +647,7 @@ func (m *DeclinedRoleAccessRequestPayload) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for RoleAccessRequest
+	// no validation rules for RoleAccessRequestTrillianMerkleHash
 
 	// no validation rules for DeclinedBy
 
@@ -544,7 +756,7 @@ func (m *CancelledRoleAccessRequestPayload) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for RoleAccessRequest
+	// no validation rules for RoleAccessRequestTrillianMerkleHash
 
 	// no validation rules for CancelledBy
 
@@ -1616,6 +1828,13 @@ func (m *StoreResponse) validate(all bool) error {
 	}
 
 	var errors []error
+
+	switch m.Contents.(type) {
+
+	case *StoreResponse_RoleAccessRequestId:
+		// no validation rules for RoleAccessRequestId
+
+	}
 
 	if len(errors) > 0 {
 		return StoreResponseMultiError(errors)

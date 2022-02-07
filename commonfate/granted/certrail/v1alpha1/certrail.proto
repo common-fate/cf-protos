@@ -10,6 +10,8 @@ service CertrailService {
   // Store a payload in the transparency log
   rpc Store(StoreRequest) returns (StoreResponse);
   rpc GetEntries(GetEntriesRequest) returns (GetEntriesResponse);
+  // used by the access handler
+  rpc GetEntryIndexByMerkleHash(GetEntryIndexByMerkleHashRequest) returns (GetEntryIndexByMerkleHashResponse);
   rpc GetLatestSignedLogRoot(GetLatestSignedLogRootRequest) returns (GetLatestSignedLogRootResponse);
 }
 
@@ -17,6 +19,14 @@ message ApproveConfigPayload {
   bytes config_sha256 = 1 [(validate.rules).bytes.len = 32];
   // the certificate of the approver
   bytes approved_by = 2;
+}
+
+message GetEntryIndexByMerkleHashRequest{
+  bytes merkle_hash = 1;
+}
+
+message GetEntryIndexByMerkleHashResponse{
+  int64 index =1;
 }
 
 // a request contains the current expected params of the request
@@ -29,20 +39,18 @@ message RoleAccessRequestPayload {
   google.protobuf.Duration session_duration = 4;
   string reason = 5;
   bytes requested_by = 6;
-  // id is a generated id to help lookups
-  string id = 7;
 }
 message ApprovedRoleAccessRequestPayload {
-  string role_access_request = 1;
+  bytes role_access_request_trillian_merkle_hash = 1;
   bytes approved_by = 2;
 }
 
 message DeclinedRoleAccessRequestPayload {
-  string role_access_request = 1;
+  bytes role_access_request_trillian_merkle_hash = 1;
   bytes declined_by = 2;
 }
 message CancelledRoleAccessRequestPayload {
-  string role_access_request = 1;
+  bytes role_access_request_trillian_merkle_hash = 1;
   bytes cancelled_by = 2;
 }
 message IssueCertificatePayload {
@@ -89,7 +97,11 @@ message StoreRequest {
   Envelope envelope = 1;
 }
 
-message StoreResponse {}
+message StoreResponse {
+  oneof contents {
+    string role_access_request_id = 1;
+    } 
+}
 
 message GetEntriesRequest {
   int64 start_index = 1;

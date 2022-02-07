@@ -35,6 +35,414 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on ListRoleAccessRequestsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListRoleAccessRequestsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListRoleAccessRequestsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListRoleAccessRequestsRequestMultiError, or nil if none found.
+func (m *ListRoleAccessRequestsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListRoleAccessRequestsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IncludeExpired
+
+	if len(errors) > 0 {
+		return ListRoleAccessRequestsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListRoleAccessRequestsRequestMultiError is an error wrapping multiple
+// validation errors returned by ListRoleAccessRequestsRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ListRoleAccessRequestsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListRoleAccessRequestsRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListRoleAccessRequestsRequestMultiError) AllErrors() []error { return m }
+
+// ListRoleAccessRequestsRequestValidationError is the validation error
+// returned by ListRoleAccessRequestsRequest.Validate if the designated
+// constraints aren't met.
+type ListRoleAccessRequestsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListRoleAccessRequestsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListRoleAccessRequestsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListRoleAccessRequestsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListRoleAccessRequestsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListRoleAccessRequestsRequestValidationError) ErrorName() string {
+	return "ListRoleAccessRequestsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListRoleAccessRequestsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListRoleAccessRequestsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListRoleAccessRequestsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListRoleAccessRequestsRequestValidationError{}
+
+// Validate checks the field values on ListRoleAccessRequestsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListRoleAccessRequestsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListRoleAccessRequestsResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListRoleAccessRequestsResponseMultiError, or nil if none found.
+func (m *ListRoleAccessRequestsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListRoleAccessRequestsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetRequests() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListRoleAccessRequestsResponseValidationError{
+						field:  fmt.Sprintf("Requests[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListRoleAccessRequestsResponseValidationError{
+						field:  fmt.Sprintf("Requests[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListRoleAccessRequestsResponseValidationError{
+					field:  fmt.Sprintf("Requests[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListRoleAccessRequestsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListRoleAccessRequestsResponseMultiError is an error wrapping multiple
+// validation errors returned by ListRoleAccessRequestsResponse.ValidateAll()
+// if the designated constraints aren't met.
+type ListRoleAccessRequestsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListRoleAccessRequestsResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListRoleAccessRequestsResponseMultiError) AllErrors() []error { return m }
+
+// ListRoleAccessRequestsResponseValidationError is the validation error
+// returned by ListRoleAccessRequestsResponse.Validate if the designated
+// constraints aren't met.
+type ListRoleAccessRequestsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListRoleAccessRequestsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListRoleAccessRequestsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListRoleAccessRequestsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListRoleAccessRequestsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListRoleAccessRequestsResponseValidationError) ErrorName() string {
+	return "ListRoleAccessRequestsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListRoleAccessRequestsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListRoleAccessRequestsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListRoleAccessRequestsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListRoleAccessRequestsResponseValidationError{}
+
+// Validate checks the field values on RoleAccessRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *RoleAccessRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RoleAccessRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RoleAccessRequestMultiError, or nil if none found.
+func (m *RoleAccessRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RoleAccessRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetRequest()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RoleAccessRequestValidationError{
+					field:  "Request",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RoleAccessRequestValidationError{
+					field:  "Request",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRequest()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RoleAccessRequestValidationError{
+				field:  "Request",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Status
+
+	if all {
+		switch v := interface{}(m.GetTimestamp()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RoleAccessRequestValidationError{
+					field:  "Timestamp",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RoleAccessRequestValidationError{
+					field:  "Timestamp",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTimestamp()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RoleAccessRequestValidationError{
+				field:  "Timestamp",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Id
+
+	// no validation rules for TrillianMerkleHash
+
+	if len(errors) > 0 {
+		return RoleAccessRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// RoleAccessRequestMultiError is an error wrapping multiple validation errors
+// returned by RoleAccessRequest.ValidateAll() if the designated constraints
+// aren't met.
+type RoleAccessRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RoleAccessRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RoleAccessRequestMultiError) AllErrors() []error { return m }
+
+// RoleAccessRequestValidationError is the validation error returned by
+// RoleAccessRequest.Validate if the designated constraints aren't met.
+type RoleAccessRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RoleAccessRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RoleAccessRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RoleAccessRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RoleAccessRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RoleAccessRequestValidationError) ErrorName() string {
+	return "RoleAccessRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RoleAccessRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRoleAccessRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RoleAccessRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RoleAccessRequestValidationError{}
+
 // Validate checks the field values on ListMembersRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

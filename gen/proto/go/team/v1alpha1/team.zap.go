@@ -7,10 +7,11 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
+	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
+	_ "github.com/common-fate/cf-protos/gen/proto/go/certrail/v1alpha1"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "google.golang.org/protobuf/types/known/durationpb"
-	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -19,6 +20,78 @@ import (
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
+
+func (m *ListRoleAccessRequestsRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "include_expired" // field include_expired = 1
+	enc.AddBool(keyName, m.IncludeExpired)
+
+	return nil
+}
+
+func (m *ListRoleAccessRequestsResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "requests" // field requests = 1
+	enc.AddArray(keyName, go_uber_org_zap_zapcore.ArrayMarshalerFunc(func(aenc go_uber_org_zap_zapcore.ArrayEncoder) error {
+		for _, rv := range m.Requests {
+			_ = rv
+			if rv != nil {
+				var vv interface{} = rv
+				if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+					aenc.AppendObject(marshaler)
+				}
+			}
+		}
+		return nil
+	}))
+
+	return nil
+}
+
+func (m *RoleAccessRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "request" // field request = 1
+	if m.Request != nil {
+		var vv interface{} = m.Request
+		if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+			enc.AddObject(keyName, marshaler)
+		}
+	}
+
+	keyName = "status" // field status = 2
+	enc.AddString(keyName, m.Status.String())
+
+	keyName = "timestamp" // field timestamp = 3
+	if t, err := github_com_golang_protobuf_ptypes.Timestamp(m.Timestamp); err == nil {
+		enc.AddTime(keyName, t)
+	}
+
+	keyName = "id" // field id = 4
+	enc.AddString(keyName, m.Id)
+
+	keyName = "trillian_merkle_hash" // field trillian_merkle_hash = 5
+	enc.AddByteString(keyName, m.TrillianMerkleHash)
+
+	return nil
+}
 
 func (m *ListMembersRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
