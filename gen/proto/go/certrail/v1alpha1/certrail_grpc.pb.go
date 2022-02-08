@@ -21,6 +21,8 @@ type CertrailServiceClient interface {
 	// Store a payload in the transparency log
 	Store(ctx context.Context, in *StoreRequest, opts ...grpc.CallOption) (*StoreResponse, error)
 	GetEntries(ctx context.Context, in *GetEntriesRequest, opts ...grpc.CallOption) (*GetEntriesResponse, error)
+	// used by the access handler
+	GetEntryIndexByMerkleHash(ctx context.Context, in *GetEntryIndexByMerkleHashRequest, opts ...grpc.CallOption) (*GetEntryIndexByMerkleHashResponse, error)
 	GetLatestSignedLogRoot(ctx context.Context, in *GetLatestSignedLogRootRequest, opts ...grpc.CallOption) (*GetLatestSignedLogRootResponse, error)
 }
 
@@ -50,6 +52,15 @@ func (c *certrailServiceClient) GetEntries(ctx context.Context, in *GetEntriesRe
 	return out, nil
 }
 
+func (c *certrailServiceClient) GetEntryIndexByMerkleHash(ctx context.Context, in *GetEntryIndexByMerkleHashRequest, opts ...grpc.CallOption) (*GetEntryIndexByMerkleHashResponse, error) {
+	out := new(GetEntryIndexByMerkleHashResponse)
+	err := c.cc.Invoke(ctx, "/certrail.v1alpha1.CertrailService/GetEntryIndexByMerkleHash", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *certrailServiceClient) GetLatestSignedLogRoot(ctx context.Context, in *GetLatestSignedLogRootRequest, opts ...grpc.CallOption) (*GetLatestSignedLogRootResponse, error) {
 	out := new(GetLatestSignedLogRootResponse)
 	err := c.cc.Invoke(ctx, "/certrail.v1alpha1.CertrailService/GetLatestSignedLogRoot", in, out, opts...)
@@ -66,6 +77,8 @@ type CertrailServiceServer interface {
 	// Store a payload in the transparency log
 	Store(context.Context, *StoreRequest) (*StoreResponse, error)
 	GetEntries(context.Context, *GetEntriesRequest) (*GetEntriesResponse, error)
+	// used by the access handler
+	GetEntryIndexByMerkleHash(context.Context, *GetEntryIndexByMerkleHashRequest) (*GetEntryIndexByMerkleHashResponse, error)
 	GetLatestSignedLogRoot(context.Context, *GetLatestSignedLogRootRequest) (*GetLatestSignedLogRootResponse, error)
 }
 
@@ -78,6 +91,9 @@ func (UnimplementedCertrailServiceServer) Store(context.Context, *StoreRequest) 
 }
 func (UnimplementedCertrailServiceServer) GetEntries(context.Context, *GetEntriesRequest) (*GetEntriesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetEntries not implemented")
+}
+func (UnimplementedCertrailServiceServer) GetEntryIndexByMerkleHash(context.Context, *GetEntryIndexByMerkleHashRequest) (*GetEntryIndexByMerkleHashResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetEntryIndexByMerkleHash not implemented")
 }
 func (UnimplementedCertrailServiceServer) GetLatestSignedLogRoot(context.Context, *GetLatestSignedLogRootRequest) (*GetLatestSignedLogRootResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLatestSignedLogRoot not implemented")
@@ -130,6 +146,24 @@ func _CertrailService_GetEntries_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CertrailService_GetEntryIndexByMerkleHash_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEntryIndexByMerkleHashRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CertrailServiceServer).GetEntryIndexByMerkleHash(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/certrail.v1alpha1.CertrailService/GetEntryIndexByMerkleHash",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CertrailServiceServer).GetEntryIndexByMerkleHash(ctx, req.(*GetEntryIndexByMerkleHashRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _CertrailService_GetLatestSignedLogRoot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetLatestSignedLogRootRequest)
 	if err := dec(in); err != nil {
@@ -162,6 +196,10 @@ var CertrailService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetEntries",
 			Handler:    _CertrailService_GetEntries_Handler,
+		},
+		{
+			MethodName: "GetEntryIndexByMerkleHash",
+			Handler:    _CertrailService_GetEntryIndexByMerkleHash_Handler,
 		},
 		{
 			MethodName: "GetLatestSignedLogRoot",
