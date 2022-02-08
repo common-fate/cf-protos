@@ -14,6 +14,7 @@ service TeamService {
   rpc ListMembers(ListMembersRequest) returns (ListMembersResponse);
   rpc ListRoles(ListRolesRequest) returns (ListRolesResponse);
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse);
+  rpc IsAdminUser(IsAdminUserRequest) returns (IsAdminUserResponse);
   rpc EnrolProvider(EnrolProviderRequest) returns (EnrolProviderResponse);
   rpc ListProviders(ListProvidersRequest) returns (ListProvidersResponse);
   // DeleteProvider removes a provider from a Granted team.
@@ -68,7 +69,13 @@ message Role {
   google.protobuf.Duration session_duration = 4;
 }
 
+message IsAdminUserRequest {
 
+}
+
+message IsAdminUserResponse {
+    bool is_admin = 1;
+}
 
 message UpdateConfigRequest {
   gconfig.v1alpha1.Config config = 1;

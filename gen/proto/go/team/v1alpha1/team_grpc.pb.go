@@ -21,6 +21,7 @@ type TeamServiceClient interface {
 	ListMembers(ctx context.Context, in *ListMembersRequest, opts ...grpc.CallOption) (*ListMembersResponse, error)
 	ListRoles(ctx context.Context, in *ListRolesRequest, opts ...grpc.CallOption) (*ListRolesResponse, error)
 	UpdateConfig(ctx context.Context, in *UpdateConfigRequest, opts ...grpc.CallOption) (*UpdateConfigResponse, error)
+	IsAdminUser(ctx context.Context, in *IsAdminUserRequest, opts ...grpc.CallOption) (*IsAdminUserResponse, error)
 	EnrolProvider(ctx context.Context, in *EnrolProviderRequest, opts ...grpc.CallOption) (*EnrolProviderResponse, error)
 	ListProviders(ctx context.Context, in *ListProvidersRequest, opts ...grpc.CallOption) (*ListProvidersResponse, error)
 	// DeleteProvider removes a provider from a Granted team.
@@ -72,6 +73,15 @@ func (c *teamServiceClient) ListRoles(ctx context.Context, in *ListRolesRequest,
 func (c *teamServiceClient) UpdateConfig(ctx context.Context, in *UpdateConfigRequest, opts ...grpc.CallOption) (*UpdateConfigResponse, error) {
 	out := new(UpdateConfigResponse)
 	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/UpdateConfig", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *teamServiceClient) IsAdminUser(ctx context.Context, in *IsAdminUserRequest, opts ...grpc.CallOption) (*IsAdminUserResponse, error) {
+	out := new(IsAdminUserResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/IsAdminUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -175,6 +185,7 @@ type TeamServiceServer interface {
 	ListMembers(context.Context, *ListMembersRequest) (*ListMembersResponse, error)
 	ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error)
 	UpdateConfig(context.Context, *UpdateConfigRequest) (*UpdateConfigResponse, error)
+	IsAdminUser(context.Context, *IsAdminUserRequest) (*IsAdminUserResponse, error)
 	EnrolProvider(context.Context, *EnrolProviderRequest) (*EnrolProviderResponse, error)
 	ListProviders(context.Context, *ListProvidersRequest) (*ListProvidersResponse, error)
 	// DeleteProvider removes a provider from a Granted team.
@@ -209,6 +220,9 @@ func (UnimplementedTeamServiceServer) ListRoles(context.Context, *ListRolesReque
 }
 func (UnimplementedTeamServiceServer) UpdateConfig(context.Context, *UpdateConfigRequest) (*UpdateConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateConfig not implemented")
+}
+func (UnimplementedTeamServiceServer) IsAdminUser(context.Context, *IsAdminUserRequest) (*IsAdminUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method IsAdminUser not implemented")
 }
 func (UnimplementedTeamServiceServer) EnrolProvider(context.Context, *EnrolProviderRequest) (*EnrolProviderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EnrolProvider not implemented")
@@ -302,6 +316,24 @@ func _TeamService_UpdateConfig_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TeamServiceServer).UpdateConfig(ctx, req.(*UpdateConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TeamService_IsAdminUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsAdminUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).IsAdminUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/IsAdminUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).IsAdminUser(ctx, req.(*IsAdminUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -504,6 +536,10 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateConfig",
 			Handler:    _TeamService_UpdateConfig_Handler,
+		},
+		{
+			MethodName: "IsAdminUser",
+			Handler:    _TeamService_IsAdminUser_Handler,
 		},
 		{
 			MethodName: "EnrolProvider",

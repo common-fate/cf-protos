@@ -173,6 +173,31 @@ func (m *Role) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error
 	return nil
 }
 
+func (m *IsAdminUserRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+func (m *IsAdminUserResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "is_admin" // field is_admin = 1
+	enc.AddBool(keyName, m.IsAdmin)
+
+	return nil
+}
+
 func (m *UpdateConfigRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
