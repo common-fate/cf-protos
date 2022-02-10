@@ -62,7 +62,6 @@ func (m *ListRoleAccessRequestsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRoleAccessRequestsRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -199,7 +198,6 @@ func (m *ListRoleAccessRequestsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRoleAccessRequestsResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -366,7 +364,6 @@ func (m *RoleAccessRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return RoleAccessRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -468,7 +465,6 @@ func (m *ListMembersRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListMembersRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -604,7 +600,6 @@ func (m *ListMembersResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListMembersResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -681,6 +676,276 @@ var _ interface {
 	ErrorName() string
 } = ListMembersResponseValidationError{}
 
+// Validate checks the field values on UpdateAccountsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateAccountsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateAccountsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateAccountsRequestMultiError, or nil if none found.
+func (m *UpdateAccountsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateAccountsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetAccounts() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdateAccountsRequestValidationError{
+						field:  fmt.Sprintf("Accounts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdateAccountsRequestValidationError{
+						field:  fmt.Sprintf("Accounts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdateAccountsRequestValidationError{
+					field:  fmt.Sprintf("Accounts[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return UpdateAccountsRequestMultiError(errors)
+	}
+	return nil
+}
+
+// UpdateAccountsRequestMultiError is an error wrapping multiple validation
+// errors returned by UpdateAccountsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateAccountsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateAccountsRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateAccountsRequestMultiError) AllErrors() []error { return m }
+
+// UpdateAccountsRequestValidationError is the validation error returned by
+// UpdateAccountsRequest.Validate if the designated constraints aren't met.
+type UpdateAccountsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateAccountsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateAccountsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateAccountsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateAccountsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateAccountsRequestValidationError) ErrorName() string {
+	return "UpdateAccountsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateAccountsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateAccountsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateAccountsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateAccountsRequestValidationError{}
+
+// Validate checks the field values on UpdateAccountsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateAccountsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateAccountsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateAccountsResponseMultiError, or nil if none found.
+func (m *UpdateAccountsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateAccountsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetMembers() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdateAccountsResponseValidationError{
+						field:  fmt.Sprintf("Members[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdateAccountsResponseValidationError{
+						field:  fmt.Sprintf("Members[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdateAccountsResponseValidationError{
+					field:  fmt.Sprintf("Members[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return UpdateAccountsResponseMultiError(errors)
+	}
+	return nil
+}
+
+// UpdateAccountsResponseMultiError is an error wrapping multiple validation
+// errors returned by UpdateAccountsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateAccountsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateAccountsResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateAccountsResponseMultiError) AllErrors() []error { return m }
+
+// UpdateAccountsResponseValidationError is the validation error returned by
+// UpdateAccountsResponse.Validate if the designated constraints aren't met.
+type UpdateAccountsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateAccountsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateAccountsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateAccountsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateAccountsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateAccountsResponseValidationError) ErrorName() string {
+	return "UpdateAccountsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateAccountsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateAccountsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateAccountsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateAccountsResponseValidationError{}
+
 // Validate checks the field values on ListRolesRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
@@ -706,7 +971,6 @@ func (m *ListRolesRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRolesRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -840,7 +1104,6 @@ func (m *ListRolesResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRolesResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -945,7 +1208,6 @@ func (m *Member) validate(all bool) error {
 	if len(errors) > 0 {
 		return MemberMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1044,10 +1306,11 @@ func (m *Account) validate(all bool) error {
 
 	// no validation rules for AccountId
 
+	// no validation rules for Alias
+
 	if len(errors) > 0 {
 		return AccountMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1244,7 +1507,6 @@ func (m *Role) validate(all bool) error {
 	if len(errors) > 0 {
 		return RoleMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1372,7 +1634,6 @@ func (m *UpdateConfigRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateConfigRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1476,7 +1737,6 @@ func (m *UpdateConfigResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateConfigResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1617,7 +1877,6 @@ func (m *EnrolProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrolProviderRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1742,7 +2001,6 @@ func (m *EnrolAWSProvider) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrolAWSProviderMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1875,7 +2133,6 @@ func (m *EnrolProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrolProviderResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1977,7 +2234,6 @@ func (m *ListProvidersRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListProvidersRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2115,7 +2371,6 @@ func (m *ListProvidersResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListProvidersResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2217,7 +2472,6 @@ func (m *GetStatusRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetStatusRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2385,7 +2639,6 @@ func (m *GetStatusResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetStatusResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2559,7 +2812,6 @@ func (m *ProviderEnrollment) validate(all bool) error {
 	if len(errors) > 0 {
 		return ProviderEnrollmentMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2663,7 +2915,6 @@ func (m *AWSProviderEnrollment) validate(all bool) error {
 	if len(errors) > 0 {
 		return AWSProviderEnrollmentMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2767,7 +3018,6 @@ func (m *DeleteProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteProviderRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2869,7 +3119,6 @@ func (m *DeleteProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteProviderResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2973,7 +3222,6 @@ func (m *GetProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetProviderRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3104,7 +3352,6 @@ func (m *GetProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetProviderResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3245,7 +3492,6 @@ func (m *Provider) validate(all bool) error {
 	if len(errors) > 0 {
 		return ProviderMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3346,7 +3592,6 @@ func (m *AWSProviderDetails) validate(all bool) error {
 	if len(errors) > 0 {
 		return AWSProviderDetailsMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3448,7 +3693,6 @@ func (m *GetAllProviderDetailsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderDetailsRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3582,7 +3826,6 @@ func (m *GetAllProviderDetailsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderDetailsResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3685,7 +3928,6 @@ func (m *GetAllProviderChecksumRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderChecksumRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3790,7 +4032,6 @@ func (m *GetAllProviderChecksumResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderChecksumResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3896,7 +4137,6 @@ func (m *GetAccessHandlersForProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAccessHandlersForProviderRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4035,7 +4275,6 @@ func (m *GetAccessHandlersForProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAccessHandlersForProviderResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4143,7 +4382,6 @@ func (m *AddAccessHandlerRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return AddAccessHandlerRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4245,7 +4483,6 @@ func (m *AddAccessHandlerResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return AddAccessHandlerResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4351,7 +4588,6 @@ func (m *DeleteAccessHandlerRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteAccessHandlerRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4453,7 +4689,6 @@ func (m *DeleteAccessHandlerResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteAccessHandlerResponseMultiError(errors)
 	}
-
 	return nil
 }
 

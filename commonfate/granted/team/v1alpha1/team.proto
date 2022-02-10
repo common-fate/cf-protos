@@ -14,6 +14,7 @@ service TeamService {
   rpc ListRoleAccessRequests(ListRoleAccessRequestsRequest) returns (ListRoleAccessRequestsResponse);
   rpc ListMembers(ListMembersRequest) returns (ListMembersResponse);
   rpc ListRoles(ListRolesRequest) returns (ListRolesResponse);
+  rpc UpdateAccounts(UpdateAccountsRequest) returns (UpdateAccountsResponse);
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse);
   rpc EnrolProvider(EnrolProviderRequest) returns (EnrolProviderResponse);
   rpc ListProviders(ListProvidersRequest) returns (ListProvidersResponse);
@@ -67,6 +68,15 @@ message ListMembersRequest {}
 message ListMembersResponse {
 	repeated Member members = 1;
 }
+
+
+message UpdateAccountsRequest {
+  repeated Account accounts = 1;
+}
+
+message UpdateAccountsResponse {
+	repeated Member members = 1;
+}
 message ListRolesRequest {}
 
 message ListRolesResponse {
@@ -82,6 +92,7 @@ message Member {
 message Account {
   string provider = 1; // e.g. "aws"
   string account_id = 2; // e.g. "123456789012"
+  string alias = 3;
 }
 
 message Role {
