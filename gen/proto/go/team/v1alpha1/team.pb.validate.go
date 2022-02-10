@@ -62,7 +62,6 @@ func (m *ListRoleAccessRequestsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRoleAccessRequestsRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -199,7 +198,6 @@ func (m *ListRoleAccessRequestsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRoleAccessRequestsResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -366,7 +364,6 @@ func (m *RoleAccessRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return RoleAccessRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -468,7 +465,6 @@ func (m *ListMembersRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListMembersRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -604,7 +600,6 @@ func (m *ListMembersResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListMembersResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -706,7 +701,6 @@ func (m *ListRolesRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRolesRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -840,7 +834,6 @@ func (m *ListRolesResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRolesResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -945,7 +938,6 @@ func (m *Member) validate(all bool) error {
 	if len(errors) > 0 {
 		return MemberMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1047,7 +1039,6 @@ func (m *Account) validate(all bool) error {
 	if len(errors) > 0 {
 		return AccountMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1244,7 +1235,6 @@ func (m *Role) validate(all bool) error {
 	if len(errors) > 0 {
 		return RoleMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1372,7 +1362,6 @@ func (m *UpdateConfigRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateConfigRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1476,7 +1465,6 @@ func (m *UpdateConfigResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateConfigResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1617,7 +1605,6 @@ func (m *EnrolProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrolProviderRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1742,7 +1729,6 @@ func (m *EnrolAWSProvider) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrolAWSProviderMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1875,7 +1861,6 @@ func (m *EnrolProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrolProviderResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1977,7 +1962,6 @@ func (m *ListProvidersRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListProvidersRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2115,7 +2099,6 @@ func (m *ListProvidersResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListProvidersResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2217,7 +2200,6 @@ func (m *GetStatusRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetStatusRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2385,7 +2367,6 @@ func (m *GetStatusResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetStatusResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2559,7 +2540,6 @@ func (m *ProviderEnrollment) validate(all bool) error {
 	if len(errors) > 0 {
 		return ProviderEnrollmentMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2663,7 +2643,6 @@ func (m *AWSProviderEnrollment) validate(all bool) error {
 	if len(errors) > 0 {
 		return AWSProviderEnrollmentMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2767,7 +2746,6 @@ func (m *DeleteProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteProviderRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2869,7 +2847,6 @@ func (m *DeleteProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteProviderResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2973,7 +2950,6 @@ func (m *GetProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetProviderRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3104,7 +3080,6 @@ func (m *GetProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetProviderResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3245,7 +3220,6 @@ func (m *Provider) validate(all bool) error {
 	if len(errors) > 0 {
 		return ProviderMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3346,7 +3320,6 @@ func (m *AWSProviderDetails) validate(all bool) error {
 	if len(errors) > 0 {
 		return AWSProviderDetailsMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3448,7 +3421,6 @@ func (m *GetAllProviderDetailsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderDetailsRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3582,7 +3554,6 @@ func (m *GetAllProviderDetailsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderDetailsResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3685,7 +3656,6 @@ func (m *GetAllProviderChecksumRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderChecksumRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3790,7 +3760,6 @@ func (m *GetAllProviderChecksumResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderChecksumResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3896,7 +3865,6 @@ func (m *GetAccessHandlersForProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAccessHandlersForProviderRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4035,7 +4003,6 @@ func (m *GetAccessHandlersForProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAccessHandlersForProviderResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4143,7 +4110,6 @@ func (m *AddAccessHandlerRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return AddAccessHandlerRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4245,7 +4211,6 @@ func (m *AddAccessHandlerResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return AddAccessHandlerResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4351,7 +4316,6 @@ func (m *DeleteAccessHandlerRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteAccessHandlerRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4453,7 +4417,6 @@ func (m *DeleteAccessHandlerResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteAccessHandlerResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4530,3 +4493,209 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = DeleteAccessHandlerResponseValidationError{}
+
+// Validate checks the field values on UpdateCISettingsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateCISettingsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateCISettingsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateCISettingsRequestMultiError, or nil if none found.
+func (m *UpdateCISettingsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateCISettingsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Enabled
+
+	// no validation rules for RepositoryUrl
+
+	if len(errors) > 0 {
+		return UpdateCISettingsRequestMultiError(errors)
+	}
+	return nil
+}
+
+// UpdateCISettingsRequestMultiError is an error wrapping multiple validation
+// errors returned by UpdateCISettingsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateCISettingsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateCISettingsRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateCISettingsRequestMultiError) AllErrors() []error { return m }
+
+// UpdateCISettingsRequestValidationError is the validation error returned by
+// UpdateCISettingsRequest.Validate if the designated constraints aren't met.
+type UpdateCISettingsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateCISettingsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateCISettingsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateCISettingsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateCISettingsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateCISettingsRequestValidationError) ErrorName() string {
+	return "UpdateCISettingsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateCISettingsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateCISettingsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateCISettingsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateCISettingsRequestValidationError{}
+
+// Validate checks the field values on UpdateCISettingsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateCISettingsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateCISettingsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateCISettingsResponseMultiError, or nil if none found.
+func (m *UpdateCISettingsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateCISettingsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UpdateCISettingsResponseMultiError(errors)
+	}
+	return nil
+}
+
+// UpdateCISettingsResponseMultiError is an error wrapping multiple validation
+// errors returned by UpdateCISettingsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateCISettingsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateCISettingsResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateCISettingsResponseMultiError) AllErrors() []error { return m }
+
+// UpdateCISettingsResponseValidationError is the validation error returned by
+// UpdateCISettingsResponse.Validate if the designated constraints aren't met.
+type UpdateCISettingsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateCISettingsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateCISettingsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateCISettingsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateCISettingsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateCISettingsResponseValidationError) ErrorName() string {
+	return "UpdateCISettingsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateCISettingsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateCISettingsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateCISettingsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateCISettingsResponseValidationError{}

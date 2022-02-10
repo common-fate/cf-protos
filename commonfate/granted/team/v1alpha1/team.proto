@@ -38,6 +38,9 @@ service TeamService {
 
   // DeleteAccessHandler deletes an Access Handler from a provider
   rpc DeleteAccessHandler(DeleteAccessHandlerRequest) returns (DeleteAccessHandlerResponse);
+
+  // UpdateCISettings enables or disabled CI role deployments for a team.
+  rpc UpdateCISettings(UpdateCISettingsRequest) returns (UpdateCISettingsResponse);
 }
 message ListRoleAccessRequestsRequest {
   bool include_expired = 1;
@@ -213,3 +216,10 @@ message DeleteAccessHandlerRequest {
 }
 
 message DeleteAccessHandlerResponse {}
+
+message UpdateCISettingsRequest {
+  bool enabled = 1;
+  string repository_url = 2;
+}
+
+message UpdateCISettingsResponse {}

@@ -42,6 +42,8 @@ type TeamServiceClient interface {
 	AddAccessHandler(ctx context.Context, in *AddAccessHandlerRequest, opts ...grpc.CallOption) (*AddAccessHandlerResponse, error)
 	// DeleteAccessHandler deletes an Access Handler from a provider
 	DeleteAccessHandler(ctx context.Context, in *DeleteAccessHandlerRequest, opts ...grpc.CallOption) (*DeleteAccessHandlerResponse, error)
+	// UpdateCISettings enables or disabled CI role deployments for a team.
+	UpdateCISettings(ctx context.Context, in *UpdateCISettingsRequest, opts ...grpc.CallOption) (*UpdateCISettingsResponse, error)
 }
 
 type teamServiceClient struct {
@@ -178,6 +180,15 @@ func (c *teamServiceClient) DeleteAccessHandler(ctx context.Context, in *DeleteA
 	return out, nil
 }
 
+func (c *teamServiceClient) UpdateCISettings(ctx context.Context, in *UpdateCISettingsRequest, opts ...grpc.CallOption) (*UpdateCISettingsResponse, error) {
+	out := new(UpdateCISettingsResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/UpdateCISettings", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TeamServiceServer is the server API for TeamService service.
 // All implementations should embed UnimplementedTeamServiceServer
 // for forward compatibility
@@ -206,6 +217,8 @@ type TeamServiceServer interface {
 	AddAccessHandler(context.Context, *AddAccessHandlerRequest) (*AddAccessHandlerResponse, error)
 	// DeleteAccessHandler deletes an Access Handler from a provider
 	DeleteAccessHandler(context.Context, *DeleteAccessHandlerRequest) (*DeleteAccessHandlerResponse, error)
+	// UpdateCISettings enables or disabled CI role deployments for a team.
+	UpdateCISettings(context.Context, *UpdateCISettingsRequest) (*UpdateCISettingsResponse, error)
 }
 
 // UnimplementedTeamServiceServer should be embedded to have forward compatible implementations.
@@ -253,6 +266,9 @@ func (UnimplementedTeamServiceServer) AddAccessHandler(context.Context, *AddAcce
 }
 func (UnimplementedTeamServiceServer) DeleteAccessHandler(context.Context, *DeleteAccessHandlerRequest) (*DeleteAccessHandlerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccessHandler not implemented")
+}
+func (UnimplementedTeamServiceServer) UpdateCISettings(context.Context, *UpdateCISettingsRequest) (*UpdateCISettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCISettings not implemented")
 }
 
 // UnsafeTeamServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -518,6 +534,24 @@ func _TeamService_DeleteAccessHandler_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TeamService_UpdateCISettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCISettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).UpdateCISettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/UpdateCISettings",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).UpdateCISettings(ctx, req.(*UpdateCISettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TeamService_ServiceDesc is the grpc.ServiceDesc for TeamService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -580,6 +614,10 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAccessHandler",
 			Handler:    _TeamService_DeleteAccessHandler_Handler,
+		},
+		{
+			MethodName: "UpdateCISettings",
+			Handler:    _TeamService_UpdateCISettings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
