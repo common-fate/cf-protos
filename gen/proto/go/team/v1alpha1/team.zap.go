@@ -7,11 +7,11 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
-	_ "google.golang.org/protobuf/types/known/durationpb"
-	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	_ "github.com/common-fate/cf-protos/gen/proto/go/certrail/v1alpha1"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
+	_ "google.golang.org/protobuf/types/known/durationpb"
+	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -299,6 +299,31 @@ func (m *Role) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error
 	return nil
 }
 
+func (m *IsAdminUserRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+func (m *IsAdminUserResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "is_admin" // field is_admin = 1
+	enc.AddBool(keyName, m.IsAdmin)
+
+	return nil
+}
+
 func (m *UpdateConfigRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
@@ -357,10 +382,35 @@ func (m *EnrolProviderRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 		}
 	}
 
+	keyName = "aws_sso" // field aws_sso = 4
+	if ov, ok := m.GetProvider().(*EnrolProviderRequest_AwsSso); ok {
+		_ = ov
+		if ov.AwsSso != nil {
+			var vv interface{} = ov.AwsSso
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
 	return nil
 }
 
 func (m *EnrolAWSProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "account_id" // field account_id = 1
+	enc.AddString(keyName, m.AccountId)
+
+	return nil
+}
+
+func (m *EnrolAWSSSOProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -778,6 +828,34 @@ func (m *DeleteAccessHandlerRequest) MarshalLogObject(enc go_uber_org_zap_zapcor
 }
 
 func (m *DeleteAccessHandlerResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+func (m *UpdateCISettingsRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "enabled" // field enabled = 1
+	enc.AddBool(keyName, m.Enabled)
+
+	keyName = "repository_url" // field repository_url = 2
+	enc.AddString(keyName, m.RepositoryUrl)
+
+	return nil
+}
+
+func (m *UpdateCISettingsResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
