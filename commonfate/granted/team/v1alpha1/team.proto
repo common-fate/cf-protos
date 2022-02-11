@@ -109,10 +109,15 @@ message EnrolProviderRequest {
   string name = 2;
   oneof provider {
     EnrolAWSProvider aws = 3;
+    EnrolAWSSSOProvider awsSSO = 4;
   }
 }
 
 message EnrolAWSProvider {
+  string account_id = 1 [(validate.rules).string = {len: 12, pattern: "^[0-9]*$"}];
+}
+
+message EnrolAWSSSOProvider {
   string account_id = 1 [(validate.rules).string = {len: 12, pattern: "^[0-9]*$"}];
 }
 

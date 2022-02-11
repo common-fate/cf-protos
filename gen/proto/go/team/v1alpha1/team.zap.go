@@ -304,10 +304,35 @@ func (m *EnrolProviderRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 		}
 	}
 
+	keyName = "awsSSO" // field awsSSO = 4
+	if ov, ok := m.GetProvider().(*EnrolProviderRequest_AwsSSO); ok {
+		_ = ov
+		if ov.AwsSSO != nil {
+			var vv interface{} = ov.AwsSSO
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
 	return nil
 }
 
 func (m *EnrolAWSProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "account_id" // field account_id = 1
+	enc.AddString(keyName, m.AccountId)
+
+	return nil
+}
+
+func (m *EnrolAWSSSOProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
