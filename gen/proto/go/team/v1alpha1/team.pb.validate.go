@@ -681,6 +681,278 @@ var _ interface {
 	ErrorName() string
 } = ListMembersResponseValidationError{}
 
+// Validate checks the field values on UpdateAccountsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateAccountsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateAccountsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateAccountsRequestMultiError, or nil if none found.
+func (m *UpdateAccountsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateAccountsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetAccounts() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdateAccountsRequestValidationError{
+						field:  fmt.Sprintf("Accounts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdateAccountsRequestValidationError{
+						field:  fmt.Sprintf("Accounts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdateAccountsRequestValidationError{
+					field:  fmt.Sprintf("Accounts[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return UpdateAccountsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateAccountsRequestMultiError is an error wrapping multiple validation
+// errors returned by UpdateAccountsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateAccountsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateAccountsRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateAccountsRequestMultiError) AllErrors() []error { return m }
+
+// UpdateAccountsRequestValidationError is the validation error returned by
+// UpdateAccountsRequest.Validate if the designated constraints aren't met.
+type UpdateAccountsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateAccountsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateAccountsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateAccountsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateAccountsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateAccountsRequestValidationError) ErrorName() string {
+	return "UpdateAccountsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateAccountsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateAccountsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateAccountsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateAccountsRequestValidationError{}
+
+// Validate checks the field values on UpdateAccountsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateAccountsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateAccountsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateAccountsResponseMultiError, or nil if none found.
+func (m *UpdateAccountsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateAccountsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetMembers() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdateAccountsResponseValidationError{
+						field:  fmt.Sprintf("Members[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdateAccountsResponseValidationError{
+						field:  fmt.Sprintf("Members[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdateAccountsResponseValidationError{
+					field:  fmt.Sprintf("Members[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return UpdateAccountsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateAccountsResponseMultiError is an error wrapping multiple validation
+// errors returned by UpdateAccountsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateAccountsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateAccountsResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateAccountsResponseMultiError) AllErrors() []error { return m }
+
+// UpdateAccountsResponseValidationError is the validation error returned by
+// UpdateAccountsResponse.Validate if the designated constraints aren't met.
+type UpdateAccountsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateAccountsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateAccountsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateAccountsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateAccountsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateAccountsResponseValidationError) ErrorName() string {
+	return "UpdateAccountsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateAccountsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateAccountsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateAccountsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateAccountsResponseValidationError{}
+
 // Validate checks the field values on ListRolesRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
@@ -1043,6 +1315,8 @@ func (m *Account) validate(all bool) error {
 	// no validation rules for Provider
 
 	// no validation rules for AccountId
+
+	// no validation rules for Alias
 
 	if len(errors) > 0 {
 		return AccountMultiError(errors)
