@@ -7,11 +7,11 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
+	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	_ "github.com/common-fate/cf-protos/gen/proto/go/certrail/v1alpha1"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "google.golang.org/protobuf/types/known/durationpb"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
-	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -242,6 +242,31 @@ func (m *Role) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error
 	if d, err := github_com_golang_protobuf_ptypes.Duration(m.SessionDuration); err == nil {
 		enc.AddDuration(keyName, d)
 	}
+
+	return nil
+}
+
+func (m *IsAdminUserRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+func (m *IsAdminUserResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "is_admin" // field is_admin = 1
+	enc.AddBool(keyName, m.IsAdmin)
 
 	return nil
 }
