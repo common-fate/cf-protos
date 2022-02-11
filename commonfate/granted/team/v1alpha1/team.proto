@@ -109,7 +109,7 @@ message EnrolProviderRequest {
   string name = 2;
   oneof provider {
     EnrolAWSProvider aws = 3;
-    EnrolAWSSSOProvider awsSSO = 4;
+    EnrolAWSSSOProvider aws_sso = 4;
   }
 }
 
