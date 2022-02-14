@@ -19,7 +19,6 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AccountServiceClient interface {
 	Signup(ctx context.Context, in *SignupRequest, opts ...grpc.CallOption) (*SignupResponse, error)
-	CheckForUpdates(ctx context.Context, in *CheckForUpdatesRequest, opts ...grpc.CallOption) (*CheckForUpdatesResponse, error)
 	GetDeviceId(ctx context.Context, in *GetDeviceIdRequest, opts ...grpc.CallOption) (*GetDeviceIdResponse, error)
 	// Authenticated informs the metadata service that the client has successfully
 	// completed the login flow with their access broker
@@ -37,15 +36,6 @@ func NewAccountServiceClient(cc grpc.ClientConnInterface) AccountServiceClient {
 func (c *accountServiceClient) Signup(ctx context.Context, in *SignupRequest, opts ...grpc.CallOption) (*SignupResponse, error) {
 	out := new(SignupResponse)
 	err := c.cc.Invoke(ctx, "/account.v1alpha1.AccountService/Signup", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *accountServiceClient) CheckForUpdates(ctx context.Context, in *CheckForUpdatesRequest, opts ...grpc.CallOption) (*CheckForUpdatesResponse, error) {
-	out := new(CheckForUpdatesResponse)
-	err := c.cc.Invoke(ctx, "/account.v1alpha1.AccountService/CheckForUpdates", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +65,6 @@ func (c *accountServiceClient) Authenticated(ctx context.Context, in *Authentica
 // for forward compatibility
 type AccountServiceServer interface {
 	Signup(context.Context, *SignupRequest) (*SignupResponse, error)
-	CheckForUpdates(context.Context, *CheckForUpdatesRequest) (*CheckForUpdatesResponse, error)
 	GetDeviceId(context.Context, *GetDeviceIdRequest) (*GetDeviceIdResponse, error)
 	// Authenticated informs the metadata service that the client has successfully
 	// completed the login flow with their access broker
@@ -88,9 +77,6 @@ type UnimplementedAccountServiceServer struct {
 
 func (UnimplementedAccountServiceServer) Signup(context.Context, *SignupRequest) (*SignupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Signup not implemented")
-}
-func (UnimplementedAccountServiceServer) CheckForUpdates(context.Context, *CheckForUpdatesRequest) (*CheckForUpdatesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CheckForUpdates not implemented")
 }
 func (UnimplementedAccountServiceServer) GetDeviceId(context.Context, *GetDeviceIdRequest) (*GetDeviceIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDeviceId not implemented")
@@ -124,24 +110,6 @@ func _AccountService_Signup_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountServiceServer).Signup(ctx, req.(*SignupRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AccountService_CheckForUpdates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CheckForUpdatesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountServiceServer).CheckForUpdates(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/account.v1alpha1.AccountService/CheckForUpdates",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).CheckForUpdates(ctx, req.(*CheckForUpdatesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -192,10 +160,6 @@ var AccountService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Signup",
 			Handler:    _AccountService_Signup_Handler,
-		},
-		{
-			MethodName: "CheckForUpdates",
-			Handler:    _AccountService_CheckForUpdates_Handler,
 		},
 		{
 			MethodName: "GetDeviceId",

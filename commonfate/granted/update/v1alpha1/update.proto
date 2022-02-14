@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package update.v1alpha1;
+
+//UpdateService is a public facing services used by the assume cli to check for updates
+service UpdateService {
+  rpc CheckForUpdates(CheckForUpdatesRequest) returns (CheckForUpdatesResponse);
+}
+
+
+message CheckForUpdatesRequest {
+	string version = 1;
+}
+
+message CheckForUpdatesResponse {
+	bool update_required = 1;
+	string message = 2;
+}
+

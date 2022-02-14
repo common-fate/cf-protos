@@ -47,37 +47,6 @@ func (m *SignupResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEnco
 	return nil
 }
 
-func (m *CheckForUpdatesRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	keyName = "version" // field version = 1
-	enc.AddString(keyName, m.Version)
-
-	return nil
-}
-
-func (m *CheckForUpdatesResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	keyName = "update_required" // field update_required = 1
-	enc.AddBool(keyName, m.UpdateRequired)
-
-	keyName = "message" // field message = 2
-	enc.AddString(keyName, m.Message)
-
-	return nil
-}
-
 func (m *GetDeviceIdRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName

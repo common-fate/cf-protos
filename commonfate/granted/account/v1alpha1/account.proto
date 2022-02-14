@@ -8,7 +8,6 @@ import "validate/validate.proto";
 // Common Fate Cloud accounts.
 service AccountService {
   rpc Signup(SignupRequest) returns (SignupResponse);
-  rpc CheckForUpdates(CheckForUpdatesRequest) returns (CheckForUpdatesResponse);
   rpc GetDeviceId(GetDeviceIdRequest) returns (GetDeviceIdResponse);
 
   // Authenticated informs the metadata service that the client has successfully
@@ -24,15 +23,6 @@ message SignupRequest {
 
 message SignupResponse {}
 
-
-message CheckForUpdatesRequest {
-	string version = 1;
-}
-
-message CheckForUpdatesResponse {
-	bool update_required = 1;
-	string message = 2;
-}
 
 message GetDeviceIdRequest {}
 
