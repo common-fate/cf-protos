@@ -35,6 +35,418 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on GetUserDefaultBrowserRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetUserDefaultBrowserRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserDefaultBrowserRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetUserDefaultBrowserRequestMultiError, or nil if none found.
+func (m *GetUserDefaultBrowserRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserDefaultBrowserRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetUserDefaultBrowserRequestMultiError(errors)
+	}
+	return nil
+}
+
+// GetUserDefaultBrowserRequestMultiError is an error wrapping multiple
+// validation errors returned by GetUserDefaultBrowserRequest.ValidateAll() if
+// the designated constraints aren't met.
+type GetUserDefaultBrowserRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserDefaultBrowserRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserDefaultBrowserRequestMultiError) AllErrors() []error { return m }
+
+// GetUserDefaultBrowserRequestValidationError is the validation error returned
+// by GetUserDefaultBrowserRequest.Validate if the designated constraints
+// aren't met.
+type GetUserDefaultBrowserRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserDefaultBrowserRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserDefaultBrowserRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserDefaultBrowserRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserDefaultBrowserRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserDefaultBrowserRequestValidationError) ErrorName() string {
+	return "GetUserDefaultBrowserRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserDefaultBrowserRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserDefaultBrowserRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserDefaultBrowserRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserDefaultBrowserRequestValidationError{}
+
+// Validate checks the field values on GetUserDefaultBrowserResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetUserDefaultBrowserResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserDefaultBrowserResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetUserDefaultBrowserResponseMultiError, or nil if none found.
+func (m *GetUserDefaultBrowserResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserDefaultBrowserResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for DefaultBrowser
+
+	if len(errors) > 0 {
+		return GetUserDefaultBrowserResponseMultiError(errors)
+	}
+	return nil
+}
+
+// GetUserDefaultBrowserResponseMultiError is an error wrapping multiple
+// validation errors returned by GetUserDefaultBrowserResponse.ValidateAll()
+// if the designated constraints aren't met.
+type GetUserDefaultBrowserResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserDefaultBrowserResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserDefaultBrowserResponseMultiError) AllErrors() []error { return m }
+
+// GetUserDefaultBrowserResponseValidationError is the validation error
+// returned by GetUserDefaultBrowserResponse.Validate if the designated
+// constraints aren't met.
+type GetUserDefaultBrowserResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserDefaultBrowserResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserDefaultBrowserResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserDefaultBrowserResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserDefaultBrowserResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserDefaultBrowserResponseValidationError) ErrorName() string {
+	return "GetUserDefaultBrowserResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserDefaultBrowserResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserDefaultBrowserResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserDefaultBrowserResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserDefaultBrowserResponseValidationError{}
+
+// Validate checks the field values on SetUserDefaultBrowserRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetUserDefaultBrowserRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetUserDefaultBrowserRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SetUserDefaultBrowserRequestMultiError, or nil if none found.
+func (m *SetUserDefaultBrowserRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetUserDefaultBrowserRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for DefaultBrowser
+
+	if len(errors) > 0 {
+		return SetUserDefaultBrowserRequestMultiError(errors)
+	}
+	return nil
+}
+
+// SetUserDefaultBrowserRequestMultiError is an error wrapping multiple
+// validation errors returned by SetUserDefaultBrowserRequest.ValidateAll() if
+// the designated constraints aren't met.
+type SetUserDefaultBrowserRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetUserDefaultBrowserRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetUserDefaultBrowserRequestMultiError) AllErrors() []error { return m }
+
+// SetUserDefaultBrowserRequestValidationError is the validation error returned
+// by SetUserDefaultBrowserRequest.Validate if the designated constraints
+// aren't met.
+type SetUserDefaultBrowserRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetUserDefaultBrowserRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetUserDefaultBrowserRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetUserDefaultBrowserRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetUserDefaultBrowserRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetUserDefaultBrowserRequestValidationError) ErrorName() string {
+	return "SetUserDefaultBrowserRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetUserDefaultBrowserRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetUserDefaultBrowserRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetUserDefaultBrowserRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetUserDefaultBrowserRequestValidationError{}
+
+// Validate checks the field values on SetUserDefaultBrowserResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetUserDefaultBrowserResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetUserDefaultBrowserResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// SetUserDefaultBrowserResponseMultiError, or nil if none found.
+func (m *SetUserDefaultBrowserResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetUserDefaultBrowserResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return SetUserDefaultBrowserResponseMultiError(errors)
+	}
+	return nil
+}
+
+// SetUserDefaultBrowserResponseMultiError is an error wrapping multiple
+// validation errors returned by SetUserDefaultBrowserResponse.ValidateAll()
+// if the designated constraints aren't met.
+type SetUserDefaultBrowserResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetUserDefaultBrowserResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetUserDefaultBrowserResponseMultiError) AllErrors() []error { return m }
+
+// SetUserDefaultBrowserResponseValidationError is the validation error
+// returned by SetUserDefaultBrowserResponse.Validate if the designated
+// constraints aren't met.
+type SetUserDefaultBrowserResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetUserDefaultBrowserResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetUserDefaultBrowserResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetUserDefaultBrowserResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetUserDefaultBrowserResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetUserDefaultBrowserResponseValidationError) ErrorName() string {
+	return "SetUserDefaultBrowserResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetUserDefaultBrowserResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetUserDefaultBrowserResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetUserDefaultBrowserResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetUserDefaultBrowserResponseValidationError{}
+
 // Validate checks the field values on ListRoleAccessRequestsRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -62,7 +474,6 @@ func (m *ListRoleAccessRequestsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRoleAccessRequestsRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -199,7 +610,6 @@ func (m *ListRoleAccessRequestsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRoleAccessRequestsResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -366,7 +776,6 @@ func (m *RoleAccessRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return RoleAccessRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -468,7 +877,6 @@ func (m *ListMembersRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListMembersRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -604,7 +1012,6 @@ func (m *ListMembersResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListMembersResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -740,7 +1147,6 @@ func (m *UpdateAccountsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateAccountsRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -876,7 +1282,6 @@ func (m *UpdateAccountsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateAccountsResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -978,7 +1383,6 @@ func (m *ListRolesRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRolesRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1112,7 +1516,6 @@ func (m *ListRolesResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRolesResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1217,7 +1620,6 @@ func (m *Member) validate(all bool) error {
 	if len(errors) > 0 {
 		return MemberMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1321,7 +1723,6 @@ func (m *Account) validate(all bool) error {
 	if len(errors) > 0 {
 		return AccountMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1518,7 +1919,6 @@ func (m *Role) validate(all bool) error {
 	if len(errors) > 0 {
 		return RoleMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1617,7 +2017,6 @@ func (m *IsAdminUserRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return IsAdminUserRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1721,7 +2120,6 @@ func (m *IsAdminUserResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return IsAdminUserResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1852,7 +2250,6 @@ func (m *UpdateConfigRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateConfigRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1956,7 +2353,6 @@ func (m *UpdateConfigResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateConfigResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2128,7 +2524,6 @@ func (m *EnrolProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrolProviderRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2253,7 +2648,6 @@ func (m *EnrolAWSProvider) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrolAWSProviderMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2378,7 +2772,6 @@ func (m *EnrolAWSSSOProvider) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrolAWSSSOProviderMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2513,7 +2906,6 @@ func (m *EnrolProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrolProviderResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2615,7 +3007,6 @@ func (m *ListProvidersRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListProvidersRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2753,7 +3144,6 @@ func (m *ListProvidersResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListProvidersResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2855,7 +3245,6 @@ func (m *GetStatusRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetStatusRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3023,7 +3412,6 @@ func (m *GetStatusResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetStatusResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3197,7 +3585,6 @@ func (m *ProviderEnrollment) validate(all bool) error {
 	if len(errors) > 0 {
 		return ProviderEnrollmentMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3301,7 +3688,6 @@ func (m *AWSProviderEnrollment) validate(all bool) error {
 	if len(errors) > 0 {
 		return AWSProviderEnrollmentMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3405,7 +3791,6 @@ func (m *DeleteProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteProviderRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3507,7 +3892,6 @@ func (m *DeleteProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteProviderResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3611,7 +3995,6 @@ func (m *GetProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetProviderRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3742,7 +4125,6 @@ func (m *GetProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetProviderResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3883,7 +4265,6 @@ func (m *Provider) validate(all bool) error {
 	if len(errors) > 0 {
 		return ProviderMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3984,7 +4365,6 @@ func (m *AWSProviderDetails) validate(all bool) error {
 	if len(errors) > 0 {
 		return AWSProviderDetailsMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4086,7 +4466,6 @@ func (m *GetAllProviderDetailsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderDetailsRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4220,7 +4599,6 @@ func (m *GetAllProviderDetailsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderDetailsResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4323,7 +4701,6 @@ func (m *GetAllProviderChecksumRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderChecksumRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4428,7 +4805,6 @@ func (m *GetAllProviderChecksumResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderChecksumResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4534,7 +4910,6 @@ func (m *GetAccessHandlersForProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAccessHandlersForProviderRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4673,7 +5048,6 @@ func (m *GetAccessHandlersForProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAccessHandlersForProviderResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4781,7 +5155,6 @@ func (m *AddAccessHandlerRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return AddAccessHandlerRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4883,7 +5256,6 @@ func (m *AddAccessHandlerResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return AddAccessHandlerResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4989,7 +5361,6 @@ func (m *DeleteAccessHandlerRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteAccessHandlerRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -5091,7 +5462,6 @@ func (m *DeleteAccessHandlerResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteAccessHandlerResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -5198,7 +5568,6 @@ func (m *UpdateCISettingsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateCISettingsRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -5300,7 +5669,6 @@ func (m *UpdateCISettingsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateCISettingsResponseMultiError(errors)
 	}
-
 	return nil
 }
 

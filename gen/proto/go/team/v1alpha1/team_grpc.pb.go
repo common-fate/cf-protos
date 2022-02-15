@@ -46,6 +46,8 @@ type TeamServiceClient interface {
 	DeleteAccessHandler(ctx context.Context, in *DeleteAccessHandlerRequest, opts ...grpc.CallOption) (*DeleteAccessHandlerResponse, error)
 	// UpdateCISettings enables or disabled CI role deployments for a team.
 	UpdateCISettings(ctx context.Context, in *UpdateCISettingsRequest, opts ...grpc.CallOption) (*UpdateCISettingsResponse, error)
+	GetUserDefaultBrowser(ctx context.Context, in *GetUserDefaultBrowserRequest, opts ...grpc.CallOption) (*GetUserDefaultBrowserResponse, error)
+	SetUserDefaultBrowser(ctx context.Context, in *SetUserDefaultBrowserRequest, opts ...grpc.CallOption) (*SetUserDefaultBrowserResponse, error)
 }
 
 type teamServiceClient struct {
@@ -209,6 +211,24 @@ func (c *teamServiceClient) UpdateCISettings(ctx context.Context, in *UpdateCISe
 	return out, nil
 }
 
+func (c *teamServiceClient) GetUserDefaultBrowser(ctx context.Context, in *GetUserDefaultBrowserRequest, opts ...grpc.CallOption) (*GetUserDefaultBrowserResponse, error) {
+	out := new(GetUserDefaultBrowserResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/GetUserDefaultBrowser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *teamServiceClient) SetUserDefaultBrowser(ctx context.Context, in *SetUserDefaultBrowserRequest, opts ...grpc.CallOption) (*SetUserDefaultBrowserResponse, error) {
+	out := new(SetUserDefaultBrowserResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/SetUserDefaultBrowser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TeamServiceServer is the server API for TeamService service.
 // All implementations should embed UnimplementedTeamServiceServer
 // for forward compatibility
@@ -241,6 +261,8 @@ type TeamServiceServer interface {
 	DeleteAccessHandler(context.Context, *DeleteAccessHandlerRequest) (*DeleteAccessHandlerResponse, error)
 	// UpdateCISettings enables or disabled CI role deployments for a team.
 	UpdateCISettings(context.Context, *UpdateCISettingsRequest) (*UpdateCISettingsResponse, error)
+	GetUserDefaultBrowser(context.Context, *GetUserDefaultBrowserRequest) (*GetUserDefaultBrowserResponse, error)
+	SetUserDefaultBrowser(context.Context, *SetUserDefaultBrowserRequest) (*SetUserDefaultBrowserResponse, error)
 }
 
 // UnimplementedTeamServiceServer should be embedded to have forward compatible implementations.
@@ -297,6 +319,12 @@ func (UnimplementedTeamServiceServer) DeleteAccessHandler(context.Context, *Dele
 }
 func (UnimplementedTeamServiceServer) UpdateCISettings(context.Context, *UpdateCISettingsRequest) (*UpdateCISettingsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCISettings not implemented")
+}
+func (UnimplementedTeamServiceServer) GetUserDefaultBrowser(context.Context, *GetUserDefaultBrowserRequest) (*GetUserDefaultBrowserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserDefaultBrowser not implemented")
+}
+func (UnimplementedTeamServiceServer) SetUserDefaultBrowser(context.Context, *SetUserDefaultBrowserRequest) (*SetUserDefaultBrowserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetUserDefaultBrowser not implemented")
 }
 
 // UnsafeTeamServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -616,6 +644,42 @@ func _TeamService_UpdateCISettings_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TeamService_GetUserDefaultBrowser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserDefaultBrowserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).GetUserDefaultBrowser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/GetUserDefaultBrowser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).GetUserDefaultBrowser(ctx, req.(*GetUserDefaultBrowserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TeamService_SetUserDefaultBrowser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetUserDefaultBrowserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).SetUserDefaultBrowser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/SetUserDefaultBrowser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).SetUserDefaultBrowser(ctx, req.(*SetUserDefaultBrowserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TeamService_ServiceDesc is the grpc.ServiceDesc for TeamService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -690,6 +754,14 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateCISettings",
 			Handler:    _TeamService_UpdateCISettings_Handler,
+		},
+		{
+			MethodName: "GetUserDefaultBrowser",
+			Handler:    _TeamService_GetUserDefaultBrowser_Handler,
+		},
+		{
+			MethodName: "SetUserDefaultBrowser",
+			Handler:    _TeamService_SetUserDefaultBrowser_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

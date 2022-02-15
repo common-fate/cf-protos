@@ -43,6 +43,24 @@ service TeamService {
 
   // UpdateCISettings enables or disabled CI role deployments for a team.
   rpc UpdateCISettings(UpdateCISettingsRequest) returns (UpdateCISettingsResponse);
+
+  rpc GetUserDefaultBrowser(GetUserDefaultBrowserRequest) returns (GetUserDefaultBrowserResponse);
+  rpc SetUserDefaultBrowser(SetUserDefaultBrowserRequest) returns (SetUserDefaultBrowserResponse);
+}
+
+message GetUserDefaultBrowserRequest {
+
+}
+message GetUserDefaultBrowserResponse {
+  string default_browser = 1;
+}
+
+message SetUserDefaultBrowserRequest {
+  string default_browser = 1;
+}
+
+message SetUserDefaultBrowserResponse {
+
 }
 message ListRoleAccessRequestsRequest {
   bool include_expired = 1;

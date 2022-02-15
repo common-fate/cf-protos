@@ -73,7 +73,6 @@ func (m *ApproveConfigPayload) validate(all bool) error {
 	if len(errors) > 0 {
 		return ApproveConfigPayloadMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -178,7 +177,6 @@ func (m *GetEntryIndexByMerkleHashRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetEntryIndexByMerkleHashRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -285,7 +283,6 @@ func (m *GetEntryIndexByMerkleHashResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetEntryIndexByMerkleHashResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -438,7 +435,6 @@ func (m *RoleAccessRequestPayload) validate(all bool) error {
 	if len(errors) > 0 {
 		return RoleAccessRequestPayloadMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -545,7 +541,6 @@ func (m *ApprovedRoleAccessRequestPayload) validate(all bool) error {
 	if len(errors) > 0 {
 		return ApprovedRoleAccessRequestPayloadMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -654,7 +649,6 @@ func (m *DeclinedRoleAccessRequestPayload) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeclinedRoleAccessRequestPayloadMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -763,7 +757,6 @@ func (m *CancelledRoleAccessRequestPayload) validate(all bool) error {
 	if len(errors) > 0 {
 		return CancelledRoleAccessRequestPayloadMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -869,7 +862,6 @@ func (m *IssueCertificatePayload) validate(all bool) error {
 	if len(errors) > 0 {
 		return IssueCertificatePayloadMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -975,7 +967,6 @@ func (m *RevokeCertificatePayload) validate(all bool) error {
 	if len(errors) > 0 {
 		return RevokeCertificatePayloadMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1083,7 +1074,6 @@ func (m *IssueSessionCredentialsPayload) validate(all bool) error {
 	if len(errors) > 0 {
 		return IssueSessionCredentialsPayloadMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1226,7 +1216,6 @@ func (m *Envelope) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnvelopeMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1605,7 +1594,6 @@ func (m *Payload) validate(all bool) error {
 	if len(errors) > 0 {
 		return PayloadMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1733,7 +1721,6 @@ func (m *StoreRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return StoreRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1839,7 +1826,6 @@ func (m *StoreResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return StoreResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1943,7 +1929,6 @@ func (m *GetEntriesRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetEntriesRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2079,7 +2064,6 @@ func (m *GetEntriesResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetEntriesResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2210,7 +2194,6 @@ func (m *IncludedEnvelope) validate(all bool) error {
 	if len(errors) > 0 {
 		return IncludedEnvelopeMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2310,7 +2293,6 @@ func (m *GetLatestSignedLogRootRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetLatestSignedLogRootRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2442,7 +2424,6 @@ func (m *GetLatestSignedLogRootResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetLatestSignedLogRootResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2577,7 +2558,6 @@ func (m *LogRoot) validate(all bool) error {
 	if len(errors) > 0 {
 		return LogRootMultiError(errors)
 	}
-
 	return nil
 }
 

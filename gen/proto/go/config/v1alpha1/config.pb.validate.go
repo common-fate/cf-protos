@@ -60,7 +60,6 @@ func (m *GetConfigRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetConfigRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -189,7 +188,6 @@ func (m *GetConfigResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetConfigResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -293,7 +291,6 @@ func (m *GetConfigByHashRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetConfigByHashRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -424,7 +421,6 @@ func (m *GetConfigByHashResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetConfigByHashResponseMultiError(errors)
 	}
-
 	return nil
 }
 
