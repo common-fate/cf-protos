@@ -63,7 +63,6 @@ func (m *GetProviderConfigByDigestRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetProviderConfigByDigestRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -197,7 +196,6 @@ func (m *GetProviderConfigByDigestResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetProviderConfigByDigestResponseMultiError(errors)
 	}
-
 	return nil
 }
 

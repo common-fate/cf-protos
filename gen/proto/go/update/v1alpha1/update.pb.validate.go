@@ -59,10 +59,11 @@ func (m *CheckForUpdatesRequest) validate(all bool) error {
 
 	// no validation rules for Version
 
+	// no validation rules for Application
+
 	if len(errors) > 0 {
 		return CheckForUpdatesRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -168,7 +169,6 @@ func (m *CheckForUpdatesResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return CheckForUpdatesResponseMultiError(errors)
 	}
-
 	return nil
 }
 

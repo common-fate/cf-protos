@@ -26,6 +26,9 @@ func (m *CheckForUpdatesRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.Ob
 	keyName = "version" // field version = 1
 	enc.AddString(keyName, m.Version)
 
+	keyName = "application" // field application = 2
+	enc.AddString(keyName, m.Application)
+
 	return nil
 }
 
