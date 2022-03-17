@@ -46,6 +46,7 @@ type TeamServiceClient interface {
 	DeleteAccessHandler(ctx context.Context, in *DeleteAccessHandlerRequest, opts ...grpc.CallOption) (*DeleteAccessHandlerResponse, error)
 	// UpdateCISettings enables or disabled CI role deployments for a team.
 	UpdateCISettings(ctx context.Context, in *UpdateCISettingsRequest, opts ...grpc.CallOption) (*UpdateCISettingsResponse, error)
+	ConnectSlack(ctx context.Context, in *ConnectSlackRequest, opts ...grpc.CallOption) (*ConnectSlackResponse, error)
 }
 
 type teamServiceClient struct {
@@ -209,6 +210,15 @@ func (c *teamServiceClient) UpdateCISettings(ctx context.Context, in *UpdateCISe
 	return out, nil
 }
 
+func (c *teamServiceClient) ConnectSlack(ctx context.Context, in *ConnectSlackRequest, opts ...grpc.CallOption) (*ConnectSlackResponse, error) {
+	out := new(ConnectSlackResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/ConnectSlack", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TeamServiceServer is the server API for TeamService service.
 // All implementations should embed UnimplementedTeamServiceServer
 // for forward compatibility
@@ -241,6 +251,7 @@ type TeamServiceServer interface {
 	DeleteAccessHandler(context.Context, *DeleteAccessHandlerRequest) (*DeleteAccessHandlerResponse, error)
 	// UpdateCISettings enables or disabled CI role deployments for a team.
 	UpdateCISettings(context.Context, *UpdateCISettingsRequest) (*UpdateCISettingsResponse, error)
+	ConnectSlack(context.Context, *ConnectSlackRequest) (*ConnectSlackResponse, error)
 }
 
 // UnimplementedTeamServiceServer should be embedded to have forward compatible implementations.
@@ -297,6 +308,9 @@ func (UnimplementedTeamServiceServer) DeleteAccessHandler(context.Context, *Dele
 }
 func (UnimplementedTeamServiceServer) UpdateCISettings(context.Context, *UpdateCISettingsRequest) (*UpdateCISettingsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCISettings not implemented")
+}
+func (UnimplementedTeamServiceServer) ConnectSlack(context.Context, *ConnectSlackRequest) (*ConnectSlackResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConnectSlack not implemented")
 }
 
 // UnsafeTeamServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -616,6 +630,24 @@ func _TeamService_UpdateCISettings_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TeamService_ConnectSlack_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConnectSlackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).ConnectSlack(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/ConnectSlack",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).ConnectSlack(ctx, req.(*ConnectSlackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TeamService_ServiceDesc is the grpc.ServiceDesc for TeamService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -690,6 +722,10 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateCISettings",
 			Handler:    _TeamService_UpdateCISettings_Handler,
+		},
+		{
+			MethodName: "ConnectSlack",
+			Handler:    _TeamService_ConnectSlack_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

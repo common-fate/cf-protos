@@ -43,6 +43,8 @@ service TeamService {
 
   // UpdateCISettings enables or disabled CI role deployments for a team.
   rpc UpdateCISettings(UpdateCISettingsRequest) returns (UpdateCISettingsResponse);
+
+  rpc ConnectSlack(ConnectSlackRequest) returns (ConnectSlackResponse);
 }
 message ListRoleAccessRequestsRequest {
   bool include_expired = 1;
@@ -239,3 +241,9 @@ message UpdateCISettingsRequest {
 }
 
 message UpdateCISettingsResponse {}
+
+message ConnectSlackRequest {
+  string bot_access_token = 1;
+  string channel_id = 2;
+}
+message ConnectSlackResponse {}
