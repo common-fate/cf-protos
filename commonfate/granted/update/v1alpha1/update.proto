@@ -10,6 +10,7 @@ service UpdateService {
 
 message CheckForUpdatesRequest {
 	string version = 1;
+	string application = 2;
 }
 
 message CheckForUpdatesResponse {
