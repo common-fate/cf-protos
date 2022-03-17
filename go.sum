@@ -19,6 +19,8 @@ github.com/common-fate/gconfig v0.0.0-20220120083656-e70209c35e3a h1:ApI13tLyn49
 github.com/common-fate/gconfig v0.0.0-20220120083656-e70209c35e3a/go.mod h1:cV9xPe2trmG4PzowEXRSMrnIoCRGMBh5EW/e6nnOeLs=
 github.com/common-fate/gconfig v0.0.0-20220131072055-1bd1a847392b h1:ZL+rsYWBsDOP78EI11WzpJWbHznx1EVH2QNS35lg0qI=
 github.com/common-fate/gconfig v0.0.0-20220131072055-1bd1a847392b/go.mod h1:cV9xPe2trmG4PzowEXRSMrnIoCRGMBh5EW/e6nnOeLs=
+github.com/common-fate/gconfig v0.0.0-20220317024440-a5e163acbac2 h1:VWpSBolXDFVhkQmB58f0Sm1iEJf1ny1uOl9cgt20Hqc=
+github.com/common-fate/gconfig v0.0.0-20220317024440-a5e163acbac2/go.mod h1:cV9xPe2trmG4PzowEXRSMrnIoCRGMBh5EW/e6nnOeLs=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
