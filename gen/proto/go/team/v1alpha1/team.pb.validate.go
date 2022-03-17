@@ -5376,3 +5376,211 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UpdateCISettingsResponseValidationError{}
+
+// Validate checks the field values on ConnectSlackRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ConnectSlackRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ConnectSlackRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ConnectSlackRequestMultiError, or nil if none found.
+func (m *ConnectSlackRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ConnectSlackRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for BotAccessToken
+
+	// no validation rules for ChannelId
+
+	if len(errors) > 0 {
+		return ConnectSlackRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ConnectSlackRequestMultiError is an error wrapping multiple validation
+// errors returned by ConnectSlackRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ConnectSlackRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ConnectSlackRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ConnectSlackRequestMultiError) AllErrors() []error { return m }
+
+// ConnectSlackRequestValidationError is the validation error returned by
+// ConnectSlackRequest.Validate if the designated constraints aren't met.
+type ConnectSlackRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ConnectSlackRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ConnectSlackRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ConnectSlackRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ConnectSlackRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ConnectSlackRequestValidationError) ErrorName() string {
+	return "ConnectSlackRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ConnectSlackRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sConnectSlackRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ConnectSlackRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ConnectSlackRequestValidationError{}
+
+// Validate checks the field values on ConnectSlackResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ConnectSlackResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ConnectSlackResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ConnectSlackResponseMultiError, or nil if none found.
+func (m *ConnectSlackResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ConnectSlackResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ConnectSlackResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ConnectSlackResponseMultiError is an error wrapping multiple validation
+// errors returned by ConnectSlackResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ConnectSlackResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ConnectSlackResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ConnectSlackResponseMultiError) AllErrors() []error { return m }
+
+// ConnectSlackResponseValidationError is the validation error returned by
+// ConnectSlackResponse.Validate if the designated constraints aren't met.
+type ConnectSlackResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ConnectSlackResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ConnectSlackResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ConnectSlackResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ConnectSlackResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ConnectSlackResponseValidationError) ErrorName() string {
+	return "ConnectSlackResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ConnectSlackResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sConnectSlackResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ConnectSlackResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ConnectSlackResponseValidationError{}
