@@ -5,7 +5,6 @@ package team.v1alpha1;
 import "gconfig/v1alpha1/gconfig.proto";
 import "certrail/v1alpha1/certrail.proto";
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/duration.proto";
 
 import "validate/validate.proto";
 
