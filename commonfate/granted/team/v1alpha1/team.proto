@@ -67,10 +67,17 @@ message RoleAccessRequest {
 }
 
 
-message ListMembersRequest {}
+message ListMembersRequest {
+
+}
 
 message ListMembersResponse {
 	repeated Member members = 1;
+}
+message Account {
+  string provider_id = 1;
+  string account_id = 2;
+  string alias = 3;
 }
 
 
@@ -84,26 +91,12 @@ message UpdateAccountsResponse {
 message ListRolesRequest {}
 
 message ListRolesResponse {
-	repeated Role roles = 1;
+	repeated gconfig.v1alpha1.Role roles = 1;
 }
 
 message Member {
 	string email_address = 1;
 	bool is_admin = 2;
-}
-
-
-message Account {
-  string provider = 1; // e.g. "aws"
-  string account_id = 2; // e.g. "123456789012"
-  string alias = 3;
-}
-
-message Role {
-	string id = 1;
-  repeated Account account = 2;
-  repeated gconfig.v1alpha1.Rule rule =3;
-  google.protobuf.Duration session_duration = 4;
 }
 
 message IsAdminUserRequest {

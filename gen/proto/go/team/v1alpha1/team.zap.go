@@ -7,11 +7,11 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
+	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	_ "github.com/common-fate/cf-protos/gen/proto/go/certrail/v1alpha1"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "google.golang.org/protobuf/types/known/durationpb"
-	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -129,6 +129,26 @@ func (m *ListMembersResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Objec
 	return nil
 }
 
+func (m *Account) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "provider_id" // field provider_id = 1
+	enc.AddString(keyName, m.ProviderId)
+
+	keyName = "account_id" // field account_id = 2
+	enc.AddString(keyName, m.AccountId)
+
+	keyName = "alias" // field alias = 3
+	enc.AddString(keyName, m.Alias)
+
+	return nil
+}
+
 func (m *UpdateAccountsRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
@@ -228,73 +248,6 @@ func (m *Member) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) err
 
 	keyName = "is_admin" // field is_admin = 2
 	enc.AddBool(keyName, m.IsAdmin)
-
-	return nil
-}
-
-func (m *Account) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	keyName = "provider" // field provider = 1
-	enc.AddString(keyName, m.Provider)
-
-	keyName = "account_id" // field account_id = 2
-	enc.AddString(keyName, m.AccountId)
-
-	keyName = "alias" // field alias = 3
-	enc.AddString(keyName, m.Alias)
-
-	return nil
-}
-
-func (m *Role) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	keyName = "id" // field id = 1
-	enc.AddString(keyName, m.Id)
-
-	keyName = "account" // field account = 2
-	enc.AddArray(keyName, go_uber_org_zap_zapcore.ArrayMarshalerFunc(func(aenc go_uber_org_zap_zapcore.ArrayEncoder) error {
-		for _, rv := range m.Account {
-			_ = rv
-			if rv != nil {
-				var vv interface{} = rv
-				if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
-					aenc.AppendObject(marshaler)
-				}
-			}
-		}
-		return nil
-	}))
-
-	keyName = "rule" // field rule = 3
-	enc.AddArray(keyName, go_uber_org_zap_zapcore.ArrayMarshalerFunc(func(aenc go_uber_org_zap_zapcore.ArrayEncoder) error {
-		for _, rv := range m.Rule {
-			_ = rv
-			if rv != nil {
-				var vv interface{} = rv
-				if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
-					aenc.AppendObject(marshaler)
-				}
-			}
-		}
-		return nil
-	}))
-
-	keyName = "session_duration" // field session_duration = 4
-	if d, err := github_com_golang_protobuf_ptypes.Duration(m.SessionDuration); err == nil {
-		enc.AddDuration(keyName, d)
-	}
 
 	return nil
 }
