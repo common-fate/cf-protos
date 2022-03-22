@@ -5593,3 +5593,209 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = HasSlackConnectionResponseValidationError{}
+
+// Validate checks the field values on UninstallSlackRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UninstallSlackRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UninstallSlackRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UninstallSlackRequestMultiError, or nil if none found.
+func (m *UninstallSlackRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UninstallSlackRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UninstallSlackRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UninstallSlackRequestMultiError is an error wrapping multiple validation
+// errors returned by UninstallSlackRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UninstallSlackRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UninstallSlackRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UninstallSlackRequestMultiError) AllErrors() []error { return m }
+
+// UninstallSlackRequestValidationError is the validation error returned by
+// UninstallSlackRequest.Validate if the designated constraints aren't met.
+type UninstallSlackRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UninstallSlackRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UninstallSlackRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UninstallSlackRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UninstallSlackRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UninstallSlackRequestValidationError) ErrorName() string {
+	return "UninstallSlackRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UninstallSlackRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUninstallSlackRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UninstallSlackRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UninstallSlackRequestValidationError{}
+
+// Validate checks the field values on UninstallSlackResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UninstallSlackResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UninstallSlackResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UninstallSlackResponseMultiError, or nil if none found.
+func (m *UninstallSlackResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UninstallSlackResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Success
+
+	if len(errors) > 0 {
+		return UninstallSlackResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UninstallSlackResponseMultiError is an error wrapping multiple validation
+// errors returned by UninstallSlackResponse.ValidateAll() if the designated
+// constraints aren't met.
+type UninstallSlackResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UninstallSlackResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UninstallSlackResponseMultiError) AllErrors() []error { return m }
+
+// UninstallSlackResponseValidationError is the validation error returned by
+// UninstallSlackResponse.Validate if the designated constraints aren't met.
+type UninstallSlackResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UninstallSlackResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UninstallSlackResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UninstallSlackResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UninstallSlackResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UninstallSlackResponseValidationError) ErrorName() string {
+	return "UninstallSlackResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UninstallSlackResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUninstallSlackResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UninstallSlackResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UninstallSlackResponseValidationError{}
