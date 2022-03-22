@@ -21,7 +21,6 @@ type TeamServiceClient interface {
 	ListRoleAccessRequests(ctx context.Context, in *ListRoleAccessRequestsRequest, opts ...grpc.CallOption) (*ListRoleAccessRequestsResponse, error)
 	ListMembers(ctx context.Context, in *ListMembersRequest, opts ...grpc.CallOption) (*ListMembersResponse, error)
 	ListRoles(ctx context.Context, in *ListRolesRequest, opts ...grpc.CallOption) (*ListRolesResponse, error)
-	UpdateAccounts(ctx context.Context, in *UpdateAccountsRequest, opts ...grpc.CallOption) (*UpdateAccountsResponse, error)
 	UpdateConfig(ctx context.Context, in *UpdateConfigRequest, opts ...grpc.CallOption) (*UpdateConfigResponse, error)
 	IsAdminUser(ctx context.Context, in *IsAdminUserRequest, opts ...grpc.CallOption) (*IsAdminUserResponse, error)
 	EnrolProvider(ctx context.Context, in *EnrolProviderRequest, opts ...grpc.CallOption) (*EnrolProviderResponse, error)
@@ -78,15 +77,6 @@ func (c *teamServiceClient) ListMembers(ctx context.Context, in *ListMembersRequ
 func (c *teamServiceClient) ListRoles(ctx context.Context, in *ListRolesRequest, opts ...grpc.CallOption) (*ListRolesResponse, error) {
 	out := new(ListRolesResponse)
 	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/ListRoles", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *teamServiceClient) UpdateAccounts(ctx context.Context, in *UpdateAccountsRequest, opts ...grpc.CallOption) (*UpdateAccountsResponse, error) {
-	out := new(UpdateAccountsResponse)
-	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/UpdateAccounts", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -226,7 +216,6 @@ type TeamServiceServer interface {
 	ListRoleAccessRequests(context.Context, *ListRoleAccessRequestsRequest) (*ListRoleAccessRequestsResponse, error)
 	ListMembers(context.Context, *ListMembersRequest) (*ListMembersResponse, error)
 	ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error)
-	UpdateAccounts(context.Context, *UpdateAccountsRequest) (*UpdateAccountsResponse, error)
 	UpdateConfig(context.Context, *UpdateConfigRequest) (*UpdateConfigResponse, error)
 	IsAdminUser(context.Context, *IsAdminUserRequest) (*IsAdminUserResponse, error)
 	EnrolProvider(context.Context, *EnrolProviderRequest) (*EnrolProviderResponse, error)
@@ -266,9 +255,6 @@ func (UnimplementedTeamServiceServer) ListMembers(context.Context, *ListMembersR
 }
 func (UnimplementedTeamServiceServer) ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListRoles not implemented")
-}
-func (UnimplementedTeamServiceServer) UpdateAccounts(context.Context, *UpdateAccountsRequest) (*UpdateAccountsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccounts not implemented")
 }
 func (UnimplementedTeamServiceServer) UpdateConfig(context.Context, *UpdateConfigRequest) (*UpdateConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateConfig not implemented")
@@ -374,24 +360,6 @@ func _TeamService_ListRoles_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TeamServiceServer).ListRoles(ctx, req.(*ListRolesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _TeamService_UpdateAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateAccountsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TeamServiceServer).UpdateAccounts(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/team.v1alpha1.TeamService/UpdateAccounts",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TeamServiceServer).UpdateAccounts(ctx, req.(*UpdateAccountsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -666,10 +634,6 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListRoles",
 			Handler:    _TeamService_ListRoles_Handler,
-		},
-		{
-			MethodName: "UpdateAccounts",
-			Handler:    _TeamService_UpdateAccounts_Handler,
 		},
 		{
 			MethodName: "UpdateConfig",
