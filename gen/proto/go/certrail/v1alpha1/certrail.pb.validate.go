@@ -1052,22 +1052,22 @@ var _ interface {
 	ErrorName() string
 } = RevokeCertificatePayloadValidationError{}
 
-// Validate checks the field values on AssumeAccessAuditRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on AssumeAccessAuditRequestPayload with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AssumeAccessAuditRequest) Validate() error {
+func (m *AssumeAccessAuditRequestPayload) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AssumeAccessAuditRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// AssumeAccessAuditRequestMultiError, or nil if none found.
-func (m *AssumeAccessAuditRequest) ValidateAll() error {
+// ValidateAll checks the field values on AssumeAccessAuditRequestPayload with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// AssumeAccessAuditRequestPayloadMultiError, or nil if none found.
+func (m *AssumeAccessAuditRequestPayload) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AssumeAccessAuditRequest) validate(all bool) error {
+func (m *AssumeAccessAuditRequestPayload) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1079,7 +1079,7 @@ func (m *AssumeAccessAuditRequest) validate(all bool) error {
 	// no validation rules for Provider
 
 	if utf8.RuneCountInString(m.GetAccount()) != 12 {
-		err := AssumeAccessAuditRequestValidationError{
+		err := AssumeAccessAuditRequestPayloadValidationError{
 			field:  "Account",
 			reason: "value length must be 12 runes",
 		}
@@ -1094,7 +1094,7 @@ func (m *AssumeAccessAuditRequest) validate(all bool) error {
 		switch v := interface{}(m.GetSessionDuration()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, AssumeAccessAuditRequestValidationError{
+				errors = append(errors, AssumeAccessAuditRequestPayloadValidationError{
 					field:  "SessionDuration",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1102,7 +1102,7 @@ func (m *AssumeAccessAuditRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, AssumeAccessAuditRequestValidationError{
+				errors = append(errors, AssumeAccessAuditRequestPayloadValidationError{
 					field:  "SessionDuration",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1111,7 +1111,7 @@ func (m *AssumeAccessAuditRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetSessionDuration()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return AssumeAccessAuditRequestValidationError{
+			return AssumeAccessAuditRequestPayloadValidationError{
 				field:  "SessionDuration",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -1128,19 +1128,19 @@ func (m *AssumeAccessAuditRequest) validate(all bool) error {
 	// no validation rules for User
 
 	if len(errors) > 0 {
-		return AssumeAccessAuditRequestMultiError(errors)
+		return AssumeAccessAuditRequestPayloadMultiError(errors)
 	}
 
 	return nil
 }
 
-// AssumeAccessAuditRequestMultiError is an error wrapping multiple validation
-// errors returned by AssumeAccessAuditRequest.ValidateAll() if the designated
-// constraints aren't met.
-type AssumeAccessAuditRequestMultiError []error
+// AssumeAccessAuditRequestPayloadMultiError is an error wrapping multiple
+// validation errors returned by AssumeAccessAuditRequestPayload.ValidateAll()
+// if the designated constraints aren't met.
+type AssumeAccessAuditRequestPayloadMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AssumeAccessAuditRequestMultiError) Error() string {
+func (m AssumeAccessAuditRequestPayloadMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1149,11 +1149,12 @@ func (m AssumeAccessAuditRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AssumeAccessAuditRequestMultiError) AllErrors() []error { return m }
+func (m AssumeAccessAuditRequestPayloadMultiError) AllErrors() []error { return m }
 
-// AssumeAccessAuditRequestValidationError is the validation error returned by
-// AssumeAccessAuditRequest.Validate if the designated constraints aren't met.
-type AssumeAccessAuditRequestValidationError struct {
+// AssumeAccessAuditRequestPayloadValidationError is the validation error
+// returned by AssumeAccessAuditRequestPayload.Validate if the designated
+// constraints aren't met.
+type AssumeAccessAuditRequestPayloadValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1161,24 +1162,24 @@ type AssumeAccessAuditRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e AssumeAccessAuditRequestValidationError) Field() string { return e.field }
+func (e AssumeAccessAuditRequestPayloadValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AssumeAccessAuditRequestValidationError) Reason() string { return e.reason }
+func (e AssumeAccessAuditRequestPayloadValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AssumeAccessAuditRequestValidationError) Cause() error { return e.cause }
+func (e AssumeAccessAuditRequestPayloadValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AssumeAccessAuditRequestValidationError) Key() bool { return e.key }
+func (e AssumeAccessAuditRequestPayloadValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AssumeAccessAuditRequestValidationError) ErrorName() string {
-	return "AssumeAccessAuditRequestValidationError"
+func (e AssumeAccessAuditRequestPayloadValidationError) ErrorName() string {
+	return "AssumeAccessAuditRequestPayloadValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e AssumeAccessAuditRequestValidationError) Error() string {
+func (e AssumeAccessAuditRequestPayloadValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1190,14 +1191,14 @@ func (e AssumeAccessAuditRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAssumeAccessAuditRequest.%s: %s%s",
+		"invalid %sAssumeAccessAuditRequestPayload.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AssumeAccessAuditRequestValidationError{}
+var _ error = AssumeAccessAuditRequestPayloadValidationError{}
 
 var _ interface {
 	Field() string
@@ -1205,7 +1206,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AssumeAccessAuditRequestValidationError{}
+} = AssumeAccessAuditRequestPayloadValidationError{}
 
 // Validate checks the field values on IssueSessionCredentialsPayload with the
 // rules defined in the proto definition for this message. If any rules are
@@ -1749,6 +1750,37 @@ func (m *Payload) validate(all bool) error {
 			if err := v.Validate(); err != nil {
 				return PayloadValidationError{
 					field:  "CancelledRoleAccessRequest",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *Payload_AssumeAccessAuditRequest:
+
+		if all {
+			switch v := interface{}(m.GetAssumeAccessAuditRequest()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, PayloadValidationError{
+						field:  "AssumeAccessAuditRequest",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, PayloadValidationError{
+						field:  "AssumeAccessAuditRequest",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetAssumeAccessAuditRequest()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PayloadValidationError{
+					field:  "AssumeAccessAuditRequest",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}

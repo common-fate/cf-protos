@@ -177,7 +177,7 @@ func (m *RevokeCertificatePayload) MarshalLogObject(enc go_uber_org_zap_zapcore.
 	return nil
 }
 
-func (m *AssumeAccessAuditRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *AssumeAccessAuditRequestPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -351,6 +351,17 @@ func (m *Payload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) er
 		_ = ov
 		if ov.CancelledRoleAccessRequest != nil {
 			var vv interface{} = ov.CancelledRoleAccessRequest
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
+	keyName = "assume_access_audit_request" // field assume_access_audit_request = 10
+	if ov, ok := m.GetContents().(*Payload_AssumeAccessAuditRequest); ok {
+		_ = ov
+		if ov.AssumeAccessAuditRequest != nil {
+			var vv interface{} = ov.AssumeAccessAuditRequest
 			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
 				enc.AddObject(keyName, marshaler)
 			}
