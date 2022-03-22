@@ -63,6 +63,21 @@ message RevokeCertificatePayload {
   bytes revoked_by = 2;
 }
 
+//audit trail log of user assuming a role
+message AssumeAccessAuditRequest {
+  string role = 1;
+  string provider = 2;
+  // must be an aws account id
+  string account =3 [(validate.rules).string.len = 12];
+  google.protobuf.Duration session_duration = 4;
+  string reason = 5;
+  bytes requested_by = 6;
+  string requested_at = 7;
+  string user = 8;
+
+
+}
+
 // When an access handler issues credentials to a user it is stored
 // in our immutable audit trail. This allows administrators to compare
 // our audit trail against their cloud providers' audit trails to verify

@@ -177,6 +177,43 @@ func (m *RevokeCertificatePayload) MarshalLogObject(enc go_uber_org_zap_zapcore.
 	return nil
 }
 
+func (m *AssumeAccessAuditRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "role" // field role = 1
+	enc.AddString(keyName, m.Role)
+
+	keyName = "provider" // field provider = 2
+	enc.AddString(keyName, m.Provider)
+
+	keyName = "account" // field account = 3
+	enc.AddString(keyName, m.Account)
+
+	keyName = "session_duration" // field session_duration = 4
+	if d, err := github_com_golang_protobuf_ptypes.Duration(m.SessionDuration); err == nil {
+		enc.AddDuration(keyName, d)
+	}
+
+	keyName = "reason" // field reason = 5
+	enc.AddString(keyName, m.Reason)
+
+	keyName = "requested_by" // field requested_by = 6
+	enc.AddByteString(keyName, m.RequestedBy)
+
+	keyName = "requested_at" // field requested_at = 7
+	enc.AddString(keyName, m.RequestedAt)
+
+	keyName = "user" // field user = 8
+	enc.AddString(keyName, m.User)
+
+	return nil
+}
+
 func (m *IssueSessionCredentialsPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
