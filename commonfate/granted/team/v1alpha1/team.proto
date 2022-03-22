@@ -13,7 +13,6 @@ service TeamService {
   rpc ListRoleAccessRequests(ListRoleAccessRequestsRequest) returns (ListRoleAccessRequestsResponse);
   rpc ListMembers(ListMembersRequest) returns (ListMembersResponse);
   rpc ListRoles(ListRolesRequest) returns (ListRolesResponse);
-  rpc UpdateAccounts(UpdateAccountsRequest) returns (UpdateAccountsResponse);
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse);
   rpc IsAdminUser(IsAdminUserRequest) returns (IsAdminUserResponse);
   rpc EnrolProvider(EnrolProviderRequest) returns (EnrolProviderResponse);
