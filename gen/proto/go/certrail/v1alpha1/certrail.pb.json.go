@@ -152,7 +152,7 @@ func (msg *RevokeCertificatePayload) UnmarshalJSON(b []byte) error {
 }
 
 // MarshalJSON implements json.Marshaler
-func (msg *AssumeAccessAuditRequestPayload) MarshalJSON() ([]byte, error) {
+func (msg *AssumeRoleRequestPayload) MarshalJSON() ([]byte, error) {
 	return protojson.MarshalOptions{
 		UseEnumNumbers:  false,
 		EmitUnpopulated: false,
@@ -161,7 +161,7 @@ func (msg *AssumeAccessAuditRequestPayload) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON implements json.Unmarshaler
-func (msg *AssumeAccessAuditRequestPayload) UnmarshalJSON(b []byte) error {
+func (msg *AssumeRoleRequestPayload) UnmarshalJSON(b []byte) error {
 	return protojson.UnmarshalOptions{
 		DiscardUnknown: false,
 	}.Unmarshal(b, msg)

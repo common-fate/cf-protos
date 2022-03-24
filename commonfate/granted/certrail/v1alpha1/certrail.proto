@@ -64,7 +64,7 @@ message RevokeCertificatePayload {
 }
 
 //audit trail log of user assuming a role
-message AssumeAccessAuditRequestPayload {
+message AssumeRoleRequestPayload {
   string role = 1;
   string provider = 2;
   // must be an aws account id
@@ -105,7 +105,7 @@ message Payload {
     ApprovedRoleAccessRequestPayload approved_role_access_request = 7;
     DeclinedRoleAccessRequestPayload declined_role_access_request = 8;
     CancelledRoleAccessRequestPayload cancelled_role_access_request = 9;
-    AssumeAccessAuditRequestPayload assume_access_audit_request = 10;
+    AssumeRoleRequestPayload assume_access_audit_request = 10;
   }
 }
 

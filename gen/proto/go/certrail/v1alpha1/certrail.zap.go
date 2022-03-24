@@ -177,7 +177,7 @@ func (m *RevokeCertificatePayload) MarshalLogObject(enc go_uber_org_zap_zapcore.
 	return nil
 }
 
-func (m *AssumeAccessAuditRequestPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *AssumeRoleRequestPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
