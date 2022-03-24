@@ -105,7 +105,7 @@ message Payload {
     ApprovedRoleAccessRequestPayload approved_role_access_request = 7;
     DeclinedRoleAccessRequestPayload declined_role_access_request = 8;
     CancelledRoleAccessRequestPayload cancelled_role_access_request = 9;
-    AssumeRoleRequestPayload assume_access_audit_request = 10;
+    AssumeRoleRequestPayload assume_role_request = 10;
   }
 }
 

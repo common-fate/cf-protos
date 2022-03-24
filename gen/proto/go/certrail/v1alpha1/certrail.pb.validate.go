@@ -1755,14 +1755,14 @@ func (m *Payload) validate(all bool) error {
 			}
 		}
 
-	case *Payload_AssumeAccessAuditRequest:
+	case *Payload_AssumeRoleRequest:
 
 		if all {
-			switch v := interface{}(m.GetAssumeAccessAuditRequest()).(type) {
+			switch v := interface{}(m.GetAssumeRoleRequest()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, PayloadValidationError{
-						field:  "AssumeAccessAuditRequest",
+						field:  "AssumeRoleRequest",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1770,16 +1770,16 @@ func (m *Payload) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, PayloadValidationError{
-						field:  "AssumeAccessAuditRequest",
+						field:  "AssumeRoleRequest",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			}
-		} else if v, ok := interface{}(m.GetAssumeAccessAuditRequest()).(interface{ Validate() error }); ok {
+		} else if v, ok := interface{}(m.GetAssumeRoleRequest()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return PayloadValidationError{
-					field:  "AssumeAccessAuditRequest",
+					field:  "AssumeRoleRequest",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}

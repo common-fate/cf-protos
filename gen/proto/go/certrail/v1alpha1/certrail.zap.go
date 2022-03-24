@@ -7,9 +7,9 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
+	_ "google.golang.org/protobuf/types/known/durationpb"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
-	_ "google.golang.org/protobuf/types/known/durationpb"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -357,11 +357,11 @@ func (m *Payload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) er
 		}
 	}
 
-	keyName = "assume_access_audit_request" // field assume_access_audit_request = 10
-	if ov, ok := m.GetContents().(*Payload_AssumeAccessAuditRequest); ok {
+	keyName = "assume_role_request" // field assume_role_request = 10
+	if ov, ok := m.GetContents().(*Payload_AssumeRoleRequest); ok {
 		_ = ov
-		if ov.AssumeAccessAuditRequest != nil {
-			var vv interface{} = ov.AssumeAccessAuditRequest
+		if ov.AssumeRoleRequest != nil {
+			var vv interface{} = ov.AssumeRoleRequest
 			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
 				enc.AddObject(keyName, marshaler)
 			}
