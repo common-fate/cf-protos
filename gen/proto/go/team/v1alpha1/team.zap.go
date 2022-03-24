@@ -895,3 +895,112 @@ func (m *UninstallSlackResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Ob
 
 	return nil
 }
+
+func (m *SetupSAMLSSORequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "mode" // field mode = 1
+	enc.AddString(keyName, m.Mode.String())
+
+	return nil
+}
+
+func (m *SetupSAMLSSOResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "metadata_url" // field metadata_url = 1
+	enc.AddString(keyName, m.MetadataUrl)
+
+	return nil
+}
+
+func (m *SetSAMLSSOIdentityProviderMetadataRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "metadata" // field metadata = 1
+	enc.AddString(keyName, m.Metadata)
+
+	return nil
+}
+
+func (m *SetSAMLSSOIdentityProviderMetadataResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+func (m *ChangeSSOModeRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "mode" // field mode = 1
+	enc.AddString(keyName, m.Mode.String())
+
+	return nil
+}
+
+func (m *ChangeSSOModeResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+func (m *GetSSOSettingsRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+func (m *GetSSOSettingsResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "mode" // field mode = 1
+	enc.AddString(keyName, m.Mode.String())
+
+	keyName = "metadata_url" // field metadata_url = 2
+	enc.AddString(keyName, m.MetadataUrl)
+
+	keyName = "idp_metadata" // field idp_metadata = 3
+	enc.AddString(keyName, m.IdpMetadata)
+
+	return nil
+}
