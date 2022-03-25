@@ -50,6 +50,7 @@ type TeamServiceClient interface {
 	// UpdateCISettings enables or disabled CI role deployments for a team.
 	UpdateCISettings(ctx context.Context, in *UpdateCISettingsRequest, opts ...grpc.CallOption) (*UpdateCISettingsResponse, error)
 	ConnectSlack(ctx context.Context, in *ConnectSlackRequest, opts ...grpc.CallOption) (*ConnectSlackResponse, error)
+	ListSlackConnections(ctx context.Context, in *ListSlackConnectionsRequest, opts ...grpc.CallOption) (*ListSlackConnectionsResponse, error)
 	HasSlackConnection(ctx context.Context, in *HasSlackConnectionRequest, opts ...grpc.CallOption) (*HasSlackConnectionResponse, error)
 	UninstallSlack(ctx context.Context, in *UninstallSlackRequest, opts ...grpc.CallOption) (*UninstallSlackResponse, error)
 }
@@ -215,6 +216,15 @@ func (c *teamServiceClient) ConnectSlack(ctx context.Context, in *ConnectSlackRe
 	return out, nil
 }
 
+func (c *teamServiceClient) ListSlackConnections(ctx context.Context, in *ListSlackConnectionsRequest, opts ...grpc.CallOption) (*ListSlackConnectionsResponse, error) {
+	out := new(ListSlackConnectionsResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/ListSlackConnections", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *teamServiceClient) HasSlackConnection(ctx context.Context, in *HasSlackConnectionRequest, opts ...grpc.CallOption) (*HasSlackConnectionResponse, error) {
 	out := new(HasSlackConnectionResponse)
 	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/HasSlackConnection", in, out, opts...)
@@ -265,6 +275,7 @@ type TeamServiceServer interface {
 	// UpdateCISettings enables or disabled CI role deployments for a team.
 	UpdateCISettings(context.Context, *UpdateCISettingsRequest) (*UpdateCISettingsResponse, error)
 	ConnectSlack(context.Context, *ConnectSlackRequest) (*ConnectSlackResponse, error)
+	ListSlackConnections(context.Context, *ListSlackConnectionsRequest) (*ListSlackConnectionsResponse, error)
 	HasSlackConnection(context.Context, *HasSlackConnectionRequest) (*HasSlackConnectionResponse, error)
 	UninstallSlack(context.Context, *UninstallSlackRequest) (*UninstallSlackResponse, error)
 }
@@ -323,6 +334,9 @@ func (UnimplementedTeamServiceServer) UpdateCISettings(context.Context, *UpdateC
 }
 func (UnimplementedTeamServiceServer) ConnectSlack(context.Context, *ConnectSlackRequest) (*ConnectSlackResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ConnectSlack not implemented")
+}
+func (UnimplementedTeamServiceServer) ListSlackConnections(context.Context, *ListSlackConnectionsRequest) (*ListSlackConnectionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSlackConnections not implemented")
 }
 func (UnimplementedTeamServiceServer) HasSlackConnection(context.Context, *HasSlackConnectionRequest) (*HasSlackConnectionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HasSlackConnection not implemented")
@@ -648,6 +662,24 @@ func _TeamService_ConnectSlack_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TeamService_ListSlackConnections_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSlackConnectionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).ListSlackConnections(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/ListSlackConnections",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).ListSlackConnections(ctx, req.(*ListSlackConnectionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _TeamService_HasSlackConnection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(HasSlackConnectionRequest)
 	if err := dec(in); err != nil {
@@ -758,6 +790,10 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ConnectSlack",
 			Handler:    _TeamService_ConnectSlack_Handler,
+		},
+		{
+			MethodName: "ListSlackConnections",
+			Handler:    _TeamService_ListSlackConnections_Handler,
 		},
 		{
 			MethodName: "HasSlackConnection",

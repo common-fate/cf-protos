@@ -5206,6 +5206,10 @@ func (m *ConnectSlackRequest) validate(all bool) error {
 
 	// no validation rules for ChannelId
 
+	// no validation rules for ChannelName
+
+	// no validation rules for Invited
+
 	if len(errors) > 0 {
 		return ConnectSlackRequestMultiError(errors)
 	}
@@ -5387,6 +5391,246 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ConnectSlackResponseValidationError{}
+
+// Validate checks the field values on ListSlackConnectionsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListSlackConnectionsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListSlackConnectionsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListSlackConnectionsRequestMultiError, or nil if none found.
+func (m *ListSlackConnectionsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListSlackConnectionsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListSlackConnectionsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListSlackConnectionsRequestMultiError is an error wrapping multiple
+// validation errors returned by ListSlackConnectionsRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListSlackConnectionsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListSlackConnectionsRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListSlackConnectionsRequestMultiError) AllErrors() []error { return m }
+
+// ListSlackConnectionsRequestValidationError is the validation error returned
+// by ListSlackConnectionsRequest.Validate if the designated constraints
+// aren't met.
+type ListSlackConnectionsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListSlackConnectionsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListSlackConnectionsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListSlackConnectionsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListSlackConnectionsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListSlackConnectionsRequestValidationError) ErrorName() string {
+	return "ListSlackConnectionsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListSlackConnectionsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListSlackConnectionsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListSlackConnectionsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListSlackConnectionsRequestValidationError{}
+
+// Validate checks the field values on ListSlackConnectionsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListSlackConnectionsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListSlackConnectionsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListSlackConnectionsResponseMultiError, or nil if none found.
+func (m *ListSlackConnectionsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListSlackConnectionsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetSlackConnections() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListSlackConnectionsResponseValidationError{
+						field:  fmt.Sprintf("SlackConnections[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListSlackConnectionsResponseValidationError{
+						field:  fmt.Sprintf("SlackConnections[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListSlackConnectionsResponseValidationError{
+					field:  fmt.Sprintf("SlackConnections[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListSlackConnectionsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListSlackConnectionsResponseMultiError is an error wrapping multiple
+// validation errors returned by ListSlackConnectionsResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ListSlackConnectionsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListSlackConnectionsResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListSlackConnectionsResponseMultiError) AllErrors() []error { return m }
+
+// ListSlackConnectionsResponseValidationError is the validation error returned
+// by ListSlackConnectionsResponse.Validate if the designated constraints
+// aren't met.
+type ListSlackConnectionsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListSlackConnectionsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListSlackConnectionsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListSlackConnectionsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListSlackConnectionsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListSlackConnectionsResponseValidationError) ErrorName() string {
+	return "ListSlackConnectionsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListSlackConnectionsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListSlackConnectionsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListSlackConnectionsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListSlackConnectionsResponseValidationError{}
 
 // Validate checks the field values on HasSlackConnectionRequest with the rules
 // defined in the proto definition for this message. If any rules are

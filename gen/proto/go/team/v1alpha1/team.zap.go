@@ -7,10 +7,10 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
+	_ "github.com/common-fate/cf-protos/gen/proto/go/certrail/v1alpha1"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
-	_ "github.com/common-fate/cf-protos/gen/proto/go/certrail/v1alpha1"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -832,6 +832,12 @@ func (m *ConnectSlackRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.Objec
 	keyName = "channel_id" // field channel_id = 2
 	enc.AddString(keyName, m.ChannelId)
 
+	keyName = "channel_name" // field channel_name = 3
+	enc.AddString(keyName, m.ChannelName)
+
+	keyName = "invited" // field invited = 4
+	enc.AddBool(keyName, m.Invited)
+
 	return nil
 }
 
@@ -842,6 +848,42 @@ func (m *ConnectSlackResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 	if m == nil {
 		return nil
 	}
+
+	return nil
+}
+
+func (m *ListSlackConnectionsRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+func (m *ListSlackConnectionsResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "slack_connections" // field slack_connections = 1
+	enc.AddArray(keyName, go_uber_org_zap_zapcore.ArrayMarshalerFunc(func(aenc go_uber_org_zap_zapcore.ArrayEncoder) error {
+		for _, rv := range m.SlackConnections {
+			_ = rv
+			if rv != nil {
+				var vv interface{} = rv
+				if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+					aenc.AppendObject(marshaler)
+				}
+			}
+		}
+		return nil
+	}))
 
 	return nil
 }
