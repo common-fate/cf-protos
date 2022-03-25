@@ -388,16 +388,50 @@ func (m *RoleAccessRequestPayload) validate(all bool) error {
 
 	// no validation rules for Role
 
-	if len(m.GetConfigSha256()) != 32 {
+	// no validation rules for Provider
+
+	if utf8.RuneCountInString(m.GetAccount()) != 12 {
 		err := RoleAccessRequestPayloadValidationError{
-			field:  "ConfigSha256",
-			reason: "value length must be 32 bytes",
+			field:  "Account",
+			reason: "value length must be 12 runes",
 		}
 		if !all {
 			return err
 		}
 		errors = append(errors, err)
+
 	}
+
+	if all {
+		switch v := interface{}(m.GetSessionDuration()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RoleAccessRequestPayloadValidationError{
+					field:  "SessionDuration",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RoleAccessRequestPayloadValidationError{
+					field:  "SessionDuration",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSessionDuration()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RoleAccessRequestPayloadValidationError{
+				field:  "SessionDuration",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Group
 
 	// no validation rules for Reason
 
@@ -510,72 +544,6 @@ func (m *ApprovedRoleAccessRequestPayload) validate(all bool) error {
 
 	// no validation rules for ApprovedBy
 
-	switch m.ProvisionStrategy.(type) {
-
-	case *ApprovedRoleAccessRequestPayload_Window:
-
-		if all {
-			switch v := interface{}(m.GetWindow()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ApprovedRoleAccessRequestPayloadValidationError{
-						field:  "Window",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ApprovedRoleAccessRequestPayloadValidationError{
-						field:  "Window",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetWindow()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ApprovedRoleAccessRequestPayloadValidationError{
-					field:  "Window",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	case *ApprovedRoleAccessRequestPayload_Expires:
-
-		if all {
-			switch v := interface{}(m.GetExpires()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ApprovedRoleAccessRequestPayloadValidationError{
-						field:  "Expires",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ApprovedRoleAccessRequestPayloadValidationError{
-						field:  "Expires",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetExpires()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ApprovedRoleAccessRequestPayloadValidationError{
-					field:  "Expires",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
 	if len(errors) > 0 {
 		return ApprovedRoleAccessRequestPayloadMultiError(errors)
 	}
@@ -657,318 +625,6 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ApprovedRoleAccessRequestPayloadValidationError{}
-
-// Validate checks the field values on Window with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *Window) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on Window with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in WindowMultiError, or nil if none found.
-func (m *Window) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *Window) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetStart()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, WindowValidationError{
-					field:  "Start",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, WindowValidationError{
-					field:  "Start",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetStart()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return WindowValidationError{
-				field:  "Start",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if all {
-		switch v := interface{}(m.GetEnd()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, WindowValidationError{
-					field:  "End",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, WindowValidationError{
-					field:  "End",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetEnd()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return WindowValidationError{
-				field:  "End",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if len(errors) > 0 {
-		return WindowMultiError(errors)
-	}
-
-	return nil
-}
-
-// WindowMultiError is an error wrapping multiple validation errors returned by
-// Window.ValidateAll() if the designated constraints aren't met.
-type WindowMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m WindowMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m WindowMultiError) AllErrors() []error { return m }
-
-// WindowValidationError is the validation error returned by Window.Validate if
-// the designated constraints aren't met.
-type WindowValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e WindowValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e WindowValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e WindowValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e WindowValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e WindowValidationError) ErrorName() string { return "WindowValidationError" }
-
-// Error satisfies the builtin error interface
-func (e WindowValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sWindow.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = WindowValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = WindowValidationError{}
-
-// Validate checks the field values on Expires with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *Expires) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on Expires with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in ExpiresMultiError, or nil if none found.
-func (m *Expires) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *Expires) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetExpiresAt()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ExpiresValidationError{
-					field:  "ExpiresAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ExpiresValidationError{
-					field:  "ExpiresAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetExpiresAt()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ExpiresValidationError{
-				field:  "ExpiresAt",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if all {
-		switch v := interface{}(m.GetApprovedSessionDuration()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ExpiresValidationError{
-					field:  "ApprovedSessionDuration",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ExpiresValidationError{
-					field:  "ApprovedSessionDuration",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetApprovedSessionDuration()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ExpiresValidationError{
-				field:  "ApprovedSessionDuration",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if len(errors) > 0 {
-		return ExpiresMultiError(errors)
-	}
-
-	return nil
-}
-
-// ExpiresMultiError is an error wrapping multiple validation errors returned
-// by Expires.ValidateAll() if the designated constraints aren't met.
-type ExpiresMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m ExpiresMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m ExpiresMultiError) AllErrors() []error { return m }
-
-// ExpiresValidationError is the validation error returned by Expires.Validate
-// if the designated constraints aren't met.
-type ExpiresValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e ExpiresValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e ExpiresValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e ExpiresValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e ExpiresValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e ExpiresValidationError) ErrorName() string { return "ExpiresValidationError" }
-
-// Error satisfies the builtin error interface
-func (e ExpiresValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sExpires.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = ExpiresValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = ExpiresValidationError{}
 
 // Validate checks the field values on DeclinedRoleAccessRequestPayload with
 // the rules defined in the proto definition for this message. If any rules

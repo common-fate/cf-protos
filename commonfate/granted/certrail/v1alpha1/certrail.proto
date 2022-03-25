@@ -29,34 +29,21 @@ message GetEntryIndexByMerkleHashResponse{
   int64 index =1;
 }
 
-// a request contains the role and the config sha it was created against, 
-// if the config has been updated, the request becomes invalid
+// a request contains the current expected params of the request
+// before approving, the admin can review whether the user still has access to the role under the same conditions it was requested
 message RoleAccessRequestPayload {
   string role = 1;
-  bytes config_sha256 = 2 [(validate.rules).bytes.len = 32];
-  string reason = 3;
-  bytes requested_by = 4;
+  string provider = 2;
+  // must be an aws account id
+  string account =3 [(validate.rules).string.len = 12];
+  google.protobuf.Duration session_duration = 4;
+  string group = 5;
+  string reason = 6;
+  bytes requested_by = 7;
 }
 message ApprovedRoleAccessRequestPayload {
   bytes role_access_request_trillian_merkle_hash = 1;
   bytes approved_by = 2;
-  //  provision_strategy defines the method to be used to provision access
-  oneof provision_strategy {
-   Window window = 3;
-   Expires expires = 4;
-  }
-
-}
-message Window {
-  google.protobuf.Timestamp start = 1;
-  google.protobuf.Timestamp end = 2;
-}
-
-// Expires is a strategy where the approver marks their approval to expire at a given datetime
-// The session duration can be customised by the approver for shorter or longer sessions as required
-message Expires {
-  google.protobuf.Timestamp expires_at = 1;
-  google.protobuf.Duration approved_session_duration = 2;
 }
 
 message DeclinedRoleAccessRequestPayload {
