@@ -88,6 +88,38 @@ func (msg *ApprovedRoleAccessRequestPayload) UnmarshalJSON(b []byte) error {
 }
 
 // MarshalJSON implements json.Marshaler
+func (msg *Window) MarshalJSON() ([]byte, error) {
+	return protojson.MarshalOptions{
+		UseEnumNumbers:  false,
+		EmitUnpopulated: false,
+		UseProtoNames:   false,
+	}.Marshal(msg)
+}
+
+// UnmarshalJSON implements json.Unmarshaler
+func (msg *Window) UnmarshalJSON(b []byte) error {
+	return protojson.UnmarshalOptions{
+		DiscardUnknown: false,
+	}.Unmarshal(b, msg)
+}
+
+// MarshalJSON implements json.Marshaler
+func (msg *Expires) MarshalJSON() ([]byte, error) {
+	return protojson.MarshalOptions{
+		UseEnumNumbers:  false,
+		EmitUnpopulated: false,
+		UseProtoNames:   false,
+	}.Marshal(msg)
+}
+
+// UnmarshalJSON implements json.Unmarshaler
+func (msg *Expires) UnmarshalJSON(b []byte) error {
+	return protojson.UnmarshalOptions{
+		DiscardUnknown: false,
+	}.Unmarshal(b, msg)
+}
+
+// MarshalJSON implements json.Marshaler
 func (msg *DeclinedRoleAccessRequestPayload) MarshalJSON() ([]byte, error) {
 	return protojson.MarshalOptions{
 		UseEnumNumbers:  false,
