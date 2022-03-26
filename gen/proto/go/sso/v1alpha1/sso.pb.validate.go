@@ -782,6 +782,8 @@ func (m *GetSettingsResponse) validate(all bool) error {
 
 	// no validation rules for IdpMetadata
 
+	// no validation rules for TestUrl
+
 	if len(errors) > 0 {
 		return GetSettingsResponseMultiError(errors)
 	}

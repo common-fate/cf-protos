@@ -52,4 +52,5 @@ message GetSettingsResponse {
   SSOMode mode = 1;
   string metadata_url = 2;
   string idp_metadata = 3;
+  string test_url = 4;
 }

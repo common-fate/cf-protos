@@ -119,5 +119,8 @@ func (m *GetSettingsResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Objec
 	keyName = "idp_metadata" // field idp_metadata = 3
 	enc.AddString(keyName, m.IdpMetadata)
 
+	keyName = "test_url" // field test_url = 4
+	enc.AddString(keyName, m.TestUrl)
+
 	return nil
 }
