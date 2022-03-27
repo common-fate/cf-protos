@@ -6043,3 +6043,213 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UninstallSlackResponseValidationError{}
+
+// Validate checks the field values on SlackChannelInviteTestRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SlackChannelInviteTestRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SlackChannelInviteTestRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// SlackChannelInviteTestRequestMultiError, or nil if none found.
+func (m *SlackChannelInviteTestRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SlackChannelInviteTestRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ChannelId
+
+	if len(errors) > 0 {
+		return SlackChannelInviteTestRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SlackChannelInviteTestRequestMultiError is an error wrapping multiple
+// validation errors returned by SlackChannelInviteTestRequest.ValidateAll()
+// if the designated constraints aren't met.
+type SlackChannelInviteTestRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SlackChannelInviteTestRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SlackChannelInviteTestRequestMultiError) AllErrors() []error { return m }
+
+// SlackChannelInviteTestRequestValidationError is the validation error
+// returned by SlackChannelInviteTestRequest.Validate if the designated
+// constraints aren't met.
+type SlackChannelInviteTestRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SlackChannelInviteTestRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SlackChannelInviteTestRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SlackChannelInviteTestRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SlackChannelInviteTestRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SlackChannelInviteTestRequestValidationError) ErrorName() string {
+	return "SlackChannelInviteTestRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SlackChannelInviteTestRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSlackChannelInviteTestRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SlackChannelInviteTestRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SlackChannelInviteTestRequestValidationError{}
+
+// Validate checks the field values on SlackChannelInviteTestResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SlackChannelInviteTestResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SlackChannelInviteTestResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// SlackChannelInviteTestResponseMultiError, or nil if none found.
+func (m *SlackChannelInviteTestResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SlackChannelInviteTestResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Success
+
+	if len(errors) > 0 {
+		return SlackChannelInviteTestResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SlackChannelInviteTestResponseMultiError is an error wrapping multiple
+// validation errors returned by SlackChannelInviteTestResponse.ValidateAll()
+// if the designated constraints aren't met.
+type SlackChannelInviteTestResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SlackChannelInviteTestResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SlackChannelInviteTestResponseMultiError) AllErrors() []error { return m }
+
+// SlackChannelInviteTestResponseValidationError is the validation error
+// returned by SlackChannelInviteTestResponse.Validate if the designated
+// constraints aren't met.
+type SlackChannelInviteTestResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SlackChannelInviteTestResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SlackChannelInviteTestResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SlackChannelInviteTestResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SlackChannelInviteTestResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SlackChannelInviteTestResponseValidationError) ErrorName() string {
+	return "SlackChannelInviteTestResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SlackChannelInviteTestResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSlackChannelInviteTestResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SlackChannelInviteTestResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SlackChannelInviteTestResponseValidationError{}

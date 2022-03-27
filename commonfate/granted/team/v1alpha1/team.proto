@@ -49,6 +49,8 @@ service TeamService {
   rpc HasSlackConnection(HasSlackConnectionRequest) returns (HasSlackConnectionResponse);
 
   rpc UninstallSlack(UninstallSlackRequest) returns (UninstallSlackResponse);
+
+  rpc SlackChannelInviteTest(SlackChannelInviteTestRequest) returns (SlackChannelInviteTestResponse);
 }
 message ListRoleAccessRequestsRequest {
   bool include_expired = 1;
@@ -271,5 +273,13 @@ message HasSlackConnectionResponse {
 message UninstallSlackRequest {}
 
 message UninstallSlackResponse {
+  bool success = 1;
+}
+
+message SlackChannelInviteTestRequest {
+  string channel_id = 2;
+}
+
+message SlackChannelInviteTestResponse {
   bool success = 1;
 }

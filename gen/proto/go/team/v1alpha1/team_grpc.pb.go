@@ -53,6 +53,7 @@ type TeamServiceClient interface {
 	ListSlackConnections(ctx context.Context, in *ListSlackConnectionsRequest, opts ...grpc.CallOption) (*ListSlackConnectionsResponse, error)
 	HasSlackConnection(ctx context.Context, in *HasSlackConnectionRequest, opts ...grpc.CallOption) (*HasSlackConnectionResponse, error)
 	UninstallSlack(ctx context.Context, in *UninstallSlackRequest, opts ...grpc.CallOption) (*UninstallSlackResponse, error)
+	SlackChannelInviteTest(ctx context.Context, in *SlackChannelInviteTestRequest, opts ...grpc.CallOption) (*SlackChannelInviteTestResponse, error)
 }
 
 type teamServiceClient struct {
@@ -243,6 +244,15 @@ func (c *teamServiceClient) UninstallSlack(ctx context.Context, in *UninstallSla
 	return out, nil
 }
 
+func (c *teamServiceClient) SlackChannelInviteTest(ctx context.Context, in *SlackChannelInviteTestRequest, opts ...grpc.CallOption) (*SlackChannelInviteTestResponse, error) {
+	out := new(SlackChannelInviteTestResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/SlackChannelInviteTest", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TeamServiceServer is the server API for TeamService service.
 // All implementations should embed UnimplementedTeamServiceServer
 // for forward compatibility
@@ -278,6 +288,7 @@ type TeamServiceServer interface {
 	ListSlackConnections(context.Context, *ListSlackConnectionsRequest) (*ListSlackConnectionsResponse, error)
 	HasSlackConnection(context.Context, *HasSlackConnectionRequest) (*HasSlackConnectionResponse, error)
 	UninstallSlack(context.Context, *UninstallSlackRequest) (*UninstallSlackResponse, error)
+	SlackChannelInviteTest(context.Context, *SlackChannelInviteTestRequest) (*SlackChannelInviteTestResponse, error)
 }
 
 // UnimplementedTeamServiceServer should be embedded to have forward compatible implementations.
@@ -343,6 +354,9 @@ func (UnimplementedTeamServiceServer) HasSlackConnection(context.Context, *HasSl
 }
 func (UnimplementedTeamServiceServer) UninstallSlack(context.Context, *UninstallSlackRequest) (*UninstallSlackResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UninstallSlack not implemented")
+}
+func (UnimplementedTeamServiceServer) SlackChannelInviteTest(context.Context, *SlackChannelInviteTestRequest) (*SlackChannelInviteTestResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SlackChannelInviteTest not implemented")
 }
 
 // UnsafeTeamServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -716,6 +730,24 @@ func _TeamService_UninstallSlack_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TeamService_SlackChannelInviteTest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SlackChannelInviteTestRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).SlackChannelInviteTest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/SlackChannelInviteTest",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).SlackChannelInviteTest(ctx, req.(*SlackChannelInviteTestRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TeamService_ServiceDesc is the grpc.ServiceDesc for TeamService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -802,6 +834,10 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UninstallSlack",
 			Handler:    _TeamService_UninstallSlack_Handler,
+		},
+		{
+			MethodName: "SlackChannelInviteTest",
+			Handler:    _TeamService_SlackChannelInviteTest_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
