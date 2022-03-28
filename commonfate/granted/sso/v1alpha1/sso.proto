@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package sso.v1alpha1;
 
-import "validate/validate.proto";
-
 // SSOService is used to manage SSO for Granted.
 service SSOService {
   // SetupSAML sets up SAML SSO settings for a Granted team.

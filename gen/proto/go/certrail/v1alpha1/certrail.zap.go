@@ -86,10 +86,13 @@ func (m *RoleAccessRequestPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.
 		enc.AddDuration(keyName, d)
 	}
 
-	keyName = "reason" // field reason = 5
+	keyName = "group" // field group = 5
+	enc.AddString(keyName, m.Group)
+
+	keyName = "reason" // field reason = 6
 	enc.AddString(keyName, m.Reason)
 
-	keyName = "requested_by" // field requested_by = 6
+	keyName = "requested_by" // field requested_by = 7
 	enc.AddByteString(keyName, m.RequestedBy)
 
 	return nil
@@ -108,6 +111,70 @@ func (m *ApprovedRoleAccessRequestPayload) MarshalLogObject(enc go_uber_org_zap_
 
 	keyName = "approved_by" // field approved_by = 2
 	enc.AddByteString(keyName, m.ApprovedBy)
+
+	keyName = "window" // field window = 3
+	if ov, ok := m.GetProvisionStrategy().(*ApprovedRoleAccessRequestPayload_Window); ok {
+		_ = ov
+		if ov.Window != nil {
+			var vv interface{} = ov.Window
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
+	keyName = "expires" // field expires = 4
+	if ov, ok := m.GetProvisionStrategy().(*ApprovedRoleAccessRequestPayload_Expires); ok {
+		_ = ov
+		if ov.Expires != nil {
+			var vv interface{} = ov.Expires
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
+	return nil
+}
+
+func (m *Window) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "start" // field start = 1
+	if t, err := github_com_golang_protobuf_ptypes.Timestamp(m.Start); err == nil {
+		enc.AddTime(keyName, t)
+	}
+
+	keyName = "end" // field end = 2
+	if t, err := github_com_golang_protobuf_ptypes.Timestamp(m.End); err == nil {
+		enc.AddTime(keyName, t)
+	}
+
+	return nil
+}
+
+func (m *Expires) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "expires_at" // field expires_at = 1
+	if t, err := github_com_golang_protobuf_ptypes.Timestamp(m.ExpiresAt); err == nil {
+		enc.AddTime(keyName, t)
+	}
+
+	keyName = "approved_session_duration" // field approved_session_duration = 2
+	if d, err := github_com_golang_protobuf_ptypes.Duration(m.ApprovedSessionDuration); err == nil {
+		enc.AddDuration(keyName, d)
+	}
 
 	return nil
 }

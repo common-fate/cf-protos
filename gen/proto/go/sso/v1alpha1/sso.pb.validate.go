@@ -60,7 +60,6 @@ func (m *SetupSAMLRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return SetupSAMLRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -162,7 +161,6 @@ func (m *SetupSAMLResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return SetupSAMLResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -268,7 +266,6 @@ func (m *SetSAMLIdentityProviderMetadataRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return SetSAMLIdentityProviderMetadataRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -374,7 +371,6 @@ func (m *SetSAMLIdentityProviderMetadataResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return SetSAMLIdentityProviderMetadataResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -480,7 +476,6 @@ func (m *ChangeModeRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ChangeModeRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -582,7 +577,6 @@ func (m *ChangeModeResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ChangeModeResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -684,7 +678,6 @@ func (m *GetSettingsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetSettingsRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -794,7 +787,6 @@ func (m *GetSettingsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetSettingsResponseMultiError(errors)
 	}
-
 	return nil
 }
 
