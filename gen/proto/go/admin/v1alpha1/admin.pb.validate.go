@@ -60,6 +60,7 @@ func (m *ListTenantsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListTenantsRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -195,6 +196,7 @@ func (m *ListTenantsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListTenantsResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -303,6 +305,7 @@ func (m *Tenant) validate(all bool) error {
 	if len(errors) > 0 {
 		return TenantMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -403,6 +406,7 @@ func (m *DeleteTenantRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteTenantRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -504,6 +508,7 @@ func (m *DeleteTenantResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteTenantResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -607,6 +612,7 @@ func (m *RotateTenantCertificateRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return RotateTenantCertificateRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -709,6 +715,7 @@ func (m *RotateTenantCertificateResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return RotateTenantCertificateResponseMultiError(errors)
 	}
+
 	return nil
 }
 
