@@ -62,7 +62,6 @@ func (m *ListRoleAccessRequestsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRoleAccessRequestsRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -199,7 +198,6 @@ func (m *ListRoleAccessRequestsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRoleAccessRequestsResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -366,7 +364,6 @@ func (m *RoleAccessRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return RoleAccessRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -468,7 +465,6 @@ func (m *ListMembersRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListMembersRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -604,7 +600,6 @@ func (m *ListMembersResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListMembersResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -711,7 +706,6 @@ func (m *Account) validate(all bool) error {
 	if len(errors) > 0 {
 		return AccountMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -844,7 +838,6 @@ func (m *UpdateAccountsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateAccountsRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -980,7 +973,6 @@ func (m *UpdateAccountsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateAccountsResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1082,7 +1074,6 @@ func (m *ListRolesRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRolesRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1216,7 +1207,6 @@ func (m *ListRolesResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRolesResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1321,7 +1311,6 @@ func (m *Member) validate(all bool) error {
 	if len(errors) > 0 {
 		return MemberMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1420,7 +1409,6 @@ func (m *IsAdminUserRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return IsAdminUserRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1524,7 +1512,6 @@ func (m *IsAdminUserResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return IsAdminUserResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1655,7 +1642,6 @@ func (m *UpdateConfigRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateConfigRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1759,7 +1745,6 @@ func (m *UpdateConfigResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateConfigResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -1931,7 +1916,6 @@ func (m *EnrolProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrolProviderRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2056,7 +2040,6 @@ func (m *EnrolAWSProvider) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrolAWSProviderMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2181,7 +2164,6 @@ func (m *EnrolAWSSSOProvider) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrolAWSSSOProviderMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2316,7 +2298,6 @@ func (m *EnrolProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrolProviderResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2418,7 +2399,6 @@ func (m *ListProvidersRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListProvidersRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2556,7 +2536,6 @@ func (m *ListProvidersResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListProvidersResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2658,7 +2637,6 @@ func (m *GetStatusRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetStatusRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -2826,7 +2804,6 @@ func (m *GetStatusResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetStatusResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3000,7 +2977,6 @@ func (m *ProviderEnrollment) validate(all bool) error {
 	if len(errors) > 0 {
 		return ProviderEnrollmentMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3104,7 +3080,6 @@ func (m *AWSProviderEnrollment) validate(all bool) error {
 	if len(errors) > 0 {
 		return AWSProviderEnrollmentMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3208,7 +3183,6 @@ func (m *DeleteProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteProviderRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3310,7 +3284,6 @@ func (m *DeleteProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteProviderResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3414,7 +3387,6 @@ func (m *GetProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetProviderRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3545,7 +3517,6 @@ func (m *GetProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetProviderResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3686,7 +3657,6 @@ func (m *Provider) validate(all bool) error {
 	if len(errors) > 0 {
 		return ProviderMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3787,7 +3757,6 @@ func (m *AWSProviderDetails) validate(all bool) error {
 	if len(errors) > 0 {
 		return AWSProviderDetailsMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -3889,7 +3858,6 @@ func (m *GetAllProviderDetailsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderDetailsRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4023,7 +3991,6 @@ func (m *GetAllProviderDetailsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderDetailsResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4126,7 +4093,6 @@ func (m *GetAllProviderChecksumRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderChecksumRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4231,7 +4197,6 @@ func (m *GetAllProviderChecksumResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderChecksumResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4337,7 +4302,6 @@ func (m *GetAccessHandlersForProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAccessHandlersForProviderRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4476,7 +4440,6 @@ func (m *GetAccessHandlersForProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAccessHandlersForProviderResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4584,7 +4547,6 @@ func (m *AddAccessHandlerRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return AddAccessHandlerRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4686,7 +4648,6 @@ func (m *AddAccessHandlerResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return AddAccessHandlerResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4792,7 +4753,6 @@ func (m *DeleteAccessHandlerRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteAccessHandlerRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -4894,7 +4854,6 @@ func (m *DeleteAccessHandlerResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteAccessHandlerResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -5001,7 +4960,6 @@ func (m *UpdateCISettingsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateCISettingsRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -5103,7 +5061,6 @@ func (m *UpdateCISettingsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateCISettingsResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -5206,10 +5163,13 @@ func (m *ConnectSlackRequest) validate(all bool) error {
 
 	// no validation rules for ChannelId
 
+	// no validation rules for ChannelName
+
+	// no validation rules for Invited
+
 	if len(errors) > 0 {
 		return ConnectSlackRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -5311,7 +5271,6 @@ func (m *ConnectSlackResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ConnectSlackResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -5388,6 +5347,244 @@ var _ interface {
 	ErrorName() string
 } = ConnectSlackResponseValidationError{}
 
+// Validate checks the field values on ListSlackConnectionsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListSlackConnectionsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListSlackConnectionsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListSlackConnectionsRequestMultiError, or nil if none found.
+func (m *ListSlackConnectionsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListSlackConnectionsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListSlackConnectionsRequestMultiError(errors)
+	}
+	return nil
+}
+
+// ListSlackConnectionsRequestMultiError is an error wrapping multiple
+// validation errors returned by ListSlackConnectionsRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListSlackConnectionsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListSlackConnectionsRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListSlackConnectionsRequestMultiError) AllErrors() []error { return m }
+
+// ListSlackConnectionsRequestValidationError is the validation error returned
+// by ListSlackConnectionsRequest.Validate if the designated constraints
+// aren't met.
+type ListSlackConnectionsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListSlackConnectionsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListSlackConnectionsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListSlackConnectionsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListSlackConnectionsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListSlackConnectionsRequestValidationError) ErrorName() string {
+	return "ListSlackConnectionsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListSlackConnectionsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListSlackConnectionsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListSlackConnectionsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListSlackConnectionsRequestValidationError{}
+
+// Validate checks the field values on ListSlackConnectionsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListSlackConnectionsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListSlackConnectionsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListSlackConnectionsResponseMultiError, or nil if none found.
+func (m *ListSlackConnectionsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListSlackConnectionsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetSlackConnections() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListSlackConnectionsResponseValidationError{
+						field:  fmt.Sprintf("SlackConnections[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListSlackConnectionsResponseValidationError{
+						field:  fmt.Sprintf("SlackConnections[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListSlackConnectionsResponseValidationError{
+					field:  fmt.Sprintf("SlackConnections[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListSlackConnectionsResponseMultiError(errors)
+	}
+	return nil
+}
+
+// ListSlackConnectionsResponseMultiError is an error wrapping multiple
+// validation errors returned by ListSlackConnectionsResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ListSlackConnectionsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListSlackConnectionsResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListSlackConnectionsResponseMultiError) AllErrors() []error { return m }
+
+// ListSlackConnectionsResponseValidationError is the validation error returned
+// by ListSlackConnectionsResponse.Validate if the designated constraints
+// aren't met.
+type ListSlackConnectionsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListSlackConnectionsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListSlackConnectionsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListSlackConnectionsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListSlackConnectionsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListSlackConnectionsResponseValidationError) ErrorName() string {
+	return "ListSlackConnectionsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListSlackConnectionsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListSlackConnectionsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListSlackConnectionsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListSlackConnectionsResponseValidationError{}
+
 // Validate checks the field values on HasSlackConnectionRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -5413,7 +5610,6 @@ func (m *HasSlackConnectionRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return HasSlackConnectionRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -5517,7 +5713,6 @@ func (m *HasSlackConnectionResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return HasSlackConnectionResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -5619,7 +5814,6 @@ func (m *UninstallSlackRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return UninstallSlackRequestMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -5723,7 +5917,6 @@ func (m *UninstallSlackResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return UninstallSlackResponseMultiError(errors)
 	}
-
 	return nil
 }
 
@@ -5800,44 +5993,43 @@ var _ interface {
 	ErrorName() string
 } = UninstallSlackResponseValidationError{}
 
-// Validate checks the field values on SetupSAMLSSORequest with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on SlackChannelInviteTestRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *SetupSAMLSSORequest) Validate() error {
+func (m *SlackChannelInviteTestRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on SetupSAMLSSORequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// SetupSAMLSSORequestMultiError, or nil if none found.
-func (m *SetupSAMLSSORequest) ValidateAll() error {
+// ValidateAll checks the field values on SlackChannelInviteTestRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// SlackChannelInviteTestRequestMultiError, or nil if none found.
+func (m *SlackChannelInviteTestRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SetupSAMLSSORequest) validate(all bool) error {
+func (m *SlackChannelInviteTestRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for Mode
+	// no validation rules for ChannelId
 
 	if len(errors) > 0 {
-		return SetupSAMLSSORequestMultiError(errors)
+		return SlackChannelInviteTestRequestMultiError(errors)
 	}
-
 	return nil
 }
 
-// SetupSAMLSSORequestMultiError is an error wrapping multiple validation
-// errors returned by SetupSAMLSSORequest.ValidateAll() if the designated
-// constraints aren't met.
-type SetupSAMLSSORequestMultiError []error
+// SlackChannelInviteTestRequestMultiError is an error wrapping multiple
+// validation errors returned by SlackChannelInviteTestRequest.ValidateAll()
+// if the designated constraints aren't met.
+type SlackChannelInviteTestRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SetupSAMLSSORequestMultiError) Error() string {
+func (m SlackChannelInviteTestRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -5846,11 +6038,12 @@ func (m SetupSAMLSSORequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SetupSAMLSSORequestMultiError) AllErrors() []error { return m }
+func (m SlackChannelInviteTestRequestMultiError) AllErrors() []error { return m }
 
-// SetupSAMLSSORequestValidationError is the validation error returned by
-// SetupSAMLSSORequest.Validate if the designated constraints aren't met.
-type SetupSAMLSSORequestValidationError struct {
+// SlackChannelInviteTestRequestValidationError is the validation error
+// returned by SlackChannelInviteTestRequest.Validate if the designated
+// constraints aren't met.
+type SlackChannelInviteTestRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5858,24 +6051,24 @@ type SetupSAMLSSORequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e SetupSAMLSSORequestValidationError) Field() string { return e.field }
+func (e SlackChannelInviteTestRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SetupSAMLSSORequestValidationError) Reason() string { return e.reason }
+func (e SlackChannelInviteTestRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SetupSAMLSSORequestValidationError) Cause() error { return e.cause }
+func (e SlackChannelInviteTestRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SetupSAMLSSORequestValidationError) Key() bool { return e.key }
+func (e SlackChannelInviteTestRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SetupSAMLSSORequestValidationError) ErrorName() string {
-	return "SetupSAMLSSORequestValidationError"
+func (e SlackChannelInviteTestRequestValidationError) ErrorName() string {
+	return "SlackChannelInviteTestRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e SetupSAMLSSORequestValidationError) Error() string {
+func (e SlackChannelInviteTestRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5887,14 +6080,14 @@ func (e SetupSAMLSSORequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSetupSAMLSSORequest.%s: %s%s",
+		"invalid %sSlackChannelInviteTestRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SetupSAMLSSORequestValidationError{}
+var _ error = SlackChannelInviteTestRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -5902,46 +6095,45 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SetupSAMLSSORequestValidationError{}
+} = SlackChannelInviteTestRequestValidationError{}
 
-// Validate checks the field values on SetupSAMLSSOResponse with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on SlackChannelInviteTestResponse with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *SetupSAMLSSOResponse) Validate() error {
+func (m *SlackChannelInviteTestResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on SetupSAMLSSOResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// SetupSAMLSSOResponseMultiError, or nil if none found.
-func (m *SetupSAMLSSOResponse) ValidateAll() error {
+// ValidateAll checks the field values on SlackChannelInviteTestResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// SlackChannelInviteTestResponseMultiError, or nil if none found.
+func (m *SlackChannelInviteTestResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SetupSAMLSSOResponse) validate(all bool) error {
+func (m *SlackChannelInviteTestResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for MetadataUrl
+	// no validation rules for Success
 
 	if len(errors) > 0 {
-		return SetupSAMLSSOResponseMultiError(errors)
+		return SlackChannelInviteTestResponseMultiError(errors)
 	}
-
 	return nil
 }
 
-// SetupSAMLSSOResponseMultiError is an error wrapping multiple validation
-// errors returned by SetupSAMLSSOResponse.ValidateAll() if the designated
-// constraints aren't met.
-type SetupSAMLSSOResponseMultiError []error
+// SlackChannelInviteTestResponseMultiError is an error wrapping multiple
+// validation errors returned by SlackChannelInviteTestResponse.ValidateAll()
+// if the designated constraints aren't met.
+type SlackChannelInviteTestResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SetupSAMLSSOResponseMultiError) Error() string {
+func (m SlackChannelInviteTestResponseMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -5950,11 +6142,12 @@ func (m SetupSAMLSSOResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SetupSAMLSSOResponseMultiError) AllErrors() []error { return m }
+func (m SlackChannelInviteTestResponseMultiError) AllErrors() []error { return m }
 
-// SetupSAMLSSOResponseValidationError is the validation error returned by
-// SetupSAMLSSOResponse.Validate if the designated constraints aren't met.
-type SetupSAMLSSOResponseValidationError struct {
+// SlackChannelInviteTestResponseValidationError is the validation error
+// returned by SlackChannelInviteTestResponse.Validate if the designated
+// constraints aren't met.
+type SlackChannelInviteTestResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5962,24 +6155,24 @@ type SetupSAMLSSOResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e SetupSAMLSSOResponseValidationError) Field() string { return e.field }
+func (e SlackChannelInviteTestResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SetupSAMLSSOResponseValidationError) Reason() string { return e.reason }
+func (e SlackChannelInviteTestResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SetupSAMLSSOResponseValidationError) Cause() error { return e.cause }
+func (e SlackChannelInviteTestResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SetupSAMLSSOResponseValidationError) Key() bool { return e.key }
+func (e SlackChannelInviteTestResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SetupSAMLSSOResponseValidationError) ErrorName() string {
-	return "SetupSAMLSSOResponseValidationError"
+func (e SlackChannelInviteTestResponseValidationError) ErrorName() string {
+	return "SlackChannelInviteTestResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e SetupSAMLSSOResponseValidationError) Error() string {
+func (e SlackChannelInviteTestResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5991,14 +6184,14 @@ func (e SetupSAMLSSOResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSetupSAMLSSOResponse.%s: %s%s",
+		"invalid %sSlackChannelInviteTestResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SetupSAMLSSOResponseValidationError{}
+var _ error = SlackChannelInviteTestResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -6006,634 +6199,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SetupSAMLSSOResponseValidationError{}
-
-// Validate checks the field values on
-// SetSAMLSSOIdentityProviderMetadataRequest with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *SetSAMLSSOIdentityProviderMetadataRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// SetSAMLSSOIdentityProviderMetadataRequest with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in
-// SetSAMLSSOIdentityProviderMetadataRequestMultiError, or nil if none found.
-func (m *SetSAMLSSOIdentityProviderMetadataRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *SetSAMLSSOIdentityProviderMetadataRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Metadata
-
-	if len(errors) > 0 {
-		return SetSAMLSSOIdentityProviderMetadataRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// SetSAMLSSOIdentityProviderMetadataRequestMultiError is an error wrapping
-// multiple validation errors returned by
-// SetSAMLSSOIdentityProviderMetadataRequest.ValidateAll() if the designated
-// constraints aren't met.
-type SetSAMLSSOIdentityProviderMetadataRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m SetSAMLSSOIdentityProviderMetadataRequestMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m SetSAMLSSOIdentityProviderMetadataRequestMultiError) AllErrors() []error { return m }
-
-// SetSAMLSSOIdentityProviderMetadataRequestValidationError is the validation
-// error returned by SetSAMLSSOIdentityProviderMetadataRequest.Validate if the
-// designated constraints aren't met.
-type SetSAMLSSOIdentityProviderMetadataRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SetSAMLSSOIdentityProviderMetadataRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e SetSAMLSSOIdentityProviderMetadataRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e SetSAMLSSOIdentityProviderMetadataRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e SetSAMLSSOIdentityProviderMetadataRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e SetSAMLSSOIdentityProviderMetadataRequestValidationError) ErrorName() string {
-	return "SetSAMLSSOIdentityProviderMetadataRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e SetSAMLSSOIdentityProviderMetadataRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSetSAMLSSOIdentityProviderMetadataRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SetSAMLSSOIdentityProviderMetadataRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SetSAMLSSOIdentityProviderMetadataRequestValidationError{}
-
-// Validate checks the field values on
-// SetSAMLSSOIdentityProviderMetadataResponse with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *SetSAMLSSOIdentityProviderMetadataResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// SetSAMLSSOIdentityProviderMetadataResponse with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in
-// SetSAMLSSOIdentityProviderMetadataResponseMultiError, or nil if none found.
-func (m *SetSAMLSSOIdentityProviderMetadataResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *SetSAMLSSOIdentityProviderMetadataResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if len(errors) > 0 {
-		return SetSAMLSSOIdentityProviderMetadataResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// SetSAMLSSOIdentityProviderMetadataResponseMultiError is an error wrapping
-// multiple validation errors returned by
-// SetSAMLSSOIdentityProviderMetadataResponse.ValidateAll() if the designated
-// constraints aren't met.
-type SetSAMLSSOIdentityProviderMetadataResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m SetSAMLSSOIdentityProviderMetadataResponseMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m SetSAMLSSOIdentityProviderMetadataResponseMultiError) AllErrors() []error { return m }
-
-// SetSAMLSSOIdentityProviderMetadataResponseValidationError is the validation
-// error returned by SetSAMLSSOIdentityProviderMetadataResponse.Validate if
-// the designated constraints aren't met.
-type SetSAMLSSOIdentityProviderMetadataResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SetSAMLSSOIdentityProviderMetadataResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e SetSAMLSSOIdentityProviderMetadataResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e SetSAMLSSOIdentityProviderMetadataResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e SetSAMLSSOIdentityProviderMetadataResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e SetSAMLSSOIdentityProviderMetadataResponseValidationError) ErrorName() string {
-	return "SetSAMLSSOIdentityProviderMetadataResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e SetSAMLSSOIdentityProviderMetadataResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSetSAMLSSOIdentityProviderMetadataResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SetSAMLSSOIdentityProviderMetadataResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SetSAMLSSOIdentityProviderMetadataResponseValidationError{}
-
-// Validate checks the field values on ChangeSSOModeRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ChangeSSOModeRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on ChangeSSOModeRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// ChangeSSOModeRequestMultiError, or nil if none found.
-func (m *ChangeSSOModeRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *ChangeSSOModeRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Mode
-
-	if len(errors) > 0 {
-		return ChangeSSOModeRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// ChangeSSOModeRequestMultiError is an error wrapping multiple validation
-// errors returned by ChangeSSOModeRequest.ValidateAll() if the designated
-// constraints aren't met.
-type ChangeSSOModeRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m ChangeSSOModeRequestMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m ChangeSSOModeRequestMultiError) AllErrors() []error { return m }
-
-// ChangeSSOModeRequestValidationError is the validation error returned by
-// ChangeSSOModeRequest.Validate if the designated constraints aren't met.
-type ChangeSSOModeRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e ChangeSSOModeRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e ChangeSSOModeRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e ChangeSSOModeRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e ChangeSSOModeRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e ChangeSSOModeRequestValidationError) ErrorName() string {
-	return "ChangeSSOModeRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e ChangeSSOModeRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sChangeSSOModeRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = ChangeSSOModeRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = ChangeSSOModeRequestValidationError{}
-
-// Validate checks the field values on ChangeSSOModeResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ChangeSSOModeResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on ChangeSSOModeResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// ChangeSSOModeResponseMultiError, or nil if none found.
-func (m *ChangeSSOModeResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *ChangeSSOModeResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if len(errors) > 0 {
-		return ChangeSSOModeResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// ChangeSSOModeResponseMultiError is an error wrapping multiple validation
-// errors returned by ChangeSSOModeResponse.ValidateAll() if the designated
-// constraints aren't met.
-type ChangeSSOModeResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m ChangeSSOModeResponseMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m ChangeSSOModeResponseMultiError) AllErrors() []error { return m }
-
-// ChangeSSOModeResponseValidationError is the validation error returned by
-// ChangeSSOModeResponse.Validate if the designated constraints aren't met.
-type ChangeSSOModeResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e ChangeSSOModeResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e ChangeSSOModeResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e ChangeSSOModeResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e ChangeSSOModeResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e ChangeSSOModeResponseValidationError) ErrorName() string {
-	return "ChangeSSOModeResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e ChangeSSOModeResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sChangeSSOModeResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = ChangeSSOModeResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = ChangeSSOModeResponseValidationError{}
-
-// Validate checks the field values on GetSSOSettingsRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetSSOSettingsRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on GetSSOSettingsRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// GetSSOSettingsRequestMultiError, or nil if none found.
-func (m *GetSSOSettingsRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GetSSOSettingsRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if len(errors) > 0 {
-		return GetSSOSettingsRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// GetSSOSettingsRequestMultiError is an error wrapping multiple validation
-// errors returned by GetSSOSettingsRequest.ValidateAll() if the designated
-// constraints aren't met.
-type GetSSOSettingsRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GetSSOSettingsRequestMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GetSSOSettingsRequestMultiError) AllErrors() []error { return m }
-
-// GetSSOSettingsRequestValidationError is the validation error returned by
-// GetSSOSettingsRequest.Validate if the designated constraints aren't met.
-type GetSSOSettingsRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GetSSOSettingsRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GetSSOSettingsRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GetSSOSettingsRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GetSSOSettingsRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GetSSOSettingsRequestValidationError) ErrorName() string {
-	return "GetSSOSettingsRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GetSSOSettingsRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGetSSOSettingsRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GetSSOSettingsRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GetSSOSettingsRequestValidationError{}
-
-// Validate checks the field values on GetSSOSettingsResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetSSOSettingsResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on GetSSOSettingsResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// GetSSOSettingsResponseMultiError, or nil if none found.
-func (m *GetSSOSettingsResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GetSSOSettingsResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Mode
-
-	// no validation rules for MetadataUrl
-
-	// no validation rules for IdpMetadata
-
-	if len(errors) > 0 {
-		return GetSSOSettingsResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// GetSSOSettingsResponseMultiError is an error wrapping multiple validation
-// errors returned by GetSSOSettingsResponse.ValidateAll() if the designated
-// constraints aren't met.
-type GetSSOSettingsResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GetSSOSettingsResponseMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GetSSOSettingsResponseMultiError) AllErrors() []error { return m }
-
-// GetSSOSettingsResponseValidationError is the validation error returned by
-// GetSSOSettingsResponse.Validate if the designated constraints aren't met.
-type GetSSOSettingsResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GetSSOSettingsResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GetSSOSettingsResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GetSSOSettingsResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GetSSOSettingsResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GetSSOSettingsResponseValidationError) ErrorName() string {
-	return "GetSSOSettingsResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GetSSOSettingsResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGetSSOSettingsResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GetSSOSettingsResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GetSSOSettingsResponseValidationError{}
+} = SlackChannelInviteTestResponseValidationError{}

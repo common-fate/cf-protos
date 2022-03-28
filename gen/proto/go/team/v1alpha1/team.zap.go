@@ -832,6 +832,12 @@ func (m *ConnectSlackRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.Objec
 	keyName = "channel_id" // field channel_id = 2
 	enc.AddString(keyName, m.ChannelId)
 
+	keyName = "channel_name" // field channel_name = 3
+	enc.AddString(keyName, m.ChannelName)
+
+	keyName = "invited" // field invited = 4
+	enc.AddBool(keyName, m.Invited)
+
 	return nil
 }
 
@@ -842,6 +848,42 @@ func (m *ConnectSlackResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 	if m == nil {
 		return nil
 	}
+
+	return nil
+}
+
+func (m *ListSlackConnectionsRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+func (m *ListSlackConnectionsResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "slack_connections" // field slack_connections = 1
+	enc.AddArray(keyName, go_uber_org_zap_zapcore.ArrayMarshalerFunc(func(aenc go_uber_org_zap_zapcore.ArrayEncoder) error {
+		for _, rv := range m.SlackConnections {
+			_ = rv
+			if rv != nil {
+				var vv interface{} = rv
+				if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+					aenc.AppendObject(marshaler)
+				}
+			}
+		}
+		return nil
+	}))
 
 	return nil
 }
@@ -896,7 +938,7 @@ func (m *UninstallSlackResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Ob
 	return nil
 }
 
-func (m *SetupSAMLSSORequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *SlackChannelInviteTestRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -904,13 +946,13 @@ func (m *SetupSAMLSSORequest) MarshalLogObject(enc go_uber_org_zap_zapcore.Objec
 		return nil
 	}
 
-	keyName = "mode" // field mode = 1
-	enc.AddString(keyName, m.Mode.String())
+	keyName = "channel_id" // field channel_id = 2
+	enc.AddString(keyName, m.ChannelId)
 
 	return nil
 }
 
-func (m *SetupSAMLSSOResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *SlackChannelInviteTestResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -918,89 +960,8 @@ func (m *SetupSAMLSSOResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 		return nil
 	}
 
-	keyName = "metadata_url" // field metadata_url = 1
-	enc.AddString(keyName, m.MetadataUrl)
-
-	return nil
-}
-
-func (m *SetSAMLSSOIdentityProviderMetadataRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	keyName = "metadata" // field metadata = 1
-	enc.AddString(keyName, m.Metadata)
-
-	return nil
-}
-
-func (m *SetSAMLSSOIdentityProviderMetadataResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	return nil
-}
-
-func (m *ChangeSSOModeRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	keyName = "mode" // field mode = 1
-	enc.AddString(keyName, m.Mode.String())
-
-	return nil
-}
-
-func (m *ChangeSSOModeResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	return nil
-}
-
-func (m *GetSSOSettingsRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	return nil
-}
-
-func (m *GetSSOSettingsResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
-
-	keyName = "mode" // field mode = 1
-	enc.AddString(keyName, m.Mode.String())
-
-	keyName = "metadata_url" // field metadata_url = 2
-	enc.AddString(keyName, m.MetadataUrl)
-
-	keyName = "idp_metadata" // field idp_metadata = 3
-	enc.AddString(keyName, m.IdpMetadata)
+	keyName = "success" // field success = 1
+	enc.AddBool(keyName, m.Success)
 
 	return nil
 }

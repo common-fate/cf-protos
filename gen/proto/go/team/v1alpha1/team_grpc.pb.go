@@ -46,19 +46,10 @@ type TeamServiceClient interface {
 	// UpdateCISettings enables or disabled CI role deployments for a team.
 	UpdateCISettings(ctx context.Context, in *UpdateCISettingsRequest, opts ...grpc.CallOption) (*UpdateCISettingsResponse, error)
 	ConnectSlack(ctx context.Context, in *ConnectSlackRequest, opts ...grpc.CallOption) (*ConnectSlackResponse, error)
+	ListSlackConnections(ctx context.Context, in *ListSlackConnectionsRequest, opts ...grpc.CallOption) (*ListSlackConnectionsResponse, error)
 	HasSlackConnection(ctx context.Context, in *HasSlackConnectionRequest, opts ...grpc.CallOption) (*HasSlackConnectionResponse, error)
 	UninstallSlack(ctx context.Context, in *UninstallSlackRequest, opts ...grpc.CallOption) (*UninstallSlackResponse, error)
-	// SetupSAMLSSO sets up SAML SSO settings for a Granted team.
-	SetupSAMLSSO(ctx context.Context, in *SetupSAMLSSORequest, opts ...grpc.CallOption) (*SetupSAMLSSOResponse, error)
-	// GetSSOSettings returns the current SAML SSO settings
-	GetSSOSettings(ctx context.Context, in *GetSSOSettingsRequest, opts ...grpc.CallOption) (*GetSSOSettingsResponse, error)
-	// SetSAMLSSOIdentityProviderMetadata sets the SAML identity provider metadata in Granted. This is needed
-	// to complete SAML SSO setup.
-	SetSAMLSSOIdentityProviderMetadata(ctx context.Context, in *SetSAMLSSOIdentityProviderMetadataRequest, opts ...grpc.CallOption) (*SetSAMLSSOIdentityProviderMetadataResponse, error)
-	// ChangeSSOMode configures a team's provider to use SAML SSO, or the internal Common Fate
-	// identity provider. A team needs to have SAML SSO fully set up (including IDP metadata configured)
-	// before they can switch their SSO provider over.
-	ChangeSSOMode(ctx context.Context, in *ChangeSSOModeRequest, opts ...grpc.CallOption) (*ChangeSSOModeResponse, error)
+	SlackChannelInviteTest(ctx context.Context, in *SlackChannelInviteTestRequest, opts ...grpc.CallOption) (*SlackChannelInviteTestResponse, error)
 }
 
 type teamServiceClient struct {
@@ -222,6 +213,15 @@ func (c *teamServiceClient) ConnectSlack(ctx context.Context, in *ConnectSlackRe
 	return out, nil
 }
 
+func (c *teamServiceClient) ListSlackConnections(ctx context.Context, in *ListSlackConnectionsRequest, opts ...grpc.CallOption) (*ListSlackConnectionsResponse, error) {
+	out := new(ListSlackConnectionsResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/ListSlackConnections", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *teamServiceClient) HasSlackConnection(ctx context.Context, in *HasSlackConnectionRequest, opts ...grpc.CallOption) (*HasSlackConnectionResponse, error) {
 	out := new(HasSlackConnectionResponse)
 	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/HasSlackConnection", in, out, opts...)
@@ -240,36 +240,9 @@ func (c *teamServiceClient) UninstallSlack(ctx context.Context, in *UninstallSla
 	return out, nil
 }
 
-func (c *teamServiceClient) SetupSAMLSSO(ctx context.Context, in *SetupSAMLSSORequest, opts ...grpc.CallOption) (*SetupSAMLSSOResponse, error) {
-	out := new(SetupSAMLSSOResponse)
-	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/SetupSAMLSSO", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *teamServiceClient) GetSSOSettings(ctx context.Context, in *GetSSOSettingsRequest, opts ...grpc.CallOption) (*GetSSOSettingsResponse, error) {
-	out := new(GetSSOSettingsResponse)
-	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/GetSSOSettings", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *teamServiceClient) SetSAMLSSOIdentityProviderMetadata(ctx context.Context, in *SetSAMLSSOIdentityProviderMetadataRequest, opts ...grpc.CallOption) (*SetSAMLSSOIdentityProviderMetadataResponse, error) {
-	out := new(SetSAMLSSOIdentityProviderMetadataResponse)
-	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/SetSAMLSSOIdentityProviderMetadata", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *teamServiceClient) ChangeSSOMode(ctx context.Context, in *ChangeSSOModeRequest, opts ...grpc.CallOption) (*ChangeSSOModeResponse, error) {
-	out := new(ChangeSSOModeResponse)
-	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/ChangeSSOMode", in, out, opts...)
+func (c *teamServiceClient) SlackChannelInviteTest(ctx context.Context, in *SlackChannelInviteTestRequest, opts ...grpc.CallOption) (*SlackChannelInviteTestResponse, error) {
+	out := new(SlackChannelInviteTestResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/SlackChannelInviteTest", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -308,19 +281,10 @@ type TeamServiceServer interface {
 	// UpdateCISettings enables or disabled CI role deployments for a team.
 	UpdateCISettings(context.Context, *UpdateCISettingsRequest) (*UpdateCISettingsResponse, error)
 	ConnectSlack(context.Context, *ConnectSlackRequest) (*ConnectSlackResponse, error)
+	ListSlackConnections(context.Context, *ListSlackConnectionsRequest) (*ListSlackConnectionsResponse, error)
 	HasSlackConnection(context.Context, *HasSlackConnectionRequest) (*HasSlackConnectionResponse, error)
 	UninstallSlack(context.Context, *UninstallSlackRequest) (*UninstallSlackResponse, error)
-	// SetupSAMLSSO sets up SAML SSO settings for a Granted team.
-	SetupSAMLSSO(context.Context, *SetupSAMLSSORequest) (*SetupSAMLSSOResponse, error)
-	// GetSSOSettings returns the current SAML SSO settings
-	GetSSOSettings(context.Context, *GetSSOSettingsRequest) (*GetSSOSettingsResponse, error)
-	// SetSAMLSSOIdentityProviderMetadata sets the SAML identity provider metadata in Granted. This is needed
-	// to complete SAML SSO setup.
-	SetSAMLSSOIdentityProviderMetadata(context.Context, *SetSAMLSSOIdentityProviderMetadataRequest) (*SetSAMLSSOIdentityProviderMetadataResponse, error)
-	// ChangeSSOMode configures a team's provider to use SAML SSO, or the internal Common Fate
-	// identity provider. A team needs to have SAML SSO fully set up (including IDP metadata configured)
-	// before they can switch their SSO provider over.
-	ChangeSSOMode(context.Context, *ChangeSSOModeRequest) (*ChangeSSOModeResponse, error)
+	SlackChannelInviteTest(context.Context, *SlackChannelInviteTestRequest) (*SlackChannelInviteTestResponse, error)
 }
 
 // UnimplementedTeamServiceServer should be embedded to have forward compatible implementations.
@@ -378,23 +342,17 @@ func (UnimplementedTeamServiceServer) UpdateCISettings(context.Context, *UpdateC
 func (UnimplementedTeamServiceServer) ConnectSlack(context.Context, *ConnectSlackRequest) (*ConnectSlackResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ConnectSlack not implemented")
 }
+func (UnimplementedTeamServiceServer) ListSlackConnections(context.Context, *ListSlackConnectionsRequest) (*ListSlackConnectionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSlackConnections not implemented")
+}
 func (UnimplementedTeamServiceServer) HasSlackConnection(context.Context, *HasSlackConnectionRequest) (*HasSlackConnectionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HasSlackConnection not implemented")
 }
 func (UnimplementedTeamServiceServer) UninstallSlack(context.Context, *UninstallSlackRequest) (*UninstallSlackResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UninstallSlack not implemented")
 }
-func (UnimplementedTeamServiceServer) SetupSAMLSSO(context.Context, *SetupSAMLSSORequest) (*SetupSAMLSSOResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetupSAMLSSO not implemented")
-}
-func (UnimplementedTeamServiceServer) GetSSOSettings(context.Context, *GetSSOSettingsRequest) (*GetSSOSettingsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetSSOSettings not implemented")
-}
-func (UnimplementedTeamServiceServer) SetSAMLSSOIdentityProviderMetadata(context.Context, *SetSAMLSSOIdentityProviderMetadataRequest) (*SetSAMLSSOIdentityProviderMetadataResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetSAMLSSOIdentityProviderMetadata not implemented")
-}
-func (UnimplementedTeamServiceServer) ChangeSSOMode(context.Context, *ChangeSSOModeRequest) (*ChangeSSOModeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ChangeSSOMode not implemented")
+func (UnimplementedTeamServiceServer) SlackChannelInviteTest(context.Context, *SlackChannelInviteTestRequest) (*SlackChannelInviteTestResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SlackChannelInviteTest not implemented")
 }
 
 // UnsafeTeamServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -714,6 +672,24 @@ func _TeamService_ConnectSlack_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TeamService_ListSlackConnections_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSlackConnectionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).ListSlackConnections(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/ListSlackConnections",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).ListSlackConnections(ctx, req.(*ListSlackConnectionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _TeamService_HasSlackConnection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(HasSlackConnectionRequest)
 	if err := dec(in); err != nil {
@@ -750,74 +726,20 @@ func _TeamService_UninstallSlack_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TeamService_SetupSAMLSSO_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetupSAMLSSORequest)
+func _TeamService_SlackChannelInviteTest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SlackChannelInviteTestRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TeamServiceServer).SetupSAMLSSO(ctx, in)
+		return srv.(TeamServiceServer).SlackChannelInviteTest(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/team.v1alpha1.TeamService/SetupSAMLSSO",
+		FullMethod: "/team.v1alpha1.TeamService/SlackChannelInviteTest",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TeamServiceServer).SetupSAMLSSO(ctx, req.(*SetupSAMLSSORequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _TeamService_GetSSOSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetSSOSettingsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TeamServiceServer).GetSSOSettings(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/team.v1alpha1.TeamService/GetSSOSettings",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TeamServiceServer).GetSSOSettings(ctx, req.(*GetSSOSettingsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _TeamService_SetSAMLSSOIdentityProviderMetadata_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetSAMLSSOIdentityProviderMetadataRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TeamServiceServer).SetSAMLSSOIdentityProviderMetadata(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/team.v1alpha1.TeamService/SetSAMLSSOIdentityProviderMetadata",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TeamServiceServer).SetSAMLSSOIdentityProviderMetadata(ctx, req.(*SetSAMLSSOIdentityProviderMetadataRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _TeamService_ChangeSSOMode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ChangeSSOModeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TeamServiceServer).ChangeSSOMode(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/team.v1alpha1.TeamService/ChangeSSOMode",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TeamServiceServer).ChangeSSOMode(ctx, req.(*ChangeSSOModeRequest))
+		return srv.(TeamServiceServer).SlackChannelInviteTest(ctx, req.(*SlackChannelInviteTestRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -898,6 +820,10 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _TeamService_ConnectSlack_Handler,
 		},
 		{
+			MethodName: "ListSlackConnections",
+			Handler:    _TeamService_ListSlackConnections_Handler,
+		},
+		{
 			MethodName: "HasSlackConnection",
 			Handler:    _TeamService_HasSlackConnection_Handler,
 		},
@@ -906,20 +832,8 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _TeamService_UninstallSlack_Handler,
 		},
 		{
-			MethodName: "SetupSAMLSSO",
-			Handler:    _TeamService_SetupSAMLSSO_Handler,
-		},
-		{
-			MethodName: "GetSSOSettings",
-			Handler:    _TeamService_GetSSOSettings_Handler,
-		},
-		{
-			MethodName: "SetSAMLSSOIdentityProviderMetadata",
-			Handler:    _TeamService_SetSAMLSSOIdentityProviderMetadata_Handler,
-		},
-		{
-			MethodName: "ChangeSSOMode",
-			Handler:    _TeamService_ChangeSSOMode_Handler,
+			MethodName: "SlackChannelInviteTest",
+			Handler:    _TeamService_SlackChannelInviteTest_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
