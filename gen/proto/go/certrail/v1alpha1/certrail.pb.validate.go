@@ -390,15 +390,19 @@ func (m *RoleAccessRequestPayload) validate(all bool) error {
 
 	// no validation rules for Provider
 
-	if utf8.RuneCountInString(m.GetAccount()) != 12 {
-		err := RoleAccessRequestPayloadValidationError{
-			field:  "Account",
-			reason: "value length must be 12 runes",
+	if m.GetAccount() != "" {
+
+		if utf8.RuneCountInString(m.GetAccount()) != 12 {
+			err := RoleAccessRequestPayloadValidationError{
+				field:  "Account",
+				reason: "value length must be 12 runes",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+
 		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
 
 	}
 

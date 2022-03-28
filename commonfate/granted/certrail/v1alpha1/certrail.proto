@@ -35,7 +35,7 @@ message RoleAccessRequestPayload {
   string role = 1;
   string provider = 2;
   // must be an aws account id
-  string account =3 [(validate.rules).string.len = 12];
+  string account =3 [(validate.rules).string = {ignore_empty: true, len: 12}];
   google.protobuf.Duration session_duration = 4;
   string group = 5;
   string reason = 6;
