@@ -101,6 +101,7 @@ func (m *EnrolRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrolRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -199,6 +200,7 @@ func (m *EnrolResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrolResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -356,6 +358,7 @@ func (m *AWSProof) validate(all bool) error {
 	if len(errors) > 0 {
 		return AWSProofMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -487,6 +490,7 @@ func (m *AWSSignature) validate(all bool) error {
 	if len(errors) > 0 {
 		return AWSSignatureMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -626,6 +630,7 @@ func (m *GetCertificateRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetCertificateRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -729,6 +734,7 @@ func (m *GetCertificateResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetCertificateResponseMultiError(errors)
 	}
+
 	return nil
 }
 

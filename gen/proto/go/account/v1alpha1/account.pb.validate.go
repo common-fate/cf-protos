@@ -94,6 +94,7 @@ func (m *SignupRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return SignupRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -243,6 +244,7 @@ func (m *SignupResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return SignupResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -342,6 +344,7 @@ func (m *GetDeviceIdRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetDeviceIdRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -445,6 +448,7 @@ func (m *GetDeviceIdResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetDeviceIdResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -546,6 +550,7 @@ func (m *AuthenticatedRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return AuthenticatedRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -647,6 +652,7 @@ func (m *AuthenticatedResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return AuthenticatedResponseMultiError(errors)
 	}
+
 	return nil
 }
 
