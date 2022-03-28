@@ -46,6 +46,8 @@ service TeamService {
 
   rpc HasSlackConnection(HasSlackConnectionRequest) returns (HasSlackConnectionResponse);
 
+  rpc GetSlackInstallURL(GetSlackInstallURLRequest) returns (GetSlackInstallURLResponse);
+
   rpc UninstallSlack(UninstallSlackRequest) returns (UninstallSlackResponse);
 
   rpc SlackChannelInviteTest(SlackChannelInviteTestRequest) returns (SlackChannelInviteTestResponse);
@@ -265,6 +267,12 @@ message HasSlackConnectionRequest {}
 
 message HasSlackConnectionResponse {
   bool has_slack_connection = 1;
+}
+
+message GetSlackInstallURLRequest {}
+
+message GetSlackInstallURLResponse {
+  string install_url = 1;
 }
 
 message UninstallSlackRequest {}

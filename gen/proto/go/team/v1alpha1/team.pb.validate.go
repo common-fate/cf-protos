@@ -5734,6 +5734,212 @@ var _ interface {
 	ErrorName() string
 } = HasSlackConnectionResponseValidationError{}
 
+// Validate checks the field values on GetSlackInstallURLRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetSlackInstallURLRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetSlackInstallURLRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetSlackInstallURLRequestMultiError, or nil if none found.
+func (m *GetSlackInstallURLRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetSlackInstallURLRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetSlackInstallURLRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetSlackInstallURLRequestMultiError is an error wrapping multiple validation
+// errors returned by GetSlackInstallURLRequest.ValidateAll() if the
+// designated constraints aren't met.
+type GetSlackInstallURLRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetSlackInstallURLRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetSlackInstallURLRequestMultiError) AllErrors() []error { return m }
+
+// GetSlackInstallURLRequestValidationError is the validation error returned by
+// GetSlackInstallURLRequest.Validate if the designated constraints aren't met.
+type GetSlackInstallURLRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetSlackInstallURLRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetSlackInstallURLRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetSlackInstallURLRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetSlackInstallURLRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetSlackInstallURLRequestValidationError) ErrorName() string {
+	return "GetSlackInstallURLRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetSlackInstallURLRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetSlackInstallURLRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetSlackInstallURLRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetSlackInstallURLRequestValidationError{}
+
+// Validate checks the field values on GetSlackInstallURLResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetSlackInstallURLResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetSlackInstallURLResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetSlackInstallURLResponseMultiError, or nil if none found.
+func (m *GetSlackInstallURLResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetSlackInstallURLResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for InstallUrl
+
+	if len(errors) > 0 {
+		return GetSlackInstallURLResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetSlackInstallURLResponseMultiError is an error wrapping multiple
+// validation errors returned by GetSlackInstallURLResponse.ValidateAll() if
+// the designated constraints aren't met.
+type GetSlackInstallURLResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetSlackInstallURLResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetSlackInstallURLResponseMultiError) AllErrors() []error { return m }
+
+// GetSlackInstallURLResponseValidationError is the validation error returned
+// by GetSlackInstallURLResponse.Validate if the designated constraints aren't met.
+type GetSlackInstallURLResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetSlackInstallURLResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetSlackInstallURLResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetSlackInstallURLResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetSlackInstallURLResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetSlackInstallURLResponseValidationError) ErrorName() string {
+	return "GetSlackInstallURLResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetSlackInstallURLResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetSlackInstallURLResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetSlackInstallURLResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetSlackInstallURLResponseValidationError{}
+
 // Validate checks the field values on UninstallSlackRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

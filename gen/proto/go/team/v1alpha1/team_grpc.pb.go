@@ -51,6 +51,7 @@ type TeamServiceClient interface {
 	UpdateCISettings(ctx context.Context, in *UpdateCISettingsRequest, opts ...grpc.CallOption) (*UpdateCISettingsResponse, error)
 	ListSlackConnections(ctx context.Context, in *ListSlackConnectionsRequest, opts ...grpc.CallOption) (*ListSlackConnectionsResponse, error)
 	HasSlackConnection(ctx context.Context, in *HasSlackConnectionRequest, opts ...grpc.CallOption) (*HasSlackConnectionResponse, error)
+	GetSlackInstallURL(ctx context.Context, in *GetSlackInstallURLRequest, opts ...grpc.CallOption) (*GetSlackInstallURLResponse, error)
 	UninstallSlack(ctx context.Context, in *UninstallSlackRequest, opts ...grpc.CallOption) (*UninstallSlackResponse, error)
 	SlackChannelInviteTest(ctx context.Context, in *SlackChannelInviteTestRequest, opts ...grpc.CallOption) (*SlackChannelInviteTestResponse, error)
 }
@@ -225,6 +226,15 @@ func (c *teamServiceClient) HasSlackConnection(ctx context.Context, in *HasSlack
 	return out, nil
 }
 
+func (c *teamServiceClient) GetSlackInstallURL(ctx context.Context, in *GetSlackInstallURLRequest, opts ...grpc.CallOption) (*GetSlackInstallURLResponse, error) {
+	out := new(GetSlackInstallURLResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/GetSlackInstallURL", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *teamServiceClient) UninstallSlack(ctx context.Context, in *UninstallSlackRequest, opts ...grpc.CallOption) (*UninstallSlackResponse, error) {
 	out := new(UninstallSlackResponse)
 	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/UninstallSlack", in, out, opts...)
@@ -276,6 +286,7 @@ type TeamServiceServer interface {
 	UpdateCISettings(context.Context, *UpdateCISettingsRequest) (*UpdateCISettingsResponse, error)
 	ListSlackConnections(context.Context, *ListSlackConnectionsRequest) (*ListSlackConnectionsResponse, error)
 	HasSlackConnection(context.Context, *HasSlackConnectionRequest) (*HasSlackConnectionResponse, error)
+	GetSlackInstallURL(context.Context, *GetSlackInstallURLRequest) (*GetSlackInstallURLResponse, error)
 	UninstallSlack(context.Context, *UninstallSlackRequest) (*UninstallSlackResponse, error)
 	SlackChannelInviteTest(context.Context, *SlackChannelInviteTestRequest) (*SlackChannelInviteTestResponse, error)
 }
@@ -337,6 +348,9 @@ func (UnimplementedTeamServiceServer) ListSlackConnections(context.Context, *Lis
 }
 func (UnimplementedTeamServiceServer) HasSlackConnection(context.Context, *HasSlackConnectionRequest) (*HasSlackConnectionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HasSlackConnection not implemented")
+}
+func (UnimplementedTeamServiceServer) GetSlackInstallURL(context.Context, *GetSlackInstallURLRequest) (*GetSlackInstallURLResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSlackInstallURL not implemented")
 }
 func (UnimplementedTeamServiceServer) UninstallSlack(context.Context, *UninstallSlackRequest) (*UninstallSlackResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UninstallSlack not implemented")
@@ -680,6 +694,24 @@ func _TeamService_HasSlackConnection_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TeamService_GetSlackInstallURL_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSlackInstallURLRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).GetSlackInstallURL(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/GetSlackInstallURL",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).GetSlackInstallURL(ctx, req.(*GetSlackInstallURLRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _TeamService_UninstallSlack_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UninstallSlackRequest)
 	if err := dec(in); err != nil {
@@ -794,6 +826,10 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "HasSlackConnection",
 			Handler:    _TeamService_HasSlackConnection_Handler,
+		},
+		{
+			MethodName: "GetSlackInstallURL",
+			Handler:    _TeamService_GetSlackInstallURL_Handler,
 		},
 		{
 			MethodName: "UninstallSlack",
