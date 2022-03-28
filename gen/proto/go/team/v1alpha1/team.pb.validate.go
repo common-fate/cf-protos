@@ -62,6 +62,7 @@ func (m *ListRoleAccessRequestsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRoleAccessRequestsRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -198,6 +199,7 @@ func (m *ListRoleAccessRequestsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRoleAccessRequestsResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -364,6 +366,7 @@ func (m *RoleAccessRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return RoleAccessRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -465,6 +468,7 @@ func (m *ListMembersRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListMembersRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -600,6 +604,7 @@ func (m *ListMembersResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListMembersResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -706,6 +711,7 @@ func (m *Account) validate(all bool) error {
 	if len(errors) > 0 {
 		return AccountMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -838,6 +844,7 @@ func (m *UpdateAccountsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateAccountsRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -973,6 +980,7 @@ func (m *UpdateAccountsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateAccountsResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1074,6 +1082,7 @@ func (m *ListRolesRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRolesRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1207,6 +1216,7 @@ func (m *ListRolesResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRolesResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1311,6 +1321,7 @@ func (m *Member) validate(all bool) error {
 	if len(errors) > 0 {
 		return MemberMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1409,6 +1420,7 @@ func (m *IsAdminUserRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return IsAdminUserRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1512,6 +1524,7 @@ func (m *IsAdminUserResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return IsAdminUserResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1642,6 +1655,7 @@ func (m *UpdateConfigRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateConfigRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1745,6 +1759,7 @@ func (m *UpdateConfigResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateConfigResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1916,6 +1931,7 @@ func (m *EnrolProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrolProviderRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2040,6 +2056,7 @@ func (m *EnrolAWSProvider) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrolAWSProviderMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2164,6 +2181,7 @@ func (m *EnrolAWSSSOProvider) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrolAWSSSOProviderMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2298,6 +2316,7 @@ func (m *EnrolProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrolProviderResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2399,6 +2418,7 @@ func (m *ListProvidersRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListProvidersRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2536,6 +2556,7 @@ func (m *ListProvidersResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListProvidersResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2637,6 +2658,7 @@ func (m *GetStatusRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetStatusRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2804,6 +2826,7 @@ func (m *GetStatusResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetStatusResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2977,6 +3000,7 @@ func (m *ProviderEnrollment) validate(all bool) error {
 	if len(errors) > 0 {
 		return ProviderEnrollmentMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3080,6 +3104,7 @@ func (m *AWSProviderEnrollment) validate(all bool) error {
 	if len(errors) > 0 {
 		return AWSProviderEnrollmentMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3183,6 +3208,7 @@ func (m *DeleteProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteProviderRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3284,6 +3310,7 @@ func (m *DeleteProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteProviderResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3387,6 +3414,7 @@ func (m *GetProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetProviderRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3517,6 +3545,7 @@ func (m *GetProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetProviderResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3657,6 +3686,7 @@ func (m *Provider) validate(all bool) error {
 	if len(errors) > 0 {
 		return ProviderMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3757,6 +3787,7 @@ func (m *AWSProviderDetails) validate(all bool) error {
 	if len(errors) > 0 {
 		return AWSProviderDetailsMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3858,6 +3889,7 @@ func (m *GetAllProviderDetailsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderDetailsRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3991,6 +4023,7 @@ func (m *GetAllProviderDetailsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderDetailsResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4093,6 +4126,7 @@ func (m *GetAllProviderChecksumRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderChecksumRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4197,6 +4231,7 @@ func (m *GetAllProviderChecksumResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderChecksumResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4302,6 +4337,7 @@ func (m *GetAccessHandlersForProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAccessHandlersForProviderRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4440,6 +4476,7 @@ func (m *GetAccessHandlersForProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAccessHandlersForProviderResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4547,6 +4584,7 @@ func (m *AddAccessHandlerRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return AddAccessHandlerRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4648,6 +4686,7 @@ func (m *AddAccessHandlerResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return AddAccessHandlerResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4753,6 +4792,7 @@ func (m *DeleteAccessHandlerRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteAccessHandlerRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4854,6 +4894,7 @@ func (m *DeleteAccessHandlerResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteAccessHandlerResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4960,6 +5001,7 @@ func (m *UpdateCISettingsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateCISettingsRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5061,6 +5103,7 @@ func (m *UpdateCISettingsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateCISettingsResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5137,22 +5180,22 @@ var _ interface {
 	ErrorName() string
 } = UpdateCISettingsResponseValidationError{}
 
-// Validate checks the field values on ConnectSlackRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ConnectSlackRequest) Validate() error {
+// Validate checks the field values on SlackConnection with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *SlackConnection) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ConnectSlackRequest with the rules
+// ValidateAll checks the field values on SlackConnection with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// ConnectSlackRequestMultiError, or nil if none found.
-func (m *ConnectSlackRequest) ValidateAll() error {
+// SlackConnectionMultiError, or nil if none found.
+func (m *SlackConnection) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ConnectSlackRequest) validate(all bool) error {
+func (m *SlackConnection) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -5168,18 +5211,19 @@ func (m *ConnectSlackRequest) validate(all bool) error {
 	// no validation rules for Invited
 
 	if len(errors) > 0 {
-		return ConnectSlackRequestMultiError(errors)
+		return SlackConnectionMultiError(errors)
 	}
+
 	return nil
 }
 
-// ConnectSlackRequestMultiError is an error wrapping multiple validation
-// errors returned by ConnectSlackRequest.ValidateAll() if the designated
-// constraints aren't met.
-type ConnectSlackRequestMultiError []error
+// SlackConnectionMultiError is an error wrapping multiple validation errors
+// returned by SlackConnection.ValidateAll() if the designated constraints
+// aren't met.
+type SlackConnectionMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ConnectSlackRequestMultiError) Error() string {
+func (m SlackConnectionMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -5188,11 +5232,11 @@ func (m ConnectSlackRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ConnectSlackRequestMultiError) AllErrors() []error { return m }
+func (m SlackConnectionMultiError) AllErrors() []error { return m }
 
-// ConnectSlackRequestValidationError is the validation error returned by
-// ConnectSlackRequest.Validate if the designated constraints aren't met.
-type ConnectSlackRequestValidationError struct {
+// SlackConnectionValidationError is the validation error returned by
+// SlackConnection.Validate if the designated constraints aren't met.
+type SlackConnectionValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5200,24 +5244,22 @@ type ConnectSlackRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ConnectSlackRequestValidationError) Field() string { return e.field }
+func (e SlackConnectionValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ConnectSlackRequestValidationError) Reason() string { return e.reason }
+func (e SlackConnectionValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ConnectSlackRequestValidationError) Cause() error { return e.cause }
+func (e SlackConnectionValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ConnectSlackRequestValidationError) Key() bool { return e.key }
+func (e SlackConnectionValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ConnectSlackRequestValidationError) ErrorName() string {
-	return "ConnectSlackRequestValidationError"
-}
+func (e SlackConnectionValidationError) ErrorName() string { return "SlackConnectionValidationError" }
 
 // Error satisfies the builtin error interface
-func (e ConnectSlackRequestValidationError) Error() string {
+func (e SlackConnectionValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5229,14 +5271,14 @@ func (e ConnectSlackRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sConnectSlackRequest.%s: %s%s",
+		"invalid %sSlackConnection.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ConnectSlackRequestValidationError{}
+var _ error = SlackConnectionValidationError{}
 
 var _ interface {
 	Field() string
@@ -5244,108 +5286,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ConnectSlackRequestValidationError{}
-
-// Validate checks the field values on ConnectSlackResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ConnectSlackResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on ConnectSlackResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// ConnectSlackResponseMultiError, or nil if none found.
-func (m *ConnectSlackResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *ConnectSlackResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if len(errors) > 0 {
-		return ConnectSlackResponseMultiError(errors)
-	}
-	return nil
-}
-
-// ConnectSlackResponseMultiError is an error wrapping multiple validation
-// errors returned by ConnectSlackResponse.ValidateAll() if the designated
-// constraints aren't met.
-type ConnectSlackResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m ConnectSlackResponseMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m ConnectSlackResponseMultiError) AllErrors() []error { return m }
-
-// ConnectSlackResponseValidationError is the validation error returned by
-// ConnectSlackResponse.Validate if the designated constraints aren't met.
-type ConnectSlackResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e ConnectSlackResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e ConnectSlackResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e ConnectSlackResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e ConnectSlackResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e ConnectSlackResponseValidationError) ErrorName() string {
-	return "ConnectSlackResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e ConnectSlackResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sConnectSlackResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = ConnectSlackResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = ConnectSlackResponseValidationError{}
+} = SlackConnectionValidationError{}
 
 // Validate checks the field values on ListSlackConnectionsRequest with the
 // rules defined in the proto definition for this message. If any rules are
@@ -5372,6 +5313,7 @@ func (m *ListSlackConnectionsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListSlackConnectionsRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5508,6 +5450,7 @@ func (m *ListSlackConnectionsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListSlackConnectionsResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5610,6 +5553,7 @@ func (m *HasSlackConnectionRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return HasSlackConnectionRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5713,6 +5657,7 @@ func (m *HasSlackConnectionResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return HasSlackConnectionResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5789,6 +5734,212 @@ var _ interface {
 	ErrorName() string
 } = HasSlackConnectionResponseValidationError{}
 
+// Validate checks the field values on GetSlackInstallURLRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetSlackInstallURLRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetSlackInstallURLRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetSlackInstallURLRequestMultiError, or nil if none found.
+func (m *GetSlackInstallURLRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetSlackInstallURLRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetSlackInstallURLRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetSlackInstallURLRequestMultiError is an error wrapping multiple validation
+// errors returned by GetSlackInstallURLRequest.ValidateAll() if the
+// designated constraints aren't met.
+type GetSlackInstallURLRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetSlackInstallURLRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetSlackInstallURLRequestMultiError) AllErrors() []error { return m }
+
+// GetSlackInstallURLRequestValidationError is the validation error returned by
+// GetSlackInstallURLRequest.Validate if the designated constraints aren't met.
+type GetSlackInstallURLRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetSlackInstallURLRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetSlackInstallURLRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetSlackInstallURLRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetSlackInstallURLRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetSlackInstallURLRequestValidationError) ErrorName() string {
+	return "GetSlackInstallURLRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetSlackInstallURLRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetSlackInstallURLRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetSlackInstallURLRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetSlackInstallURLRequestValidationError{}
+
+// Validate checks the field values on GetSlackInstallURLResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetSlackInstallURLResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetSlackInstallURLResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetSlackInstallURLResponseMultiError, or nil if none found.
+func (m *GetSlackInstallURLResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetSlackInstallURLResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for InstallUrl
+
+	if len(errors) > 0 {
+		return GetSlackInstallURLResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetSlackInstallURLResponseMultiError is an error wrapping multiple
+// validation errors returned by GetSlackInstallURLResponse.ValidateAll() if
+// the designated constraints aren't met.
+type GetSlackInstallURLResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetSlackInstallURLResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetSlackInstallURLResponseMultiError) AllErrors() []error { return m }
+
+// GetSlackInstallURLResponseValidationError is the validation error returned
+// by GetSlackInstallURLResponse.Validate if the designated constraints aren't met.
+type GetSlackInstallURLResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetSlackInstallURLResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetSlackInstallURLResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetSlackInstallURLResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetSlackInstallURLResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetSlackInstallURLResponseValidationError) ErrorName() string {
+	return "GetSlackInstallURLResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetSlackInstallURLResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetSlackInstallURLResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetSlackInstallURLResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetSlackInstallURLResponseValidationError{}
+
 // Validate checks the field values on UninstallSlackRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -5814,6 +5965,7 @@ func (m *UninstallSlackRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return UninstallSlackRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5917,6 +6069,7 @@ func (m *UninstallSlackResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return UninstallSlackResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -6020,6 +6173,7 @@ func (m *SlackChannelInviteTestRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return SlackChannelInviteTestRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -6124,6 +6278,7 @@ func (m *SlackChannelInviteTestResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return SlackChannelInviteTestResponseMultiError(errors)
 	}
+
 	return nil
 }
 

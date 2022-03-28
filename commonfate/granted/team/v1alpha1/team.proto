@@ -42,11 +42,11 @@ service TeamService {
   // UpdateCISettings enables or disabled CI role deployments for a team.
   rpc UpdateCISettings(UpdateCISettingsRequest) returns (UpdateCISettingsResponse);
 
-  rpc ConnectSlack(ConnectSlackRequest) returns (ConnectSlackResponse);
-
   rpc ListSlackConnections(ListSlackConnectionsRequest) returns (ListSlackConnectionsResponse);
 
   rpc HasSlackConnection(HasSlackConnectionRequest) returns (HasSlackConnectionResponse);
+
+  rpc GetSlackInstallURL(GetSlackInstallURLRequest) returns (GetSlackInstallURLResponse);
 
   rpc UninstallSlack(UninstallSlackRequest) returns (UninstallSlackResponse);
 
@@ -250,18 +250,16 @@ message UpdateCISettingsRequest {
 message UpdateCISettingsResponse {}
 
 // Note: this has not yet been used since the slack integration is running off a server callback
-message ConnectSlackRequest {
+message SlackConnection {
   string bot_access_token = 1;
   string channel_id = 2;
   string channel_name = 3;
   bool invited = 4;
 }
 
-message ConnectSlackResponse {}
-
 message ListSlackConnectionsRequest {}
 message ListSlackConnectionsResponse {
-  repeated ConnectSlackRequest slack_connections = 1;
+  repeated SlackConnection slack_connections = 1;
 }
 
 
@@ -269,6 +267,12 @@ message HasSlackConnectionRequest {}
 
 message HasSlackConnectionResponse {
   bool has_slack_connection = 1;
+}
+
+message GetSlackInstallURLRequest {}
+
+message GetSlackInstallURLResponse {
+  string install_url = 1;
 }
 
 message UninstallSlackRequest {}

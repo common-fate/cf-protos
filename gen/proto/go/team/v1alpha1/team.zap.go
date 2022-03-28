@@ -818,7 +818,7 @@ func (m *UpdateCISettingsResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.
 	return nil
 }
 
-func (m *ConnectSlackRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *SlackConnection) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -837,17 +837,6 @@ func (m *ConnectSlackRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.Objec
 
 	keyName = "invited" // field invited = 4
 	enc.AddBool(keyName, m.Invited)
-
-	return nil
-}
-
-func (m *ConnectSlackResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
-	var keyName string
-	_ = keyName
-
-	if m == nil {
-		return nil
-	}
 
 	return nil
 }
@@ -909,6 +898,31 @@ func (m *HasSlackConnectionResponse) MarshalLogObject(enc go_uber_org_zap_zapcor
 
 	keyName = "has_slack_connection" // field has_slack_connection = 1
 	enc.AddBool(keyName, m.HasSlackConnection)
+
+	return nil
+}
+
+func (m *GetSlackInstallURLRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+func (m *GetSlackInstallURLResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "install_url" // field install_url = 1
+	enc.AddString(keyName, m.InstallUrl)
 
 	return nil
 }

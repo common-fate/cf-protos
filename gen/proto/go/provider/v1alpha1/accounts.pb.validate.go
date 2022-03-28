@@ -94,6 +94,7 @@ func (m *StoreAccountsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return StoreAccountsRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -195,6 +196,7 @@ func (m *StoreAccountsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return StoreAccountsResponseMultiError(errors)
 	}
+
 	return nil
 }
 
