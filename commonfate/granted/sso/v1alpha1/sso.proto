@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package sso.v1alpha1;
+
+import "validate/validate.proto";
+
+// SSOService is used to manage SSO for Granted.
+service SSOService {
+  // SetupSAML sets up SAML SSO settings for a Granted team.
+  rpc SetupSAML(SetupSAMLRequest) returns (SetupSAMLResponse);
+
+  // GetSettings returns the current SSO settings
+  rpc GetSettings(GetSettingsRequest) returns (GetSettingsResponse);
+
+  // SetSAMLIdentityProviderMetadata sets the SAML identity provider metadata in Granted. This is needed
+  // to complete SAML SSO setup.
+  rpc SetSAMLIdentityProviderMetadata(SetSAMLIdentityProviderMetadataRequest) returns (SetSAMLIdentityProviderMetadataResponse);
+
+  // ChangeMode configures a team's provider to use SAML SSO, or the internal Common Fate
+  // identity provider. A team needs to have SAML SSO fully set up (including IDP metadata configured)
+  // before they can switch their SSO provider over.
+  rpc ChangeMode(ChangeModeRequest) returns (ChangeModeResponse);
+}
+
+enum SSOMode {
+  SSO_MODE_UNSPECIFIED = 0;
+  SSO_MODE_DISABLED = 1;
+  SSO_MODE_SAML = 2;
+}
+
+message SetupSAMLRequest {}
+
+message SetupSAMLResponse {
+  string metadata_url = 1;
+}
+
+message SetSAMLIdentityProviderMetadataRequest {
+  string metadata = 1;
+}
+
+message SetSAMLIdentityProviderMetadataResponse {}
+
+message ChangeModeRequest {
+  SSOMode mode = 1;
+}
+
+message ChangeModeResponse {}
+
+message GetSettingsRequest {}
+
+message GetSettingsResponse {
+  SSOMode mode = 1;
+  string metadata_url = 2;
+  string idp_metadata = 3;
+  string test_url = 4;
+}

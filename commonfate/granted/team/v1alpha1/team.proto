@@ -52,6 +52,7 @@ service TeamService {
 
   rpc SlackChannelInviteTest(SlackChannelInviteTestRequest) returns (SlackChannelInviteTestResponse);
 }
+
 message ListRoleAccessRequestsRequest {
   bool include_expired = 1;
 }
