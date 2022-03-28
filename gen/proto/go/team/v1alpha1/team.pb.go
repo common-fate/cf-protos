@@ -2263,7 +2263,7 @@ func (*UpdateCISettingsResponse) Descriptor() ([]byte, []int) {
 }
 
 // Note: this has not yet been used since the slack integration is running off a server callback
-type ConnectSlackRequest struct {
+type SlackConnection struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -2274,8 +2274,8 @@ type ConnectSlackRequest struct {
 	Invited        bool   `protobuf:"varint,4,opt,name=invited,proto3" json:"invited,omitempty"`
 }
 
-func (x *ConnectSlackRequest) Reset() {
-	*x = ConnectSlackRequest{}
+func (x *SlackConnection) Reset() {
+	*x = SlackConnection{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_team_v1alpha1_team_proto_msgTypes[43]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2283,13 +2283,13 @@ func (x *ConnectSlackRequest) Reset() {
 	}
 }
 
-func (x *ConnectSlackRequest) String() string {
+func (x *SlackConnection) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ConnectSlackRequest) ProtoMessage() {}
+func (*SlackConnection) ProtoMessage() {}
 
-func (x *ConnectSlackRequest) ProtoReflect() protoreflect.Message {
+func (x *SlackConnection) ProtoReflect() protoreflect.Message {
 	mi := &file_team_v1alpha1_team_proto_msgTypes[43]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2301,75 +2301,37 @@ func (x *ConnectSlackRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ConnectSlackRequest.ProtoReflect.Descriptor instead.
-func (*ConnectSlackRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use SlackConnection.ProtoReflect.Descriptor instead.
+func (*SlackConnection) Descriptor() ([]byte, []int) {
 	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{43}
 }
 
-func (x *ConnectSlackRequest) GetBotAccessToken() string {
+func (x *SlackConnection) GetBotAccessToken() string {
 	if x != nil {
 		return x.BotAccessToken
 	}
 	return ""
 }
 
-func (x *ConnectSlackRequest) GetChannelId() string {
+func (x *SlackConnection) GetChannelId() string {
 	if x != nil {
 		return x.ChannelId
 	}
 	return ""
 }
 
-func (x *ConnectSlackRequest) GetChannelName() string {
+func (x *SlackConnection) GetChannelName() string {
 	if x != nil {
 		return x.ChannelName
 	}
 	return ""
 }
 
-func (x *ConnectSlackRequest) GetInvited() bool {
+func (x *SlackConnection) GetInvited() bool {
 	if x != nil {
 		return x.Invited
 	}
 	return false
-}
-
-type ConnectSlackResponse struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-}
-
-func (x *ConnectSlackResponse) Reset() {
-	*x = ConnectSlackResponse{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[44]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ConnectSlackResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ConnectSlackResponse) ProtoMessage() {}
-
-func (x *ConnectSlackResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[44]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ConnectSlackResponse.ProtoReflect.Descriptor instead.
-func (*ConnectSlackResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{44}
 }
 
 type ListSlackConnectionsRequest struct {
@@ -2381,7 +2343,7 @@ type ListSlackConnectionsRequest struct {
 func (x *ListSlackConnectionsRequest) Reset() {
 	*x = ListSlackConnectionsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[45]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[44]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2394,7 +2356,7 @@ func (x *ListSlackConnectionsRequest) String() string {
 func (*ListSlackConnectionsRequest) ProtoMessage() {}
 
 func (x *ListSlackConnectionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[45]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[44]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2407,7 +2369,7 @@ func (x *ListSlackConnectionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSlackConnectionsRequest.ProtoReflect.Descriptor instead.
 func (*ListSlackConnectionsRequest) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{45}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{44}
 }
 
 type ListSlackConnectionsResponse struct {
@@ -2415,13 +2377,13 @@ type ListSlackConnectionsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SlackConnections []*ConnectSlackRequest `protobuf:"bytes,1,rep,name=slack_connections,json=slackConnections,proto3" json:"slack_connections,omitempty"`
+	SlackConnections []*SlackConnection `protobuf:"bytes,1,rep,name=slack_connections,json=slackConnections,proto3" json:"slack_connections,omitempty"`
 }
 
 func (x *ListSlackConnectionsResponse) Reset() {
 	*x = ListSlackConnectionsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[46]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[45]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2434,7 +2396,7 @@ func (x *ListSlackConnectionsResponse) String() string {
 func (*ListSlackConnectionsResponse) ProtoMessage() {}
 
 func (x *ListSlackConnectionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[46]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[45]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2447,10 +2409,10 @@ func (x *ListSlackConnectionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSlackConnectionsResponse.ProtoReflect.Descriptor instead.
 func (*ListSlackConnectionsResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{46}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{45}
 }
 
-func (x *ListSlackConnectionsResponse) GetSlackConnections() []*ConnectSlackRequest {
+func (x *ListSlackConnectionsResponse) GetSlackConnections() []*SlackConnection {
 	if x != nil {
 		return x.SlackConnections
 	}
@@ -2466,7 +2428,7 @@ type HasSlackConnectionRequest struct {
 func (x *HasSlackConnectionRequest) Reset() {
 	*x = HasSlackConnectionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[47]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[46]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2479,7 +2441,7 @@ func (x *HasSlackConnectionRequest) String() string {
 func (*HasSlackConnectionRequest) ProtoMessage() {}
 
 func (x *HasSlackConnectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[47]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[46]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2492,7 +2454,7 @@ func (x *HasSlackConnectionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HasSlackConnectionRequest.ProtoReflect.Descriptor instead.
 func (*HasSlackConnectionRequest) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{47}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{46}
 }
 
 type HasSlackConnectionResponse struct {
@@ -2506,7 +2468,7 @@ type HasSlackConnectionResponse struct {
 func (x *HasSlackConnectionResponse) Reset() {
 	*x = HasSlackConnectionResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[48]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[47]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2519,7 +2481,7 @@ func (x *HasSlackConnectionResponse) String() string {
 func (*HasSlackConnectionResponse) ProtoMessage() {}
 
 func (x *HasSlackConnectionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[48]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[47]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2532,7 +2494,7 @@ func (x *HasSlackConnectionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HasSlackConnectionResponse.ProtoReflect.Descriptor instead.
 func (*HasSlackConnectionResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{48}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *HasSlackConnectionResponse) GetHasSlackConnection() bool {
@@ -2551,7 +2513,7 @@ type UninstallSlackRequest struct {
 func (x *UninstallSlackRequest) Reset() {
 	*x = UninstallSlackRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[49]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[48]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2564,7 +2526,7 @@ func (x *UninstallSlackRequest) String() string {
 func (*UninstallSlackRequest) ProtoMessage() {}
 
 func (x *UninstallSlackRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[49]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[48]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2577,7 +2539,7 @@ func (x *UninstallSlackRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UninstallSlackRequest.ProtoReflect.Descriptor instead.
 func (*UninstallSlackRequest) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{49}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{48}
 }
 
 type UninstallSlackResponse struct {
@@ -2591,7 +2553,7 @@ type UninstallSlackResponse struct {
 func (x *UninstallSlackResponse) Reset() {
 	*x = UninstallSlackResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[50]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[49]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2604,7 +2566,7 @@ func (x *UninstallSlackResponse) String() string {
 func (*UninstallSlackResponse) ProtoMessage() {}
 
 func (x *UninstallSlackResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[50]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[49]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2617,7 +2579,7 @@ func (x *UninstallSlackResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UninstallSlackResponse.ProtoReflect.Descriptor instead.
 func (*UninstallSlackResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{50}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *UninstallSlackResponse) GetSuccess() bool {
@@ -2638,7 +2600,7 @@ type SlackChannelInviteTestRequest struct {
 func (x *SlackChannelInviteTestRequest) Reset() {
 	*x = SlackChannelInviteTestRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[51]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[50]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2651,7 +2613,7 @@ func (x *SlackChannelInviteTestRequest) String() string {
 func (*SlackChannelInviteTestRequest) ProtoMessage() {}
 
 func (x *SlackChannelInviteTestRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[51]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[50]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2664,7 +2626,7 @@ func (x *SlackChannelInviteTestRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SlackChannelInviteTestRequest.ProtoReflect.Descriptor instead.
 func (*SlackChannelInviteTestRequest) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{51}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *SlackChannelInviteTestRequest) GetChannelId() string {
@@ -2685,7 +2647,7 @@ type SlackChannelInviteTestResponse struct {
 func (x *SlackChannelInviteTestResponse) Reset() {
 	*x = SlackChannelInviteTestResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[52]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[51]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2698,7 +2660,7 @@ func (x *SlackChannelInviteTestResponse) String() string {
 func (*SlackChannelInviteTestResponse) ProtoMessage() {}
 
 func (x *SlackChannelInviteTestResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[52]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[51]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2711,7 +2673,7 @@ func (x *SlackChannelInviteTestResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SlackChannelInviteTestResponse.ProtoReflect.Descriptor instead.
 func (*SlackChannelInviteTestResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{52}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *SlackChannelInviteTestResponse) GetSuccess() bool {
@@ -2954,27 +2916,25 @@ var file_team_v1alpha1_team_proto_rawDesc = []byte{
 	0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x6f, 0x72, 0x79, 0x5f, 0x75, 0x72, 0x6c, 0x18, 0x02, 0x20,
 	0x01, 0x28, 0x09, 0x52, 0x0d, 0x72, 0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x6f, 0x72, 0x79, 0x55,
 	0x72, 0x6c, 0x22, 0x1a, 0x0a, 0x18, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x49, 0x53, 0x65,
-	0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x9b,
-	0x01, 0x0a, 0x13, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x28, 0x0a, 0x10, 0x62, 0x6f, 0x74, 0x5f, 0x61, 0x63,
-	0x63, 0x65, 0x73, 0x73, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x0e, 0x62, 0x6f, 0x74, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x54, 0x6f, 0x6b, 0x65, 0x6e,
-	0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x5f, 0x69, 0x64, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x49, 0x64, 0x12,
-	0x21, 0x0a, 0x0c, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18,
-	0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x4e, 0x61,
-	0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x69, 0x6e, 0x76, 0x69, 0x74, 0x65, 0x64, 0x18, 0x04, 0x20,
-	0x01, 0x28, 0x08, 0x52, 0x07, 0x69, 0x6e, 0x76, 0x69, 0x74, 0x65, 0x64, 0x22, 0x16, 0x0a, 0x14,
-	0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x1d, 0x0a, 0x1b, 0x4c, 0x69, 0x73, 0x74, 0x53, 0x6c, 0x61, 0x63,
-	0x6b, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x22, 0x6f, 0x0a, 0x1c, 0x4c, 0x69, 0x73, 0x74, 0x53, 0x6c, 0x61, 0x63, 0x6b,
-	0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x12, 0x4f, 0x0a, 0x11, 0x73, 0x6c, 0x61, 0x63, 0x6b, 0x5f, 0x63, 0x6f, 0x6e,
-	0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x22,
-	0x2e, 0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x43,
-	0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x52, 0x10, 0x73, 0x6c, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74,
+	0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x97,
+	0x01, 0x0a, 0x0f, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69,
+	0x6f, 0x6e, 0x12, 0x28, 0x0a, 0x10, 0x62, 0x6f, 0x74, 0x5f, 0x61, 0x63, 0x63, 0x65, 0x73, 0x73,
+	0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x62, 0x6f,
+	0x74, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x1d, 0x0a, 0x0a,
+	0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x09, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x49, 0x64, 0x12, 0x21, 0x0a, 0x0c, 0x63,
+	0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x0b, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x18,
+	0x0a, 0x07, 0x69, 0x6e, 0x76, 0x69, 0x74, 0x65, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x08, 0x52,
+	0x07, 0x69, 0x6e, 0x76, 0x69, 0x74, 0x65, 0x64, 0x22, 0x1d, 0x0a, 0x1b, 0x4c, 0x69, 0x73, 0x74,
+	0x53, 0x6c, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x6b, 0x0a, 0x1c, 0x4c, 0x69, 0x73, 0x74, 0x53,
+	0x6c, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4b, 0x0a, 0x11, 0x73, 0x6c, 0x61, 0x63, 0x6b,
+	0x5f, 0x63, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68,
+	0x61, 0x31, 0x2e, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69,
+	0x6f, 0x6e, 0x52, 0x10, 0x73, 0x6c, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74,
 	0x69, 0x6f, 0x6e, 0x73, 0x22, 0x1b, 0x0a, 0x19, 0x48, 0x61, 0x73, 0x53, 0x6c, 0x61, 0x63, 0x6b,
 	0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
 	0x74, 0x22, 0x4e, 0x0a, 0x1a, 0x48, 0x61, 0x73, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x6e,
@@ -3009,7 +2969,7 @@ var file_team_v1alpha1_team_proto_rawDesc = []byte{
 	0x53, 0x5f, 0x43, 0x41, 0x4e, 0x43, 0x45, 0x4c, 0x4c, 0x45, 0x44, 0x10, 0x03, 0x12, 0x27, 0x0a,
 	0x23, 0x52, 0x4f, 0x4c, 0x45, 0x5f, 0x41, 0x43, 0x43, 0x45, 0x53, 0x53, 0x5f, 0x52, 0x45, 0x51,
 	0x55, 0x45, 0x53, 0x54, 0x5f, 0x53, 0x54, 0x41, 0x54, 0x55, 0x53, 0x5f, 0x44, 0x45, 0x43, 0x4c,
-	0x49, 0x4e, 0x45, 0x44, 0x10, 0x04, 0x32, 0xce, 0x10, 0x0a, 0x0b, 0x54, 0x65, 0x61, 0x6d, 0x53,
+	0x49, 0x4e, 0x45, 0x44, 0x10, 0x04, 0x32, 0xf5, 0x0f, 0x0a, 0x0b, 0x54, 0x65, 0x61, 0x6d, 0x53,
 	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x75, 0x0a, 0x16, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x6f,
 	0x6c, 0x65, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x73,
 	0x12, 0x2c, 0x2e, 0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31,
@@ -3109,52 +3069,47 @@ var file_team_v1alpha1_team_proto_rawDesc = []byte{
 	0x74, 0x65, 0x43, 0x49, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x65, 0x71, 0x75,
 	0x65, 0x73, 0x74, 0x1a, 0x27, 0x2e, 0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70,
 	0x68, 0x61, 0x31, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x49, 0x53, 0x65, 0x74, 0x74,
-	0x69, 0x6e, 0x67, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x57, 0x0a, 0x0c,
-	0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x12, 0x22, 0x2e, 0x74,
-	0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x6e,
-	0x6e, 0x65, 0x63, 0x74, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x1a, 0x23, 0x2e, 0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31,
-	0x2e, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x6f, 0x0a, 0x14, 0x4c, 0x69, 0x73, 0x74, 0x53, 0x6c, 0x61,
-	0x63, 0x6b, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x2a, 0x2e,
-	0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x4c, 0x69,
-	0x73, 0x74, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f,
-	0x6e, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2b, 0x2e, 0x74, 0x65, 0x61, 0x6d,
-	0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x53, 0x6c,
-	0x61, 0x63, 0x6b, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x69, 0x0a, 0x12, 0x48, 0x61, 0x73, 0x53, 0x6c, 0x61,
-	0x63, 0x6b, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x28, 0x2e, 0x74,
-	0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x48, 0x61, 0x73,
-	0x53, 0x6c, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x29, 0x2e, 0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31,
-	0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x48, 0x61, 0x73, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x43,
-	0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x12, 0x5d, 0x0a, 0x0e, 0x55, 0x6e, 0x69, 0x6e, 0x73, 0x74, 0x61, 0x6c, 0x6c, 0x53, 0x6c,
-	0x61, 0x63, 0x6b, 0x12, 0x24, 0x2e, 0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70,
-	0x68, 0x61, 0x31, 0x2e, 0x55, 0x6e, 0x69, 0x6e, 0x73, 0x74, 0x61, 0x6c, 0x6c, 0x53, 0x6c, 0x61,
-	0x63, 0x6b, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x25, 0x2e, 0x74, 0x65, 0x61, 0x6d,
-	0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x55, 0x6e, 0x69, 0x6e, 0x73, 0x74,
-	0x61, 0x6c, 0x6c, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x12, 0x75, 0x0a, 0x16, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x43, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c,
-	0x49, 0x6e, 0x76, 0x69, 0x74, 0x65, 0x54, 0x65, 0x73, 0x74, 0x12, 0x2c, 0x2e, 0x74, 0x65, 0x61,
-	0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x53, 0x6c, 0x61, 0x63, 0x6b,
+	0x69, 0x6e, 0x67, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x6f, 0x0a, 0x14,
+	0x4c, 0x69, 0x73, 0x74, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74,
+	0x69, 0x6f, 0x6e, 0x73, 0x12, 0x2a, 0x2e, 0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c,
+	0x70, 0x68, 0x61, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x43, 0x6f,
+	0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x2b, 0x2e, 0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31,
+	0x2e, 0x4c, 0x69, 0x73, 0x74, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63,
+	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x69, 0x0a,
+	0x12, 0x48, 0x61, 0x73, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74,
+	0x69, 0x6f, 0x6e, 0x12, 0x28, 0x2e, 0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70,
+	0x68, 0x61, 0x31, 0x2e, 0x48, 0x61, 0x73, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x6e, 0x6e,
+	0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x29, 0x2e,
+	0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x48, 0x61,
+	0x73, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x5d, 0x0a, 0x0e, 0x55, 0x6e, 0x69, 0x6e,
+	0x73, 0x74, 0x61, 0x6c, 0x6c, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x12, 0x24, 0x2e, 0x74, 0x65, 0x61,
+	0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x55, 0x6e, 0x69, 0x6e, 0x73,
+	0x74, 0x61, 0x6c, 0x6c, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x25, 0x2e, 0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31,
+	0x2e, 0x55, 0x6e, 0x69, 0x6e, 0x73, 0x74, 0x61, 0x6c, 0x6c, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x75, 0x0a, 0x16, 0x53, 0x6c, 0x61, 0x63, 0x6b,
 	0x43, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x49, 0x6e, 0x76, 0x69, 0x74, 0x65, 0x54, 0x65, 0x73,
-	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2d, 0x2e, 0x74, 0x65, 0x61, 0x6d, 0x2e,
-	0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x43, 0x68,
-	0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x49, 0x6e, 0x76, 0x69, 0x74, 0x65, 0x54, 0x65, 0x73, 0x74, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0xbd, 0x01, 0x0a, 0x11, 0x63, 0x6f, 0x6d, 0x2e,
-	0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x42, 0x09, 0x54,
-	0x65, 0x61, 0x6d, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x48, 0x67, 0x69, 0x74, 0x68,
-	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2d, 0x66, 0x61,
-	0x74, 0x65, 0x2f, 0x63, 0x66, 0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2f, 0x67, 0x65, 0x6e,
-	0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x6f, 0x2f, 0x74, 0x65, 0x61, 0x6d, 0x2f, 0x76,
-	0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x3b, 0x74, 0x65, 0x61, 0x6d, 0x76, 0x31, 0x61, 0x6c,
-	0x70, 0x68, 0x61, 0x31, 0xa2, 0x02, 0x03, 0x54, 0x58, 0x58, 0xaa, 0x02, 0x0d, 0x54, 0x65, 0x61,
-	0x6d, 0x2e, 0x56, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0xca, 0x02, 0x0d, 0x54, 0x65, 0x61,
-	0x6d, 0x5c, 0x56, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0xe2, 0x02, 0x19, 0x54, 0x65, 0x61,
-	0x6d, 0x5c, 0x56, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65,
-	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0e, 0x54, 0x65, 0x61, 0x6d, 0x3a, 0x3a, 0x56,
-	0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x12, 0x2c, 0x2e, 0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61,
+	0x31, 0x2e, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x43, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x49, 0x6e,
+	0x76, 0x69, 0x74, 0x65, 0x54, 0x65, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x2d, 0x2e, 0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e,
+	0x53, 0x6c, 0x61, 0x63, 0x6b, 0x43, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x49, 0x6e, 0x76, 0x69,
+	0x74, 0x65, 0x54, 0x65, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0xbd,
+	0x01, 0x0a, 0x11, 0x63, 0x6f, 0x6d, 0x2e, 0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c,
+	0x70, 0x68, 0x61, 0x31, 0x42, 0x09, 0x54, 0x65, 0x61, 0x6d, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50,
+	0x01, 0x5a, 0x48, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f,
+	0x6d, 0x6d, 0x6f, 0x6e, 0x2d, 0x66, 0x61, 0x74, 0x65, 0x2f, 0x63, 0x66, 0x2d, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x73, 0x2f, 0x67, 0x65, 0x6e, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x6f,
+	0x2f, 0x74, 0x65, 0x61, 0x6d, 0x2f, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x3b, 0x74,
+	0x65, 0x61, 0x6d, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0xa2, 0x02, 0x03, 0x54, 0x58,
+	0x58, 0xaa, 0x02, 0x0d, 0x54, 0x65, 0x61, 0x6d, 0x2e, 0x56, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61,
+	0x31, 0xca, 0x02, 0x0d, 0x54, 0x65, 0x61, 0x6d, 0x5c, 0x56, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61,
+	0x31, 0xe2, 0x02, 0x19, 0x54, 0x65, 0x61, 0x6d, 0x5c, 0x56, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61,
+	0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0e,
+	0x54, 0x65, 0x61, 0x6d, 0x3a, 0x3a, 0x56, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -3170,7 +3125,7 @@ func file_team_v1alpha1_team_proto_rawDescGZIP() []byte {
 }
 
 var file_team_v1alpha1_team_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_team_v1alpha1_team_proto_msgTypes = make([]protoimpl.MessageInfo, 53)
+var file_team_v1alpha1_team_proto_msgTypes = make([]protoimpl.MessageInfo, 52)
 var file_team_v1alpha1_team_proto_goTypes = []interface{}{
 	(RoleAccessRequestStatus)(0),                 // 0: team.v1alpha1.RoleAccessRequestStatus
 	(*ListRoleAccessRequestsRequest)(nil),        // 1: team.v1alpha1.ListRoleAccessRequestsRequest
@@ -3216,46 +3171,45 @@ var file_team_v1alpha1_team_proto_goTypes = []interface{}{
 	(*DeleteAccessHandlerResponse)(nil),          // 41: team.v1alpha1.DeleteAccessHandlerResponse
 	(*UpdateCISettingsRequest)(nil),              // 42: team.v1alpha1.UpdateCISettingsRequest
 	(*UpdateCISettingsResponse)(nil),             // 43: team.v1alpha1.UpdateCISettingsResponse
-	(*ConnectSlackRequest)(nil),                  // 44: team.v1alpha1.ConnectSlackRequest
-	(*ConnectSlackResponse)(nil),                 // 45: team.v1alpha1.ConnectSlackResponse
-	(*ListSlackConnectionsRequest)(nil),          // 46: team.v1alpha1.ListSlackConnectionsRequest
-	(*ListSlackConnectionsResponse)(nil),         // 47: team.v1alpha1.ListSlackConnectionsResponse
-	(*HasSlackConnectionRequest)(nil),            // 48: team.v1alpha1.HasSlackConnectionRequest
-	(*HasSlackConnectionResponse)(nil),           // 49: team.v1alpha1.HasSlackConnectionResponse
-	(*UninstallSlackRequest)(nil),                // 50: team.v1alpha1.UninstallSlackRequest
-	(*UninstallSlackResponse)(nil),               // 51: team.v1alpha1.UninstallSlackResponse
-	(*SlackChannelInviteTestRequest)(nil),        // 52: team.v1alpha1.SlackChannelInviteTestRequest
-	(*SlackChannelInviteTestResponse)(nil),       // 53: team.v1alpha1.SlackChannelInviteTestResponse
-	(*v1alpha1.RoleAccessRequestPayload)(nil),    // 54: certrail.v1alpha1.RoleAccessRequestPayload
-	(*timestamppb.Timestamp)(nil),                // 55: google.protobuf.Timestamp
-	(*v1alpha11.Role)(nil),                       // 56: gconfig.v1alpha1.Role
-	(*v1alpha11.Config)(nil),                     // 57: gconfig.v1alpha1.Config
-	(*v1alpha11.Providers)(nil),                  // 58: gconfig.v1alpha1.Providers
-	(*v1alpha11.AccessHandler)(nil),              // 59: gconfig.v1alpha1.AccessHandler
+	(*SlackConnection)(nil),                      // 44: team.v1alpha1.SlackConnection
+	(*ListSlackConnectionsRequest)(nil),          // 45: team.v1alpha1.ListSlackConnectionsRequest
+	(*ListSlackConnectionsResponse)(nil),         // 46: team.v1alpha1.ListSlackConnectionsResponse
+	(*HasSlackConnectionRequest)(nil),            // 47: team.v1alpha1.HasSlackConnectionRequest
+	(*HasSlackConnectionResponse)(nil),           // 48: team.v1alpha1.HasSlackConnectionResponse
+	(*UninstallSlackRequest)(nil),                // 49: team.v1alpha1.UninstallSlackRequest
+	(*UninstallSlackResponse)(nil),               // 50: team.v1alpha1.UninstallSlackResponse
+	(*SlackChannelInviteTestRequest)(nil),        // 51: team.v1alpha1.SlackChannelInviteTestRequest
+	(*SlackChannelInviteTestResponse)(nil),       // 52: team.v1alpha1.SlackChannelInviteTestResponse
+	(*v1alpha1.RoleAccessRequestPayload)(nil),    // 53: certrail.v1alpha1.RoleAccessRequestPayload
+	(*timestamppb.Timestamp)(nil),                // 54: google.protobuf.Timestamp
+	(*v1alpha11.Role)(nil),                       // 55: gconfig.v1alpha1.Role
+	(*v1alpha11.Config)(nil),                     // 56: gconfig.v1alpha1.Config
+	(*v1alpha11.Providers)(nil),                  // 57: gconfig.v1alpha1.Providers
+	(*v1alpha11.AccessHandler)(nil),              // 58: gconfig.v1alpha1.AccessHandler
 }
 var file_team_v1alpha1_team_proto_depIdxs = []int32{
 	3,  // 0: team.v1alpha1.ListRoleAccessRequestsResponse.requests:type_name -> team.v1alpha1.RoleAccessRequest
-	54, // 1: team.v1alpha1.RoleAccessRequest.request:type_name -> certrail.v1alpha1.RoleAccessRequestPayload
+	53, // 1: team.v1alpha1.RoleAccessRequest.request:type_name -> certrail.v1alpha1.RoleAccessRequestPayload
 	0,  // 2: team.v1alpha1.RoleAccessRequest.status:type_name -> team.v1alpha1.RoleAccessRequestStatus
-	55, // 3: team.v1alpha1.RoleAccessRequest.timestamp:type_name -> google.protobuf.Timestamp
+	54, // 3: team.v1alpha1.RoleAccessRequest.timestamp:type_name -> google.protobuf.Timestamp
 	11, // 4: team.v1alpha1.ListMembersResponse.members:type_name -> team.v1alpha1.Member
 	6,  // 5: team.v1alpha1.UpdateAccountsRequest.accounts:type_name -> team.v1alpha1.Account
 	11, // 6: team.v1alpha1.UpdateAccountsResponse.members:type_name -> team.v1alpha1.Member
-	56, // 7: team.v1alpha1.ListRolesResponse.roles:type_name -> gconfig.v1alpha1.Role
-	57, // 8: team.v1alpha1.UpdateConfigRequest.config:type_name -> gconfig.v1alpha1.Config
+	55, // 7: team.v1alpha1.ListRolesResponse.roles:type_name -> gconfig.v1alpha1.Role
+	56, // 8: team.v1alpha1.UpdateConfigRequest.config:type_name -> gconfig.v1alpha1.Config
 	17, // 9: team.v1alpha1.EnrolProviderRequest.aws:type_name -> team.v1alpha1.EnrolAWSProvider
 	18, // 10: team.v1alpha1.EnrolProviderRequest.aws_sso:type_name -> team.v1alpha1.EnrolAWSSSOProvider
-	55, // 11: team.v1alpha1.EnrolProviderResponse.expires_at:type_name -> google.protobuf.Timestamp
+	54, // 11: team.v1alpha1.EnrolProviderResponse.expires_at:type_name -> google.protobuf.Timestamp
 	30, // 12: team.v1alpha1.ListProvidersResponse.providers:type_name -> team.v1alpha1.Provider
 	24, // 13: team.v1alpha1.GetStatusResponse.enrollments:type_name -> team.v1alpha1.ProviderEnrollment
 	24, // 14: team.v1alpha1.GetStatusResponse.expired_enrollments:type_name -> team.v1alpha1.ProviderEnrollment
-	55, // 15: team.v1alpha1.ProviderEnrollment.expires_at:type_name -> google.protobuf.Timestamp
+	54, // 15: team.v1alpha1.ProviderEnrollment.expires_at:type_name -> google.protobuf.Timestamp
 	25, // 16: team.v1alpha1.ProviderEnrollment.aws:type_name -> team.v1alpha1.AWSProviderEnrollment
 	30, // 17: team.v1alpha1.GetProviderResponse.provider:type_name -> team.v1alpha1.Provider
 	31, // 18: team.v1alpha1.Provider.aws:type_name -> team.v1alpha1.AWSProviderDetails
-	58, // 19: team.v1alpha1.GetAllProviderDetailsResponse.providers:type_name -> gconfig.v1alpha1.Providers
-	59, // 20: team.v1alpha1.GetAccessHandlersForProviderResponse.access_handlers:type_name -> gconfig.v1alpha1.AccessHandler
-	44, // 21: team.v1alpha1.ListSlackConnectionsResponse.slack_connections:type_name -> team.v1alpha1.ConnectSlackRequest
+	57, // 19: team.v1alpha1.GetAllProviderDetailsResponse.providers:type_name -> gconfig.v1alpha1.Providers
+	58, // 20: team.v1alpha1.GetAccessHandlersForProviderResponse.access_handlers:type_name -> gconfig.v1alpha1.AccessHandler
+	44, // 21: team.v1alpha1.ListSlackConnectionsResponse.slack_connections:type_name -> team.v1alpha1.SlackConnection
 	1,  // 22: team.v1alpha1.TeamService.ListRoleAccessRequests:input_type -> team.v1alpha1.ListRoleAccessRequestsRequest
 	4,  // 23: team.v1alpha1.TeamService.ListMembers:input_type -> team.v1alpha1.ListMembersRequest
 	9,  // 24: team.v1alpha1.TeamService.ListRoles:input_type -> team.v1alpha1.ListRolesRequest
@@ -3272,34 +3226,32 @@ var file_team_v1alpha1_team_proto_depIdxs = []int32{
 	38, // 35: team.v1alpha1.TeamService.AddAccessHandler:input_type -> team.v1alpha1.AddAccessHandlerRequest
 	40, // 36: team.v1alpha1.TeamService.DeleteAccessHandler:input_type -> team.v1alpha1.DeleteAccessHandlerRequest
 	42, // 37: team.v1alpha1.TeamService.UpdateCISettings:input_type -> team.v1alpha1.UpdateCISettingsRequest
-	44, // 38: team.v1alpha1.TeamService.ConnectSlack:input_type -> team.v1alpha1.ConnectSlackRequest
-	46, // 39: team.v1alpha1.TeamService.ListSlackConnections:input_type -> team.v1alpha1.ListSlackConnectionsRequest
-	48, // 40: team.v1alpha1.TeamService.HasSlackConnection:input_type -> team.v1alpha1.HasSlackConnectionRequest
-	50, // 41: team.v1alpha1.TeamService.UninstallSlack:input_type -> team.v1alpha1.UninstallSlackRequest
-	52, // 42: team.v1alpha1.TeamService.SlackChannelInviteTest:input_type -> team.v1alpha1.SlackChannelInviteTestRequest
-	2,  // 43: team.v1alpha1.TeamService.ListRoleAccessRequests:output_type -> team.v1alpha1.ListRoleAccessRequestsResponse
-	5,  // 44: team.v1alpha1.TeamService.ListMembers:output_type -> team.v1alpha1.ListMembersResponse
-	10, // 45: team.v1alpha1.TeamService.ListRoles:output_type -> team.v1alpha1.ListRolesResponse
-	15, // 46: team.v1alpha1.TeamService.UpdateConfig:output_type -> team.v1alpha1.UpdateConfigResponse
-	13, // 47: team.v1alpha1.TeamService.IsAdminUser:output_type -> team.v1alpha1.IsAdminUserResponse
-	19, // 48: team.v1alpha1.TeamService.EnrolProvider:output_type -> team.v1alpha1.EnrolProviderResponse
-	21, // 49: team.v1alpha1.TeamService.ListProviders:output_type -> team.v1alpha1.ListProvidersResponse
-	27, // 50: team.v1alpha1.TeamService.DeleteProvider:output_type -> team.v1alpha1.DeleteProviderResponse
-	23, // 51: team.v1alpha1.TeamService.GetStatus:output_type -> team.v1alpha1.GetStatusResponse
-	29, // 52: team.v1alpha1.TeamService.GetProvider:output_type -> team.v1alpha1.GetProviderResponse
-	33, // 53: team.v1alpha1.TeamService.GetAllProviderDetails:output_type -> team.v1alpha1.GetAllProviderDetailsResponse
-	35, // 54: team.v1alpha1.TeamService.GetAllProviderChecksum:output_type -> team.v1alpha1.GetAllProviderChecksumResponse
-	37, // 55: team.v1alpha1.TeamService.GetAccessHandlersForProvider:output_type -> team.v1alpha1.GetAccessHandlersForProviderResponse
-	39, // 56: team.v1alpha1.TeamService.AddAccessHandler:output_type -> team.v1alpha1.AddAccessHandlerResponse
-	41, // 57: team.v1alpha1.TeamService.DeleteAccessHandler:output_type -> team.v1alpha1.DeleteAccessHandlerResponse
-	43, // 58: team.v1alpha1.TeamService.UpdateCISettings:output_type -> team.v1alpha1.UpdateCISettingsResponse
-	45, // 59: team.v1alpha1.TeamService.ConnectSlack:output_type -> team.v1alpha1.ConnectSlackResponse
-	47, // 60: team.v1alpha1.TeamService.ListSlackConnections:output_type -> team.v1alpha1.ListSlackConnectionsResponse
-	49, // 61: team.v1alpha1.TeamService.HasSlackConnection:output_type -> team.v1alpha1.HasSlackConnectionResponse
-	51, // 62: team.v1alpha1.TeamService.UninstallSlack:output_type -> team.v1alpha1.UninstallSlackResponse
-	53, // 63: team.v1alpha1.TeamService.SlackChannelInviteTest:output_type -> team.v1alpha1.SlackChannelInviteTestResponse
-	43, // [43:64] is the sub-list for method output_type
-	22, // [22:43] is the sub-list for method input_type
+	45, // 38: team.v1alpha1.TeamService.ListSlackConnections:input_type -> team.v1alpha1.ListSlackConnectionsRequest
+	47, // 39: team.v1alpha1.TeamService.HasSlackConnection:input_type -> team.v1alpha1.HasSlackConnectionRequest
+	49, // 40: team.v1alpha1.TeamService.UninstallSlack:input_type -> team.v1alpha1.UninstallSlackRequest
+	51, // 41: team.v1alpha1.TeamService.SlackChannelInviteTest:input_type -> team.v1alpha1.SlackChannelInviteTestRequest
+	2,  // 42: team.v1alpha1.TeamService.ListRoleAccessRequests:output_type -> team.v1alpha1.ListRoleAccessRequestsResponse
+	5,  // 43: team.v1alpha1.TeamService.ListMembers:output_type -> team.v1alpha1.ListMembersResponse
+	10, // 44: team.v1alpha1.TeamService.ListRoles:output_type -> team.v1alpha1.ListRolesResponse
+	15, // 45: team.v1alpha1.TeamService.UpdateConfig:output_type -> team.v1alpha1.UpdateConfigResponse
+	13, // 46: team.v1alpha1.TeamService.IsAdminUser:output_type -> team.v1alpha1.IsAdminUserResponse
+	19, // 47: team.v1alpha1.TeamService.EnrolProvider:output_type -> team.v1alpha1.EnrolProviderResponse
+	21, // 48: team.v1alpha1.TeamService.ListProviders:output_type -> team.v1alpha1.ListProvidersResponse
+	27, // 49: team.v1alpha1.TeamService.DeleteProvider:output_type -> team.v1alpha1.DeleteProviderResponse
+	23, // 50: team.v1alpha1.TeamService.GetStatus:output_type -> team.v1alpha1.GetStatusResponse
+	29, // 51: team.v1alpha1.TeamService.GetProvider:output_type -> team.v1alpha1.GetProviderResponse
+	33, // 52: team.v1alpha1.TeamService.GetAllProviderDetails:output_type -> team.v1alpha1.GetAllProviderDetailsResponse
+	35, // 53: team.v1alpha1.TeamService.GetAllProviderChecksum:output_type -> team.v1alpha1.GetAllProviderChecksumResponse
+	37, // 54: team.v1alpha1.TeamService.GetAccessHandlersForProvider:output_type -> team.v1alpha1.GetAccessHandlersForProviderResponse
+	39, // 55: team.v1alpha1.TeamService.AddAccessHandler:output_type -> team.v1alpha1.AddAccessHandlerResponse
+	41, // 56: team.v1alpha1.TeamService.DeleteAccessHandler:output_type -> team.v1alpha1.DeleteAccessHandlerResponse
+	43, // 57: team.v1alpha1.TeamService.UpdateCISettings:output_type -> team.v1alpha1.UpdateCISettingsResponse
+	46, // 58: team.v1alpha1.TeamService.ListSlackConnections:output_type -> team.v1alpha1.ListSlackConnectionsResponse
+	48, // 59: team.v1alpha1.TeamService.HasSlackConnection:output_type -> team.v1alpha1.HasSlackConnectionResponse
+	50, // 60: team.v1alpha1.TeamService.UninstallSlack:output_type -> team.v1alpha1.UninstallSlackResponse
+	52, // 61: team.v1alpha1.TeamService.SlackChannelInviteTest:output_type -> team.v1alpha1.SlackChannelInviteTestResponse
+	42, // [42:62] is the sub-list for method output_type
+	22, // [22:42] is the sub-list for method input_type
 	22, // [22:22] is the sub-list for extension type_name
 	22, // [22:22] is the sub-list for extension extendee
 	0,  // [0:22] is the sub-list for field type_name
@@ -3828,7 +3780,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[43].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ConnectSlackRequest); i {
+			switch v := v.(*SlackConnection); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3840,18 +3792,6 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[44].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ConnectSlackResponse); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_team_v1alpha1_team_proto_msgTypes[45].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListSlackConnectionsRequest); i {
 			case 0:
 				return &v.state
@@ -3863,7 +3803,7 @@ func file_team_v1alpha1_team_proto_init() {
 				return nil
 			}
 		}
-		file_team_v1alpha1_team_proto_msgTypes[46].Exporter = func(v interface{}, i int) interface{} {
+		file_team_v1alpha1_team_proto_msgTypes[45].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListSlackConnectionsResponse); i {
 			case 0:
 				return &v.state
@@ -3875,7 +3815,7 @@ func file_team_v1alpha1_team_proto_init() {
 				return nil
 			}
 		}
-		file_team_v1alpha1_team_proto_msgTypes[47].Exporter = func(v interface{}, i int) interface{} {
+		file_team_v1alpha1_team_proto_msgTypes[46].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*HasSlackConnectionRequest); i {
 			case 0:
 				return &v.state
@@ -3887,7 +3827,7 @@ func file_team_v1alpha1_team_proto_init() {
 				return nil
 			}
 		}
-		file_team_v1alpha1_team_proto_msgTypes[48].Exporter = func(v interface{}, i int) interface{} {
+		file_team_v1alpha1_team_proto_msgTypes[47].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*HasSlackConnectionResponse); i {
 			case 0:
 				return &v.state
@@ -3899,7 +3839,7 @@ func file_team_v1alpha1_team_proto_init() {
 				return nil
 			}
 		}
-		file_team_v1alpha1_team_proto_msgTypes[49].Exporter = func(v interface{}, i int) interface{} {
+		file_team_v1alpha1_team_proto_msgTypes[48].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UninstallSlackRequest); i {
 			case 0:
 				return &v.state
@@ -3911,7 +3851,7 @@ func file_team_v1alpha1_team_proto_init() {
 				return nil
 			}
 		}
-		file_team_v1alpha1_team_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
+		file_team_v1alpha1_team_proto_msgTypes[49].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UninstallSlackResponse); i {
 			case 0:
 				return &v.state
@@ -3923,7 +3863,7 @@ func file_team_v1alpha1_team_proto_init() {
 				return nil
 			}
 		}
-		file_team_v1alpha1_team_proto_msgTypes[51].Exporter = func(v interface{}, i int) interface{} {
+		file_team_v1alpha1_team_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SlackChannelInviteTestRequest); i {
 			case 0:
 				return &v.state
@@ -3935,7 +3875,7 @@ func file_team_v1alpha1_team_proto_init() {
 				return nil
 			}
 		}
-		file_team_v1alpha1_team_proto_msgTypes[52].Exporter = func(v interface{}, i int) interface{} {
+		file_team_v1alpha1_team_proto_msgTypes[51].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SlackChannelInviteTestResponse); i {
 			case 0:
 				return &v.state
@@ -3964,7 +3904,7 @@ func file_team_v1alpha1_team_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_team_v1alpha1_team_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   53,
+			NumMessages:   52,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
