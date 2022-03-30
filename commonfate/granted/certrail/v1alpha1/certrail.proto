@@ -40,6 +40,7 @@ message RoleAccessRequestPayload {
   string group = 5;
   string reason = 6;
   bytes requested_by = 7;
+  string token_context = 8;
 }
 message ApprovedRoleAccessRequestPayload {
   bytes role_access_request_trillian_merkle_hash = 1;
