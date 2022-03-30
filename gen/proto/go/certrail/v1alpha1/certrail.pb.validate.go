@@ -2739,6 +2739,8 @@ func (m *IncludedEnvelope) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for TrillianMerkleHash
+
 	if len(errors) > 0 {
 		return IncludedEnvelopeMultiError(errors)
 	}

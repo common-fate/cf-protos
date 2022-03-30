@@ -524,6 +524,9 @@ func (m *IncludedEnvelope) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEn
 		}
 	}
 
+	keyName = "trillian_merkle_hash" // field trillian_merkle_hash = 2
+	enc.AddByteString(keyName, m.TrillianMerkleHash)
+
 	return nil
 }
 

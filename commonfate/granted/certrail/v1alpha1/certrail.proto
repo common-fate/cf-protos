@@ -150,6 +150,7 @@ message GetEntriesResponse {
 
 message IncludedEnvelope {
   Envelope envelope = 1;
+  bytes trillian_merkle_hash = 2;
 }
 
 message GetLatestSignedLogRootRequest {}
