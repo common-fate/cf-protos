@@ -91,6 +91,22 @@ message IssueSessionCredentialsPayload {
   string id = 1;
   bytes user_certificate = 2;
   string user_supplied_reason = 3;
+  // Optionally, include the hash of the approval request if it exists that led to these credentials being granted
+  bytes role_access_request_trillian_merkle_hash = 4;
+ 
+}
+
+// When an access handler starts an OKTA granted state machine workflow
+// This payload is created to record the ARN of the workflow run
+// Auditors can be assured that workflow runs were created correctly
+message OktaAccessWorkflowInitiatedPayload {
+  string invocation_arn = 1;
+  bytes user_certificate = 2;
+  string okta_group = 3;
+  // Optionally, include the hash of the approval request if it exists that led to these credentials being granted
+  bytes role_access_request_trillian_merkle_hash = 4;
+  string user_supplied_reason = 5;
+  
 }
 
 message Envelope {

@@ -7,9 +7,9 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
+	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	_ "google.golang.org/protobuf/types/known/durationpb"
-	_ "google.golang.org/protobuf/types/known/timestamppb"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -259,6 +259,35 @@ func (m *IssueSessionCredentialsPayload) MarshalLogObject(enc go_uber_org_zap_za
 	enc.AddByteString(keyName, m.UserCertificate)
 
 	keyName = "user_supplied_reason" // field user_supplied_reason = 3
+	enc.AddString(keyName, m.UserSuppliedReason)
+
+	keyName = "role_access_request_trillian_merkle_hash" // field role_access_request_trillian_merkle_hash = 4
+	enc.AddByteString(keyName, m.RoleAccessRequestTrillianMerkleHash)
+
+	return nil
+}
+
+func (m *OktaAccessWorkflowInitiatedPayload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "invocation_arn" // field invocation_arn = 1
+	enc.AddString(keyName, m.InvocationArn)
+
+	keyName = "user_certificate" // field user_certificate = 2
+	enc.AddByteString(keyName, m.UserCertificate)
+
+	keyName = "okta_group" // field okta_group = 3
+	enc.AddString(keyName, m.OktaGroup)
+
+	keyName = "role_access_request_trillian_merkle_hash" // field role_access_request_trillian_merkle_hash = 4
+	enc.AddByteString(keyName, m.RoleAccessRequestTrillianMerkleHash)
+
+	keyName = "user_supplied_reason" // field user_supplied_reason = 5
 	enc.AddString(keyName, m.UserSuppliedReason)
 
 	return nil
