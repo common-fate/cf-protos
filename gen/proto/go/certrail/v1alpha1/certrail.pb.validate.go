@@ -441,6 +441,8 @@ func (m *RoleAccessRequestPayload) validate(all bool) error {
 
 	// no validation rules for RequestedBy
 
+	// no validation rules for TokenContext
+
 	if len(errors) > 0 {
 		return RoleAccessRequestPayloadMultiError(errors)
 	}
