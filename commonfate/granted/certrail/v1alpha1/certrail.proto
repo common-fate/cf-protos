@@ -92,6 +92,22 @@ message IssueSessionCredentialsPayload {
   string id = 1;
   bytes user_certificate = 2;
   string user_supplied_reason = 3;
+  // Optionally, include the hash of the approval request if it exists that led to these credentials being granted
+  bytes role_access_request_trillian_merkle_hash = 4;
+ 
+}
+
+// When an access handler starts an OKTA granted state machine workflow
+// This payload is created to record the ARN of the workflow run
+// Auditors can be assured that workflow runs were created correctly
+message OktaAccessWorkflowInitiatedPayload {
+  string invocation_arn = 1;
+  bytes user_certificate = 2;
+  string okta_group = 3;
+  // Optionally, include the hash of the approval request if it exists that led to these credentials being granted
+  bytes role_access_request_trillian_merkle_hash = 4;
+  string user_supplied_reason = 5;
+  
 }
 
 message Envelope {
@@ -110,6 +126,7 @@ message Payload {
     ApprovedRoleAccessRequestPayload approved_role_access_request = 7;
     DeclinedRoleAccessRequestPayload declined_role_access_request = 8;
     CancelledRoleAccessRequestPayload cancelled_role_access_request = 9;
+    OktaAccessWorkflowInitiatedPayload okta_access_workflow_initiated = 10;
   }
 }
 
@@ -134,6 +151,7 @@ message GetEntriesResponse {
 
 message IncludedEnvelope {
   Envelope envelope = 1;
+  bytes trillian_merkle_hash = 2;
 }
 
 message GetLatestSignedLogRootRequest {}

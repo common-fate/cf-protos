@@ -1466,6 +1466,8 @@ func (m *IssueSessionCredentialsPayload) validate(all bool) error {
 
 	// no validation rules for UserSuppliedReason
 
+	// no validation rules for RoleAccessRequestTrillianMerkleHash
+
 	if len(errors) > 0 {
 		return IssueSessionCredentialsPayloadMultiError(errors)
 	}
@@ -1546,6 +1548,121 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = IssueSessionCredentialsPayloadValidationError{}
+
+// Validate checks the field values on OktaAccessWorkflowInitiatedPayload with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *OktaAccessWorkflowInitiatedPayload) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on OktaAccessWorkflowInitiatedPayload
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// OktaAccessWorkflowInitiatedPayloadMultiError, or nil if none found.
+func (m *OktaAccessWorkflowInitiatedPayload) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *OktaAccessWorkflowInitiatedPayload) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for InvocationArn
+
+	// no validation rules for UserCertificate
+
+	// no validation rules for OktaGroup
+
+	// no validation rules for RoleAccessRequestTrillianMerkleHash
+
+	// no validation rules for UserSuppliedReason
+
+	if len(errors) > 0 {
+		return OktaAccessWorkflowInitiatedPayloadMultiError(errors)
+	}
+
+	return nil
+}
+
+// OktaAccessWorkflowInitiatedPayloadMultiError is an error wrapping multiple
+// validation errors returned by
+// OktaAccessWorkflowInitiatedPayload.ValidateAll() if the designated
+// constraints aren't met.
+type OktaAccessWorkflowInitiatedPayloadMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m OktaAccessWorkflowInitiatedPayloadMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m OktaAccessWorkflowInitiatedPayloadMultiError) AllErrors() []error { return m }
+
+// OktaAccessWorkflowInitiatedPayloadValidationError is the validation error
+// returned by OktaAccessWorkflowInitiatedPayload.Validate if the designated
+// constraints aren't met.
+type OktaAccessWorkflowInitiatedPayloadValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OktaAccessWorkflowInitiatedPayloadValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OktaAccessWorkflowInitiatedPayloadValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OktaAccessWorkflowInitiatedPayloadValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OktaAccessWorkflowInitiatedPayloadValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OktaAccessWorkflowInitiatedPayloadValidationError) ErrorName() string {
+	return "OktaAccessWorkflowInitiatedPayloadValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e OktaAccessWorkflowInitiatedPayloadValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOktaAccessWorkflowInitiatedPayload.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OktaAccessWorkflowInitiatedPayloadValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OktaAccessWorkflowInitiatedPayloadValidationError{}
 
 // Validate checks the field values on Envelope with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
@@ -1980,6 +2097,37 @@ func (m *Payload) validate(all bool) error {
 			if err := v.Validate(); err != nil {
 				return PayloadValidationError{
 					field:  "CancelledRoleAccessRequest",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *Payload_OktaAccessWorkflowInitiated:
+
+		if all {
+			switch v := interface{}(m.GetOktaAccessWorkflowInitiated()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, PayloadValidationError{
+						field:  "OktaAccessWorkflowInitiated",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, PayloadValidationError{
+						field:  "OktaAccessWorkflowInitiated",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetOktaAccessWorkflowInitiated()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PayloadValidationError{
+					field:  "OktaAccessWorkflowInitiated",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -2592,6 +2740,8 @@ func (m *IncludedEnvelope) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for TrillianMerkleHash
 
 	if len(errors) > 0 {
 		return IncludedEnvelopeMultiError(errors)
