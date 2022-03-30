@@ -125,6 +125,7 @@ message Payload {
     ApprovedRoleAccessRequestPayload approved_role_access_request = 7;
     DeclinedRoleAccessRequestPayload declined_role_access_request = 8;
     CancelledRoleAccessRequestPayload cancelled_role_access_request = 9;
+    OktaAccessWorkflowInitiatedPayload okta_access_workflow_initiated = 10;
   }
 }
 

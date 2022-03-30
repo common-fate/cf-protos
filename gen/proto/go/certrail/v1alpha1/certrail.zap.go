@@ -416,6 +416,17 @@ func (m *Payload) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) er
 		}
 	}
 
+	keyName = "okta_access_workflow_initiated" // field okta_access_workflow_initiated = 10
+	if ov, ok := m.GetContents().(*Payload_OktaAccessWorkflowInitiated); ok {
+		_ = ov
+		if ov.OktaAccessWorkflowInitiated != nil {
+			var vv interface{} = ov.OktaAccessWorkflowInitiated
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
 	return nil
 }
 
