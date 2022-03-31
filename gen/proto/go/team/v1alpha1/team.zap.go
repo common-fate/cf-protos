@@ -7,10 +7,10 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
-	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
-	_ "github.com/common-fate/cf-protos/gen/proto/go/certrail/v1alpha1"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
+	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
+	_ "github.com/common-fate/cf-protos/gen/proto/go/certrail/v1alpha1"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -545,10 +545,60 @@ func (m *ProviderEnrollment) MarshalLogObject(enc go_uber_org_zap_zapcore.Object
 		}
 	}
 
+	keyName = "awssso" // field awssso = 7
+	if ov, ok := m.GetDetails().(*ProviderEnrollment_Awssso); ok {
+		_ = ov
+		if ov.Awssso != nil {
+			var vv interface{} = ov.Awssso
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
+	keyName = "okta" // field okta = 8
+	if ov, ok := m.GetDetails().(*ProviderEnrollment_Okta); ok {
+		_ = ov
+		if ov.Okta != nil {
+			var vv interface{} = ov.Okta
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
 	return nil
 }
 
 func (m *AWSProviderEnrollment) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "account_id" // field account_id = 1
+	enc.AddString(keyName, m.AccountId)
+
+	return nil
+}
+
+func (m *AWSSSOProviderEnrollment) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "account_id" // field account_id = 1
+	enc.AddString(keyName, m.AccountId)
+
+	return nil
+}
+
+func (m *OktaProviderEnrollment) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -645,10 +695,60 @@ func (m *Provider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) e
 		}
 	}
 
+	keyName = "awssso" // field awssso = 5
+	if ov, ok := m.GetDetails().(*Provider_Awssso); ok {
+		_ = ov
+		if ov.Awssso != nil {
+			var vv interface{} = ov.Awssso
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
+	keyName = "okta" // field okta = 6
+	if ov, ok := m.GetDetails().(*Provider_Okta); ok {
+		_ = ov
+		if ov.Okta != nil {
+			var vv interface{} = ov.Okta
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
 	return nil
 }
 
 func (m *AWSProviderDetails) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "org_management_account_id" // field org_management_account_id = 1
+	enc.AddString(keyName, m.OrgManagementAccountId)
+
+	return nil
+}
+
+func (m *AWSSSOProviderDetails) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "org_management_account_id" // field org_management_account_id = 1
+	enc.AddString(keyName, m.OrgManagementAccountId)
+
+	return nil
+}
+
+func (m *OktaProviderDetails) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 

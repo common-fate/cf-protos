@@ -3153,6 +3153,68 @@ func (m *ProviderEnrollment) validate(all bool) error {
 			}
 		}
 
+	case *ProviderEnrollment_Awssso:
+
+		if all {
+			switch v := interface{}(m.GetAwssso()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ProviderEnrollmentValidationError{
+						field:  "Awssso",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ProviderEnrollmentValidationError{
+						field:  "Awssso",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetAwssso()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ProviderEnrollmentValidationError{
+					field:  "Awssso",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *ProviderEnrollment_Okta:
+
+		if all {
+			switch v := interface{}(m.GetOkta()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ProviderEnrollmentValidationError{
+						field:  "Okta",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ProviderEnrollmentValidationError{
+						field:  "Okta",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetOkta()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ProviderEnrollmentValidationError{
+					field:  "Okta",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if len(errors) > 0 {
@@ -3338,6 +3400,214 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = AWSProviderEnrollmentValidationError{}
+
+// Validate checks the field values on AWSSSOProviderEnrollment with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AWSSSOProviderEnrollment) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AWSSSOProviderEnrollment with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AWSSSOProviderEnrollmentMultiError, or nil if none found.
+func (m *AWSSSOProviderEnrollment) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AWSSSOProviderEnrollment) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AccountId
+
+	if len(errors) > 0 {
+		return AWSSSOProviderEnrollmentMultiError(errors)
+	}
+
+	return nil
+}
+
+// AWSSSOProviderEnrollmentMultiError is an error wrapping multiple validation
+// errors returned by AWSSSOProviderEnrollment.ValidateAll() if the designated
+// constraints aren't met.
+type AWSSSOProviderEnrollmentMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AWSSSOProviderEnrollmentMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AWSSSOProviderEnrollmentMultiError) AllErrors() []error { return m }
+
+// AWSSSOProviderEnrollmentValidationError is the validation error returned by
+// AWSSSOProviderEnrollment.Validate if the designated constraints aren't met.
+type AWSSSOProviderEnrollmentValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AWSSSOProviderEnrollmentValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AWSSSOProviderEnrollmentValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AWSSSOProviderEnrollmentValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AWSSSOProviderEnrollmentValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AWSSSOProviderEnrollmentValidationError) ErrorName() string {
+	return "AWSSSOProviderEnrollmentValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AWSSSOProviderEnrollmentValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAWSSSOProviderEnrollment.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AWSSSOProviderEnrollmentValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AWSSSOProviderEnrollmentValidationError{}
+
+// Validate checks the field values on OktaProviderEnrollment with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *OktaProviderEnrollment) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on OktaProviderEnrollment with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// OktaProviderEnrollmentMultiError, or nil if none found.
+func (m *OktaProviderEnrollment) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *OktaProviderEnrollment) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AccountId
+
+	if len(errors) > 0 {
+		return OktaProviderEnrollmentMultiError(errors)
+	}
+
+	return nil
+}
+
+// OktaProviderEnrollmentMultiError is an error wrapping multiple validation
+// errors returned by OktaProviderEnrollment.ValidateAll() if the designated
+// constraints aren't met.
+type OktaProviderEnrollmentMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m OktaProviderEnrollmentMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m OktaProviderEnrollmentMultiError) AllErrors() []error { return m }
+
+// OktaProviderEnrollmentValidationError is the validation error returned by
+// OktaProviderEnrollment.Validate if the designated constraints aren't met.
+type OktaProviderEnrollmentValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OktaProviderEnrollmentValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OktaProviderEnrollmentValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OktaProviderEnrollmentValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OktaProviderEnrollmentValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OktaProviderEnrollmentValidationError) ErrorName() string {
+	return "OktaProviderEnrollmentValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e OktaProviderEnrollmentValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOktaProviderEnrollment.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OktaProviderEnrollmentValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OktaProviderEnrollmentValidationError{}
 
 // Validate checks the field values on DeleteProviderRequest with the rules
 // defined in the proto definition for this message. If any rules are
@@ -3839,6 +4109,68 @@ func (m *Provider) validate(all bool) error {
 			}
 		}
 
+	case *Provider_Awssso:
+
+		if all {
+			switch v := interface{}(m.GetAwssso()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ProviderValidationError{
+						field:  "Awssso",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ProviderValidationError{
+						field:  "Awssso",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetAwssso()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ProviderValidationError{
+					field:  "Awssso",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *Provider_Okta:
+
+		if all {
+			switch v := interface{}(m.GetOkta()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ProviderValidationError{
+						field:  "Okta",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ProviderValidationError{
+						field:  "Okta",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetOkta()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ProviderValidationError{
+					field:  "Okta",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if len(errors) > 0 {
@@ -4021,6 +4353,214 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = AWSProviderDetailsValidationError{}
+
+// Validate checks the field values on AWSSSOProviderDetails with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AWSSSOProviderDetails) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AWSSSOProviderDetails with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AWSSSOProviderDetailsMultiError, or nil if none found.
+func (m *AWSSSOProviderDetails) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AWSSSOProviderDetails) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OrgManagementAccountId
+
+	if len(errors) > 0 {
+		return AWSSSOProviderDetailsMultiError(errors)
+	}
+
+	return nil
+}
+
+// AWSSSOProviderDetailsMultiError is an error wrapping multiple validation
+// errors returned by AWSSSOProviderDetails.ValidateAll() if the designated
+// constraints aren't met.
+type AWSSSOProviderDetailsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AWSSSOProviderDetailsMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AWSSSOProviderDetailsMultiError) AllErrors() []error { return m }
+
+// AWSSSOProviderDetailsValidationError is the validation error returned by
+// AWSSSOProviderDetails.Validate if the designated constraints aren't met.
+type AWSSSOProviderDetailsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AWSSSOProviderDetailsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AWSSSOProviderDetailsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AWSSSOProviderDetailsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AWSSSOProviderDetailsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AWSSSOProviderDetailsValidationError) ErrorName() string {
+	return "AWSSSOProviderDetailsValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AWSSSOProviderDetailsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAWSSSOProviderDetails.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AWSSSOProviderDetailsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AWSSSOProviderDetailsValidationError{}
+
+// Validate checks the field values on OktaProviderDetails with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *OktaProviderDetails) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on OktaProviderDetails with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// OktaProviderDetailsMultiError, or nil if none found.
+func (m *OktaProviderDetails) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *OktaProviderDetails) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OrgManagementAccountId
+
+	if len(errors) > 0 {
+		return OktaProviderDetailsMultiError(errors)
+	}
+
+	return nil
+}
+
+// OktaProviderDetailsMultiError is an error wrapping multiple validation
+// errors returned by OktaProviderDetails.ValidateAll() if the designated
+// constraints aren't met.
+type OktaProviderDetailsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m OktaProviderDetailsMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m OktaProviderDetailsMultiError) AllErrors() []error { return m }
+
+// OktaProviderDetailsValidationError is the validation error returned by
+// OktaProviderDetails.Validate if the designated constraints aren't met.
+type OktaProviderDetailsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OktaProviderDetailsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OktaProviderDetailsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OktaProviderDetailsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OktaProviderDetailsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OktaProviderDetailsValidationError) ErrorName() string {
+	return "OktaProviderDetailsValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e OktaProviderDetailsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOktaProviderDetails.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OktaProviderDetailsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OktaProviderDetailsValidationError{}
 
 // Validate checks the field values on GetAllProviderDetailsRequest with the
 // rules defined in the proto definition for this message. If any rules are

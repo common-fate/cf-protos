@@ -174,10 +174,18 @@ message ProviderEnrollment {
   google.protobuf.Timestamp expires_at = 5;
   oneof details {
     AWSProviderEnrollment aws = 6;
+    AWSSSOProviderEnrollment awssso = 7;
+    OktaProviderEnrollment okta = 8;
   }
 }
 
 message AWSProviderEnrollment {
+  string account_id = 1;
+}
+message AWSSSOProviderEnrollment {
+  string account_id = 1;
+}
+message OktaProviderEnrollment {
   string account_id = 1;
 }
 
@@ -200,12 +208,21 @@ message Provider {
   string name = 2;
   oneof details {
     AWSProviderDetails aws = 4;
+    AWSSSOProviderDetails awssso = 5;
+    OktaProviderDetails okta = 6;
   }
 }
 
 message AWSProviderDetails {
   string org_management_account_id = 1;
 }
+message AWSSSOProviderDetails {
+  string org_management_account_id = 1;
+}
+message OktaProviderDetails {
+  string org_management_account_id = 1;
+}
+
 
 
 message GetAllProviderDetailsRequest {}
