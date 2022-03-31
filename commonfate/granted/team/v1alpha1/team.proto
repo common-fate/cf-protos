@@ -130,6 +130,7 @@ message EnrolProviderRequest {
   oneof provider {
     EnrolAWSProvider aws = 3;
     EnrolAWSSSOProvider aws_sso = 4;
+    EnrolOktaProvider okta = 5;
   }
 }
 
@@ -138,6 +139,9 @@ message EnrolAWSProvider {
 }
 
 message EnrolAWSSSOProvider {
+  string account_id = 1 [(validate.rules).string = {len: 12, pattern: "^[0-9]*$"}];
+}
+message EnrolOktaProvider {
   string account_id = 1 [(validate.rules).string = {len: 12, pattern: "^[0-9]*$"}];
 }
 

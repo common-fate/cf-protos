@@ -824,6 +824,7 @@ type EnrolProviderRequest struct {
 	// Types that are assignable to Provider:
 	//	*EnrolProviderRequest_Aws
 	//	*EnrolProviderRequest_AwsSso
+	//	*EnrolProviderRequest_Okta
 	Provider isEnrolProviderRequest_Provider `protobuf_oneof:"provider"`
 }
 
@@ -894,6 +895,13 @@ func (x *EnrolProviderRequest) GetAwsSso() *EnrolAWSSSOProvider {
 	return nil
 }
 
+func (x *EnrolProviderRequest) GetOkta() *EnrolOktaProvider {
+	if x, ok := x.GetProvider().(*EnrolProviderRequest_Okta); ok {
+		return x.Okta
+	}
+	return nil
+}
+
 type isEnrolProviderRequest_Provider interface {
 	isEnrolProviderRequest_Provider()
 }
@@ -906,9 +914,15 @@ type EnrolProviderRequest_AwsSso struct {
 	AwsSso *EnrolAWSSSOProvider `protobuf:"bytes,4,opt,name=aws_sso,json=awsSso,proto3,oneof"`
 }
 
+type EnrolProviderRequest_Okta struct {
+	Okta *EnrolOktaProvider `protobuf:"bytes,5,opt,name=okta,proto3,oneof"`
+}
+
 func (*EnrolProviderRequest_Aws) isEnrolProviderRequest_Provider() {}
 
 func (*EnrolProviderRequest_AwsSso) isEnrolProviderRequest_Provider() {}
+
+func (*EnrolProviderRequest_Okta) isEnrolProviderRequest_Provider() {}
 
 type EnrolAWSProvider struct {
 	state         protoimpl.MessageState
@@ -1004,6 +1018,53 @@ func (x *EnrolAWSSSOProvider) GetAccountId() string {
 	return ""
 }
 
+type EnrolOktaProvider struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+}
+
+func (x *EnrolOktaProvider) Reset() {
+	*x = EnrolOktaProvider{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_team_v1alpha1_team_proto_msgTypes[18]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EnrolOktaProvider) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnrolOktaProvider) ProtoMessage() {}
+
+func (x *EnrolOktaProvider) ProtoReflect() protoreflect.Message {
+	mi := &file_team_v1alpha1_team_proto_msgTypes[18]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnrolOktaProvider.ProtoReflect.Descriptor instead.
+func (*EnrolOktaProvider) Descriptor() ([]byte, []int) {
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *EnrolOktaProvider) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
 type EnrolProviderResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1016,7 +1077,7 @@ type EnrolProviderResponse struct {
 func (x *EnrolProviderResponse) Reset() {
 	*x = EnrolProviderResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[18]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1029,7 +1090,7 @@ func (x *EnrolProviderResponse) String() string {
 func (*EnrolProviderResponse) ProtoMessage() {}
 
 func (x *EnrolProviderResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[18]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1042,7 +1103,7 @@ func (x *EnrolProviderResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnrolProviderResponse.ProtoReflect.Descriptor instead.
 func (*EnrolProviderResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{18}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *EnrolProviderResponse) GetDeploymentUrl() string {
@@ -1068,7 +1129,7 @@ type ListProvidersRequest struct {
 func (x *ListProvidersRequest) Reset() {
 	*x = ListProvidersRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[19]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1081,7 +1142,7 @@ func (x *ListProvidersRequest) String() string {
 func (*ListProvidersRequest) ProtoMessage() {}
 
 func (x *ListProvidersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[19]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1094,7 +1155,7 @@ func (x *ListProvidersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListProvidersRequest.ProtoReflect.Descriptor instead.
 func (*ListProvidersRequest) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{19}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{20}
 }
 
 type ListProvidersResponse struct {
@@ -1109,7 +1170,7 @@ type ListProvidersResponse struct {
 func (x *ListProvidersResponse) Reset() {
 	*x = ListProvidersResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[20]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1122,7 +1183,7 @@ func (x *ListProvidersResponse) String() string {
 func (*ListProvidersResponse) ProtoMessage() {}
 
 func (x *ListProvidersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[20]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1135,7 +1196,7 @@ func (x *ListProvidersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListProvidersResponse.ProtoReflect.Descriptor instead.
 func (*ListProvidersResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{20}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ListProvidersResponse) GetProviders() []*Provider {
@@ -1161,7 +1222,7 @@ type GetStatusRequest struct {
 func (x *GetStatusRequest) Reset() {
 	*x = GetStatusRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[21]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1174,7 +1235,7 @@ func (x *GetStatusRequest) String() string {
 func (*GetStatusRequest) ProtoMessage() {}
 
 func (x *GetStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[21]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1187,7 +1248,7 @@ func (x *GetStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetStatusRequest.ProtoReflect.Descriptor instead.
 func (*GetStatusRequest) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{21}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{22}
 }
 
 type GetStatusResponse struct {
@@ -1204,7 +1265,7 @@ type GetStatusResponse struct {
 func (x *GetStatusResponse) Reset() {
 	*x = GetStatusResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[22]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1217,7 +1278,7 @@ func (x *GetStatusResponse) String() string {
 func (*GetStatusResponse) ProtoMessage() {}
 
 func (x *GetStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[22]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1230,7 +1291,7 @@ func (x *GetStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetStatusResponse.ProtoReflect.Descriptor instead.
 func (*GetStatusResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{22}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *GetStatusResponse) GetEnrollments() []*ProviderEnrollment {
@@ -1265,7 +1326,7 @@ type ProviderEnrollment struct {
 func (x *ProviderEnrollment) Reset() {
 	*x = ProviderEnrollment{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[23]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1278,7 +1339,7 @@ func (x *ProviderEnrollment) String() string {
 func (*ProviderEnrollment) ProtoMessage() {}
 
 func (x *ProviderEnrollment) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[23]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1291,7 +1352,7 @@ func (x *ProviderEnrollment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProviderEnrollment.ProtoReflect.Descriptor instead.
 func (*ProviderEnrollment) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{23}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ProviderEnrollment) GetId() string {
@@ -1364,7 +1425,7 @@ type AWSProviderEnrollment struct {
 func (x *AWSProviderEnrollment) Reset() {
 	*x = AWSProviderEnrollment{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[24]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1377,7 +1438,7 @@ func (x *AWSProviderEnrollment) String() string {
 func (*AWSProviderEnrollment) ProtoMessage() {}
 
 func (x *AWSProviderEnrollment) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[24]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1390,7 +1451,7 @@ func (x *AWSProviderEnrollment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AWSProviderEnrollment.ProtoReflect.Descriptor instead.
 func (*AWSProviderEnrollment) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{24}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *AWSProviderEnrollment) GetAccountId() string {
@@ -1411,7 +1472,7 @@ type DeleteProviderRequest struct {
 func (x *DeleteProviderRequest) Reset() {
 	*x = DeleteProviderRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[25]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[26]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1424,7 +1485,7 @@ func (x *DeleteProviderRequest) String() string {
 func (*DeleteProviderRequest) ProtoMessage() {}
 
 func (x *DeleteProviderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[25]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[26]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1437,7 +1498,7 @@ func (x *DeleteProviderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteProviderRequest.ProtoReflect.Descriptor instead.
 func (*DeleteProviderRequest) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{25}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *DeleteProviderRequest) GetId() string {
@@ -1456,7 +1517,7 @@ type DeleteProviderResponse struct {
 func (x *DeleteProviderResponse) Reset() {
 	*x = DeleteProviderResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[26]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1469,7 +1530,7 @@ func (x *DeleteProviderResponse) String() string {
 func (*DeleteProviderResponse) ProtoMessage() {}
 
 func (x *DeleteProviderResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[26]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1482,7 +1543,7 @@ func (x *DeleteProviderResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteProviderResponse.ProtoReflect.Descriptor instead.
 func (*DeleteProviderResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{26}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{27}
 }
 
 type GetProviderRequest struct {
@@ -1496,7 +1557,7 @@ type GetProviderRequest struct {
 func (x *GetProviderRequest) Reset() {
 	*x = GetProviderRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[27]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1509,7 +1570,7 @@ func (x *GetProviderRequest) String() string {
 func (*GetProviderRequest) ProtoMessage() {}
 
 func (x *GetProviderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[27]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1522,7 +1583,7 @@ func (x *GetProviderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetProviderRequest.ProtoReflect.Descriptor instead.
 func (*GetProviderRequest) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{27}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *GetProviderRequest) GetId() string {
@@ -1543,7 +1604,7 @@ type GetProviderResponse struct {
 func (x *GetProviderResponse) Reset() {
 	*x = GetProviderResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[28]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[29]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1556,7 +1617,7 @@ func (x *GetProviderResponse) String() string {
 func (*GetProviderResponse) ProtoMessage() {}
 
 func (x *GetProviderResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[28]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[29]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1569,7 +1630,7 @@ func (x *GetProviderResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetProviderResponse.ProtoReflect.Descriptor instead.
 func (*GetProviderResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{28}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *GetProviderResponse) GetProvider() *Provider {
@@ -1594,7 +1655,7 @@ type Provider struct {
 func (x *Provider) Reset() {
 	*x = Provider{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[29]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[30]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1607,7 +1668,7 @@ func (x *Provider) String() string {
 func (*Provider) ProtoMessage() {}
 
 func (x *Provider) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[29]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[30]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1620,7 +1681,7 @@ func (x *Provider) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Provider.ProtoReflect.Descriptor instead.
 func (*Provider) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{29}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *Provider) GetId() string {
@@ -1672,7 +1733,7 @@ type AWSProviderDetails struct {
 func (x *AWSProviderDetails) Reset() {
 	*x = AWSProviderDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[30]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[31]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1685,7 +1746,7 @@ func (x *AWSProviderDetails) String() string {
 func (*AWSProviderDetails) ProtoMessage() {}
 
 func (x *AWSProviderDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[30]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[31]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1698,7 +1759,7 @@ func (x *AWSProviderDetails) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AWSProviderDetails.ProtoReflect.Descriptor instead.
 func (*AWSProviderDetails) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{30}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *AWSProviderDetails) GetOrgManagementAccountId() string {
@@ -1717,7 +1778,7 @@ type GetAllProviderDetailsRequest struct {
 func (x *GetAllProviderDetailsRequest) Reset() {
 	*x = GetAllProviderDetailsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[31]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[32]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1730,7 +1791,7 @@ func (x *GetAllProviderDetailsRequest) String() string {
 func (*GetAllProviderDetailsRequest) ProtoMessage() {}
 
 func (x *GetAllProviderDetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[31]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[32]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1743,7 +1804,7 @@ func (x *GetAllProviderDetailsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAllProviderDetailsRequest.ProtoReflect.Descriptor instead.
 func (*GetAllProviderDetailsRequest) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{31}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{32}
 }
 
 type GetAllProviderDetailsResponse struct {
@@ -1761,7 +1822,7 @@ type GetAllProviderDetailsResponse struct {
 func (x *GetAllProviderDetailsResponse) Reset() {
 	*x = GetAllProviderDetailsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[32]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[33]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1774,7 +1835,7 @@ func (x *GetAllProviderDetailsResponse) String() string {
 func (*GetAllProviderDetailsResponse) ProtoMessage() {}
 
 func (x *GetAllProviderDetailsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[32]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[33]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1787,7 +1848,7 @@ func (x *GetAllProviderDetailsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAllProviderDetailsResponse.ProtoReflect.Descriptor instead.
 func (*GetAllProviderDetailsResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{32}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *GetAllProviderDetailsResponse) GetProviders() *v1alpha11.Providers {
@@ -1813,7 +1874,7 @@ type GetAllProviderChecksumRequest struct {
 func (x *GetAllProviderChecksumRequest) Reset() {
 	*x = GetAllProviderChecksumRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[33]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[34]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1826,7 +1887,7 @@ func (x *GetAllProviderChecksumRequest) String() string {
 func (*GetAllProviderChecksumRequest) ProtoMessage() {}
 
 func (x *GetAllProviderChecksumRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[33]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[34]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1839,7 +1900,7 @@ func (x *GetAllProviderChecksumRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAllProviderChecksumRequest.ProtoReflect.Descriptor instead.
 func (*GetAllProviderChecksumRequest) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{33}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{34}
 }
 
 type GetAllProviderChecksumResponse struct {
@@ -1853,7 +1914,7 @@ type GetAllProviderChecksumResponse struct {
 func (x *GetAllProviderChecksumResponse) Reset() {
 	*x = GetAllProviderChecksumResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[34]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[35]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1866,7 +1927,7 @@ func (x *GetAllProviderChecksumResponse) String() string {
 func (*GetAllProviderChecksumResponse) ProtoMessage() {}
 
 func (x *GetAllProviderChecksumResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[34]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[35]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1879,7 +1940,7 @@ func (x *GetAllProviderChecksumResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAllProviderChecksumResponse.ProtoReflect.Descriptor instead.
 func (*GetAllProviderChecksumResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{34}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *GetAllProviderChecksumResponse) GetSha256Checksum() []byte {
@@ -1900,7 +1961,7 @@ type GetAccessHandlersForProviderRequest struct {
 func (x *GetAccessHandlersForProviderRequest) Reset() {
 	*x = GetAccessHandlersForProviderRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[35]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[36]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1913,7 +1974,7 @@ func (x *GetAccessHandlersForProviderRequest) String() string {
 func (*GetAccessHandlersForProviderRequest) ProtoMessage() {}
 
 func (x *GetAccessHandlersForProviderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[35]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[36]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1926,7 +1987,7 @@ func (x *GetAccessHandlersForProviderRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use GetAccessHandlersForProviderRequest.ProtoReflect.Descriptor instead.
 func (*GetAccessHandlersForProviderRequest) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{35}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *GetAccessHandlersForProviderRequest) GetProviderId() string {
@@ -1947,7 +2008,7 @@ type GetAccessHandlersForProviderResponse struct {
 func (x *GetAccessHandlersForProviderResponse) Reset() {
 	*x = GetAccessHandlersForProviderResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[36]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[37]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1960,7 +2021,7 @@ func (x *GetAccessHandlersForProviderResponse) String() string {
 func (*GetAccessHandlersForProviderResponse) ProtoMessage() {}
 
 func (x *GetAccessHandlersForProviderResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[36]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[37]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1973,7 +2034,7 @@ func (x *GetAccessHandlersForProviderResponse) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use GetAccessHandlersForProviderResponse.ProtoReflect.Descriptor instead.
 func (*GetAccessHandlersForProviderResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{36}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *GetAccessHandlersForProviderResponse) GetAccessHandlers() []*v1alpha11.AccessHandler {
@@ -1995,7 +2056,7 @@ type AddAccessHandlerRequest struct {
 func (x *AddAccessHandlerRequest) Reset() {
 	*x = AddAccessHandlerRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[37]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[38]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2008,7 +2069,7 @@ func (x *AddAccessHandlerRequest) String() string {
 func (*AddAccessHandlerRequest) ProtoMessage() {}
 
 func (x *AddAccessHandlerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[37]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[38]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2021,7 +2082,7 @@ func (x *AddAccessHandlerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddAccessHandlerRequest.ProtoReflect.Descriptor instead.
 func (*AddAccessHandlerRequest) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{37}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *AddAccessHandlerRequest) GetProviderId() string {
@@ -2047,7 +2108,7 @@ type AddAccessHandlerResponse struct {
 func (x *AddAccessHandlerResponse) Reset() {
 	*x = AddAccessHandlerResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[38]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[39]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2060,7 +2121,7 @@ func (x *AddAccessHandlerResponse) String() string {
 func (*AddAccessHandlerResponse) ProtoMessage() {}
 
 func (x *AddAccessHandlerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[38]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[39]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2073,7 +2134,7 @@ func (x *AddAccessHandlerResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddAccessHandlerResponse.ProtoReflect.Descriptor instead.
 func (*AddAccessHandlerResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{38}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{39}
 }
 
 type DeleteAccessHandlerRequest struct {
@@ -2088,7 +2149,7 @@ type DeleteAccessHandlerRequest struct {
 func (x *DeleteAccessHandlerRequest) Reset() {
 	*x = DeleteAccessHandlerRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[39]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[40]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2101,7 +2162,7 @@ func (x *DeleteAccessHandlerRequest) String() string {
 func (*DeleteAccessHandlerRequest) ProtoMessage() {}
 
 func (x *DeleteAccessHandlerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[39]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[40]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2114,7 +2175,7 @@ func (x *DeleteAccessHandlerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAccessHandlerRequest.ProtoReflect.Descriptor instead.
 func (*DeleteAccessHandlerRequest) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{39}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *DeleteAccessHandlerRequest) GetProviderId() string {
@@ -2140,7 +2201,7 @@ type DeleteAccessHandlerResponse struct {
 func (x *DeleteAccessHandlerResponse) Reset() {
 	*x = DeleteAccessHandlerResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[40]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[41]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2153,7 +2214,7 @@ func (x *DeleteAccessHandlerResponse) String() string {
 func (*DeleteAccessHandlerResponse) ProtoMessage() {}
 
 func (x *DeleteAccessHandlerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[40]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[41]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2166,7 +2227,7 @@ func (x *DeleteAccessHandlerResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAccessHandlerResponse.ProtoReflect.Descriptor instead.
 func (*DeleteAccessHandlerResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{40}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{41}
 }
 
 type UpdateCISettingsRequest struct {
@@ -2181,7 +2242,7 @@ type UpdateCISettingsRequest struct {
 func (x *UpdateCISettingsRequest) Reset() {
 	*x = UpdateCISettingsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[41]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[42]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2194,7 +2255,7 @@ func (x *UpdateCISettingsRequest) String() string {
 func (*UpdateCISettingsRequest) ProtoMessage() {}
 
 func (x *UpdateCISettingsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[41]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[42]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2207,7 +2268,7 @@ func (x *UpdateCISettingsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateCISettingsRequest.ProtoReflect.Descriptor instead.
 func (*UpdateCISettingsRequest) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{41}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *UpdateCISettingsRequest) GetEnabled() bool {
@@ -2233,7 +2294,7 @@ type UpdateCISettingsResponse struct {
 func (x *UpdateCISettingsResponse) Reset() {
 	*x = UpdateCISettingsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[42]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[43]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2246,7 +2307,7 @@ func (x *UpdateCISettingsResponse) String() string {
 func (*UpdateCISettingsResponse) ProtoMessage() {}
 
 func (x *UpdateCISettingsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[42]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[43]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2259,7 +2320,7 @@ func (x *UpdateCISettingsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateCISettingsResponse.ProtoReflect.Descriptor instead.
 func (*UpdateCISettingsResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{42}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{43}
 }
 
 // Note: this has not yet been used since the slack integration is running off a server callback
@@ -2277,7 +2338,7 @@ type SlackConnection struct {
 func (x *SlackConnection) Reset() {
 	*x = SlackConnection{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[43]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[44]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2290,7 +2351,7 @@ func (x *SlackConnection) String() string {
 func (*SlackConnection) ProtoMessage() {}
 
 func (x *SlackConnection) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[43]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[44]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2303,7 +2364,7 @@ func (x *SlackConnection) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SlackConnection.ProtoReflect.Descriptor instead.
 func (*SlackConnection) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{43}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *SlackConnection) GetBotAccessToken() string {
@@ -2343,7 +2404,7 @@ type ListSlackConnectionsRequest struct {
 func (x *ListSlackConnectionsRequest) Reset() {
 	*x = ListSlackConnectionsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[44]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[45]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2356,7 +2417,7 @@ func (x *ListSlackConnectionsRequest) String() string {
 func (*ListSlackConnectionsRequest) ProtoMessage() {}
 
 func (x *ListSlackConnectionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[44]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[45]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2369,7 +2430,7 @@ func (x *ListSlackConnectionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSlackConnectionsRequest.ProtoReflect.Descriptor instead.
 func (*ListSlackConnectionsRequest) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{44}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{45}
 }
 
 type ListSlackConnectionsResponse struct {
@@ -2383,7 +2444,7 @@ type ListSlackConnectionsResponse struct {
 func (x *ListSlackConnectionsResponse) Reset() {
 	*x = ListSlackConnectionsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[45]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[46]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2396,7 +2457,7 @@ func (x *ListSlackConnectionsResponse) String() string {
 func (*ListSlackConnectionsResponse) ProtoMessage() {}
 
 func (x *ListSlackConnectionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[45]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[46]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2409,7 +2470,7 @@ func (x *ListSlackConnectionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSlackConnectionsResponse.ProtoReflect.Descriptor instead.
 func (*ListSlackConnectionsResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{45}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *ListSlackConnectionsResponse) GetSlackConnections() []*SlackConnection {
@@ -2428,7 +2489,7 @@ type HasSlackConnectionRequest struct {
 func (x *HasSlackConnectionRequest) Reset() {
 	*x = HasSlackConnectionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[46]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[47]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2441,7 +2502,7 @@ func (x *HasSlackConnectionRequest) String() string {
 func (*HasSlackConnectionRequest) ProtoMessage() {}
 
 func (x *HasSlackConnectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[46]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[47]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2454,7 +2515,7 @@ func (x *HasSlackConnectionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HasSlackConnectionRequest.ProtoReflect.Descriptor instead.
 func (*HasSlackConnectionRequest) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{46}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{47}
 }
 
 type HasSlackConnectionResponse struct {
@@ -2468,7 +2529,7 @@ type HasSlackConnectionResponse struct {
 func (x *HasSlackConnectionResponse) Reset() {
 	*x = HasSlackConnectionResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[47]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[48]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2481,7 +2542,7 @@ func (x *HasSlackConnectionResponse) String() string {
 func (*HasSlackConnectionResponse) ProtoMessage() {}
 
 func (x *HasSlackConnectionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[47]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[48]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2494,7 +2555,7 @@ func (x *HasSlackConnectionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HasSlackConnectionResponse.ProtoReflect.Descriptor instead.
 func (*HasSlackConnectionResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{47}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *HasSlackConnectionResponse) GetHasSlackConnection() bool {
@@ -2513,7 +2574,7 @@ type GetSlackInstallURLRequest struct {
 func (x *GetSlackInstallURLRequest) Reset() {
 	*x = GetSlackInstallURLRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[48]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[49]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2526,7 +2587,7 @@ func (x *GetSlackInstallURLRequest) String() string {
 func (*GetSlackInstallURLRequest) ProtoMessage() {}
 
 func (x *GetSlackInstallURLRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[48]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[49]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2539,7 +2600,7 @@ func (x *GetSlackInstallURLRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSlackInstallURLRequest.ProtoReflect.Descriptor instead.
 func (*GetSlackInstallURLRequest) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{48}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{49}
 }
 
 type GetSlackInstallURLResponse struct {
@@ -2553,7 +2614,7 @@ type GetSlackInstallURLResponse struct {
 func (x *GetSlackInstallURLResponse) Reset() {
 	*x = GetSlackInstallURLResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[49]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[50]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2566,7 +2627,7 @@ func (x *GetSlackInstallURLResponse) String() string {
 func (*GetSlackInstallURLResponse) ProtoMessage() {}
 
 func (x *GetSlackInstallURLResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[49]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[50]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2579,7 +2640,7 @@ func (x *GetSlackInstallURLResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSlackInstallURLResponse.ProtoReflect.Descriptor instead.
 func (*GetSlackInstallURLResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{49}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *GetSlackInstallURLResponse) GetInstallUrl() string {
@@ -2598,7 +2659,7 @@ type UninstallSlackRequest struct {
 func (x *UninstallSlackRequest) Reset() {
 	*x = UninstallSlackRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[50]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[51]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2611,7 +2672,7 @@ func (x *UninstallSlackRequest) String() string {
 func (*UninstallSlackRequest) ProtoMessage() {}
 
 func (x *UninstallSlackRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[50]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[51]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2624,7 +2685,7 @@ func (x *UninstallSlackRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UninstallSlackRequest.ProtoReflect.Descriptor instead.
 func (*UninstallSlackRequest) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{50}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{51}
 }
 
 type UninstallSlackResponse struct {
@@ -2638,7 +2699,7 @@ type UninstallSlackResponse struct {
 func (x *UninstallSlackResponse) Reset() {
 	*x = UninstallSlackResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[51]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[52]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2651,7 +2712,7 @@ func (x *UninstallSlackResponse) String() string {
 func (*UninstallSlackResponse) ProtoMessage() {}
 
 func (x *UninstallSlackResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[51]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[52]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2664,7 +2725,7 @@ func (x *UninstallSlackResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UninstallSlackResponse.ProtoReflect.Descriptor instead.
 func (*UninstallSlackResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{51}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *UninstallSlackResponse) GetSuccess() bool {
@@ -2685,7 +2746,7 @@ type SlackChannelInviteTestRequest struct {
 func (x *SlackChannelInviteTestRequest) Reset() {
 	*x = SlackChannelInviteTestRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[52]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[53]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2698,7 +2759,7 @@ func (x *SlackChannelInviteTestRequest) String() string {
 func (*SlackChannelInviteTestRequest) ProtoMessage() {}
 
 func (x *SlackChannelInviteTestRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[52]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[53]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2711,7 +2772,7 @@ func (x *SlackChannelInviteTestRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SlackChannelInviteTestRequest.ProtoReflect.Descriptor instead.
 func (*SlackChannelInviteTestRequest) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{52}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *SlackChannelInviteTestRequest) GetChannelId() string {
@@ -2732,7 +2793,7 @@ type SlackChannelInviteTestResponse struct {
 func (x *SlackChannelInviteTestResponse) Reset() {
 	*x = SlackChannelInviteTestResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_team_v1alpha1_team_proto_msgTypes[53]
+		mi := &file_team_v1alpha1_team_proto_msgTypes[54]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2745,7 +2806,7 @@ func (x *SlackChannelInviteTestResponse) String() string {
 func (*SlackChannelInviteTestResponse) ProtoMessage() {}
 
 func (x *SlackChannelInviteTestResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_team_v1alpha1_team_proto_msgTypes[53]
+	mi := &file_team_v1alpha1_team_proto_msgTypes[54]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2758,7 +2819,7 @@ func (x *SlackChannelInviteTestResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SlackChannelInviteTestResponse.ProtoReflect.Descriptor instead.
 func (*SlackChannelInviteTestResponse) Descriptor() ([]byte, []int) {
-	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{53}
+	return file_team_v1alpha1_team_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *SlackChannelInviteTestResponse) GetSuccess() bool {
@@ -2853,7 +2914,7 @@ var file_team_v1alpha1_team_proto_rawDesc = []byte{
 	0x67, 0x22, 0x37, 0x0a, 0x14, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x6e, 0x66, 0x69,
 	0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x73, 0x68, 0x61,
 	0x32, 0x35, 0x36, 0x5f, 0x68, 0x61, 0x73, 0x68, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x0a,
-	0x73, 0x68, 0x61, 0x32, 0x35, 0x36, 0x48, 0x61, 0x73, 0x68, 0x22, 0xba, 0x01, 0x0a, 0x14, 0x45,
+	0x73, 0x68, 0x61, 0x32, 0x35, 0x36, 0x48, 0x61, 0x73, 0x68, 0x22, 0xf2, 0x01, 0x0a, 0x14, 0x45,
 	0x6e, 0x72, 0x6f, 0x6c, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75,
 	0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
@@ -2864,13 +2925,21 @@ var file_team_v1alpha1_team_proto_rawDesc = []byte{
 	0x61, 0x77, 0x73, 0x5f, 0x73, 0x73, 0x6f, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x22, 0x2e,
 	0x74, 0x65, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x45, 0x6e,
 	0x72, 0x6f, 0x6c, 0x41, 0x57, 0x53, 0x53, 0x53, 0x4f, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65,
-	0x72, 0x48, 0x00, 0x52, 0x06, 0x61, 0x77, 0x73, 0x53, 0x73, 0x6f, 0x42, 0x0a, 0x0a, 0x08, 0x70,
-	0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x22, 0x45, 0x0a, 0x10, 0x45, 0x6e, 0x72, 0x6f, 0x6c,
-	0x41, 0x57, 0x53, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x12, 0x31, 0x0a, 0x0a, 0x61,
-	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42,
-	0x12, 0xfa, 0x42, 0x0f, 0x72, 0x0d, 0x32, 0x08, 0x5e, 0x5b, 0x30, 0x2d, 0x39, 0x5d, 0x2a, 0x24,
-	0x98, 0x01, 0x0c, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x22, 0x48,
-	0x0a, 0x13, 0x45, 0x6e, 0x72, 0x6f, 0x6c, 0x41, 0x57, 0x53, 0x53, 0x53, 0x4f, 0x50, 0x72, 0x6f,
+	0x72, 0x48, 0x00, 0x52, 0x06, 0x61, 0x77, 0x73, 0x53, 0x73, 0x6f, 0x12, 0x36, 0x0a, 0x04, 0x6f,
+	0x6b, 0x74, 0x61, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x74, 0x65, 0x61, 0x6d,
+	0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x45, 0x6e, 0x72, 0x6f, 0x6c, 0x4f,
+	0x6b, 0x74, 0x61, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x48, 0x00, 0x52, 0x04, 0x6f,
+	0x6b, 0x74, 0x61, 0x42, 0x0a, 0x0a, 0x08, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x22,
+	0x45, 0x0a, 0x10, 0x45, 0x6e, 0x72, 0x6f, 0x6c, 0x41, 0x57, 0x53, 0x50, 0x72, 0x6f, 0x76, 0x69,
+	0x64, 0x65, 0x72, 0x12, 0x31, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x12, 0xfa, 0x42, 0x0f, 0x72, 0x0d, 0x32, 0x08,
+	0x5e, 0x5b, 0x30, 0x2d, 0x39, 0x5d, 0x2a, 0x24, 0x98, 0x01, 0x0c, 0x52, 0x09, 0x61, 0x63, 0x63,
+	0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x22, 0x48, 0x0a, 0x13, 0x45, 0x6e, 0x72, 0x6f, 0x6c, 0x41,
+	0x57, 0x53, 0x53, 0x53, 0x4f, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x12, 0x31, 0x0a,
+	0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x42, 0x12, 0xfa, 0x42, 0x0f, 0x72, 0x0d, 0x32, 0x08, 0x5e, 0x5b, 0x30, 0x2d, 0x39, 0x5d,
+	0x2a, 0x24, 0x98, 0x01, 0x0c, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64,
+	0x22, 0x46, 0x0a, 0x11, 0x45, 0x6e, 0x72, 0x6f, 0x6c, 0x4f, 0x6b, 0x74, 0x61, 0x50, 0x72, 0x6f,
 	0x76, 0x69, 0x64, 0x65, 0x72, 0x12, 0x31, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74,
 	0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x12, 0xfa, 0x42, 0x0f, 0x72, 0x0d,
 	0x32, 0x08, 0x5e, 0x5b, 0x30, 0x2d, 0x39, 0x5d, 0x2a, 0x24, 0x98, 0x01, 0x0c, 0x52, 0x09, 0x61,
@@ -3222,7 +3291,7 @@ func file_team_v1alpha1_team_proto_rawDescGZIP() []byte {
 }
 
 var file_team_v1alpha1_team_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_team_v1alpha1_team_proto_msgTypes = make([]protoimpl.MessageInfo, 54)
+var file_team_v1alpha1_team_proto_msgTypes = make([]protoimpl.MessageInfo, 55)
 var file_team_v1alpha1_team_proto_goTypes = []interface{}{
 	(RoleAccessRequestStatus)(0),                 // 0: team.v1alpha1.RoleAccessRequestStatus
 	(*ListRoleAccessRequestsRequest)(nil),        // 1: team.v1alpha1.ListRoleAccessRequestsRequest
@@ -3243,119 +3312,121 @@ var file_team_v1alpha1_team_proto_goTypes = []interface{}{
 	(*EnrolProviderRequest)(nil),                 // 16: team.v1alpha1.EnrolProviderRequest
 	(*EnrolAWSProvider)(nil),                     // 17: team.v1alpha1.EnrolAWSProvider
 	(*EnrolAWSSSOProvider)(nil),                  // 18: team.v1alpha1.EnrolAWSSSOProvider
-	(*EnrolProviderResponse)(nil),                // 19: team.v1alpha1.EnrolProviderResponse
-	(*ListProvidersRequest)(nil),                 // 20: team.v1alpha1.ListProvidersRequest
-	(*ListProvidersResponse)(nil),                // 21: team.v1alpha1.ListProvidersResponse
-	(*GetStatusRequest)(nil),                     // 22: team.v1alpha1.GetStatusRequest
-	(*GetStatusResponse)(nil),                    // 23: team.v1alpha1.GetStatusResponse
-	(*ProviderEnrollment)(nil),                   // 24: team.v1alpha1.ProviderEnrollment
-	(*AWSProviderEnrollment)(nil),                // 25: team.v1alpha1.AWSProviderEnrollment
-	(*DeleteProviderRequest)(nil),                // 26: team.v1alpha1.DeleteProviderRequest
-	(*DeleteProviderResponse)(nil),               // 27: team.v1alpha1.DeleteProviderResponse
-	(*GetProviderRequest)(nil),                   // 28: team.v1alpha1.GetProviderRequest
-	(*GetProviderResponse)(nil),                  // 29: team.v1alpha1.GetProviderResponse
-	(*Provider)(nil),                             // 30: team.v1alpha1.Provider
-	(*AWSProviderDetails)(nil),                   // 31: team.v1alpha1.AWSProviderDetails
-	(*GetAllProviderDetailsRequest)(nil),         // 32: team.v1alpha1.GetAllProviderDetailsRequest
-	(*GetAllProviderDetailsResponse)(nil),        // 33: team.v1alpha1.GetAllProviderDetailsResponse
-	(*GetAllProviderChecksumRequest)(nil),        // 34: team.v1alpha1.GetAllProviderChecksumRequest
-	(*GetAllProviderChecksumResponse)(nil),       // 35: team.v1alpha1.GetAllProviderChecksumResponse
-	(*GetAccessHandlersForProviderRequest)(nil),  // 36: team.v1alpha1.GetAccessHandlersForProviderRequest
-	(*GetAccessHandlersForProviderResponse)(nil), // 37: team.v1alpha1.GetAccessHandlersForProviderResponse
-	(*AddAccessHandlerRequest)(nil),              // 38: team.v1alpha1.AddAccessHandlerRequest
-	(*AddAccessHandlerResponse)(nil),             // 39: team.v1alpha1.AddAccessHandlerResponse
-	(*DeleteAccessHandlerRequest)(nil),           // 40: team.v1alpha1.DeleteAccessHandlerRequest
-	(*DeleteAccessHandlerResponse)(nil),          // 41: team.v1alpha1.DeleteAccessHandlerResponse
-	(*UpdateCISettingsRequest)(nil),              // 42: team.v1alpha1.UpdateCISettingsRequest
-	(*UpdateCISettingsResponse)(nil),             // 43: team.v1alpha1.UpdateCISettingsResponse
-	(*SlackConnection)(nil),                      // 44: team.v1alpha1.SlackConnection
-	(*ListSlackConnectionsRequest)(nil),          // 45: team.v1alpha1.ListSlackConnectionsRequest
-	(*ListSlackConnectionsResponse)(nil),         // 46: team.v1alpha1.ListSlackConnectionsResponse
-	(*HasSlackConnectionRequest)(nil),            // 47: team.v1alpha1.HasSlackConnectionRequest
-	(*HasSlackConnectionResponse)(nil),           // 48: team.v1alpha1.HasSlackConnectionResponse
-	(*GetSlackInstallURLRequest)(nil),            // 49: team.v1alpha1.GetSlackInstallURLRequest
-	(*GetSlackInstallURLResponse)(nil),           // 50: team.v1alpha1.GetSlackInstallURLResponse
-	(*UninstallSlackRequest)(nil),                // 51: team.v1alpha1.UninstallSlackRequest
-	(*UninstallSlackResponse)(nil),               // 52: team.v1alpha1.UninstallSlackResponse
-	(*SlackChannelInviteTestRequest)(nil),        // 53: team.v1alpha1.SlackChannelInviteTestRequest
-	(*SlackChannelInviteTestResponse)(nil),       // 54: team.v1alpha1.SlackChannelInviteTestResponse
-	(*v1alpha1.RoleAccessRequestPayload)(nil),    // 55: certrail.v1alpha1.RoleAccessRequestPayload
-	(*timestamppb.Timestamp)(nil),                // 56: google.protobuf.Timestamp
-	(*v1alpha11.Role)(nil),                       // 57: gconfig.v1alpha1.Role
-	(*v1alpha11.Config)(nil),                     // 58: gconfig.v1alpha1.Config
-	(*v1alpha11.Providers)(nil),                  // 59: gconfig.v1alpha1.Providers
-	(*v1alpha11.AccessHandler)(nil),              // 60: gconfig.v1alpha1.AccessHandler
+	(*EnrolOktaProvider)(nil),                    // 19: team.v1alpha1.EnrolOktaProvider
+	(*EnrolProviderResponse)(nil),                // 20: team.v1alpha1.EnrolProviderResponse
+	(*ListProvidersRequest)(nil),                 // 21: team.v1alpha1.ListProvidersRequest
+	(*ListProvidersResponse)(nil),                // 22: team.v1alpha1.ListProvidersResponse
+	(*GetStatusRequest)(nil),                     // 23: team.v1alpha1.GetStatusRequest
+	(*GetStatusResponse)(nil),                    // 24: team.v1alpha1.GetStatusResponse
+	(*ProviderEnrollment)(nil),                   // 25: team.v1alpha1.ProviderEnrollment
+	(*AWSProviderEnrollment)(nil),                // 26: team.v1alpha1.AWSProviderEnrollment
+	(*DeleteProviderRequest)(nil),                // 27: team.v1alpha1.DeleteProviderRequest
+	(*DeleteProviderResponse)(nil),               // 28: team.v1alpha1.DeleteProviderResponse
+	(*GetProviderRequest)(nil),                   // 29: team.v1alpha1.GetProviderRequest
+	(*GetProviderResponse)(nil),                  // 30: team.v1alpha1.GetProviderResponse
+	(*Provider)(nil),                             // 31: team.v1alpha1.Provider
+	(*AWSProviderDetails)(nil),                   // 32: team.v1alpha1.AWSProviderDetails
+	(*GetAllProviderDetailsRequest)(nil),         // 33: team.v1alpha1.GetAllProviderDetailsRequest
+	(*GetAllProviderDetailsResponse)(nil),        // 34: team.v1alpha1.GetAllProviderDetailsResponse
+	(*GetAllProviderChecksumRequest)(nil),        // 35: team.v1alpha1.GetAllProviderChecksumRequest
+	(*GetAllProviderChecksumResponse)(nil),       // 36: team.v1alpha1.GetAllProviderChecksumResponse
+	(*GetAccessHandlersForProviderRequest)(nil),  // 37: team.v1alpha1.GetAccessHandlersForProviderRequest
+	(*GetAccessHandlersForProviderResponse)(nil), // 38: team.v1alpha1.GetAccessHandlersForProviderResponse
+	(*AddAccessHandlerRequest)(nil),              // 39: team.v1alpha1.AddAccessHandlerRequest
+	(*AddAccessHandlerResponse)(nil),             // 40: team.v1alpha1.AddAccessHandlerResponse
+	(*DeleteAccessHandlerRequest)(nil),           // 41: team.v1alpha1.DeleteAccessHandlerRequest
+	(*DeleteAccessHandlerResponse)(nil),          // 42: team.v1alpha1.DeleteAccessHandlerResponse
+	(*UpdateCISettingsRequest)(nil),              // 43: team.v1alpha1.UpdateCISettingsRequest
+	(*UpdateCISettingsResponse)(nil),             // 44: team.v1alpha1.UpdateCISettingsResponse
+	(*SlackConnection)(nil),                      // 45: team.v1alpha1.SlackConnection
+	(*ListSlackConnectionsRequest)(nil),          // 46: team.v1alpha1.ListSlackConnectionsRequest
+	(*ListSlackConnectionsResponse)(nil),         // 47: team.v1alpha1.ListSlackConnectionsResponse
+	(*HasSlackConnectionRequest)(nil),            // 48: team.v1alpha1.HasSlackConnectionRequest
+	(*HasSlackConnectionResponse)(nil),           // 49: team.v1alpha1.HasSlackConnectionResponse
+	(*GetSlackInstallURLRequest)(nil),            // 50: team.v1alpha1.GetSlackInstallURLRequest
+	(*GetSlackInstallURLResponse)(nil),           // 51: team.v1alpha1.GetSlackInstallURLResponse
+	(*UninstallSlackRequest)(nil),                // 52: team.v1alpha1.UninstallSlackRequest
+	(*UninstallSlackResponse)(nil),               // 53: team.v1alpha1.UninstallSlackResponse
+	(*SlackChannelInviteTestRequest)(nil),        // 54: team.v1alpha1.SlackChannelInviteTestRequest
+	(*SlackChannelInviteTestResponse)(nil),       // 55: team.v1alpha1.SlackChannelInviteTestResponse
+	(*v1alpha1.RoleAccessRequestPayload)(nil),    // 56: certrail.v1alpha1.RoleAccessRequestPayload
+	(*timestamppb.Timestamp)(nil),                // 57: google.protobuf.Timestamp
+	(*v1alpha11.Role)(nil),                       // 58: gconfig.v1alpha1.Role
+	(*v1alpha11.Config)(nil),                     // 59: gconfig.v1alpha1.Config
+	(*v1alpha11.Providers)(nil),                  // 60: gconfig.v1alpha1.Providers
+	(*v1alpha11.AccessHandler)(nil),              // 61: gconfig.v1alpha1.AccessHandler
 }
 var file_team_v1alpha1_team_proto_depIdxs = []int32{
 	3,  // 0: team.v1alpha1.ListRoleAccessRequestsResponse.requests:type_name -> team.v1alpha1.RoleAccessRequest
-	55, // 1: team.v1alpha1.RoleAccessRequest.request:type_name -> certrail.v1alpha1.RoleAccessRequestPayload
+	56, // 1: team.v1alpha1.RoleAccessRequest.request:type_name -> certrail.v1alpha1.RoleAccessRequestPayload
 	0,  // 2: team.v1alpha1.RoleAccessRequest.status:type_name -> team.v1alpha1.RoleAccessRequestStatus
-	56, // 3: team.v1alpha1.RoleAccessRequest.timestamp:type_name -> google.protobuf.Timestamp
+	57, // 3: team.v1alpha1.RoleAccessRequest.timestamp:type_name -> google.protobuf.Timestamp
 	11, // 4: team.v1alpha1.ListMembersResponse.members:type_name -> team.v1alpha1.Member
 	6,  // 5: team.v1alpha1.UpdateAccountsRequest.accounts:type_name -> team.v1alpha1.Account
 	11, // 6: team.v1alpha1.UpdateAccountsResponse.members:type_name -> team.v1alpha1.Member
-	57, // 7: team.v1alpha1.ListRolesResponse.roles:type_name -> gconfig.v1alpha1.Role
-	58, // 8: team.v1alpha1.UpdateConfigRequest.config:type_name -> gconfig.v1alpha1.Config
+	58, // 7: team.v1alpha1.ListRolesResponse.roles:type_name -> gconfig.v1alpha1.Role
+	59, // 8: team.v1alpha1.UpdateConfigRequest.config:type_name -> gconfig.v1alpha1.Config
 	17, // 9: team.v1alpha1.EnrolProviderRequest.aws:type_name -> team.v1alpha1.EnrolAWSProvider
 	18, // 10: team.v1alpha1.EnrolProviderRequest.aws_sso:type_name -> team.v1alpha1.EnrolAWSSSOProvider
-	56, // 11: team.v1alpha1.EnrolProviderResponse.expires_at:type_name -> google.protobuf.Timestamp
-	30, // 12: team.v1alpha1.ListProvidersResponse.providers:type_name -> team.v1alpha1.Provider
-	24, // 13: team.v1alpha1.GetStatusResponse.enrollments:type_name -> team.v1alpha1.ProviderEnrollment
-	24, // 14: team.v1alpha1.GetStatusResponse.expired_enrollments:type_name -> team.v1alpha1.ProviderEnrollment
-	56, // 15: team.v1alpha1.ProviderEnrollment.expires_at:type_name -> google.protobuf.Timestamp
-	25, // 16: team.v1alpha1.ProviderEnrollment.aws:type_name -> team.v1alpha1.AWSProviderEnrollment
-	30, // 17: team.v1alpha1.GetProviderResponse.provider:type_name -> team.v1alpha1.Provider
-	31, // 18: team.v1alpha1.Provider.aws:type_name -> team.v1alpha1.AWSProviderDetails
-	59, // 19: team.v1alpha1.GetAllProviderDetailsResponse.providers:type_name -> gconfig.v1alpha1.Providers
-	60, // 20: team.v1alpha1.GetAccessHandlersForProviderResponse.access_handlers:type_name -> gconfig.v1alpha1.AccessHandler
-	44, // 21: team.v1alpha1.ListSlackConnectionsResponse.slack_connections:type_name -> team.v1alpha1.SlackConnection
-	1,  // 22: team.v1alpha1.TeamService.ListRoleAccessRequests:input_type -> team.v1alpha1.ListRoleAccessRequestsRequest
-	4,  // 23: team.v1alpha1.TeamService.ListMembers:input_type -> team.v1alpha1.ListMembersRequest
-	9,  // 24: team.v1alpha1.TeamService.ListRoles:input_type -> team.v1alpha1.ListRolesRequest
-	14, // 25: team.v1alpha1.TeamService.UpdateConfig:input_type -> team.v1alpha1.UpdateConfigRequest
-	12, // 26: team.v1alpha1.TeamService.IsAdminUser:input_type -> team.v1alpha1.IsAdminUserRequest
-	16, // 27: team.v1alpha1.TeamService.EnrolProvider:input_type -> team.v1alpha1.EnrolProviderRequest
-	20, // 28: team.v1alpha1.TeamService.ListProviders:input_type -> team.v1alpha1.ListProvidersRequest
-	26, // 29: team.v1alpha1.TeamService.DeleteProvider:input_type -> team.v1alpha1.DeleteProviderRequest
-	22, // 30: team.v1alpha1.TeamService.GetStatus:input_type -> team.v1alpha1.GetStatusRequest
-	28, // 31: team.v1alpha1.TeamService.GetProvider:input_type -> team.v1alpha1.GetProviderRequest
-	32, // 32: team.v1alpha1.TeamService.GetAllProviderDetails:input_type -> team.v1alpha1.GetAllProviderDetailsRequest
-	34, // 33: team.v1alpha1.TeamService.GetAllProviderChecksum:input_type -> team.v1alpha1.GetAllProviderChecksumRequest
-	36, // 34: team.v1alpha1.TeamService.GetAccessHandlersForProvider:input_type -> team.v1alpha1.GetAccessHandlersForProviderRequest
-	38, // 35: team.v1alpha1.TeamService.AddAccessHandler:input_type -> team.v1alpha1.AddAccessHandlerRequest
-	40, // 36: team.v1alpha1.TeamService.DeleteAccessHandler:input_type -> team.v1alpha1.DeleteAccessHandlerRequest
-	42, // 37: team.v1alpha1.TeamService.UpdateCISettings:input_type -> team.v1alpha1.UpdateCISettingsRequest
-	45, // 38: team.v1alpha1.TeamService.ListSlackConnections:input_type -> team.v1alpha1.ListSlackConnectionsRequest
-	47, // 39: team.v1alpha1.TeamService.HasSlackConnection:input_type -> team.v1alpha1.HasSlackConnectionRequest
-	49, // 40: team.v1alpha1.TeamService.GetSlackInstallURL:input_type -> team.v1alpha1.GetSlackInstallURLRequest
-	51, // 41: team.v1alpha1.TeamService.UninstallSlack:input_type -> team.v1alpha1.UninstallSlackRequest
-	53, // 42: team.v1alpha1.TeamService.SlackChannelInviteTest:input_type -> team.v1alpha1.SlackChannelInviteTestRequest
-	2,  // 43: team.v1alpha1.TeamService.ListRoleAccessRequests:output_type -> team.v1alpha1.ListRoleAccessRequestsResponse
-	5,  // 44: team.v1alpha1.TeamService.ListMembers:output_type -> team.v1alpha1.ListMembersResponse
-	10, // 45: team.v1alpha1.TeamService.ListRoles:output_type -> team.v1alpha1.ListRolesResponse
-	15, // 46: team.v1alpha1.TeamService.UpdateConfig:output_type -> team.v1alpha1.UpdateConfigResponse
-	13, // 47: team.v1alpha1.TeamService.IsAdminUser:output_type -> team.v1alpha1.IsAdminUserResponse
-	19, // 48: team.v1alpha1.TeamService.EnrolProvider:output_type -> team.v1alpha1.EnrolProviderResponse
-	21, // 49: team.v1alpha1.TeamService.ListProviders:output_type -> team.v1alpha1.ListProvidersResponse
-	27, // 50: team.v1alpha1.TeamService.DeleteProvider:output_type -> team.v1alpha1.DeleteProviderResponse
-	23, // 51: team.v1alpha1.TeamService.GetStatus:output_type -> team.v1alpha1.GetStatusResponse
-	29, // 52: team.v1alpha1.TeamService.GetProvider:output_type -> team.v1alpha1.GetProviderResponse
-	33, // 53: team.v1alpha1.TeamService.GetAllProviderDetails:output_type -> team.v1alpha1.GetAllProviderDetailsResponse
-	35, // 54: team.v1alpha1.TeamService.GetAllProviderChecksum:output_type -> team.v1alpha1.GetAllProviderChecksumResponse
-	37, // 55: team.v1alpha1.TeamService.GetAccessHandlersForProvider:output_type -> team.v1alpha1.GetAccessHandlersForProviderResponse
-	39, // 56: team.v1alpha1.TeamService.AddAccessHandler:output_type -> team.v1alpha1.AddAccessHandlerResponse
-	41, // 57: team.v1alpha1.TeamService.DeleteAccessHandler:output_type -> team.v1alpha1.DeleteAccessHandlerResponse
-	43, // 58: team.v1alpha1.TeamService.UpdateCISettings:output_type -> team.v1alpha1.UpdateCISettingsResponse
-	46, // 59: team.v1alpha1.TeamService.ListSlackConnections:output_type -> team.v1alpha1.ListSlackConnectionsResponse
-	48, // 60: team.v1alpha1.TeamService.HasSlackConnection:output_type -> team.v1alpha1.HasSlackConnectionResponse
-	50, // 61: team.v1alpha1.TeamService.GetSlackInstallURL:output_type -> team.v1alpha1.GetSlackInstallURLResponse
-	52, // 62: team.v1alpha1.TeamService.UninstallSlack:output_type -> team.v1alpha1.UninstallSlackResponse
-	54, // 63: team.v1alpha1.TeamService.SlackChannelInviteTest:output_type -> team.v1alpha1.SlackChannelInviteTestResponse
-	43, // [43:64] is the sub-list for method output_type
-	22, // [22:43] is the sub-list for method input_type
-	22, // [22:22] is the sub-list for extension type_name
-	22, // [22:22] is the sub-list for extension extendee
-	0,  // [0:22] is the sub-list for field type_name
+	19, // 11: team.v1alpha1.EnrolProviderRequest.okta:type_name -> team.v1alpha1.EnrolOktaProvider
+	57, // 12: team.v1alpha1.EnrolProviderResponse.expires_at:type_name -> google.protobuf.Timestamp
+	31, // 13: team.v1alpha1.ListProvidersResponse.providers:type_name -> team.v1alpha1.Provider
+	25, // 14: team.v1alpha1.GetStatusResponse.enrollments:type_name -> team.v1alpha1.ProviderEnrollment
+	25, // 15: team.v1alpha1.GetStatusResponse.expired_enrollments:type_name -> team.v1alpha1.ProviderEnrollment
+	57, // 16: team.v1alpha1.ProviderEnrollment.expires_at:type_name -> google.protobuf.Timestamp
+	26, // 17: team.v1alpha1.ProviderEnrollment.aws:type_name -> team.v1alpha1.AWSProviderEnrollment
+	31, // 18: team.v1alpha1.GetProviderResponse.provider:type_name -> team.v1alpha1.Provider
+	32, // 19: team.v1alpha1.Provider.aws:type_name -> team.v1alpha1.AWSProviderDetails
+	60, // 20: team.v1alpha1.GetAllProviderDetailsResponse.providers:type_name -> gconfig.v1alpha1.Providers
+	61, // 21: team.v1alpha1.GetAccessHandlersForProviderResponse.access_handlers:type_name -> gconfig.v1alpha1.AccessHandler
+	45, // 22: team.v1alpha1.ListSlackConnectionsResponse.slack_connections:type_name -> team.v1alpha1.SlackConnection
+	1,  // 23: team.v1alpha1.TeamService.ListRoleAccessRequests:input_type -> team.v1alpha1.ListRoleAccessRequestsRequest
+	4,  // 24: team.v1alpha1.TeamService.ListMembers:input_type -> team.v1alpha1.ListMembersRequest
+	9,  // 25: team.v1alpha1.TeamService.ListRoles:input_type -> team.v1alpha1.ListRolesRequest
+	14, // 26: team.v1alpha1.TeamService.UpdateConfig:input_type -> team.v1alpha1.UpdateConfigRequest
+	12, // 27: team.v1alpha1.TeamService.IsAdminUser:input_type -> team.v1alpha1.IsAdminUserRequest
+	16, // 28: team.v1alpha1.TeamService.EnrolProvider:input_type -> team.v1alpha1.EnrolProviderRequest
+	21, // 29: team.v1alpha1.TeamService.ListProviders:input_type -> team.v1alpha1.ListProvidersRequest
+	27, // 30: team.v1alpha1.TeamService.DeleteProvider:input_type -> team.v1alpha1.DeleteProviderRequest
+	23, // 31: team.v1alpha1.TeamService.GetStatus:input_type -> team.v1alpha1.GetStatusRequest
+	29, // 32: team.v1alpha1.TeamService.GetProvider:input_type -> team.v1alpha1.GetProviderRequest
+	33, // 33: team.v1alpha1.TeamService.GetAllProviderDetails:input_type -> team.v1alpha1.GetAllProviderDetailsRequest
+	35, // 34: team.v1alpha1.TeamService.GetAllProviderChecksum:input_type -> team.v1alpha1.GetAllProviderChecksumRequest
+	37, // 35: team.v1alpha1.TeamService.GetAccessHandlersForProvider:input_type -> team.v1alpha1.GetAccessHandlersForProviderRequest
+	39, // 36: team.v1alpha1.TeamService.AddAccessHandler:input_type -> team.v1alpha1.AddAccessHandlerRequest
+	41, // 37: team.v1alpha1.TeamService.DeleteAccessHandler:input_type -> team.v1alpha1.DeleteAccessHandlerRequest
+	43, // 38: team.v1alpha1.TeamService.UpdateCISettings:input_type -> team.v1alpha1.UpdateCISettingsRequest
+	46, // 39: team.v1alpha1.TeamService.ListSlackConnections:input_type -> team.v1alpha1.ListSlackConnectionsRequest
+	48, // 40: team.v1alpha1.TeamService.HasSlackConnection:input_type -> team.v1alpha1.HasSlackConnectionRequest
+	50, // 41: team.v1alpha1.TeamService.GetSlackInstallURL:input_type -> team.v1alpha1.GetSlackInstallURLRequest
+	52, // 42: team.v1alpha1.TeamService.UninstallSlack:input_type -> team.v1alpha1.UninstallSlackRequest
+	54, // 43: team.v1alpha1.TeamService.SlackChannelInviteTest:input_type -> team.v1alpha1.SlackChannelInviteTestRequest
+	2,  // 44: team.v1alpha1.TeamService.ListRoleAccessRequests:output_type -> team.v1alpha1.ListRoleAccessRequestsResponse
+	5,  // 45: team.v1alpha1.TeamService.ListMembers:output_type -> team.v1alpha1.ListMembersResponse
+	10, // 46: team.v1alpha1.TeamService.ListRoles:output_type -> team.v1alpha1.ListRolesResponse
+	15, // 47: team.v1alpha1.TeamService.UpdateConfig:output_type -> team.v1alpha1.UpdateConfigResponse
+	13, // 48: team.v1alpha1.TeamService.IsAdminUser:output_type -> team.v1alpha1.IsAdminUserResponse
+	20, // 49: team.v1alpha1.TeamService.EnrolProvider:output_type -> team.v1alpha1.EnrolProviderResponse
+	22, // 50: team.v1alpha1.TeamService.ListProviders:output_type -> team.v1alpha1.ListProvidersResponse
+	28, // 51: team.v1alpha1.TeamService.DeleteProvider:output_type -> team.v1alpha1.DeleteProviderResponse
+	24, // 52: team.v1alpha1.TeamService.GetStatus:output_type -> team.v1alpha1.GetStatusResponse
+	30, // 53: team.v1alpha1.TeamService.GetProvider:output_type -> team.v1alpha1.GetProviderResponse
+	34, // 54: team.v1alpha1.TeamService.GetAllProviderDetails:output_type -> team.v1alpha1.GetAllProviderDetailsResponse
+	36, // 55: team.v1alpha1.TeamService.GetAllProviderChecksum:output_type -> team.v1alpha1.GetAllProviderChecksumResponse
+	38, // 56: team.v1alpha1.TeamService.GetAccessHandlersForProvider:output_type -> team.v1alpha1.GetAccessHandlersForProviderResponse
+	40, // 57: team.v1alpha1.TeamService.AddAccessHandler:output_type -> team.v1alpha1.AddAccessHandlerResponse
+	42, // 58: team.v1alpha1.TeamService.DeleteAccessHandler:output_type -> team.v1alpha1.DeleteAccessHandlerResponse
+	44, // 59: team.v1alpha1.TeamService.UpdateCISettings:output_type -> team.v1alpha1.UpdateCISettingsResponse
+	47, // 60: team.v1alpha1.TeamService.ListSlackConnections:output_type -> team.v1alpha1.ListSlackConnectionsResponse
+	49, // 61: team.v1alpha1.TeamService.HasSlackConnection:output_type -> team.v1alpha1.HasSlackConnectionResponse
+	51, // 62: team.v1alpha1.TeamService.GetSlackInstallURL:output_type -> team.v1alpha1.GetSlackInstallURLResponse
+	53, // 63: team.v1alpha1.TeamService.UninstallSlack:output_type -> team.v1alpha1.UninstallSlackResponse
+	55, // 64: team.v1alpha1.TeamService.SlackChannelInviteTest:output_type -> team.v1alpha1.SlackChannelInviteTestResponse
+	44, // [44:65] is the sub-list for method output_type
+	23, // [23:44] is the sub-list for method input_type
+	23, // [23:23] is the sub-list for extension type_name
+	23, // [23:23] is the sub-list for extension extendee
+	0,  // [0:23] is the sub-list for field type_name
 }
 
 func init() { file_team_v1alpha1_team_proto_init() }
@@ -3581,7 +3652,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*EnrolProviderResponse); i {
+			switch v := v.(*EnrolOktaProvider); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3593,7 +3664,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListProvidersRequest); i {
+			switch v := v.(*EnrolProviderResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3605,7 +3676,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListProvidersResponse); i {
+			switch v := v.(*ListProvidersRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3617,7 +3688,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetStatusRequest); i {
+			switch v := v.(*ListProvidersResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3629,7 +3700,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetStatusResponse); i {
+			switch v := v.(*GetStatusRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3641,7 +3712,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ProviderEnrollment); i {
+			switch v := v.(*GetStatusResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3653,7 +3724,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AWSProviderEnrollment); i {
+			switch v := v.(*ProviderEnrollment); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3665,7 +3736,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteProviderRequest); i {
+			switch v := v.(*AWSProviderEnrollment); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3677,7 +3748,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteProviderResponse); i {
+			switch v := v.(*DeleteProviderRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3689,7 +3760,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetProviderRequest); i {
+			switch v := v.(*DeleteProviderResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3701,7 +3772,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetProviderResponse); i {
+			switch v := v.(*GetProviderRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3713,7 +3784,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Provider); i {
+			switch v := v.(*GetProviderResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3725,7 +3796,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AWSProviderDetails); i {
+			switch v := v.(*Provider); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3737,7 +3808,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetAllProviderDetailsRequest); i {
+			switch v := v.(*AWSProviderDetails); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3749,7 +3820,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetAllProviderDetailsResponse); i {
+			switch v := v.(*GetAllProviderDetailsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3761,7 +3832,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetAllProviderChecksumRequest); i {
+			switch v := v.(*GetAllProviderDetailsResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3773,7 +3844,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetAllProviderChecksumResponse); i {
+			switch v := v.(*GetAllProviderChecksumRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3785,7 +3856,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetAccessHandlersForProviderRequest); i {
+			switch v := v.(*GetAllProviderChecksumResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3797,7 +3868,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetAccessHandlersForProviderResponse); i {
+			switch v := v.(*GetAccessHandlersForProviderRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3809,7 +3880,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddAccessHandlerRequest); i {
+			switch v := v.(*GetAccessHandlersForProviderResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3821,7 +3892,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[38].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddAccessHandlerResponse); i {
+			switch v := v.(*AddAccessHandlerRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3833,7 +3904,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteAccessHandlerRequest); i {
+			switch v := v.(*AddAccessHandlerResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3845,7 +3916,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[40].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteAccessHandlerResponse); i {
+			switch v := v.(*DeleteAccessHandlerRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3857,7 +3928,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[41].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateCISettingsRequest); i {
+			switch v := v.(*DeleteAccessHandlerResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3869,7 +3940,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[42].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateCISettingsResponse); i {
+			switch v := v.(*UpdateCISettingsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3881,7 +3952,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[43].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SlackConnection); i {
+			switch v := v.(*UpdateCISettingsResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3893,7 +3964,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[44].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListSlackConnectionsRequest); i {
+			switch v := v.(*SlackConnection); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3905,7 +3976,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[45].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListSlackConnectionsResponse); i {
+			switch v := v.(*ListSlackConnectionsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3917,7 +3988,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[46].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*HasSlackConnectionRequest); i {
+			switch v := v.(*ListSlackConnectionsResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3929,7 +4000,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[47].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*HasSlackConnectionResponse); i {
+			switch v := v.(*HasSlackConnectionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3941,7 +4012,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[48].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetSlackInstallURLRequest); i {
+			switch v := v.(*HasSlackConnectionResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3953,7 +4024,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[49].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetSlackInstallURLResponse); i {
+			switch v := v.(*GetSlackInstallURLRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3965,7 +4036,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UninstallSlackRequest); i {
+			switch v := v.(*GetSlackInstallURLResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3977,7 +4048,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[51].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UninstallSlackResponse); i {
+			switch v := v.(*UninstallSlackRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3989,7 +4060,7 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[52].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SlackChannelInviteTestRequest); i {
+			switch v := v.(*UninstallSlackResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4001,6 +4072,18 @@ func file_team_v1alpha1_team_proto_init() {
 			}
 		}
 		file_team_v1alpha1_team_proto_msgTypes[53].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SlackChannelInviteTestRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_team_v1alpha1_team_proto_msgTypes[54].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SlackChannelInviteTestResponse); i {
 			case 0:
 				return &v.state
@@ -4016,11 +4099,12 @@ func file_team_v1alpha1_team_proto_init() {
 	file_team_v1alpha1_team_proto_msgTypes[15].OneofWrappers = []interface{}{
 		(*EnrolProviderRequest_Aws)(nil),
 		(*EnrolProviderRequest_AwsSso)(nil),
+		(*EnrolProviderRequest_Okta)(nil),
 	}
-	file_team_v1alpha1_team_proto_msgTypes[23].OneofWrappers = []interface{}{
+	file_team_v1alpha1_team_proto_msgTypes[24].OneofWrappers = []interface{}{
 		(*ProviderEnrollment_Aws)(nil),
 	}
-	file_team_v1alpha1_team_proto_msgTypes[29].OneofWrappers = []interface{}{
+	file_team_v1alpha1_team_proto_msgTypes[30].OneofWrappers = []interface{}{
 		(*Provider_Aws)(nil),
 	}
 	type x struct{}
@@ -4029,7 +4113,7 @@ func file_team_v1alpha1_team_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_team_v1alpha1_team_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   54,
+			NumMessages:   55,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

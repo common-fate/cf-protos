@@ -345,6 +345,17 @@ func (m *EnrolProviderRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 		}
 	}
 
+	keyName = "okta" // field okta = 5
+	if ov, ok := m.GetProvider().(*EnrolProviderRequest_Okta); ok {
+		_ = ov
+		if ov.Okta != nil {
+			var vv interface{} = ov.Okta
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
 	return nil
 }
 
@@ -363,6 +374,20 @@ func (m *EnrolAWSProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEn
 }
 
 func (m *EnrolAWSSSOProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "account_id" // field account_id = 1
+	enc.AddString(keyName, m.AccountId)
+
+	return nil
+}
+
+func (m *EnrolOktaProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 

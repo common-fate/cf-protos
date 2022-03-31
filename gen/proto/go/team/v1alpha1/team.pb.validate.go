@@ -1926,6 +1926,37 @@ func (m *EnrolProviderRequest) validate(all bool) error {
 			}
 		}
 
+	case *EnrolProviderRequest_Okta:
+
+		if all {
+			switch v := interface{}(m.GetOkta()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, EnrolProviderRequestValidationError{
+						field:  "Okta",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, EnrolProviderRequestValidationError{
+						field:  "Okta",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetOkta()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return EnrolProviderRequestValidationError{
+					field:  "Okta",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if len(errors) > 0 {
@@ -2259,6 +2290,133 @@ var _ interface {
 } = EnrolAWSSSOProviderValidationError{}
 
 var _EnrolAWSSSOProvider_AccountId_Pattern = regexp.MustCompile("^[0-9]*$")
+
+// Validate checks the field values on EnrolOktaProvider with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *EnrolOktaProvider) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on EnrolOktaProvider with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// EnrolOktaProviderMultiError, or nil if none found.
+func (m *EnrolOktaProvider) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *EnrolOktaProvider) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetAccountId()) != 12 {
+		err := EnrolOktaProviderValidationError{
+			field:  "AccountId",
+			reason: "value length must be 12 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+
+	}
+
+	if !_EnrolOktaProvider_AccountId_Pattern.MatchString(m.GetAccountId()) {
+		err := EnrolOktaProviderValidationError{
+			field:  "AccountId",
+			reason: "value does not match regex pattern \"^[0-9]*$\"",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return EnrolOktaProviderMultiError(errors)
+	}
+
+	return nil
+}
+
+// EnrolOktaProviderMultiError is an error wrapping multiple validation errors
+// returned by EnrolOktaProvider.ValidateAll() if the designated constraints
+// aren't met.
+type EnrolOktaProviderMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m EnrolOktaProviderMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m EnrolOktaProviderMultiError) AllErrors() []error { return m }
+
+// EnrolOktaProviderValidationError is the validation error returned by
+// EnrolOktaProvider.Validate if the designated constraints aren't met.
+type EnrolOktaProviderValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e EnrolOktaProviderValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e EnrolOktaProviderValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e EnrolOktaProviderValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e EnrolOktaProviderValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e EnrolOktaProviderValidationError) ErrorName() string {
+	return "EnrolOktaProviderValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e EnrolOktaProviderValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sEnrolOktaProvider.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = EnrolOktaProviderValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = EnrolOktaProviderValidationError{}
+
+var _EnrolOktaProvider_AccountId_Pattern = regexp.MustCompile("^[0-9]*$")
 
 // Validate checks the field values on EnrolProviderResponse with the rules
 // defined in the proto definition for this message. If any rules are
