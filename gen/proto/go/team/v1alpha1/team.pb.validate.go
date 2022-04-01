@@ -363,6 +363,8 @@ func (m *RoleAccessRequest) validate(all bool) error {
 
 	// no validation rules for TrillianMerkleHash
 
+	// no validation rules for ProvisioningStrat
+
 	if len(errors) > 0 {
 		return RoleAccessRequestMultiError(errors)
 	}
