@@ -248,7 +248,7 @@ func (msg *UpdateConfigResponse) UnmarshalJSON(b []byte) error {
 }
 
 // MarshalJSON implements json.Marshaler
-func (msg *EnrolProviderRequest) MarshalJSON() ([]byte, error) {
+func (msg *EnrollProviderRequest) MarshalJSON() ([]byte, error) {
 	return protojson.MarshalOptions{
 		UseEnumNumbers:  false,
 		EmitUnpopulated: false,
@@ -257,14 +257,14 @@ func (msg *EnrolProviderRequest) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON implements json.Unmarshaler
-func (msg *EnrolProviderRequest) UnmarshalJSON(b []byte) error {
+func (msg *EnrollProviderRequest) UnmarshalJSON(b []byte) error {
 	return protojson.UnmarshalOptions{
 		DiscardUnknown: false,
 	}.Unmarshal(b, msg)
 }
 
 // MarshalJSON implements json.Marshaler
-func (msg *EnrolAWSProvider) MarshalJSON() ([]byte, error) {
+func (msg *EnrollAWSProvider) MarshalJSON() ([]byte, error) {
 	return protojson.MarshalOptions{
 		UseEnumNumbers:  false,
 		EmitUnpopulated: false,
@@ -273,14 +273,14 @@ func (msg *EnrolAWSProvider) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON implements json.Unmarshaler
-func (msg *EnrolAWSProvider) UnmarshalJSON(b []byte) error {
+func (msg *EnrollAWSProvider) UnmarshalJSON(b []byte) error {
 	return protojson.UnmarshalOptions{
 		DiscardUnknown: false,
 	}.Unmarshal(b, msg)
 }
 
 // MarshalJSON implements json.Marshaler
-func (msg *EnrolAWSSSOProvider) MarshalJSON() ([]byte, error) {
+func (msg *EnrollAWSSSOProvider) MarshalJSON() ([]byte, error) {
 	return protojson.MarshalOptions{
 		UseEnumNumbers:  false,
 		EmitUnpopulated: false,
@@ -289,14 +289,14 @@ func (msg *EnrolAWSSSOProvider) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON implements json.Unmarshaler
-func (msg *EnrolAWSSSOProvider) UnmarshalJSON(b []byte) error {
+func (msg *EnrollAWSSSOProvider) UnmarshalJSON(b []byte) error {
 	return protojson.UnmarshalOptions{
 		DiscardUnknown: false,
 	}.Unmarshal(b, msg)
 }
 
 // MarshalJSON implements json.Marshaler
-func (msg *EnrolOktaProvider) MarshalJSON() ([]byte, error) {
+func (msg *EnrollOktaProvider) MarshalJSON() ([]byte, error) {
 	return protojson.MarshalOptions{
 		UseEnumNumbers:  false,
 		EmitUnpopulated: false,
@@ -305,14 +305,14 @@ func (msg *EnrolOktaProvider) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON implements json.Unmarshaler
-func (msg *EnrolOktaProvider) UnmarshalJSON(b []byte) error {
+func (msg *EnrollOktaProvider) UnmarshalJSON(b []byte) error {
 	return protojson.UnmarshalOptions{
 		DiscardUnknown: false,
 	}.Unmarshal(b, msg)
 }
 
 // MarshalJSON implements json.Marshaler
-func (msg *EnrolProviderResponse) MarshalJSON() ([]byte, error) {
+func (msg *EnrollProviderResponse) MarshalJSON() ([]byte, error) {
 	return protojson.MarshalOptions{
 		UseEnumNumbers:  false,
 		EmitUnpopulated: false,
@@ -321,7 +321,7 @@ func (msg *EnrolProviderResponse) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON implements json.Unmarshaler
-func (msg *EnrolProviderResponse) UnmarshalJSON(b []byte) error {
+func (msg *EnrollProviderResponse) UnmarshalJSON(b []byte) error {
 	return protojson.UnmarshalOptions{
 		DiscardUnknown: false,
 	}.Unmarshal(b, msg)
@@ -978,6 +978,38 @@ func (msg *GetAccessHandlerDeploymentGuideResponse) MarshalJSON() ([]byte, error
 
 // UnmarshalJSON implements json.Unmarshaler
 func (msg *GetAccessHandlerDeploymentGuideResponse) UnmarshalJSON(b []byte) error {
+	return protojson.UnmarshalOptions{
+		DiscardUnknown: false,
+	}.Unmarshal(b, msg)
+}
+
+// MarshalJSON implements json.Marshaler
+func (msg *EnrollAccessHandlerRequest) MarshalJSON() ([]byte, error) {
+	return protojson.MarshalOptions{
+		UseEnumNumbers:  false,
+		EmitUnpopulated: false,
+		UseProtoNames:   false,
+	}.Marshal(msg)
+}
+
+// UnmarshalJSON implements json.Unmarshaler
+func (msg *EnrollAccessHandlerRequest) UnmarshalJSON(b []byte) error {
+	return protojson.UnmarshalOptions{
+		DiscardUnknown: false,
+	}.Unmarshal(b, msg)
+}
+
+// MarshalJSON implements json.Marshaler
+func (msg *EnrollAccessHandlerResponse) MarshalJSON() ([]byte, error) {
+	return protojson.MarshalOptions{
+		UseEnumNumbers:  false,
+		EmitUnpopulated: false,
+		UseProtoNames:   false,
+	}.Marshal(msg)
+}
+
+// UnmarshalJSON implements json.Unmarshaler
+func (msg *EnrollAccessHandlerResponse) UnmarshalJSON(b []byte) error {
 	return protojson.UnmarshalOptions{
 		DiscardUnknown: false,
 	}.Unmarshal(b, msg)

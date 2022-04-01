@@ -23,7 +23,7 @@ type TeamServiceClient interface {
 	ListRoles(ctx context.Context, in *ListRolesRequest, opts ...grpc.CallOption) (*ListRolesResponse, error)
 	UpdateConfig(ctx context.Context, in *UpdateConfigRequest, opts ...grpc.CallOption) (*UpdateConfigResponse, error)
 	IsAdminUser(ctx context.Context, in *IsAdminUserRequest, opts ...grpc.CallOption) (*IsAdminUserResponse, error)
-	EnrolProvider(ctx context.Context, in *EnrolProviderRequest, opts ...grpc.CallOption) (*EnrolProviderResponse, error)
+	EnrollProvider(ctx context.Context, in *EnrollProviderRequest, opts ...grpc.CallOption) (*EnrollProviderResponse, error)
 	ListProviders(ctx context.Context, in *ListProvidersRequest, opts ...grpc.CallOption) (*ListProvidersResponse, error)
 	// DeleteProvider removes a provider from a Granted team.
 	DeleteProvider(ctx context.Context, in *DeleteProviderRequest, opts ...grpc.CallOption) (*DeleteProviderResponse, error)
@@ -41,6 +41,8 @@ type TeamServiceClient interface {
 	GetAccessHandlersForProvider(ctx context.Context, in *GetAccessHandlersForProviderRequest, opts ...grpc.CallOption) (*GetAccessHandlersForProviderResponse, error)
 	// GetAccessHandlerDeploymentGuide gets a deployment URL for a new Access Handler
 	GetAccessHandlerDeploymentGuide(ctx context.Context, in *GetAccessHandlerDeploymentGuideRequest, opts ...grpc.CallOption) (*GetAccessHandlerDeploymentGuideResponse, error)
+	// EnrolAccessHandler kicks off the registration process for an Access Handler.
+	EnrollAccessHandler(ctx context.Context, in *EnrollAccessHandlerRequest, opts ...grpc.CallOption) (*EnrollAccessHandlerResponse, error)
 	// AddAccessHandler registers a new Access Handler for a provider
 	AddAccessHandler(ctx context.Context, in *AddAccessHandlerRequest, opts ...grpc.CallOption) (*AddAccessHandlerResponse, error)
 	// DeleteAccessHandler deletes an Access Handler from a provider
@@ -107,9 +109,9 @@ func (c *teamServiceClient) IsAdminUser(ctx context.Context, in *IsAdminUserRequ
 	return out, nil
 }
 
-func (c *teamServiceClient) EnrolProvider(ctx context.Context, in *EnrolProviderRequest, opts ...grpc.CallOption) (*EnrolProviderResponse, error) {
-	out := new(EnrolProviderResponse)
-	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/EnrolProvider", in, out, opts...)
+func (c *teamServiceClient) EnrollProvider(ctx context.Context, in *EnrollProviderRequest, opts ...grpc.CallOption) (*EnrollProviderResponse, error) {
+	out := new(EnrollProviderResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/EnrollProvider", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -182,6 +184,15 @@ func (c *teamServiceClient) GetAccessHandlersForProvider(ctx context.Context, in
 func (c *teamServiceClient) GetAccessHandlerDeploymentGuide(ctx context.Context, in *GetAccessHandlerDeploymentGuideRequest, opts ...grpc.CallOption) (*GetAccessHandlerDeploymentGuideResponse, error) {
 	out := new(GetAccessHandlerDeploymentGuideResponse)
 	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/GetAccessHandlerDeploymentGuide", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *teamServiceClient) EnrollAccessHandler(ctx context.Context, in *EnrollAccessHandlerRequest, opts ...grpc.CallOption) (*EnrollAccessHandlerResponse, error) {
+	out := new(EnrollAccessHandlerResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/EnrollAccessHandler", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -269,7 +280,7 @@ type TeamServiceServer interface {
 	ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error)
 	UpdateConfig(context.Context, *UpdateConfigRequest) (*UpdateConfigResponse, error)
 	IsAdminUser(context.Context, *IsAdminUserRequest) (*IsAdminUserResponse, error)
-	EnrolProvider(context.Context, *EnrolProviderRequest) (*EnrolProviderResponse, error)
+	EnrollProvider(context.Context, *EnrollProviderRequest) (*EnrollProviderResponse, error)
 	ListProviders(context.Context, *ListProvidersRequest) (*ListProvidersResponse, error)
 	// DeleteProvider removes a provider from a Granted team.
 	DeleteProvider(context.Context, *DeleteProviderRequest) (*DeleteProviderResponse, error)
@@ -287,6 +298,8 @@ type TeamServiceServer interface {
 	GetAccessHandlersForProvider(context.Context, *GetAccessHandlersForProviderRequest) (*GetAccessHandlersForProviderResponse, error)
 	// GetAccessHandlerDeploymentGuide gets a deployment URL for a new Access Handler
 	GetAccessHandlerDeploymentGuide(context.Context, *GetAccessHandlerDeploymentGuideRequest) (*GetAccessHandlerDeploymentGuideResponse, error)
+	// EnrolAccessHandler kicks off the registration process for an Access Handler.
+	EnrollAccessHandler(context.Context, *EnrollAccessHandlerRequest) (*EnrollAccessHandlerResponse, error)
 	// AddAccessHandler registers a new Access Handler for a provider
 	AddAccessHandler(context.Context, *AddAccessHandlerRequest) (*AddAccessHandlerResponse, error)
 	// DeleteAccessHandler deletes an Access Handler from a provider
@@ -319,8 +332,8 @@ func (UnimplementedTeamServiceServer) UpdateConfig(context.Context, *UpdateConfi
 func (UnimplementedTeamServiceServer) IsAdminUser(context.Context, *IsAdminUserRequest) (*IsAdminUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method IsAdminUser not implemented")
 }
-func (UnimplementedTeamServiceServer) EnrolProvider(context.Context, *EnrolProviderRequest) (*EnrolProviderResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method EnrolProvider not implemented")
+func (UnimplementedTeamServiceServer) EnrollProvider(context.Context, *EnrollProviderRequest) (*EnrollProviderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EnrollProvider not implemented")
 }
 func (UnimplementedTeamServiceServer) ListProviders(context.Context, *ListProvidersRequest) (*ListProvidersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListProviders not implemented")
@@ -345,6 +358,9 @@ func (UnimplementedTeamServiceServer) GetAccessHandlersForProvider(context.Conte
 }
 func (UnimplementedTeamServiceServer) GetAccessHandlerDeploymentGuide(context.Context, *GetAccessHandlerDeploymentGuideRequest) (*GetAccessHandlerDeploymentGuideResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccessHandlerDeploymentGuide not implemented")
+}
+func (UnimplementedTeamServiceServer) EnrollAccessHandler(context.Context, *EnrollAccessHandlerRequest) (*EnrollAccessHandlerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EnrollAccessHandler not implemented")
 }
 func (UnimplementedTeamServiceServer) AddAccessHandler(context.Context, *AddAccessHandlerRequest) (*AddAccessHandlerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddAccessHandler not implemented")
@@ -472,20 +488,20 @@ func _TeamService_IsAdminUser_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TeamService_EnrolProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EnrolProviderRequest)
+func _TeamService_EnrollProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnrollProviderRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TeamServiceServer).EnrolProvider(ctx, in)
+		return srv.(TeamServiceServer).EnrollProvider(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/team.v1alpha1.TeamService/EnrolProvider",
+		FullMethod: "/team.v1alpha1.TeamService/EnrollProvider",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TeamServiceServer).EnrolProvider(ctx, req.(*EnrolProviderRequest))
+		return srv.(TeamServiceServer).EnrollProvider(ctx, req.(*EnrollProviderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -630,6 +646,24 @@ func _TeamService_GetAccessHandlerDeploymentGuide_Handler(srv interface{}, ctx c
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TeamServiceServer).GetAccessHandlerDeploymentGuide(ctx, req.(*GetAccessHandlerDeploymentGuideRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TeamService_EnrollAccessHandler_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnrollAccessHandlerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).EnrollAccessHandler(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/EnrollAccessHandler",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).EnrollAccessHandler(ctx, req.(*EnrollAccessHandlerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -806,8 +840,8 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _TeamService_IsAdminUser_Handler,
 		},
 		{
-			MethodName: "EnrolProvider",
-			Handler:    _TeamService_EnrolProvider_Handler,
+			MethodName: "EnrollProvider",
+			Handler:    _TeamService_EnrollProvider_Handler,
 		},
 		{
 			MethodName: "ListProviders",
@@ -840,6 +874,10 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAccessHandlerDeploymentGuide",
 			Handler:    _TeamService_GetAccessHandlerDeploymentGuide_Handler,
+		},
+		{
+			MethodName: "EnrollAccessHandler",
+			Handler:    _TeamService_EnrollAccessHandler_Handler,
 		},
 		{
 			MethodName: "AddAccessHandler",

@@ -15,7 +15,7 @@ service TeamService {
   rpc ListRoles(ListRolesRequest) returns (ListRolesResponse);
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse);
   rpc IsAdminUser(IsAdminUserRequest) returns (IsAdminUserResponse);
-  rpc EnrolProvider(EnrolProviderRequest) returns (EnrolProviderResponse);
+  rpc EnrollProvider(EnrollProviderRequest) returns (EnrollProviderResponse);
   rpc ListProviders(ListProvidersRequest) returns (ListProvidersResponse);
   // DeleteProvider removes a provider from a Granted team.
   rpc DeleteProvider(DeleteProviderRequest) returns (DeleteProviderResponse);
@@ -35,6 +35,9 @@ service TeamService {
 
   // GetAccessHandlerDeploymentGuide gets a deployment URL for a new Access Handler
   rpc GetAccessHandlerDeploymentGuide(GetAccessHandlerDeploymentGuideRequest) returns (GetAccessHandlerDeploymentGuideResponse);
+
+  // EnrolAccessHandler kicks off the registration process for an Access Handler.
+  rpc EnrollAccessHandler(EnrollAccessHandlerRequest) returns (EnrollAccessHandlerResponse);
 
   // AddAccessHandler registers a new Access Handler for a provider
   rpc AddAccessHandler(AddAccessHandlerRequest) returns (AddAccessHandlerResponse);
@@ -78,8 +81,6 @@ message RoleAccessRequest {
   bytes trillian_merkle_hash = 5;
   string provision_strategy = 6;
   string expiry_duration = 7;
-
-
 }
 
 
@@ -131,28 +132,28 @@ message UpdateConfigResponse {
   bytes sha256_hash = 1;
 }
 
-message EnrolProviderRequest {
+message EnrollProviderRequest {
   string id = 1;
   string name = 2;
   oneof provider {
-    EnrolAWSProvider aws = 3;
-    EnrolAWSSSOProvider aws_sso = 4;
-    EnrolOktaProvider okta = 5;
+    EnrollAWSProvider aws = 3;
+    EnrollAWSSSOProvider aws_sso = 4;
+    EnrollOktaProvider okta = 5;
   }
 }
 
-message EnrolAWSProvider {
+message EnrollAWSProvider {
   string account_id = 1 [(validate.rules).string = {len: 12, pattern: "^[0-9]*$"}];
 }
 
-message EnrolAWSSSOProvider {
+message EnrollAWSSSOProvider {
   string account_id = 1 [(validate.rules).string = {len: 12, pattern: "^[0-9]*$"}];
 }
-message EnrolOktaProvider {
+message EnrollOktaProvider {
   string org_url = 1 [(validate.rules).string.uri = true];
 }
 
-message EnrolProviderResponse {}
+message EnrollProviderResponse {}
 
 message ListProvidersRequest {}
 
@@ -319,6 +320,8 @@ message SlackChannelInviteTestResponse {
   bool success = 1;
 }
 
+// this is currently unused, but will allow users to let
+// Granted how they are hosting their access handlers in future.
 enum AccessHandlerHostingStrategy {
   ACCESS_HANDLER_HOSTING_STRATEGY_UNSPECIFIED = 0;
   ACCESS_HANDLER_HOSTING_STRATEGY_AWS_LAMBDA = 1;
@@ -331,4 +334,15 @@ message GetAccessHandlerDeploymentGuideRequest {
 
 message GetAccessHandlerDeploymentGuideResponse {
   string deployment_url = 1;
+}
+
+message EnrollAccessHandlerRequest {
+  string access_handler_url = 1;
+  string provider_id = 2;
+  AccessHandlerHostingStrategy hosting_strategy = 3;
+}
+
+message EnrollAccessHandlerResponse {
+  string enrollment_token = 1;
+  google.protobuf.Timestamp expires_at = 2;
 }

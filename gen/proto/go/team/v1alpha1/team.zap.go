@@ -7,10 +7,10 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
+	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	_ "github.com/common-fate/cf-protos/gen/proto/go/certrail/v1alpha1"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
-	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -315,7 +315,7 @@ func (m *UpdateConfigResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 	return nil
 }
 
-func (m *EnrolProviderRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *EnrollProviderRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -330,7 +330,7 @@ func (m *EnrolProviderRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 	enc.AddString(keyName, m.Name)
 
 	keyName = "aws" // field aws = 3
-	if ov, ok := m.GetProvider().(*EnrolProviderRequest_Aws); ok {
+	if ov, ok := m.GetProvider().(*EnrollProviderRequest_Aws); ok {
 		_ = ov
 		if ov.Aws != nil {
 			var vv interface{} = ov.Aws
@@ -341,7 +341,7 @@ func (m *EnrolProviderRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 	}
 
 	keyName = "aws_sso" // field aws_sso = 4
-	if ov, ok := m.GetProvider().(*EnrolProviderRequest_AwsSso); ok {
+	if ov, ok := m.GetProvider().(*EnrollProviderRequest_AwsSso); ok {
 		_ = ov
 		if ov.AwsSso != nil {
 			var vv interface{} = ov.AwsSso
@@ -352,7 +352,7 @@ func (m *EnrolProviderRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 	}
 
 	keyName = "okta" // field okta = 5
-	if ov, ok := m.GetProvider().(*EnrolProviderRequest_Okta); ok {
+	if ov, ok := m.GetProvider().(*EnrollProviderRequest_Okta); ok {
 		_ = ov
 		if ov.Okta != nil {
 			var vv interface{} = ov.Okta
@@ -365,7 +365,7 @@ func (m *EnrolProviderRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 	return nil
 }
 
-func (m *EnrolAWSProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *EnrollAWSProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -379,7 +379,7 @@ func (m *EnrolAWSProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEn
 	return nil
 }
 
-func (m *EnrolAWSSSOProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *EnrollAWSSSOProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -393,7 +393,7 @@ func (m *EnrolAWSSSOProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.Objec
 	return nil
 }
 
-func (m *EnrolOktaProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *EnrollOktaProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -407,7 +407,7 @@ func (m *EnrolOktaProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectE
 	return nil
 }
 
-func (m *EnrolProviderResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *EnrollProviderResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -1133,6 +1133,45 @@ func (m *GetAccessHandlerDeploymentGuideResponse) MarshalLogObject(enc go_uber_o
 
 	keyName = "deployment_url" // field deployment_url = 1
 	enc.AddString(keyName, m.DeploymentUrl)
+
+	return nil
+}
+
+func (m *EnrollAccessHandlerRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "access_handler_url" // field access_handler_url = 1
+	enc.AddString(keyName, m.AccessHandlerUrl)
+
+	keyName = "provider_id" // field provider_id = 2
+	enc.AddString(keyName, m.ProviderId)
+
+	keyName = "hosting_strategy" // field hosting_strategy = 3
+	enc.AddString(keyName, m.HostingStrategy.String())
+
+	return nil
+}
+
+func (m *EnrollAccessHandlerResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "enrollment_token" // field enrollment_token = 1
+	enc.AddString(keyName, m.EnrollmentToken)
+
+	keyName = "expires_at" // field expires_at = 2
+	if t, err := github_com_golang_protobuf_ptypes.Timestamp(m.ExpiresAt); err == nil {
+		enc.AddTime(keyName, t)
+	}
 
 	return nil
 }
