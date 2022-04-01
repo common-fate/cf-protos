@@ -57,11 +57,7 @@ func (m *EnrolRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Team
-
-	// no validation rules for Provider
-
-	// no validation rules for AccessHandlerUrl
+	// no validation rules for Token
 
 	switch m.Proof.(type) {
 

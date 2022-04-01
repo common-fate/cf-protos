@@ -25,14 +25,8 @@ func (m *EnrolRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncode
 		return nil
 	}
 
-	keyName = "team" // field team = 1
-	enc.AddString(keyName, m.Team)
-
-	keyName = "provider" // field provider = 2
-	enc.AddString(keyName, m.Provider)
-
-	keyName = "access_handler_url" // field access_handler_url = 3
-	enc.AddString(keyName, m.AccessHandlerUrl)
+	keyName = "token" // field token = 1
+	enc.AddString(keyName, m.Token)
 
 	keyName = "aws" // field aws = 4
 	if ov, ok := m.GetProof().(*EnrolRequest_Aws); ok {
