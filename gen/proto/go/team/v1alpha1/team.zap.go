@@ -401,9 +401,6 @@ func (m *EnrolOktaProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectE
 		return nil
 	}
 
-	keyName = "account_id" // field account_id = 1
-	enc.AddString(keyName, m.AccountId)
-
 	return nil
 }
 
