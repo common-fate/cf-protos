@@ -73,10 +73,8 @@ message RoleAccessRequest {
   google.protobuf.Timestamp timestamp = 3;
   string id = 4;
   bytes trillian_merkle_hash = 5;
-  oneof provision_strategy {
-   certrail.v1alpha1.Window window = 6;
-   certrail.v1alpha1.Expires expires = 7;
-  }
+  string provision_strategy = 6;
+  string expiry_duration = 7;
 
 
 }
