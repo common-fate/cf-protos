@@ -73,6 +73,10 @@ message RoleAccessRequest {
   google.protobuf.Timestamp timestamp = 3;
   string id = 4;
   bytes trillian_merkle_hash = 5;
+  string provision_strategy = 6;
+  string expiry_duration = 7;
+
+
 }
 
 

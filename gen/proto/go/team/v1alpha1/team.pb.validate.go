@@ -363,6 +363,10 @@ func (m *RoleAccessRequest) validate(all bool) error {
 
 	// no validation rules for TrillianMerkleHash
 
+	// no validation rules for ProvisionStrategy
+
+	// no validation rules for ExpiryDuration
+
 	if len(errors) > 0 {
 		return RoleAccessRequestMultiError(errors)
 	}
