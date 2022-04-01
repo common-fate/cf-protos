@@ -4023,6 +4023,8 @@ func (m *Provider) validate(all bool) error {
 
 	// no validation rules for Name
 
+	// no validation rules for Status
+
 	switch m.Details.(type) {
 
 	case *Provider_Aws:

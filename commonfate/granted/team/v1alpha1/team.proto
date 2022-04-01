@@ -205,9 +205,16 @@ message GetProviderResponse {
   Provider provider = 1;
 }
 
+enum ProviderStatus {
+  PROVIDER_STATUS_UNSPECIFIED = 0;
+  PROVIDER_STATUS_PENDING = 1;
+  PROVIDER_STATUS_READY = 2;
+}
+
 message Provider {
   string id = 1;
   string name = 2;
+  ProviderStatus status = 3;
   oneof details {
     AWSProviderDetails aws = 4;
     AWSSSOProviderDetails awssso = 5;
