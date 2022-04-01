@@ -2299,6 +2299,27 @@ func (m *EnrolOktaProvider) validate(all bool) error {
 
 	var errors []error
 
+	if uri, err := url.Parse(m.GetOrgUrl()); err != nil {
+		err = EnrolOktaProviderValidationError{
+			field:  "OrgUrl",
+			reason: "value must be a valid URI",
+			cause:  err,
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	} else if !uri.IsAbs() {
+		err := EnrolOktaProviderValidationError{
+			field:  "OrgUrl",
+			reason: "value must be absolute",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return EnrolOktaProviderMultiError(errors)
 	}
@@ -4426,7 +4447,7 @@ func (m *OktaProviderDetails) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for OrgManagementAccountId
+	// no validation rules for OrgUrl
 
 	if len(errors) > 0 {
 		return OktaProviderDetailsMultiError(errors)

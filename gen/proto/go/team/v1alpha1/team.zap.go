@@ -401,6 +401,9 @@ func (m *EnrolOktaProvider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectE
 		return nil
 	}
 
+	keyName = "org_url" // field org_url = 1
+	enc.AddString(keyName, m.OrgUrl)
+
 	return nil
 }
 
@@ -762,8 +765,8 @@ func (m *OktaProviderDetails) MarshalLogObject(enc go_uber_org_zap_zapcore.Objec
 		return nil
 	}
 
-	keyName = "org_management_account_id" // field org_management_account_id = 1
-	enc.AddString(keyName, m.OrgManagementAccountId)
+	keyName = "org_url" // field org_url = 1
+	enc.AddString(keyName, m.OrgUrl)
 
 	return nil
 }

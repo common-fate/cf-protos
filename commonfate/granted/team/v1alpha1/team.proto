@@ -145,7 +145,9 @@ message EnrolAWSProvider {
 message EnrolAWSSSOProvider {
   string account_id = 1 [(validate.rules).string = {len: 12, pattern: "^[0-9]*$"}];
 }
-message EnrolOktaProvider {}
+message EnrolOktaProvider {
+  string org_url = 1 [(validate.rules).string.uri = true];
+}
 
 message EnrolProviderResponse {
   string deployment_url = 2;
@@ -229,7 +231,7 @@ message AWSSSOProviderDetails {
   string org_management_account_id = 1;
 }
 message OktaProviderDetails {
-  string org_management_account_id = 1;
+  string org_url = 1;
 }
 
 
