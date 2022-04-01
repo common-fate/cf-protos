@@ -2421,37 +2421,6 @@ func (m *EnrolProviderResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for DeploymentUrl
-
-	if all {
-		switch v := interface{}(m.GetExpiresAt()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, EnrolProviderResponseValidationError{
-					field:  "ExpiresAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, EnrolProviderResponseValidationError{
-					field:  "ExpiresAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetExpiresAt()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return EnrolProviderResponseValidationError{
-				field:  "ExpiresAt",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	if len(errors) > 0 {
 		return EnrolProviderResponseMultiError(errors)
 	}
@@ -6996,3 +6965,219 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = SlackChannelInviteTestResponseValidationError{}
+
+// Validate checks the field values on GetAccessHandlerDeploymentGuideRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetAccessHandlerDeploymentGuideRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetAccessHandlerDeploymentGuideRequest with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// GetAccessHandlerDeploymentGuideRequestMultiError, or nil if none found.
+func (m *GetAccessHandlerDeploymentGuideRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAccessHandlerDeploymentGuideRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ProviderId
+
+	// no validation rules for HostingStrategy
+
+	if len(errors) > 0 {
+		return GetAccessHandlerDeploymentGuideRequestMultiError(errors)
+	}
+	return nil
+}
+
+// GetAccessHandlerDeploymentGuideRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// GetAccessHandlerDeploymentGuideRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetAccessHandlerDeploymentGuideRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAccessHandlerDeploymentGuideRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAccessHandlerDeploymentGuideRequestMultiError) AllErrors() []error { return m }
+
+// GetAccessHandlerDeploymentGuideRequestValidationError is the validation
+// error returned by GetAccessHandlerDeploymentGuideRequest.Validate if the
+// designated constraints aren't met.
+type GetAccessHandlerDeploymentGuideRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAccessHandlerDeploymentGuideRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAccessHandlerDeploymentGuideRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAccessHandlerDeploymentGuideRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAccessHandlerDeploymentGuideRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAccessHandlerDeploymentGuideRequestValidationError) ErrorName() string {
+	return "GetAccessHandlerDeploymentGuideRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAccessHandlerDeploymentGuideRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAccessHandlerDeploymentGuideRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAccessHandlerDeploymentGuideRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAccessHandlerDeploymentGuideRequestValidationError{}
+
+// Validate checks the field values on GetAccessHandlerDeploymentGuideResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetAccessHandlerDeploymentGuideResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetAccessHandlerDeploymentGuideResponse with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// GetAccessHandlerDeploymentGuideResponseMultiError, or nil if none found.
+func (m *GetAccessHandlerDeploymentGuideResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAccessHandlerDeploymentGuideResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for DeploymentUrl
+
+	if len(errors) > 0 {
+		return GetAccessHandlerDeploymentGuideResponseMultiError(errors)
+	}
+	return nil
+}
+
+// GetAccessHandlerDeploymentGuideResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// GetAccessHandlerDeploymentGuideResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetAccessHandlerDeploymentGuideResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAccessHandlerDeploymentGuideResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAccessHandlerDeploymentGuideResponseMultiError) AllErrors() []error { return m }
+
+// GetAccessHandlerDeploymentGuideResponseValidationError is the validation
+// error returned by GetAccessHandlerDeploymentGuideResponse.Validate if the
+// designated constraints aren't met.
+type GetAccessHandlerDeploymentGuideResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAccessHandlerDeploymentGuideResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAccessHandlerDeploymentGuideResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAccessHandlerDeploymentGuideResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAccessHandlerDeploymentGuideResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAccessHandlerDeploymentGuideResponseValidationError) ErrorName() string {
+	return "GetAccessHandlerDeploymentGuideResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAccessHandlerDeploymentGuideResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAccessHandlerDeploymentGuideResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAccessHandlerDeploymentGuideResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAccessHandlerDeploymentGuideResponseValidationError{}

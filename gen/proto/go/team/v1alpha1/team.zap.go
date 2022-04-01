@@ -7,10 +7,10 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
-	_ "google.golang.org/protobuf/types/known/timestamppb"
-	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	_ "github.com/common-fate/cf-protos/gen/proto/go/certrail/v1alpha1"
+	_ "google.golang.org/protobuf/types/known/timestamppb"
+	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -413,14 +413,6 @@ func (m *EnrolProviderResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Obj
 
 	if m == nil {
 		return nil
-	}
-
-	keyName = "deployment_url" // field deployment_url = 2
-	enc.AddString(keyName, m.DeploymentUrl)
-
-	keyName = "expires_at" // field expires_at = 4
-	if t, err := github_com_golang_protobuf_ptypes.Timestamp(m.ExpiresAt); err == nil {
-		enc.AddTime(keyName, t)
 	}
 
 	return nil
@@ -1110,6 +1102,37 @@ func (m *SlackChannelInviteTestResponse) MarshalLogObject(enc go_uber_org_zap_za
 
 	keyName = "success" // field success = 1
 	enc.AddBool(keyName, m.Success)
+
+	return nil
+}
+
+func (m *GetAccessHandlerDeploymentGuideRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "provider_id" // field provider_id = 1
+	enc.AddString(keyName, m.ProviderId)
+
+	keyName = "hosting_strategy" // field hosting_strategy = 2
+	enc.AddString(keyName, m.HostingStrategy.String())
+
+	return nil
+}
+
+func (m *GetAccessHandlerDeploymentGuideResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "deployment_url" // field deployment_url = 1
+	enc.AddString(keyName, m.DeploymentUrl)
 
 	return nil
 }
