@@ -8127,6 +8127,8 @@ func (m *EnrollAccessHandlerResponse) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for AccessHandlerId
+
 	if len(errors) > 0 {
 		return EnrollAccessHandlerResponseMultiError(errors)
 	}

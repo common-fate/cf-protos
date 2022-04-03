@@ -402,6 +402,7 @@ message EnrollAccessHandlerRequest {
 }
 
 message EnrollAccessHandlerResponse {
+  string access_handler_id = 1;
   // string enrollment_token = 1;
   // google.protobuf.Timestamp expires_at = 2;
 }
