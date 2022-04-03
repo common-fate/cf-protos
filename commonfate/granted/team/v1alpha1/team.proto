@@ -98,6 +98,13 @@ message RoleAccessRequest {
   bytes trillian_merkle_hash = 5;
   string provision_strategy = 6;
   string expiry_duration = 7;
+
+  // new fields
+  string provider_id = 8;
+  string provider_type = 9;
+  string principal = 10;
+  google.protobuf.Timestamp start = 11; 
+  google.protobuf.Timestamp end = 12;
 }
 
 

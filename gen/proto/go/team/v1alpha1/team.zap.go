@@ -7,10 +7,10 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
-	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	_ "github.com/common-fate/cf-protos/gen/proto/go/certrail/v1alpha1"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
+	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -141,6 +141,25 @@ func (m *RoleAccessRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectE
 
 	keyName = "expiry_duration" // field expiry_duration = 7
 	enc.AddString(keyName, m.ExpiryDuration)
+
+	keyName = "provider_id" // field provider_id = 8
+	enc.AddString(keyName, m.ProviderId)
+
+	keyName = "provider_type" // field provider_type = 9
+	enc.AddString(keyName, m.ProviderType)
+
+	keyName = "principal" // field principal = 10
+	enc.AddString(keyName, m.Principal)
+
+	keyName = "start" // field start = 11
+	if t, err := github_com_golang_protobuf_ptypes.Timestamp(m.Start); err == nil {
+		enc.AddTime(keyName, t)
+	}
+
+	keyName = "end" // field end = 12
+	if t, err := github_com_golang_protobuf_ptypes.Timestamp(m.End); err == nil {
+		enc.AddTime(keyName, t)
+	}
 
 	return nil
 }
