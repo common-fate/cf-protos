@@ -116,9 +116,6 @@ func (m *GetCertificateRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.Obj
 	keyName = "team" // field team = 2
 	enc.AddString(keyName, m.Team)
 
-	keyName = "provider" // field provider = 3
-	enc.AddString(keyName, m.Provider)
-
 	keyName = "aws" // field aws = 4
 	if ov, ok := m.GetProof().(*GetCertificateRequest_Aws); ok {
 		_ = ov

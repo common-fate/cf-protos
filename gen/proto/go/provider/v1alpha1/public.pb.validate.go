@@ -582,8 +582,6 @@ func (m *GetCertificateRequest) validate(all bool) error {
 
 	// no validation rules for Team
 
-	// no validation rules for Provider
-
 	switch m.Proof.(type) {
 
 	case *GetCertificateRequest_Aws:

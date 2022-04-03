@@ -36,8 +36,6 @@ message GetCertificateRequest {
   bytes csr = 1;
   // the slug of the team
   string team = 2;
-  // the customer ID of the provider
-  string provider = 3;
   oneof proof {
     AWSProof aws = 4;
   }
