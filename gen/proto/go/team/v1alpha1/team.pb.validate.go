@@ -7538,7 +7538,7 @@ func (m *GetAccessHandlerDeploymentGuideRequest) validate(all bool) error {
 
 	// no validation rules for ProviderId
 
-	// no validation rules for HostingStrategy
+	// no validation rules for Runtime
 
 	if len(errors) > 0 {
 		return GetAccessHandlerDeploymentGuideRequestMultiError(errors)
@@ -7728,6 +7728,212 @@ var _ interface {
 	ErrorName() string
 } = GetAccessHandlerDeploymentGuideResponseValidationError{}
 
+// Validate checks the field values on AWSRoleEnrollment with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *AWSRoleEnrollment) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AWSRoleEnrollment with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AWSRoleEnrollmentMultiError, or nil if none found.
+func (m *AWSRoleEnrollment) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AWSRoleEnrollment) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AwsRole
+
+	if len(errors) > 0 {
+		return AWSRoleEnrollmentMultiError(errors)
+	}
+	return nil
+}
+
+// AWSRoleEnrollmentMultiError is an error wrapping multiple validation errors
+// returned by AWSRoleEnrollment.ValidateAll() if the designated constraints
+// aren't met.
+type AWSRoleEnrollmentMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AWSRoleEnrollmentMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AWSRoleEnrollmentMultiError) AllErrors() []error { return m }
+
+// AWSRoleEnrollmentValidationError is the validation error returned by
+// AWSRoleEnrollment.Validate if the designated constraints aren't met.
+type AWSRoleEnrollmentValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AWSRoleEnrollmentValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AWSRoleEnrollmentValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AWSRoleEnrollmentValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AWSRoleEnrollmentValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AWSRoleEnrollmentValidationError) ErrorName() string {
+	return "AWSRoleEnrollmentValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AWSRoleEnrollmentValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAWSRoleEnrollment.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AWSRoleEnrollmentValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AWSRoleEnrollmentValidationError{}
+
+// Validate checks the field values on SelfHostedEnrollment with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SelfHostedEnrollment) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SelfHostedEnrollment with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SelfHostedEnrollmentMultiError, or nil if none found.
+func (m *SelfHostedEnrollment) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SelfHostedEnrollment) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Certificate
+
+	if len(errors) > 0 {
+		return SelfHostedEnrollmentMultiError(errors)
+	}
+	return nil
+}
+
+// SelfHostedEnrollmentMultiError is an error wrapping multiple validation
+// errors returned by SelfHostedEnrollment.ValidateAll() if the designated
+// constraints aren't met.
+type SelfHostedEnrollmentMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SelfHostedEnrollmentMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SelfHostedEnrollmentMultiError) AllErrors() []error { return m }
+
+// SelfHostedEnrollmentValidationError is the validation error returned by
+// SelfHostedEnrollment.Validate if the designated constraints aren't met.
+type SelfHostedEnrollmentValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SelfHostedEnrollmentValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SelfHostedEnrollmentValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SelfHostedEnrollmentValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SelfHostedEnrollmentValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SelfHostedEnrollmentValidationError) ErrorName() string {
+	return "SelfHostedEnrollmentValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SelfHostedEnrollmentValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSelfHostedEnrollment.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SelfHostedEnrollmentValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SelfHostedEnrollmentValidationError{}
+
 // Validate checks the field values on EnrollAccessHandlerRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -7754,7 +7960,73 @@ func (m *EnrollAccessHandlerRequest) validate(all bool) error {
 
 	// no validation rules for ProviderId
 
-	// no validation rules for HostingStrategy
+	// no validation rules for Runtime
+
+	switch m.Enrollment.(type) {
+
+	case *EnrollAccessHandlerRequest_AwsRole:
+
+		if all {
+			switch v := interface{}(m.GetAwsRole()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, EnrollAccessHandlerRequestValidationError{
+						field:  "AwsRole",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, EnrollAccessHandlerRequestValidationError{
+						field:  "AwsRole",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetAwsRole()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return EnrollAccessHandlerRequestValidationError{
+					field:  "AwsRole",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *EnrollAccessHandlerRequest_SelfHosted:
+
+		if all {
+			switch v := interface{}(m.GetSelfHosted()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, EnrollAccessHandlerRequestValidationError{
+						field:  "SelfHosted",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, EnrollAccessHandlerRequestValidationError{
+						field:  "SelfHosted",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetSelfHosted()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return EnrollAccessHandlerRequestValidationError{
+					field:  "SelfHosted",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	if len(errors) > 0 {
 		return EnrollAccessHandlerRequestMultiError(errors)
@@ -7856,37 +8128,6 @@ func (m *EnrollAccessHandlerResponse) validate(all bool) error {
 	}
 
 	var errors []error
-
-	// no validation rules for EnrollmentToken
-
-	if all {
-		switch v := interface{}(m.GetExpiresAt()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, EnrollAccessHandlerResponseValidationError{
-					field:  "ExpiresAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, EnrollAccessHandlerResponseValidationError{
-					field:  "ExpiresAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetExpiresAt()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return EnrollAccessHandlerResponseValidationError{
-				field:  "ExpiresAt",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
 	if len(errors) > 0 {
 		return EnrollAccessHandlerResponseMultiError(errors)

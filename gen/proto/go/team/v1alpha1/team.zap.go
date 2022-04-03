@@ -7,10 +7,10 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
+	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	_ "github.com/common-fate/cf-protos/gen/proto/go/certrail/v1alpha1"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
-	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -1217,8 +1217,8 @@ func (m *GetAccessHandlerDeploymentGuideRequest) MarshalLogObject(enc go_uber_or
 	keyName = "provider_id" // field provider_id = 1
 	enc.AddString(keyName, m.ProviderId)
 
-	keyName = "hosting_strategy" // field hosting_strategy = 2
-	enc.AddString(keyName, m.HostingStrategy.String())
+	keyName = "runtime" // field runtime = 2
+	enc.AddString(keyName, m.Runtime.String())
 
 	return nil
 }
@@ -1237,6 +1237,34 @@ func (m *GetAccessHandlerDeploymentGuideResponse) MarshalLogObject(enc go_uber_o
 	return nil
 }
 
+func (m *AWSRoleEnrollment) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "aws_role" // field aws_role = 1
+	enc.AddString(keyName, m.AwsRole)
+
+	return nil
+}
+
+func (m *SelfHostedEnrollment) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "certificate" // field certificate = 2
+	enc.AddString(keyName, m.Certificate)
+
+	return nil
+}
+
 func (m *EnrollAccessHandlerRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
@@ -1251,8 +1279,30 @@ func (m *EnrollAccessHandlerRequest) MarshalLogObject(enc go_uber_org_zap_zapcor
 	keyName = "provider_id" // field provider_id = 2
 	enc.AddString(keyName, m.ProviderId)
 
-	keyName = "hosting_strategy" // field hosting_strategy = 3
-	enc.AddString(keyName, m.HostingStrategy.String())
+	keyName = "runtime" // field runtime = 3
+	enc.AddString(keyName, m.Runtime.String())
+
+	keyName = "aws_role" // field aws_role = 4
+	if ov, ok := m.GetEnrollment().(*EnrollAccessHandlerRequest_AwsRole); ok {
+		_ = ov
+		if ov.AwsRole != nil {
+			var vv interface{} = ov.AwsRole
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
+
+	keyName = "self_hosted" // field self_hosted = 5
+	if ov, ok := m.GetEnrollment().(*EnrollAccessHandlerRequest_SelfHosted); ok {
+		_ = ov
+		if ov.SelfHosted != nil {
+			var vv interface{} = ov.SelfHosted
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
 
 	return nil
 }
@@ -1263,14 +1313,6 @@ func (m *EnrollAccessHandlerResponse) MarshalLogObject(enc go_uber_org_zap_zapco
 
 	if m == nil {
 		return nil
-	}
-
-	keyName = "enrollment_token" // field enrollment_token = 1
-	enc.AddString(keyName, m.EnrollmentToken)
-
-	keyName = "expires_at" // field expires_at = 2
-	if t, err := github_com_golang_protobuf_ptypes.Timestamp(m.ExpiresAt); err == nil {
-		enc.AddTime(keyName, t)
 	}
 
 	return nil

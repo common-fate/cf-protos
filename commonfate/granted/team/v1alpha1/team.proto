@@ -368,29 +368,42 @@ message SlackChannelInviteTestResponse {
 
 // this is currently unused, but will allow users to let
 // Granted how they are hosting their access handlers in future.
-enum AccessHandlerHostingStrategy {
-  ACCESS_HANDLER_HOSTING_STRATEGY_UNSPECIFIED = 0;
-  ACCESS_HANDLER_HOSTING_STRATEGY_AWS_LAMBDA = 1;
+enum AccessHandlerRuntime {
+  ACCESS_HANDLER_RUNTIME_UNSPECIFIED = 0;
+  ACCESS_HANDLER_RUNTIME_AWS_LAMBDA_STEPFUNCTIONS = 1;
+  ACCESS_HANDLER_RUNTIME_SELFHOSTED = 2;
 }
 
 message GetAccessHandlerDeploymentGuideRequest {
   string provider_id = 1;
-  AccessHandlerHostingStrategy hosting_strategy = 2;
+  AccessHandlerRuntime runtime = 2;
 }
 
 message GetAccessHandlerDeploymentGuideResponse {
   string deployment_url = 1;
 }
 
+message AWSRoleEnrollment {
+  string aws_role = 1;
+}
+
+message SelfHostedEnrollment {
+  string certificate = 2;
+}
+
 message EnrollAccessHandlerRequest {
   string access_handler_url = 1;
   string provider_id = 2;
-  AccessHandlerHostingStrategy hosting_strategy = 3;
+  AccessHandlerRuntime runtime = 3;
+  oneof enrollment {
+    AWSRoleEnrollment aws_role = 4;
+    SelfHostedEnrollment self_hosted = 5;
+  }
 }
 
 message EnrollAccessHandlerResponse {
-  string enrollment_token = 1;
-  google.protobuf.Timestamp expires_at = 2;
+  // string enrollment_token = 1;
+  // google.protobuf.Timestamp expires_at = 2;
 }
 
 message QueryProviderInfo {
