@@ -136,6 +136,7 @@ message ListMembersRequest {
 message ListMembersResponse {
 	repeated Member members = 1;
 }
+
 message Account {
   string provider_id = 1;
   string account_id = 2;

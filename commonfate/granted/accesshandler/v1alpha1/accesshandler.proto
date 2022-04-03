@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package accesshandler.v1alpha1;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+// AccessHandlerService is a service used by Granted Access Handlers
+service AccessHandlerService {
+  rpc NotifyGrantEvent(NotifyGrantEventRequest) returns (NotifyGrantEventResponse);
+}
+
+message Grant {
+  string id = 1;
+  string provider_id = 2;
+  string provider_type = 3;
+  string principal = 4;
+  google.protobuf.Timestamp start = 5; 
+  google.protobuf.Timestamp end = 6;
+  string user = 7;
+  google.protobuf.Struct claims = 8;
+}
+
+enum GrantEvent {
+  GRANT_EVENT_UNSPECIFIED = 0;
+  GRANT_EVENT_ACTIVATED = 1;
+  GRANT_EVENT_DEACTIVATED = 2;
+  GRANT_EVENT_ERROR = 3;
+}
+
+message NotifyGrantEventRequest {
+  Grant grant = 1;
+  GrantEvent event = 2;
+  google.protobuf.Struct data = 3;
+}
+
+message NotifyGrantEventResponse {
+  string event_id = 1;
+}
