@@ -921,7 +921,7 @@ func (m *GetAllProviderChecksumResponse) MarshalLogObject(enc go_uber_org_zap_za
 	return nil
 }
 
-func (m *GetAccessHandlersForProviderRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *ListAccessHandlersRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 
@@ -935,7 +935,33 @@ func (m *GetAccessHandlersForProviderRequest) MarshalLogObject(enc go_uber_org_z
 	return nil
 }
 
-func (m *GetAccessHandlersForProviderResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+func (m *AccessHandler) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
+	var keyName string
+	_ = keyName
+
+	if m == nil {
+		return nil
+	}
+
+	keyName = "id" // field id = 1
+	enc.AddString(keyName, m.Id)
+
+	keyName = "url" // field url = 2
+	enc.AddString(keyName, m.Url)
+
+	keyName = "provider_ids" // field provider_ids = 3
+	enc.AddArray(keyName, go_uber_org_zap_zapcore.ArrayMarshalerFunc(func(aenc go_uber_org_zap_zapcore.ArrayEncoder) error {
+		for _, rv := range m.ProviderIds {
+			_ = rv
+			aenc.AppendString(rv)
+		}
+		return nil
+	}))
+
+	return nil
+}
+
+func (m *ListAccessHandlersResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) error {
 	var keyName string
 	_ = keyName
 

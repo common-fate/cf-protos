@@ -5484,23 +5484,22 @@ var _ interface {
 	ErrorName() string
 } = GetAllProviderChecksumResponseValidationError{}
 
-// Validate checks the field values on GetAccessHandlersForProviderRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *GetAccessHandlersForProviderRequest) Validate() error {
+// Validate checks the field values on ListAccessHandlersRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListAccessHandlersRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetAccessHandlersForProviderRequest
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// GetAccessHandlersForProviderRequestMultiError, or nil if none found.
-func (m *GetAccessHandlersForProviderRequest) ValidateAll() error {
+// ValidateAll checks the field values on ListAccessHandlersRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListAccessHandlersRequestMultiError, or nil if none found.
+func (m *ListAccessHandlersRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetAccessHandlersForProviderRequest) validate(all bool) error {
+func (m *ListAccessHandlersRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -5510,19 +5509,18 @@ func (m *GetAccessHandlersForProviderRequest) validate(all bool) error {
 	// no validation rules for ProviderId
 
 	if len(errors) > 0 {
-		return GetAccessHandlersForProviderRequestMultiError(errors)
+		return ListAccessHandlersRequestMultiError(errors)
 	}
 	return nil
 }
 
-// GetAccessHandlersForProviderRequestMultiError is an error wrapping multiple
-// validation errors returned by
-// GetAccessHandlersForProviderRequest.ValidateAll() if the designated
-// constraints aren't met.
-type GetAccessHandlersForProviderRequestMultiError []error
+// ListAccessHandlersRequestMultiError is an error wrapping multiple validation
+// errors returned by ListAccessHandlersRequest.ValidateAll() if the
+// designated constraints aren't met.
+type ListAccessHandlersRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetAccessHandlersForProviderRequestMultiError) Error() string {
+func (m ListAccessHandlersRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -5531,12 +5529,11 @@ func (m GetAccessHandlersForProviderRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetAccessHandlersForProviderRequestMultiError) AllErrors() []error { return m }
+func (m ListAccessHandlersRequestMultiError) AllErrors() []error { return m }
 
-// GetAccessHandlersForProviderRequestValidationError is the validation error
-// returned by GetAccessHandlersForProviderRequest.Validate if the designated
-// constraints aren't met.
-type GetAccessHandlersForProviderRequestValidationError struct {
+// ListAccessHandlersRequestValidationError is the validation error returned by
+// ListAccessHandlersRequest.Validate if the designated constraints aren't met.
+type ListAccessHandlersRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5544,24 +5541,24 @@ type GetAccessHandlersForProviderRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetAccessHandlersForProviderRequestValidationError) Field() string { return e.field }
+func (e ListAccessHandlersRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetAccessHandlersForProviderRequestValidationError) Reason() string { return e.reason }
+func (e ListAccessHandlersRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetAccessHandlersForProviderRequestValidationError) Cause() error { return e.cause }
+func (e ListAccessHandlersRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetAccessHandlersForProviderRequestValidationError) Key() bool { return e.key }
+func (e ListAccessHandlersRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetAccessHandlersForProviderRequestValidationError) ErrorName() string {
-	return "GetAccessHandlersForProviderRequestValidationError"
+func (e ListAccessHandlersRequestValidationError) ErrorName() string {
+	return "ListAccessHandlersRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetAccessHandlersForProviderRequestValidationError) Error() string {
+func (e ListAccessHandlersRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5573,14 +5570,14 @@ func (e GetAccessHandlersForProviderRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetAccessHandlersForProviderRequest.%s: %s%s",
+		"invalid %sListAccessHandlersRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetAccessHandlersForProviderRequestValidationError{}
+var _ error = ListAccessHandlersRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -5588,25 +5585,127 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetAccessHandlersForProviderRequestValidationError{}
+} = ListAccessHandlersRequestValidationError{}
 
-// Validate checks the field values on GetAccessHandlersForProviderResponse
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the first error encountered is returned, or nil if
-// there are no violations.
-func (m *GetAccessHandlersForProviderResponse) Validate() error {
+// Validate checks the field values on AccessHandler with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *AccessHandler) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetAccessHandlersForProviderResponse
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// GetAccessHandlersForProviderResponseMultiError, or nil if none found.
-func (m *GetAccessHandlersForProviderResponse) ValidateAll() error {
+// ValidateAll checks the field values on AccessHandler with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in AccessHandlerMultiError, or
+// nil if none found.
+func (m *AccessHandler) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetAccessHandlersForProviderResponse) validate(all bool) error {
+func (m *AccessHandler) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Url
+
+	if len(errors) > 0 {
+		return AccessHandlerMultiError(errors)
+	}
+	return nil
+}
+
+// AccessHandlerMultiError is an error wrapping multiple validation errors
+// returned by AccessHandler.ValidateAll() if the designated constraints
+// aren't met.
+type AccessHandlerMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AccessHandlerMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AccessHandlerMultiError) AllErrors() []error { return m }
+
+// AccessHandlerValidationError is the validation error returned by
+// AccessHandler.Validate if the designated constraints aren't met.
+type AccessHandlerValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AccessHandlerValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AccessHandlerValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AccessHandlerValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AccessHandlerValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AccessHandlerValidationError) ErrorName() string { return "AccessHandlerValidationError" }
+
+// Error satisfies the builtin error interface
+func (e AccessHandlerValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAccessHandler.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AccessHandlerValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AccessHandlerValidationError{}
+
+// Validate checks the field values on ListAccessHandlersResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListAccessHandlersResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListAccessHandlersResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListAccessHandlersResponseMultiError, or nil if none found.
+func (m *ListAccessHandlersResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListAccessHandlersResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -5620,7 +5719,7 @@ func (m *GetAccessHandlersForProviderResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GetAccessHandlersForProviderResponseValidationError{
+					errors = append(errors, ListAccessHandlersResponseValidationError{
 						field:  fmt.Sprintf("AccessHandlers[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -5628,7 +5727,7 @@ func (m *GetAccessHandlersForProviderResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, GetAccessHandlersForProviderResponseValidationError{
+					errors = append(errors, ListAccessHandlersResponseValidationError{
 						field:  fmt.Sprintf("AccessHandlers[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -5637,7 +5736,7 @@ func (m *GetAccessHandlersForProviderResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return GetAccessHandlersForProviderResponseValidationError{
+				return ListAccessHandlersResponseValidationError{
 					field:  fmt.Sprintf("AccessHandlers[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -5648,19 +5747,18 @@ func (m *GetAccessHandlersForProviderResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return GetAccessHandlersForProviderResponseMultiError(errors)
+		return ListAccessHandlersResponseMultiError(errors)
 	}
 	return nil
 }
 
-// GetAccessHandlersForProviderResponseMultiError is an error wrapping multiple
-// validation errors returned by
-// GetAccessHandlersForProviderResponse.ValidateAll() if the designated
-// constraints aren't met.
-type GetAccessHandlersForProviderResponseMultiError []error
+// ListAccessHandlersResponseMultiError is an error wrapping multiple
+// validation errors returned by ListAccessHandlersResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ListAccessHandlersResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetAccessHandlersForProviderResponseMultiError) Error() string {
+func (m ListAccessHandlersResponseMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -5669,12 +5767,11 @@ func (m GetAccessHandlersForProviderResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetAccessHandlersForProviderResponseMultiError) AllErrors() []error { return m }
+func (m ListAccessHandlersResponseMultiError) AllErrors() []error { return m }
 
-// GetAccessHandlersForProviderResponseValidationError is the validation error
-// returned by GetAccessHandlersForProviderResponse.Validate if the designated
-// constraints aren't met.
-type GetAccessHandlersForProviderResponseValidationError struct {
+// ListAccessHandlersResponseValidationError is the validation error returned
+// by ListAccessHandlersResponse.Validate if the designated constraints aren't met.
+type ListAccessHandlersResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5682,24 +5779,24 @@ type GetAccessHandlersForProviderResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetAccessHandlersForProviderResponseValidationError) Field() string { return e.field }
+func (e ListAccessHandlersResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetAccessHandlersForProviderResponseValidationError) Reason() string { return e.reason }
+func (e ListAccessHandlersResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetAccessHandlersForProviderResponseValidationError) Cause() error { return e.cause }
+func (e ListAccessHandlersResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetAccessHandlersForProviderResponseValidationError) Key() bool { return e.key }
+func (e ListAccessHandlersResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetAccessHandlersForProviderResponseValidationError) ErrorName() string {
-	return "GetAccessHandlersForProviderResponseValidationError"
+func (e ListAccessHandlersResponseValidationError) ErrorName() string {
+	return "ListAccessHandlersResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetAccessHandlersForProviderResponseValidationError) Error() string {
+func (e ListAccessHandlersResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5711,14 +5808,14 @@ func (e GetAccessHandlersForProviderResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetAccessHandlersForProviderResponse.%s: %s%s",
+		"invalid %sListAccessHandlersResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetAccessHandlersForProviderResponseValidationError{}
+var _ error = ListAccessHandlersResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -5726,7 +5823,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetAccessHandlersForProviderResponseValidationError{}
+} = ListAccessHandlersResponseValidationError{}
 
 // Validate checks the field values on AddAccessHandlerRequest with the rules
 // defined in the proto definition for this message. If any rules are

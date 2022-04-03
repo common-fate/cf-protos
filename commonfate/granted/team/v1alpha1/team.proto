@@ -35,8 +35,8 @@ service TeamService {
   // QueryAccessHandlers returns a list of access handlers that can satisfy a set of providers
   rpc QueryAccessHandlers(QueryAccessHandlersRequest) returns (QueryAccessHandlersResponse);
 
-  // GetAccessHandlersForProvider lists the Access Handlers associated with a provider
-  rpc GetAccessHandlersForProvider(GetAccessHandlersForProviderRequest) returns (GetAccessHandlersForProviderResponse);
+  // ListAccessHandlers lists all Access Handlers
+  rpc ListAccessHandlers(ListAccessHandlersRequest) returns (ListAccessHandlersResponse);
 
   // GetAccessHandlerDeploymentGuide gets a deployment URL for a new Access Handler
   rpc GetAccessHandlerDeploymentGuide(GetAccessHandlerDeploymentGuideRequest) returns (GetAccessHandlerDeploymentGuideResponse);
@@ -297,12 +297,18 @@ message GetAllProviderChecksumResponse {
   bytes sha256_checksum = 1;
 }
 
-message GetAccessHandlersForProviderRequest {
+message ListAccessHandlersRequest {
   string provider_id = 1;
 }
 
-message GetAccessHandlersForProviderResponse {
-  repeated gconfig.v1alpha1.AccessHandler access_handlers = 1;
+message AccessHandler {
+  string id = 1;
+  string url = 2;
+  repeated string provider_ids = 3;
+}
+
+message ListAccessHandlersResponse {
+  repeated AccessHandler access_handlers = 1;
 }
 
 message AddAccessHandlerRequest {

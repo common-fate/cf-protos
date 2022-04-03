@@ -41,8 +41,8 @@ type TeamServiceClient interface {
 	GetAllProviderChecksum(ctx context.Context, in *GetAllProviderChecksumRequest, opts ...grpc.CallOption) (*GetAllProviderChecksumResponse, error)
 	// QueryAccessHandlers returns a list of access handlers that can satisfy a set of providers
 	QueryAccessHandlers(ctx context.Context, in *QueryAccessHandlersRequest, opts ...grpc.CallOption) (*QueryAccessHandlersResponse, error)
-	// GetAccessHandlersForProvider lists the Access Handlers associated with a provider
-	GetAccessHandlersForProvider(ctx context.Context, in *GetAccessHandlersForProviderRequest, opts ...grpc.CallOption) (*GetAccessHandlersForProviderResponse, error)
+	// ListAccessHandlers lists all Access Handlers
+	ListAccessHandlers(ctx context.Context, in *ListAccessHandlersRequest, opts ...grpc.CallOption) (*ListAccessHandlersResponse, error)
 	// GetAccessHandlerDeploymentGuide gets a deployment URL for a new Access Handler
 	GetAccessHandlerDeploymentGuide(ctx context.Context, in *GetAccessHandlerDeploymentGuideRequest, opts ...grpc.CallOption) (*GetAccessHandlerDeploymentGuideResponse, error)
 	// EnrolAccessHandler kicks off the registration process for an Access Handler.
@@ -203,9 +203,9 @@ func (c *teamServiceClient) QueryAccessHandlers(ctx context.Context, in *QueryAc
 	return out, nil
 }
 
-func (c *teamServiceClient) GetAccessHandlersForProvider(ctx context.Context, in *GetAccessHandlersForProviderRequest, opts ...grpc.CallOption) (*GetAccessHandlersForProviderResponse, error) {
-	out := new(GetAccessHandlersForProviderResponse)
-	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/GetAccessHandlersForProvider", in, out, opts...)
+func (c *teamServiceClient) ListAccessHandlers(ctx context.Context, in *ListAccessHandlersRequest, opts ...grpc.CallOption) (*ListAccessHandlersResponse, error) {
+	out := new(ListAccessHandlersResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/ListAccessHandlers", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -329,8 +329,8 @@ type TeamServiceServer interface {
 	GetAllProviderChecksum(context.Context, *GetAllProviderChecksumRequest) (*GetAllProviderChecksumResponse, error)
 	// QueryAccessHandlers returns a list of access handlers that can satisfy a set of providers
 	QueryAccessHandlers(context.Context, *QueryAccessHandlersRequest) (*QueryAccessHandlersResponse, error)
-	// GetAccessHandlersForProvider lists the Access Handlers associated with a provider
-	GetAccessHandlersForProvider(context.Context, *GetAccessHandlersForProviderRequest) (*GetAccessHandlersForProviderResponse, error)
+	// ListAccessHandlers lists all Access Handlers
+	ListAccessHandlers(context.Context, *ListAccessHandlersRequest) (*ListAccessHandlersResponse, error)
 	// GetAccessHandlerDeploymentGuide gets a deployment URL for a new Access Handler
 	GetAccessHandlerDeploymentGuide(context.Context, *GetAccessHandlerDeploymentGuideRequest) (*GetAccessHandlerDeploymentGuideResponse, error)
 	// EnrolAccessHandler kicks off the registration process for an Access Handler.
@@ -397,8 +397,8 @@ func (UnimplementedTeamServiceServer) GetAllProviderChecksum(context.Context, *G
 func (UnimplementedTeamServiceServer) QueryAccessHandlers(context.Context, *QueryAccessHandlersRequest) (*QueryAccessHandlersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryAccessHandlers not implemented")
 }
-func (UnimplementedTeamServiceServer) GetAccessHandlersForProvider(context.Context, *GetAccessHandlersForProviderRequest) (*GetAccessHandlersForProviderResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAccessHandlersForProvider not implemented")
+func (UnimplementedTeamServiceServer) ListAccessHandlers(context.Context, *ListAccessHandlersRequest) (*ListAccessHandlersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccessHandlers not implemented")
 }
 func (UnimplementedTeamServiceServer) GetAccessHandlerDeploymentGuide(context.Context, *GetAccessHandlerDeploymentGuideRequest) (*GetAccessHandlerDeploymentGuideResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccessHandlerDeploymentGuide not implemented")
@@ -712,20 +712,20 @@ func _TeamService_QueryAccessHandlers_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TeamService_GetAccessHandlersForProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAccessHandlersForProviderRequest)
+func _TeamService_ListAccessHandlers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAccessHandlersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TeamServiceServer).GetAccessHandlersForProvider(ctx, in)
+		return srv.(TeamServiceServer).ListAccessHandlers(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/team.v1alpha1.TeamService/GetAccessHandlersForProvider",
+		FullMethod: "/team.v1alpha1.TeamService/ListAccessHandlers",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TeamServiceServer).GetAccessHandlersForProvider(ctx, req.(*GetAccessHandlersForProviderRequest))
+		return srv.(TeamServiceServer).ListAccessHandlers(ctx, req.(*ListAccessHandlersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -978,8 +978,8 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _TeamService_QueryAccessHandlers_Handler,
 		},
 		{
-			MethodName: "GetAccessHandlersForProvider",
-			Handler:    _TeamService_GetAccessHandlersForProvider_Handler,
+			MethodName: "ListAccessHandlers",
+			Handler:    _TeamService_ListAccessHandlers_Handler,
 		},
 		{
 			MethodName: "GetAccessHandlerDeploymentGuide",
