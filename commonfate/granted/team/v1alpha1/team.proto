@@ -313,8 +313,7 @@ message AddAccessHandlerRequest {
 message AddAccessHandlerResponse {}
 
 message DeleteAccessHandlerRequest {
-  string provider_id = 1;
-  string access_handler_url = 2;
+  string access_handler_id = 1;
 }
 
 message DeleteAccessHandlerResponse {}

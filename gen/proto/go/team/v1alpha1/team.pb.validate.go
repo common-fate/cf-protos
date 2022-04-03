@@ -5956,9 +5956,7 @@ func (m *DeleteAccessHandlerRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for ProviderId
-
-	// no validation rules for AccessHandlerUrl
+	// no validation rules for AccessHandlerId
 
 	if len(errors) > 0 {
 		return DeleteAccessHandlerRequestMultiError(errors)
