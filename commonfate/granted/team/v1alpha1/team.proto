@@ -5,6 +5,7 @@ package team.v1alpha1;
 import "gconfig/v1alpha1/gconfig.proto";
 import "certrail/v1alpha1/certrail.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
 
 import "validate/validate.proto";
 
@@ -70,6 +71,7 @@ message RequestAccessRequest {
   string principal = 3;
   google.protobuf.Timestamp start = 4; 
   google.protobuf.Timestamp end = 5;
+  google.protobuf.Struct claims = 6;
 }
 
 message RequestAccessResponse {

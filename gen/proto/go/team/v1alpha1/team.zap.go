@@ -7,10 +7,11 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
-	_ "github.com/common-fate/cf-protos/gen/proto/go/certrail/v1alpha1"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
+	_ "google.golang.org/protobuf/types/known/structpb"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
+	_ "github.com/common-fate/cf-protos/gen/proto/go/certrail/v1alpha1"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -45,6 +46,14 @@ func (m *RequestAccessRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.Obje
 	keyName = "end" // field end = 5
 	if t, err := github_com_golang_protobuf_ptypes.Timestamp(m.End); err == nil {
 		enc.AddTime(keyName, t)
+	}
+
+	keyName = "claims" // field claims = 6
+	if m.Claims != nil {
+		var vv interface{} = m.Claims
+		if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+			enc.AddObject(keyName, marshaler)
+		}
 	}
 
 	return nil
