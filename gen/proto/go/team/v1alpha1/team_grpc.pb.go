@@ -19,6 +19,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TeamServiceClient interface {
 	RequestAccess(ctx context.Context, in *RequestAccessRequest, opts ...grpc.CallOption) (*RequestAccessResponse, error)
+	ReviewRequest(ctx context.Context, in *ReviewRequestRequest, opts ...grpc.CallOption) (*ReviewRequestResponse, error)
 	ListRoleAccessRequests(ctx context.Context, in *ListRoleAccessRequestsRequest, opts ...grpc.CallOption) (*ListRoleAccessRequestsResponse, error)
 	ListMembers(ctx context.Context, in *ListMembersRequest, opts ...grpc.CallOption) (*ListMembersResponse, error)
 	ListRoles(ctx context.Context, in *ListRolesRequest, opts ...grpc.CallOption) (*ListRolesResponse, error)
@@ -68,6 +69,15 @@ func NewTeamServiceClient(cc grpc.ClientConnInterface) TeamServiceClient {
 func (c *teamServiceClient) RequestAccess(ctx context.Context, in *RequestAccessRequest, opts ...grpc.CallOption) (*RequestAccessResponse, error) {
 	out := new(RequestAccessResponse)
 	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/RequestAccess", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *teamServiceClient) ReviewRequest(ctx context.Context, in *ReviewRequestRequest, opts ...grpc.CallOption) (*ReviewRequestResponse, error) {
+	out := new(ReviewRequestResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/ReviewRequest", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -286,6 +296,7 @@ func (c *teamServiceClient) SlackChannelInviteTest(ctx context.Context, in *Slac
 // for forward compatibility
 type TeamServiceServer interface {
 	RequestAccess(context.Context, *RequestAccessRequest) (*RequestAccessResponse, error)
+	ReviewRequest(context.Context, *ReviewRequestRequest) (*ReviewRequestResponse, error)
 	ListRoleAccessRequests(context.Context, *ListRoleAccessRequestsRequest) (*ListRoleAccessRequestsResponse, error)
 	ListMembers(context.Context, *ListMembersRequest) (*ListMembersResponse, error)
 	ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error)
@@ -330,6 +341,9 @@ type UnimplementedTeamServiceServer struct {
 
 func (UnimplementedTeamServiceServer) RequestAccess(context.Context, *RequestAccessRequest) (*RequestAccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RequestAccess not implemented")
+}
+func (UnimplementedTeamServiceServer) ReviewRequest(context.Context, *ReviewRequestRequest) (*ReviewRequestResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReviewRequest not implemented")
 }
 func (UnimplementedTeamServiceServer) ListRoleAccessRequests(context.Context, *ListRoleAccessRequestsRequest) (*ListRoleAccessRequestsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListRoleAccessRequests not implemented")
@@ -426,6 +440,24 @@ func _TeamService_RequestAccess_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TeamServiceServer).RequestAccess(ctx, req.(*RequestAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TeamService_ReviewRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReviewRequestRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).ReviewRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/ReviewRequest",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).ReviewRequest(ctx, req.(*ReviewRequestRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -854,6 +886,10 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RequestAccess",
 			Handler:    _TeamService_RequestAccess_Handler,
+		},
+		{
+			MethodName: "ReviewRequest",
+			Handler:    _TeamService_ReviewRequest_Handler,
 		},
 		{
 			MethodName: "ListRoleAccessRequests",

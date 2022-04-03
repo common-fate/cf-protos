@@ -11,6 +11,7 @@ import "validate/validate.proto";
 // TeamService is used to manage Granted teams.
 service TeamService {
   rpc RequestAccess(RequestAccessRequest) returns (RequestAccessResponse);
+  rpc ReviewRequest(ReviewRequestRequest) returns (ReviewRequestResponse);
   rpc ListRoleAccessRequests(ListRoleAccessRequestsRequest) returns (ListRoleAccessRequestsResponse);
   rpc ListMembers(ListMembersRequest) returns (ListMembersResponse);
   rpc ListRoles(ListRolesRequest) returns (ListRolesResponse);
@@ -107,6 +108,19 @@ message RoleAccessRequest {
   google.protobuf.Timestamp end = 12;
   string requested_by = 13;
 }
+
+enum ReviewDecision {
+  REVIEW_DECISION_UNSPECIFIED = 0;
+  REVIEW_DECISION_APPROVED = 1;
+  REVIEW_DECISION_DECLINED = 2;
+}
+
+message ReviewRequestRequest {
+  string request_id = 1;
+  ReviewDecision decision = 2;
+}
+
+message ReviewRequestResponse {}
 
 
 message ListMembersRequest {

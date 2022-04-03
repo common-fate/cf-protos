@@ -780,6 +780,212 @@ var _ interface {
 	ErrorName() string
 } = RoleAccessRequestValidationError{}
 
+// Validate checks the field values on ReviewRequestRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ReviewRequestRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ReviewRequestRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ReviewRequestRequestMultiError, or nil if none found.
+func (m *ReviewRequestRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ReviewRequestRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RequestId
+
+	// no validation rules for Decision
+
+	if len(errors) > 0 {
+		return ReviewRequestRequestMultiError(errors)
+	}
+	return nil
+}
+
+// ReviewRequestRequestMultiError is an error wrapping multiple validation
+// errors returned by ReviewRequestRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ReviewRequestRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ReviewRequestRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ReviewRequestRequestMultiError) AllErrors() []error { return m }
+
+// ReviewRequestRequestValidationError is the validation error returned by
+// ReviewRequestRequest.Validate if the designated constraints aren't met.
+type ReviewRequestRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ReviewRequestRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ReviewRequestRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ReviewRequestRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ReviewRequestRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ReviewRequestRequestValidationError) ErrorName() string {
+	return "ReviewRequestRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ReviewRequestRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sReviewRequestRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ReviewRequestRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ReviewRequestRequestValidationError{}
+
+// Validate checks the field values on ReviewRequestResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ReviewRequestResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ReviewRequestResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ReviewRequestResponseMultiError, or nil if none found.
+func (m *ReviewRequestResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ReviewRequestResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ReviewRequestResponseMultiError(errors)
+	}
+	return nil
+}
+
+// ReviewRequestResponseMultiError is an error wrapping multiple validation
+// errors returned by ReviewRequestResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ReviewRequestResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ReviewRequestResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ReviewRequestResponseMultiError) AllErrors() []error { return m }
+
+// ReviewRequestResponseValidationError is the validation error returned by
+// ReviewRequestResponse.Validate if the designated constraints aren't met.
+type ReviewRequestResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ReviewRequestResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ReviewRequestResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ReviewRequestResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ReviewRequestResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ReviewRequestResponseValidationError) ErrorName() string {
+	return "ReviewRequestResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ReviewRequestResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sReviewRequestResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ReviewRequestResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ReviewRequestResponseValidationError{}
+
 // Validate checks the field values on ListMembersRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
