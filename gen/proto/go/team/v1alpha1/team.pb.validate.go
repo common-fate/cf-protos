@@ -35,6 +35,274 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on RequestAccessRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RequestAccessRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RequestAccessRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RequestAccessRequestMultiError, or nil if none found.
+func (m *RequestAccessRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RequestAccessRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ProviderId
+
+	// no validation rules for Principal
+
+	if all {
+		switch v := interface{}(m.GetStart()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RequestAccessRequestValidationError{
+					field:  "Start",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RequestAccessRequestValidationError{
+					field:  "Start",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetStart()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RequestAccessRequestValidationError{
+				field:  "Start",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetEnd()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RequestAccessRequestValidationError{
+					field:  "End",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RequestAccessRequestValidationError{
+					field:  "End",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetEnd()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RequestAccessRequestValidationError{
+				field:  "End",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return RequestAccessRequestMultiError(errors)
+	}
+	return nil
+}
+
+// RequestAccessRequestMultiError is an error wrapping multiple validation
+// errors returned by RequestAccessRequest.ValidateAll() if the designated
+// constraints aren't met.
+type RequestAccessRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RequestAccessRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RequestAccessRequestMultiError) AllErrors() []error { return m }
+
+// RequestAccessRequestValidationError is the validation error returned by
+// RequestAccessRequest.Validate if the designated constraints aren't met.
+type RequestAccessRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RequestAccessRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RequestAccessRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RequestAccessRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RequestAccessRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RequestAccessRequestValidationError) ErrorName() string {
+	return "RequestAccessRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RequestAccessRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRequestAccessRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RequestAccessRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RequestAccessRequestValidationError{}
+
+// Validate checks the field values on RequestAccessResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RequestAccessResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RequestAccessResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RequestAccessResponseMultiError, or nil if none found.
+func (m *RequestAccessResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RequestAccessResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Status
+
+	if len(errors) > 0 {
+		return RequestAccessResponseMultiError(errors)
+	}
+	return nil
+}
+
+// RequestAccessResponseMultiError is an error wrapping multiple validation
+// errors returned by RequestAccessResponse.ValidateAll() if the designated
+// constraints aren't met.
+type RequestAccessResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RequestAccessResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RequestAccessResponseMultiError) AllErrors() []error { return m }
+
+// RequestAccessResponseValidationError is the validation error returned by
+// RequestAccessResponse.Validate if the designated constraints aren't met.
+type RequestAccessResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RequestAccessResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RequestAccessResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RequestAccessResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RequestAccessResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RequestAccessResponseValidationError) ErrorName() string {
+	return "RequestAccessResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RequestAccessResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRequestAccessResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RequestAccessResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RequestAccessResponseValidationError{}
+
 // Validate checks the field values on ListRoleAccessRequestsRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
