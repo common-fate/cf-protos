@@ -32,6 +32,9 @@ service TeamService {
   // details requires an update.
   rpc GetAllProviderChecksum(GetAllProviderChecksumRequest) returns (GetAllProviderChecksumResponse);
 
+  // QueryAccessHandlers returns a list of access handlers that can satisfy a set of providers
+  rpc QueryAccessHandlers(QueryAccessHandlersRequest) returns (QueryAccessHandlersResponse);
+
   // GetAccessHandlersForProvider lists the Access Handlers associated with a provider
   rpc GetAccessHandlersForProvider(GetAccessHandlersForProviderRequest) returns (GetAccessHandlersForProviderResponse);
 
@@ -384,4 +387,17 @@ message EnrollAccessHandlerRequest {
 message EnrollAccessHandlerResponse {
   string enrollment_token = 1;
   google.protobuf.Timestamp expires_at = 2;
+}
+
+message QueryProviderInfo {
+  string provider_id = 1;
+  string provider_type = 2;
+}
+
+message QueryAccessHandlersRequest {
+  repeated QueryProviderInfo providers = 1;
+}
+
+message QueryAccessHandlersResponse {
+  repeated string access_handler_urls = 1;
 }

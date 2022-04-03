@@ -39,6 +39,8 @@ type TeamServiceClient interface {
 	// GetAllProviderChecksum is used by clients to determine whether their local cache of provider
 	// details requires an update.
 	GetAllProviderChecksum(ctx context.Context, in *GetAllProviderChecksumRequest, opts ...grpc.CallOption) (*GetAllProviderChecksumResponse, error)
+	// QueryAccessHandlers returns a list of access handlers that can satisfy a set of providers
+	QueryAccessHandlers(ctx context.Context, in *QueryAccessHandlersRequest, opts ...grpc.CallOption) (*QueryAccessHandlersResponse, error)
 	// GetAccessHandlersForProvider lists the Access Handlers associated with a provider
 	GetAccessHandlersForProvider(ctx context.Context, in *GetAccessHandlersForProviderRequest, opts ...grpc.CallOption) (*GetAccessHandlersForProviderResponse, error)
 	// GetAccessHandlerDeploymentGuide gets a deployment URL for a new Access Handler
@@ -192,6 +194,15 @@ func (c *teamServiceClient) GetAllProviderChecksum(ctx context.Context, in *GetA
 	return out, nil
 }
 
+func (c *teamServiceClient) QueryAccessHandlers(ctx context.Context, in *QueryAccessHandlersRequest, opts ...grpc.CallOption) (*QueryAccessHandlersResponse, error) {
+	out := new(QueryAccessHandlersResponse)
+	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/QueryAccessHandlers", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *teamServiceClient) GetAccessHandlersForProvider(ctx context.Context, in *GetAccessHandlersForProviderRequest, opts ...grpc.CallOption) (*GetAccessHandlersForProviderResponse, error) {
 	out := new(GetAccessHandlersForProviderResponse)
 	err := c.cc.Invoke(ctx, "/team.v1alpha1.TeamService/GetAccessHandlersForProvider", in, out, opts...)
@@ -316,6 +327,8 @@ type TeamServiceServer interface {
 	// GetAllProviderChecksum is used by clients to determine whether their local cache of provider
 	// details requires an update.
 	GetAllProviderChecksum(context.Context, *GetAllProviderChecksumRequest) (*GetAllProviderChecksumResponse, error)
+	// QueryAccessHandlers returns a list of access handlers that can satisfy a set of providers
+	QueryAccessHandlers(context.Context, *QueryAccessHandlersRequest) (*QueryAccessHandlersResponse, error)
 	// GetAccessHandlersForProvider lists the Access Handlers associated with a provider
 	GetAccessHandlersForProvider(context.Context, *GetAccessHandlersForProviderRequest) (*GetAccessHandlersForProviderResponse, error)
 	// GetAccessHandlerDeploymentGuide gets a deployment URL for a new Access Handler
@@ -380,6 +393,9 @@ func (UnimplementedTeamServiceServer) GetAllProviderDetails(context.Context, *Ge
 }
 func (UnimplementedTeamServiceServer) GetAllProviderChecksum(context.Context, *GetAllProviderChecksumRequest) (*GetAllProviderChecksumResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllProviderChecksum not implemented")
+}
+func (UnimplementedTeamServiceServer) QueryAccessHandlers(context.Context, *QueryAccessHandlersRequest) (*QueryAccessHandlersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryAccessHandlers not implemented")
 }
 func (UnimplementedTeamServiceServer) GetAccessHandlersForProvider(context.Context, *GetAccessHandlersForProviderRequest) (*GetAccessHandlersForProviderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccessHandlersForProvider not implemented")
@@ -678,6 +694,24 @@ func _TeamService_GetAllProviderChecksum_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TeamService_QueryAccessHandlers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryAccessHandlersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TeamServiceServer).QueryAccessHandlers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/team.v1alpha1.TeamService/QueryAccessHandlers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TeamServiceServer).QueryAccessHandlers(ctx, req.(*QueryAccessHandlersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _TeamService_GetAccessHandlersForProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAccessHandlersForProviderRequest)
 	if err := dec(in); err != nil {
@@ -938,6 +972,10 @@ var TeamService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAllProviderChecksum",
 			Handler:    _TeamService_GetAllProviderChecksum_Handler,
+		},
+		{
+			MethodName: "QueryAccessHandlers",
+			Handler:    _TeamService_QueryAccessHandlers_Handler,
 		},
 		{
 			MethodName: "GetAccessHandlersForProvider",
