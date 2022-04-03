@@ -699,6 +699,8 @@ func (m *RoleAccessRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for RequestedBy
+
 	if len(errors) > 0 {
 		return RoleAccessRequestMultiError(errors)
 	}

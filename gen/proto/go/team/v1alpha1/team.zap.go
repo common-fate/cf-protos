@@ -161,6 +161,9 @@ func (m *RoleAccessRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectE
 		enc.AddTime(keyName, t)
 	}
 
+	keyName = "requested_by" // field requested_by = 13
+	enc.AddString(keyName, m.RequestedBy)
+
 	return nil
 }
 
