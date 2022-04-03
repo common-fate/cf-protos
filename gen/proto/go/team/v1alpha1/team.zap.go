@@ -192,6 +192,9 @@ func (m *ReviewRequestResponse) MarshalLogObject(enc go_uber_org_zap_zapcore.Obj
 		return nil
 	}
 
+	keyName = "grant_id" // field grant_id = 1
+	enc.AddString(keyName, m.GrantId)
+
 	return nil
 }
 

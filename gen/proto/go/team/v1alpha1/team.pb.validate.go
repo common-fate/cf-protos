@@ -907,6 +907,8 @@ func (m *ReviewRequestResponse) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for GrantId
+
 	if len(errors) > 0 {
 		return ReviewRequestResponseMultiError(errors)
 	}
