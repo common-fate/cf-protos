@@ -1276,8 +1276,14 @@ func (m *EnrollAccessHandlerRequest) MarshalLogObject(enc go_uber_org_zap_zapcor
 	keyName = "access_handler_url" // field access_handler_url = 1
 	enc.AddString(keyName, m.AccessHandlerUrl)
 
-	keyName = "provider_id" // field provider_id = 2
-	enc.AddString(keyName, m.ProviderId)
+	keyName = "provider_ids" // field provider_ids = 2
+	enc.AddArray(keyName, go_uber_org_zap_zapcore.ArrayMarshalerFunc(func(aenc go_uber_org_zap_zapcore.ArrayEncoder) error {
+		for _, rv := range m.ProviderIds {
+			_ = rv
+			aenc.AppendString(rv)
+		}
+		return nil
+	}))
 
 	keyName = "runtime" // field runtime = 3
 	enc.AddString(keyName, m.Runtime.String())

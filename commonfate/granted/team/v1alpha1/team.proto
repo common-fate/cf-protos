@@ -393,7 +393,7 @@ message SelfHostedEnrollment {
 
 message EnrollAccessHandlerRequest {
   string access_handler_url = 1;
-  string provider_id = 2;
+  repeated string provider_ids = 2;
   AccessHandlerRuntime runtime = 3;
   oneof enrollment {
     AWSRoleEnrollment aws_role = 4;

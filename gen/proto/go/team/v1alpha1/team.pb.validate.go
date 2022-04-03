@@ -7958,8 +7958,6 @@ func (m *EnrollAccessHandlerRequest) validate(all bool) error {
 
 	// no validation rules for AccessHandlerUrl
 
-	// no validation rules for ProviderId
-
 	// no validation rules for Runtime
 
 	switch m.Enrollment.(type) {
