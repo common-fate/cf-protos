@@ -59,6 +59,8 @@ func (m *RequestAccessRequest) validate(all bool) error {
 
 	// no validation rules for ProviderId
 
+	// no validation rules for ProviderType
+
 	// no validation rules for Principal
 
 	if all {

@@ -62,9 +62,10 @@ service TeamService {
 
 message RequestAccessRequest {
   string provider_id = 1;
-  string principal = 2;
-  google.protobuf.Timestamp start = 3; 
-  google.protobuf.Timestamp end = 4;
+  string provider_type = 2;
+  string principal = 3;
+  google.protobuf.Timestamp start = 4; 
+  google.protobuf.Timestamp end = 5;
 }
 
 message RequestAccessResponse {
