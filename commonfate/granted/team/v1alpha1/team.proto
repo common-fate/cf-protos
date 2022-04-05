@@ -13,6 +13,7 @@ service TeamService {
   rpc ListRoleAccessRequests(ListRoleAccessRequestsRequest) returns (ListRoleAccessRequestsResponse);
   rpc ListMembers(ListMembersRequest) returns (ListMembersResponse);
   rpc ListRoles(ListRolesRequest) returns (ListRolesResponse);
+  rpc ListGroups(ListGroupsRequest) returns (ListGroupsResponse);
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse);
   rpc IsAdminUser(IsAdminUserRequest) returns (IsAdminUserResponse);
   rpc EnrollProvider(EnrollProviderRequest) returns (EnrollProviderResponse);
@@ -109,6 +110,12 @@ message ListRolesRequest {}
 
 message ListRolesResponse {
 	repeated gconfig.v1alpha1.Role roles = 1;
+}
+
+message ListGroupsRequest {}
+
+message ListGroupsResponse {
+	repeated gconfig.v1alpha1.Group groups = 1;
 }
 
 message Member {
