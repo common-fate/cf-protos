@@ -363,9 +363,71 @@ func (m *RoleAccessRequest) validate(all bool) error {
 
 	// no validation rules for TrillianMerkleHash
 
-	// no validation rules for ProvisionStrategy
+	switch m.ProvisionStrategy.(type) {
 
-	// no validation rules for ExpiryDuration
+	case *RoleAccessRequest_Window:
+
+		if all {
+			switch v := interface{}(m.GetWindow()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, RoleAccessRequestValidationError{
+						field:  "Window",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, RoleAccessRequestValidationError{
+						field:  "Window",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetWindow()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return RoleAccessRequestValidationError{
+					field:  "Window",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *RoleAccessRequest_Expires:
+
+		if all {
+			switch v := interface{}(m.GetExpires()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, RoleAccessRequestValidationError{
+						field:  "Expires",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, RoleAccessRequestValidationError{
+						field:  "Expires",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetExpires()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return RoleAccessRequestValidationError{
+					field:  "Expires",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	if len(errors) > 0 {
 		return RoleAccessRequestMultiError(errors)

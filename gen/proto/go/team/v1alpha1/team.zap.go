@@ -89,11 +89,27 @@ func (m *RoleAccessRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectE
 	keyName = "trillian_merkle_hash" // field trillian_merkle_hash = 5
 	enc.AddByteString(keyName, m.TrillianMerkleHash)
 
-	keyName = "provision_strategy" // field provision_strategy = 6
-	enc.AddString(keyName, m.ProvisionStrategy)
+	keyName = "window" // field window = 6
+	if ov, ok := m.GetProvisionStrategy().(*RoleAccessRequest_Window); ok {
+		_ = ov
+		if ov.Window != nil {
+			var vv interface{} = ov.Window
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
 
-	keyName = "expiry_duration" // field expiry_duration = 7
-	enc.AddString(keyName, m.ExpiryDuration)
+	keyName = "expires" // field expires = 7
+	if ov, ok := m.GetProvisionStrategy().(*RoleAccessRequest_Expires); ok {
+		_ = ov
+		if ov.Expires != nil {
+			var vv interface{} = ov.Expires
+			if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+				enc.AddObject(keyName, marshaler)
+			}
+		}
+	}
 
 	return nil
 }
