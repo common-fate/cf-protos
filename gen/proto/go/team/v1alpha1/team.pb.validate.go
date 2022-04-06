@@ -62,6 +62,7 @@ func (m *ListRoleAccessRequestsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRoleAccessRequestsRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -198,6 +199,7 @@ func (m *ListRoleAccessRequestsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRoleAccessRequestsResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -361,13 +363,76 @@ func (m *RoleAccessRequest) validate(all bool) error {
 
 	// no validation rules for TrillianMerkleHash
 
-	// no validation rules for ProvisionStrategy
+	switch m.ProvisionStrategy.(type) {
 
-	// no validation rules for ExpiryDuration
+	case *RoleAccessRequest_Window:
+
+		if all {
+			switch v := interface{}(m.GetWindow()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, RoleAccessRequestValidationError{
+						field:  "Window",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, RoleAccessRequestValidationError{
+						field:  "Window",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetWindow()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return RoleAccessRequestValidationError{
+					field:  "Window",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *RoleAccessRequest_Expires:
+
+		if all {
+			switch v := interface{}(m.GetExpires()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, RoleAccessRequestValidationError{
+						field:  "Expires",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, RoleAccessRequestValidationError{
+						field:  "Expires",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetExpires()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return RoleAccessRequestValidationError{
+					field:  "Expires",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	if len(errors) > 0 {
 		return RoleAccessRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -469,6 +534,7 @@ func (m *ListMembersRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListMembersRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -604,6 +670,7 @@ func (m *ListMembersResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListMembersResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -710,6 +777,7 @@ func (m *Account) validate(all bool) error {
 	if len(errors) > 0 {
 		return AccountMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -842,6 +910,7 @@ func (m *UpdateAccountsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateAccountsRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -977,6 +1046,7 @@ func (m *UpdateAccountsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateAccountsResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1078,6 +1148,7 @@ func (m *ListRolesRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRolesRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1211,6 +1282,7 @@ func (m *ListRolesResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListRolesResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1315,6 +1387,7 @@ func (m *Member) validate(all bool) error {
 	if len(errors) > 0 {
 		return MemberMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1413,6 +1486,7 @@ func (m *IsAdminUserRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return IsAdminUserRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1516,6 +1590,7 @@ func (m *IsAdminUserResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return IsAdminUserResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1646,6 +1721,7 @@ func (m *UpdateConfigRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateConfigRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1749,6 +1825,7 @@ func (m *UpdateConfigResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateConfigResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1951,6 +2028,7 @@ func (m *EnrollProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrollProviderRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2075,6 +2153,7 @@ func (m *EnrollAWSProvider) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrollAWSProviderMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2201,6 +2280,7 @@ func (m *EnrollAWSSSOProvider) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrollAWSSSOProviderMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2325,6 +2405,7 @@ func (m *EnrollOktaProvider) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrollOktaProviderMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2426,6 +2507,7 @@ func (m *EnrollProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrollProviderResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2527,6 +2609,7 @@ func (m *ListProvidersRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListProvidersRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2664,6 +2747,7 @@ func (m *ListProvidersResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListProvidersResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2765,6 +2849,7 @@ func (m *GetStatusRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetStatusRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2932,6 +3017,7 @@ func (m *GetStatusResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetStatusResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3167,6 +3253,7 @@ func (m *ProviderEnrollment) validate(all bool) error {
 	if len(errors) > 0 {
 		return ProviderEnrollmentMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3270,6 +3357,7 @@ func (m *AWSProviderEnrollment) validate(all bool) error {
 	if len(errors) > 0 {
 		return AWSProviderEnrollmentMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3373,6 +3461,7 @@ func (m *AWSSSOProviderEnrollment) validate(all bool) error {
 	if len(errors) > 0 {
 		return AWSSSOProviderEnrollmentMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3476,6 +3565,7 @@ func (m *OktaProviderEnrollment) validate(all bool) error {
 	if len(errors) > 0 {
 		return OktaProviderEnrollmentMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3579,6 +3669,7 @@ func (m *DeleteProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteProviderRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3680,6 +3771,7 @@ func (m *DeleteProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteProviderResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3783,6 +3875,7 @@ func (m *GetProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetProviderRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3913,6 +4006,7 @@ func (m *GetProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetProviderResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4117,6 +4211,7 @@ func (m *Provider) validate(all bool) error {
 	if len(errors) > 0 {
 		return ProviderMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4217,6 +4312,7 @@ func (m *AWSProviderDetails) validate(all bool) error {
 	if len(errors) > 0 {
 		return AWSProviderDetailsMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4320,6 +4416,7 @@ func (m *AWSSSOProviderDetails) validate(all bool) error {
 	if len(errors) > 0 {
 		return AWSSSOProviderDetailsMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4423,6 +4520,7 @@ func (m *OktaProviderDetails) validate(all bool) error {
 	if len(errors) > 0 {
 		return OktaProviderDetailsMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4524,6 +4622,7 @@ func (m *GetAllProviderDetailsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderDetailsRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4657,6 +4756,7 @@ func (m *GetAllProviderDetailsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderDetailsResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4759,6 +4859,7 @@ func (m *GetAllProviderChecksumRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderChecksumRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4863,6 +4964,7 @@ func (m *GetAllProviderChecksumResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAllProviderChecksumResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4968,6 +5070,7 @@ func (m *GetAccessHandlersForProviderRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAccessHandlersForProviderRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5106,6 +5209,7 @@ func (m *GetAccessHandlersForProviderResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAccessHandlersForProviderResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5213,6 +5317,7 @@ func (m *AddAccessHandlerRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return AddAccessHandlerRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5314,6 +5419,7 @@ func (m *AddAccessHandlerResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return AddAccessHandlerResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5419,6 +5525,7 @@ func (m *DeleteAccessHandlerRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteAccessHandlerRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5520,6 +5627,7 @@ func (m *DeleteAccessHandlerResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return DeleteAccessHandlerResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5626,6 +5734,7 @@ func (m *UpdateCISettingsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateCISettingsRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5727,6 +5836,7 @@ func (m *UpdateCISettingsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return UpdateCISettingsResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5836,6 +5946,7 @@ func (m *SlackConnection) validate(all bool) error {
 	if len(errors) > 0 {
 		return SlackConnectionMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5935,6 +6046,7 @@ func (m *ListSlackConnectionsRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListSlackConnectionsRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -6071,6 +6183,7 @@ func (m *ListSlackConnectionsResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return ListSlackConnectionsResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -6173,6 +6286,7 @@ func (m *HasSlackConnectionRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return HasSlackConnectionRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -6276,6 +6390,7 @@ func (m *HasSlackConnectionResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return HasSlackConnectionResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -6377,6 +6492,7 @@ func (m *GetSlackInstallURLRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetSlackInstallURLRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -6480,6 +6596,7 @@ func (m *GetSlackInstallURLResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetSlackInstallURLResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -6581,6 +6698,7 @@ func (m *UninstallSlackRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return UninstallSlackRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -6684,6 +6802,7 @@ func (m *UninstallSlackResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return UninstallSlackResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -6787,6 +6906,7 @@ func (m *SlackChannelInviteTestRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return SlackChannelInviteTestRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -6891,6 +7011,7 @@ func (m *SlackChannelInviteTestResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return SlackChannelInviteTestResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -6999,6 +7120,7 @@ func (m *GetAccessHandlerDeploymentGuideRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAccessHandlerDeploymentGuideRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -7106,6 +7228,7 @@ func (m *GetAccessHandlerDeploymentGuideResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return GetAccessHandlerDeploymentGuideResponseMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -7215,6 +7338,7 @@ func (m *EnrollAccessHandlerRequest) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrollAccessHandlerRequestMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -7347,6 +7471,7 @@ func (m *EnrollAccessHandlerResponse) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnrollAccessHandlerResponseMultiError(errors)
 	}
+
 	return nil
 }
 
