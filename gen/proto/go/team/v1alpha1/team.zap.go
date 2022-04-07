@@ -7,10 +7,10 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
+	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	_ "github.com/common-fate/gconfig/gen/gconfig/v1alpha1"
 	_ "github.com/common-fate/cf-protos/gen/proto/go/certrail/v1alpha1"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
-	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	go_uber_org_zap_zapcore "go.uber.org/zap/zapcore"
 	github_com_golang_protobuf_ptypes "github.com/golang/protobuf/ptypes"
 )
@@ -642,8 +642,13 @@ func (m *DeleteProviderRequest) MarshalLogObject(enc go_uber_org_zap_zapcore.Obj
 		return nil
 	}
 
-	keyName = "id" // field id = 1
-	enc.AddString(keyName, m.Id)
+	keyName = "provider" // field provider = 1
+	if m.Provider != nil {
+		var vv interface{} = m.Provider
+		if marshaler, ok := vv.(go_uber_org_zap_zapcore.ObjectMarshaler); ok {
+			enc.AddObject(keyName, marshaler)
+		}
+	}
 
 	return nil
 }

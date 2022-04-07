@@ -196,7 +196,7 @@ message OktaProviderEnrollment {
 }
 
 message DeleteProviderRequest {
-  string id = 1;
+  Provider provider = 1;
 }
 
 message DeleteProviderResponse {}
