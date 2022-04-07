@@ -212,10 +212,11 @@ message GetProviderResponse {
 message Provider {
   string id = 1;
   string name = 2;
+  string type = 3;
   oneof details {
-    AWSProviderDetails aws = 4;
-    AWSSSOProviderDetails awssso = 5;
-    OktaProviderDetails okta = 6;
+    AWSProviderDetails aws = 5;
+    AWSSSOProviderDetails awssso = 6;
+    OktaProviderDetails okta = 7;
   }
 }
 

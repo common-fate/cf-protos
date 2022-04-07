@@ -706,7 +706,10 @@ func (m *Provider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) e
 	keyName = "name" // field name = 2
 	enc.AddString(keyName, m.Name)
 
-	keyName = "aws" // field aws = 4
+	keyName = "type" // field type = 3
+	enc.AddString(keyName, m.Type)
+
+	keyName = "aws" // field aws = 5
 	if ov, ok := m.GetDetails().(*Provider_Aws); ok {
 		_ = ov
 		if ov.Aws != nil {
@@ -717,7 +720,7 @@ func (m *Provider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) e
 		}
 	}
 
-	keyName = "awssso" // field awssso = 5
+	keyName = "awssso" // field awssso = 6
 	if ov, ok := m.GetDetails().(*Provider_Awssso); ok {
 		_ = ov
 		if ov.Awssso != nil {
@@ -728,7 +731,7 @@ func (m *Provider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) e
 		}
 	}
 
-	keyName = "okta" // field okta = 6
+	keyName = "okta" // field okta = 7
 	if ov, ok := m.GetDetails().(*Provider_Okta); ok {
 		_ = ov
 		if ov.Okta != nil {
