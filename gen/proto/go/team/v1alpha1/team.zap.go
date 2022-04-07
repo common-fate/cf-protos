@@ -706,8 +706,8 @@ func (m *Provider) MarshalLogObject(enc go_uber_org_zap_zapcore.ObjectEncoder) e
 	keyName = "name" // field name = 2
 	enc.AddString(keyName, m.Name)
 
-	keyName = "type" // field type = 3
-	enc.AddString(keyName, m.Type)
+	keyName = "status" // field status = 3
+	enc.AddString(keyName, m.Status)
 
 	keyName = "aws" // field aws = 5
 	if ov, ok := m.GetDetails().(*Provider_Aws); ok {
